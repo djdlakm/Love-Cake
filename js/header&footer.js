@@ -72,7 +72,9 @@ function highlightCurrentPage() {
 function loadComponents() {
   // 🎯 TỰ ĐỘNG XÁC ĐỊNH BASE_URL:
   // Nếu URL chứa /Policy/ hoặc /policy/ thì lùi ra 1 cấp '../', ngược lại dùng './'
-  const isSubFolder = window.location.pathname.toLowerCase().includes('/policy/');
+  const isSubFolder = window.location.pathname
+    .toLowerCase()
+    .includes('/policy/');
   const BASE_URL = isSubFolder ? '../' : './';
 
   const headerHTML = `
@@ -157,9 +159,9 @@ function loadComponents() {
         <div class="col3">
           <h3>Chính sách</h3>
           <ul>
-            <li><a href="${BASE_URL}Policy/privacy.html">Chính sách bảo mật</a></li>
-            <li><a href="${BASE_URL}Policy/payment.html">Chính sách thanh toán</a></li>
-            <li><a href="${BASE_URL}Policy/shipping.html">Chính sách giao hàng</a></li>
+            <li><a href="${BASE_URL}policy/privacy.html">Chính sách bảo mật</a></li>
+            <li><a href="${BASE_URL}policy/payment.html">Chính sách thanh toán</a></li>
+            <li><a href="${BASE_URL}policy/shipping.html">Chính sách giao hàng</a></li>
           </ul>
         </div>
       </div>
