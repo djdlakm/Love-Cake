@@ -77,8 +77,8 @@ function loadComponents() {
         </button>
 
         <!-- Logo (Giữa) 🖼️ -->
-        <a href="/" class="logo-wrapper">
-          <img class="logo" src="/assets/img/logo.png" alt="logo" />
+        <a href="#" class="logo-wrapper">
+          <img class="logo" src="assets/img/logo.png" alt="logo" />
         </a>
 
         <!-- Off-canvas Menu Trượt từ Trái 🎨 -->
@@ -89,7 +89,7 @@ function loadComponents() {
             <button class="menu-close" id="menuClose" aria-label="Close Menu">&times;</button>
           </div>
           <ul>
-            <li><a href="/">Trang chủ</a></li>
+            <li><a href="#">Trang chủ</a></li>
             <li><a href="about.html">Giới thiệu</a></li>
             <li><a href="shop.html">Cửa hàng</a></li>
             <li><a href="builder.html">Tự thiết kế bánh</a></li>
@@ -99,7 +99,7 @@ function loadComponents() {
 
         <!-- Giỏ hàng (Phải) 🛒 -->
         <div class="cart">
-            <a href="/cart.html" class="cart-icon">
+            <a href="cart.html" class="cart-icon">
                 <i class="fas fa-shopping-cart"></i>
                 <span class="cart-badge">0</span>
             </a>
@@ -116,7 +116,7 @@ function loadComponents() {
 
       <div class="container">
         <div class="col1">
-          <img class="logo" src="/assets/img/logo.png" alt="logo" />
+          <img class="logo" src="assets/img/logo.png" alt="logo" />
           <ul>
             <li>
               <p>📍</p>
@@ -150,9 +150,9 @@ function loadComponents() {
         <div class="col3">
           <h3>Chính sách</h3>
           <ul>
-            <li><a href="/policy/privacy.html">Chính sách bảo mật</a></li>
-            <li><a href="/policy/payment.html">Chính sách thanh toán</a></li>
-            <li><a href="/policy/shipping.html">Chính sách giao hàng</a></li>
+            <li><a href="policy/privacy.html">Chính sách bảo mật</a></li>
+            <li><a href="policy/payment.html">Chính sách thanh toán</a></li>
+            <li><a href="policy/shipping.html">Chính sách giao hàng</a></li>
           </ul>
         </div>
       </div>
