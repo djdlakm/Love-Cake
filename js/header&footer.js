@@ -90,10 +90,10 @@ function loadComponents() {
           </div>
           <ul>
             <li><a href="/">Trang chủ</a></li>
-            <li><a href="/about.html">Giới thiệu</a></li>
-            <li><a href="/shop.html">Cửa hàng</a></li>
-            <li><a href="/builder.html">Tự thiết kế bánh</a></li>
-            <li><a href="/contact.html">Liên hệ</a></li>
+            <li><a href="about.html">Giới thiệu</a></li>
+            <li><a href="shop.html">Cửa hàng</a></li>
+            <li><a href="builder.html">Tự thiết kế bánh</a></li>
+            <li><a href="contact.html">Liên hệ</a></li>
           </ul>
         </nav>
 
