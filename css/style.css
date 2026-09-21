@@ -1,0 +1,405 @@
+/* ==========================================
+   1. RESET & SETUP CHUNG 🌐
+   ========================================== */
+* {
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+* {
+  font-family: 'Open Sans', sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings: 'wdth' 100;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Ẩn phần tử mobile ở giao diện Desktop */
+.menu-toggle,
+.menu-header {
+  display: none;
+}
+
+/* ==========================================
+   2. HEADER CHUNG (DESKTOP) 🔝
+   ========================================== */
+.header {
+  background-color: #ffffff;
+  border-bottom: 2px solid #ffe4e6;
+  padding: 12px 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.header .logo {
+  height: 50px;
+  width: auto;
+  display: block;
+}
+
+/* Menu Navbar */
+.header .navbar {
+  position: static;
+  width: auto;
+  height: auto;
+  background-color: transparent;
+  box-shadow: none;
+  transform: none;
+}
+
+.header .navbar ul {
+  display: flex;
+  flex-direction: row;
+  gap: 35px;
+}
+
+.header .navbar a {
+  display: inline-block;
+  color: #333333;
+  font-weight: 600;
+  font-size: 16px;
+  transition: all 0.2s ease;
+  padding: 0;
+  margin: 0;
+}
+
+/* Hover & Active hiệu ứng gạch thẳng vừa khít chữ */
+.header .navbar a:hover,
+.header .navbar li.active a,
+.header .navbar a.active {
+  color: #f43f5e;
+}
+
+.header .navbar li.active a,
+.header .navbar a.active {
+  border-bottom: 2.5px solid #f43f5e;
+  padding-bottom: 4px;
+  border-radius: 0;
+}
+
+/* Giỏ hàng (Cart Icon & Badge) */
+.cart-icon {
+  position: relative;
+  display: inline-flex;
+  color: #333333;
+  font-size: 24px;
+  transition: color 0.3s ease;
+}
+
+.cart-icon:hover {
+  color: #f43f5e;
+}
+
+.cart-badge {
+  position: absolute;
+  top: -10px;
+  right: -12px;
+  background-color: #f43f5e;
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 700;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ==========================================
+   3. FOOTER CHUNG (DESKTOP) 🦶
+   ========================================== */
+.footer {
+  background-color: #071224;
+  padding-top: 40px;
+  border-top: 2px solid #ffe4e6;
+  position: relative;
+}
+
+.footer .container {
+  align-items: flex-start;
+  gap: 30px;
+  margin-bottom: 40px;
+}
+
+.footer .col1,
+.footer .col2,
+.footer .col3 {
+  flex: 1;
+}
+
+.footer .col1 .logo {
+  height: 40px;
+  margin-bottom: 24px;
+  display: block;
+}
+
+.footer h3 {
+  color: #e0d1d5;
+  font-size: 18px;
+  font-weight: 700;
+  height: 40px;
+  margin-top: 0;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: flex-end;
+}
+
+.footer .col1 li,
+.footer .col2 li,
+.footer .col3 li {
+  font-size: 14px;
+  line-height: 1.5;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+}
+
+.footer .col1 li {
+  color: #90a1b9;
+  gap: 12px;
+}
+
+.footer .col1 p,
+.footer .col2 li p {
+  margin: 0;
+  font-size: 14px;
+}
+
+.footer .col2 li {
+  color: #90a1b9;
+  gap: 10px;
+}
+
+.footer .col2 li p:first-child {
+  width: 120px;
+}
+
+.footer .col3 a {
+  color: #90a1b9;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.footer .col3 a:hover {
+  color: #f43f5e;
+  padding-left: 6px;
+}
+
+/* Phần bản quyền */
+.footer .bottom {
+  border-top: 1px solid rgba(255, 228, 230, 0.2);
+  display: flex;
+  justify-content: center;
+  padding: 15px 0;
+}
+
+.footer .bottom p {
+  margin: 0;
+  font-size: 14px;
+  color: #90a1b9;
+}
+
+/* Nút Scroll To Top */
+#scrollToTopBtn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background-color: #f43f5e;
+  color: #ffffff;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  z-index: 10;
+  transition: all 0.3s ease;
+}
+
+#scrollToTopBtn:hover {
+  background-color: #e11d48;
+  transform: translateY(-5px);
+  box-shadow: 0 6px 15px rgba(244, 63, 94, 0.4);
+}
+
+/* ==========================================
+   4. TABLET & MOBILE (Màn hình ≤ 1024px) 📱
+   ========================================== */
+@media screen and (max-width: 1024px) {
+  .header .container {
+    padding: 0 15px;
+  }
+
+  /* Nút 3 gạch Mở Menu */
+  .menu-toggle {
+    display: block !important;
+    background: none;
+    border: none;
+    font-size: 22px;
+    color: #2b3a4a;
+    cursor: pointer;
+    padding: 5px;
+    width: 40px;
+    text-align: left;
+  }
+
+  .logo-wrapper {
+    display: flex;
+    justify-content: center;
+    flex: 1;
+  }
+
+  .header .logo {
+    height: 40px;
+  }
+
+  .header .cart {
+    width: 40px;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  /* Menu trượt Off-Canvas */
+  .header .navbar {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 280px;
+    height: 100vh;
+    background-color: #ffffff;
+    z-index: 9999;
+    box-shadow: 2px 0 12px rgba(0, 0, 0, 0.15);
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
+    padding: 0 !important;
+    margin: 0 !important;
+    display: flex !important;
+    flex-direction: column;
+  }
+
+  .header .navbar.active {
+    transform: translateX(0) !important;
+  }
+
+  .menu-header {
+    display: flex !important;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ff7597;
+    color: #ffffff;
+    padding: 16px 20px;
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  .menu-close {
+    background: none;
+    border: none;
+    color: #ffffff;
+    font-size: 26px;
+    cursor: pointer;
+    line-height: 1;
+  }
+
+  .header .navbar ul {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .header .navbar li {
+    border-bottom: 1px solid #f3f4f6;
+    width: 100%;
+  }
+
+  .header .navbar a {
+    display: block;
+    padding: 15px 20px;
+    font-size: 15px;
+  }
+
+  .header .navbar li.active a,
+  .header .navbar a.active {
+    background-color: #fff1f2;
+    border-bottom: none;
+    padding-bottom: 15px;
+  }
+
+  /* Footer 2 Cột trên Tablet */
+  .footer .container {
+    flex-wrap: wrap;
+    gap: 30px 20px;
+    margin-left: 35px;
+    margin-right: 20px;
+  }
+
+  .footer .col1,
+  .footer .col2 {
+    flex: 0 0 calc(50% - 10px);
+  }
+
+  .footer .col3 {
+    flex: 0 0 100%;
+  }
+}
+
+/* ==========================================
+   5. ĐIỆN THOẠI NHỎ (Màn hình < 768px) 📲
+   ========================================== */
+@media screen and (max-width: 767px) {
+  /* Footer xếp 1 cột dọc */
+  .footer .container {
+    flex-direction: column;
+    gap: 25px;
+  }
+
+  .footer .col1,
+  .footer .col2,
+  .footer .col3 {
+    flex: 1 1 100%;
+    width: 100%;
+  }
+
+  .footer h3 {
+    height: auto;
+    margin-bottom: 15px;
+  }
+
+  .footer .col1 .logo {
+    margin-bottom: 15px;
+  }
+
+  #scrollToTopBtn {
+    width: 40px;
+    height: 40px;
+    top: 15px;
+    right: 15px;
+    font-size: 16px;
+  }
+}
