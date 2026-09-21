@@ -45,29 +45,36 @@ function initMobileMenu() {
 
 // 4. Hàm tự động Highlight trang hiện tại 📍
 function highlightCurrentPage() {
-  const currentPath = window.location.pathname;
+  const currentPath = window.location.pathname.toLowerCase();
   const navLinks = document.querySelectorAll('.navbar a');
 
   navLinks.forEach((link) => {
-    const linkPath = link.getAttribute('href');
+    const linkPath = link.getAttribute('href').toLowerCase();
     const parentLi = link.parentElement;
 
-    // Xóa class active cũ
-    parentLi.classList.remove('active');
+    if (parentLi) {
+      parentLi.classList.remove('active');
+    }
 
-    // Kiểm tra trùng khớp URL (xử lý cả trang chủ "/" hoặc "index.html")
+    // So sánh linh hoạt đường dẫn
     if (
-      currentPath === linkPath ||
-      (currentPath === '/' && linkPath === '/') ||
-      (currentPath.endsWith('index.html') && linkPath === '/')
+      currentPath.endsWith(linkPath) ||
+      (currentPath.endsWith('/') && linkPath.includes('index.html'))
     ) {
-      parentLi.classList.add('active');
+      if (parentLi) {
+        parentLi.classList.add('active');
+      }
     }
   });
 }
 
 // 5. Hàm tải Header & Footer tự động 📦
 function loadComponents() {
+  // 🎯 TỰ ĐỘNG XÁC ĐỊNH BASE_URL:
+  // Nếu URL chứa /Policy/ hoặc /policy/ thì lùi ra 1 cấp '../', ngược lại dùng './'
+  const isSubFolder = window.location.pathname.toLowerCase().includes('/policy/');
+  const BASE_URL = isSubFolder ? '../' : './';
+
   const headerHTML = `
     <header class="header">
       <div class="container">
@@ -77,8 +84,8 @@ function loadComponents() {
         </button>
 
         <!-- Logo (Giữa) 🖼️ -->
-        <a href="index.html" class="logo-wrapper">
-          <img class="logo" src="assets/img/logo.png" alt="logo" />
+        <a href="${BASE_URL}index.html" class="logo-wrapper">
+          <img class="logo" src="${BASE_URL}assets/img/logo.png" alt="logo" />
         </a>
 
         <!-- Off-canvas Menu Trượt từ Trái 🎨 -->
@@ -89,17 +96,17 @@ function loadComponents() {
             <button class="menu-close" id="menuClose" aria-label="Close Menu">&times;</button>
           </div>
           <ul>
-            <li><a href="index.html">Trang chủ</a></li>
-            <li><a href="about.html">Giới thiệu</a></li>
-            <li><a href="shop.html">Cửa hàng</a></li>
-            <li><a href="builder.html">Tự thiết kế bánh</a></li>
-            <li><a href="contact.html">Liên hệ</a></li>
+            <li><a href="${BASE_URL}index.html">Trang chủ</a></li>
+            <li><a href="${BASE_URL}about.html">Giới thiệu</a></li>
+            <li><a href="${BASE_URL}shop.html">Cửa hàng</a></li>
+            <li><a href="${BASE_URL}builder.html">Tự thiết kế bánh</a></li>
+            <li><a href="${BASE_URL}contact.html">Liên hệ</a></li>
           </ul>
         </nav>
 
         <!-- Giỏ hàng (Phải) 🛒 -->
         <div class="cart">
-            <a href="cart.html" class="cart-icon">
+            <a href="${BASE_URL}cart.html" class="cart-icon">
                 <i class="fas fa-shopping-cart"></i>
                 <span class="cart-badge">0</span>
             </a>
@@ -116,7 +123,7 @@ function loadComponents() {
 
       <div class="container">
         <div class="col1">
-          <img class="logo" src="assets/img/logo.png" alt="logo" />
+          <img class="logo" src="${BASE_URL}assets/img/logo.png" alt="logo" />
           <ul>
             <li>
               <p>📍</p>
@@ -150,9 +157,9 @@ function loadComponents() {
         <div class="col3">
           <h3>Chính sách</h3>
           <ul>
-            <li><a href="policy/privacy.html">Chính sách bảo mật</a></li>
-            <li><a href="policy/payment.html">Chính sách thanh toán</a></li>
-            <li><a href="policy/shipping.html">Chính sách giao hàng</a></li>
+            <li><a href="${BASE_URL}Policy/privacy.html">Chính sách bảo mật</a></li>
+            <li><a href="${BASE_URL}Policy/payment.html">Chính sách thanh toán</a></li>
+            <li><a href="${BASE_URL}Policy/shipping.html">Chính sách giao hàng</a></li>
           </ul>
         </div>
       </div>
@@ -173,7 +180,7 @@ function loadComponents() {
   updateCartBadge();
   initScrollToTop();
   initMobileMenu();
-  highlightCurrentPage(); // 🎯 Gọi hàm tự động active đúng trang
+  highlightCurrentPage();
 }
 
 document.addEventListener('DOMContentLoaded', loadComponents);
