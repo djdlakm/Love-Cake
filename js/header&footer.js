@@ -86,7 +86,7 @@ function loadComponents() {
         </button>
 
         <!-- Logo (Giữa) 🖼️ -->
-        <a href="${BASE_URL}index.html" class="logo-wrapper">
+        <a href="${BASE_URL}" class="logo-wrapper">
           <img class="logo" src="${BASE_URL}assets/img/logo.png" alt="logo" />
         </a>
 
@@ -98,7 +98,7 @@ function loadComponents() {
             <button class="menu-close" id="menuClose" aria-label="Close Menu">&times;</button>
           </div>
           <ul>
-            <li><a href="${BASE_URL}index.html">Trang chủ</a></li>
+            <li><a href="${BASE_URL}">Trang chủ</a></li>
             <li><a href="${BASE_URL}about.html">Giới thiệu</a></li>
             <li><a href="${BASE_URL}shop.html">Cửa hàng</a></li>
             <li><a href="${BASE_URL}builder.html">Tự thiết kế bánh</a></li>
