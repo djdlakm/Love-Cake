@@ -100,7 +100,7 @@ function loadComponents() {
           <ul>
             <li><a href="${BASE_URL}">Trang chủ</a></li>
             <li><a href="${BASE_URL}about.html">Giới thiệu</a></li>
-            <li><a href="${BASE_URL}shop.html">Cửa hàng</a></li>
+            <li><a href="${BASE_URL}shop.html">Sản phẩm</a></li>
             <li><a href="${BASE_URL}builder.html">Tự thiết kế bánh</a></li>
             <li><a href="${BASE_URL}contact.html">Liên hệ</a></li>
           </ul>
