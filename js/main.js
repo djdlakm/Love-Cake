@@ -16,14 +16,6 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-// scroll to top button
-document.querySelector("#scrollToTopBtn").addEventListener("click", function () {
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth" // Cuộn mượt mà
-  });
-})
-
 // Hàm cập nhật số lượng hiển thị trên icon giỏ hàng 🎈
 function updateCartBadge() {
   // 1. Lấy danh sách giỏ hàng từ localStorage (nếu chưa có thì trả về mảng rỗng)
