@@ -45,22 +45,24 @@ function initMobileMenu() {
 
 // 4. Hàm tự động Highlight trang hiện tại 📍
 function highlightCurrentPage() {
-  const currentPath = window.location.pathname.toLowerCase();
+  const normalizePath = (path) => {
+    const withoutIndex = path.toLowerCase().replace(/\/index\.html$/, '/');
+    return withoutIndex.replace(/\/+$/, '') || '/';
+  };
+  const currentPath = normalizePath(window.location.pathname);
   const navLinks = document.querySelectorAll('.navbar a');
 
   navLinks.forEach((link) => {
-    const linkPath = link.getAttribute('href').toLowerCase();
+    const linkPath = normalizePath(
+      new URL(link.href, window.location.href).pathname
+    );
     const parentLi = link.parentElement;
 
     if (parentLi) {
       parentLi.classList.remove('active');
     }
 
-    // So sánh linh hoạt đường dẫn
-    if (
-      currentPath.endsWith(linkPath) ||
-      (currentPath.endsWith('/') && linkPath.includes('index.html'))
-    ) {
+    if (currentPath === linkPath) {
       if (parentLi) {
         parentLi.classList.add('active');
       }
