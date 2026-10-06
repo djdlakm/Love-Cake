@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="vi">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,20 +8,158 @@
       crossorigin="anonymous"
     ></script>
     <link rel="stylesheet" href="css/style.css" />
-    <title>Love Cake</title>
+    <link rel="stylesheet" href="css/cart.css" />
+
+    <title>Giỏ hàng - Love Cake Studio</title>
   </head>
   <body>
-    <!-- Thẻ giữ chỗ cho Header 📌 -->
     <div id="header-placeholder"></div>
 
-    <main>
+    <main class="cart-page">
+      <div class="cart-breadcrumb">
+        <span class="crumb-icon"><i class="fa-solid fa-house"></i></span>
+        <span>Trang chủ</span>
+        <span class="crumb-separator">/</span>
+        <span>Giỏ hàng của bạn</span>
+      </div>
 
+      <div class="cart-header">
+        <h1>Giỏ Hàng</h1>
+        <span class="cart-count">1 sản phẩm</span>
+      </div>
+
+      <p class="cart-subtitle">
+        Kiểm tra thông tin chi tiết bánh tùy chỉnh trước khi hoàn tất đặt bánh
+      </p>
+
+      <div class="cart-layout">
+        <section class="cart-main">
+          <div class="cart-table">
+            <div class="cart-table-header">
+              <div class="col-product">Sản phẩm</div>
+              <div class="col-price">Đơn giá</div>
+              <div class="col-qty">Số lượng</div>
+              <div class="col-total">Thành tiền</div>
+            </div>
+
+            <div class="cart-item">
+              <button class="remove-item" aria-label="Xóa sản phẩm">
+                <i class="fa-solid fa-xmark"></i>
+              </button>
+
+              <div class="product-cell">
+                <div class="product-thumb">
+                  <img
+                    src="assets/img/cart-cake.png"
+                    alt="Bánh Bento"
+                  />
+                </div>
+
+                <div class="product-info">
+                  <div class="product-badge">BENTO CAKE</div>
+                  <h3>Bánh Bento <br />kem dâu tây</h3>
+                  <div class="product-meta">
+                    <span class="meta-title">Mã SP:</span>
+                    <span class="meta-value">BLC-2026</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="price-cell">100.000đ</div>
+
+              <div class="qty-cell">
+                <div class="quantity-box">
+                  <button class="qty-btn minus" aria-label="Giảm số lượng">−</button>
+                  <span class="qty-value">1</span>
+                  <button class="qty-btn plus" aria-label="Tăng số lượng">+</button>
+                </div>
+              </div>
+
+              <div class="total-cell">100.000đ</div>
+            </div>
+
+            <div class="cart-item-footer">
+              <button class="continue-btn">
+                <span class="arrow">←</span> Tiếp tục mua bánh
+              </button>
+
+              <button class="trash-btn" aria-label="Xóa giỏ hàng">
+                <i class="fa-regular fa-trash-can"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="cart-note-group">
+            <label class="note-title" for="cart-note">Ghi chú</label>
+            <textarea
+              id="cart-note"
+              class="cart-note-box"
+              placeholder="Nhập ghi chú cho bánh của bạn..."
+            ></textarea>
+            <div class="note-suggestions">
+              <span>Gợi ý nhanh:</span>
+              <button type="button" class="note-chip">+ Bánh ít ngọt</button>
+              <button type="button" class="note-chip">+ Thêm dâu</button>
+              <button type="button" class="note-chip">+ Thêm dao, nĩa</button>
+            </div>
+          </div>
+        </section>
+
+        <aside class="cart-summary">
+          <div class="summary-header">
+            <h2>Đơn hàng của bạn</h2>
+            <span class="dot"></span>
+          </div>
+
+          <div class="summary-row">
+            <span class="label">Tạm tính tiền bánh</span>
+            <span class="value">100.000đ</span>
+          </div>
+
+          <div class="summary-row sub">
+            <span class="label">Phụ kiện đi kèm</span>
+            <span class="value">0đ</span>
+          </div>
+
+          <div class="coupon-box">
+            <div class="coupon-header">
+              <span>Mã giảm giá / Voucher</span>
+            </div>
+
+            <div class="coupon-input-row">
+              <input type="text" placeholder="NHẬP MÃ ƯU ĐÃI..." />
+              <button>Áp dụng</button>
+            </div>
+          </div>
+
+          <div class="shipping-box">
+            <label class="shipping-option">
+              <i class="fa-regular fa-square"></i>
+              <span>Xuất hóa đơn công ty (VAT) nếu có</span>
+            </label>
+          </div>
+
+          <div class="summary-total">
+            <span>Tổng thanh toán</span>
+            <strong>100.000đ</strong>
+          </div>
+
+          <p class="vat-note">(Đã bao gồm VAT nếu có)</p>
+
+          <button class="checkout-btn">Tiến hành đặt hàng</button>
+
+          <div class="contact-box">
+            <span class="contact-label">Tư vấn đặt hàng nhanh qua Zalo:</span>
+            <strong>0969062471</strong>
+          </div>
+        </aside>
+      </div>
     </main>
-    <!-- Thẻ giữ chỗ cho Footer 📌 -->
+
     <div id="footer-placeholder"></div>
 
-   
     <script src="js/header&footer.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/cart.js"></script>
   </body>
 </html>
