@@ -91,6 +91,7 @@ ul {
   display: block;
   object-fit: cover;
   object-position: center;
+  filter: drop-shadow(3px 3px 3px var(--color-shadow-medium));
 }
 
 /* Menu Navbar */
