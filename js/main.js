@@ -1,32 +1,20 @@
 document.addEventListener("DOMContentLoaded", function () {
-  // 1. Lấy tên file hoặc đường dẫn hiện tại trên thanh địa chỉ 📍
-  const currentPath = window.location.pathname;
-
-  // 2. Chọn tất cả các thẻ <a> nằm trong menu navigation 🔗
+  const normalizePath = (path) => {
+    const withoutIndex = path.toLowerCase().replace(/\/index\.html$/, "/");
+    return withoutIndex.replace(/\/+$/, "") || "/";
+  };
+  const currentPath = normalizePath(window.location.pathname);
   const navLinks = document.querySelectorAll(".navbar a");
 
-  // 3. Duyệt qua từng liên kết để kiểm tra
   navLinks.forEach((link) => {
-    const linkPath = link.getAttribute("href");
-
-    // Nếu đường dẫn hiện tại trùng với href của thẻ a
-    if (
-      linkPath === currentPath || 
-      (currentPath === "/" && linkPath === "/") ||
-      (linkPath !== "/" && currentPath.endsWith(linkPath))
-    ) {
-      link.classList.add("active"); // 🌟 Thêm class active
+    const linkPath = normalizePath(
+      new URL(link.href, window.location.href).pathname
+    );
+    if (linkPath === currentPath) {
+      link.classList.add("active");
     }
   });
 });
-
-// scroll to top button
-document.querySelector("#scrollToTopBtn").addEventListener("click", function () {
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth" // Cuộn mượt mà
-  });
-})
 
 // Hàm cập nhật số lượng hiển thị trên icon giỏ hàng 🎈
 function updateCartBadge() {

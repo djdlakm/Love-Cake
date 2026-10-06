@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="vi">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,19 +8,167 @@
       crossorigin="anonymous"
     ></script>
     <link rel="stylesheet" href="css/style.css" />
-    <title>Love Cake</title>
+    <link rel="stylesheet" href="css/about.css" />
+    <title>Giới thiệu | Love Cake</title>
   </head>
   <body>
     <!-- Thẻ giữ chỗ cho Header 📌 -->
     <div id="header-placeholder"></div>
 
-    <main>
+    <main class="about-page">
+      <section class="about-hero" aria-labelledby="about-title">
+        <div class="about-hero-inner">
+          <nav class="breadcrumb" aria-label="Điều hướng đường dẫn">
+            <a href="index.html">Trang chủ</a>
+            <span aria-hidden="true">/</span>
+            <span aria-current="page">Giới thiệu</span>
+          </nav>
+          <p class="eyebrow">Chuyện nhà Love Cake</p>
+          <h1 id="about-title">
+            Mỗi chiếc bánh,<br />
+            <span>Một cách nói lời yêu thương</span>
+          </h1>
+          <p class="about-hero-copy">
+            Những chiếc bánh thủ công cho khoảnh khắc sum vầy, lời chúc mừng và
+            những điều bạn muốn nói bằng cả tấm lòng.
+          </p>
+        </div>
+      </section>
 
+      <section class="story-section" aria-labelledby="story-title">
+        <div class="story-image-wrap">
+          <img
+            class="story-image story-image-main"
+            src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=1400&q=85"
+            alt="Chiếc bánh kem được trang trí tỉ mỉ trong gian bếp Love Cake"
+          />
+          <img
+            class="story-image story-image-left"
+            src="https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=800&q=85"
+            alt="Món tráng miệng ngọt ngào được chuẩn bị tại Love Cake"
+            loading="lazy"
+          />
+          <img
+            class="story-image story-image-bottom"
+            src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?auto=format&fit=crop&w=800&q=85"
+            alt="Bánh kem dâu tươi cho những dịp đặc biệt"
+            loading="lazy"
+          />
+        </div>
+        <div class="story-copy">
+          <p class="eyebrow">Từ căn bếp nhỏ đến bàn tiệc của bạn</p>
+          <h2 id="story-title">Ngọt ngào bắt đầu từ những điều chân thành</h2>
+          <p>
+            Love Cake bắt đầu từ niềm vui khi làm nên những chiếc bánh nhỏ xinh
+            cho các dịp đáng nhớ. Chúng tôi chọn nguyên liệu tươi, chăm chút
+            từng công đoạn và gửi vào mỗi mẻ bánh sự chân thành.
+          </p>
+          <p>
+            Từ chiếc bánh sinh nhật thân quen đến món quà bất ngờ, chúng tôi
+            mong mỗi chiếc bánh sẽ giúp bạn trao đi lời yêu thương thật ấm áp.
+          </p>
+          <a class="story-link" href="shop.html"
+            >Khám phá cửa hàng <span aria-hidden="true">→</span></a
+          >
+        </div>
+      </section>
+
+      <section class="team-section" aria-labelledby="team-title">
+        <div class="section-heading">
+          <p class="eyebrow">Bàn tay đứng sau mỗi chiếc bánh</p>
+          <h2 id="team-title">Một chút tỉ mỉ, thật nhiều tâm huyết</h2>
+          <p>
+            Đội ngũ Love Cake chăm chút từ cốt bánh đến lớp trang trí cuối cùng,
+            để mỗi món quà vừa đẹp mắt vừa mang dấu ấn riêng.
+          </p>
+        </div>
+        <div class="team-grid">
+          <article class="chef-card">
+            <img
+              src="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?auto=format&fit=crop&w=1000&q=85"
+              alt="Đầu bếp Love Cake đang chuẩn bị món bánh trong bếp"
+              loading="lazy"
+            />
+            <div class="chef-info">
+              <p class="chef-role">Bếp trưởng bánh Âu</p>
+              <h3>Nguyễn Minh Anh</h3>
+              <p>
+                Chăm chút từ cốt bánh mềm mịn đến lớp kem hài hòa, để mỗi hương
+                vị đều thật trọn vẹn.
+              </p>
+            </div>
+          </article>
+          <article class="chef-card">
+            <img
+              src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=1000&q=85"
+              alt="Đầu bếp đang chăm chút những mẻ bánh mới ra lò"
+              loading="lazy"
+            />
+            <div class="chef-info">
+              <p class="chef-role">Bếp trưởng trang trí</p>
+              <h3>Trần Hoàng Nam</h3>
+              <p>
+                Biến ý tưởng thành những tạo hình tinh tế, hoàn thiện chiếc
+                bánh mang dấu ấn riêng cho từng dịp.
+              </p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="promise-section" aria-labelledby="promise-title">
+        <div class="promise-heading">
+          <p class="eyebrow">Điều làm nên một chiếc bánh đáng nhớ</p>
+          <h2 id="promise-title">Lời hứa của Love Cake</h2>
+        </div>
+        <div class="promise-grid">
+          <article class="promise-item">
+            <div class="promise-image">
+              <img
+                src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&w=900&q=85"
+                alt="Nguyên liệu tươi được chuẩn bị để làm bánh"
+                loading="lazy"
+              />
+            </div>
+            <h3>Chất lượng</h3>
+            <p>
+              Mỗi nguyên liệu được Love Cake lựa chọn tỉ mỉ cùng những tiêu
+              chuẩn cao cấp nhất. Mang đến một hành trình khám phá vị giác, gói
+              trọn trong sự tưới mới và thanh lịch.
+            </p>
+          </article>
+          <article class="promise-item">
+            <div class="promise-image">
+              <img
+                src="https://images.unsplash.com/photo-1576618148400-f54bed99fcfd?auto=format&fit=crop&w=900&q=85"
+                alt="Chiếc bánh được trang trí thủ công với dâu tươi"
+                loading="lazy"
+              />
+            </div>
+            <h3>Trải nghiệm</h3>
+            <p>
+              Với dịch vụ giao bánh tận nơi và quy trình đặt hàng đơn giản, Love Cake mong muốn mang đến cho bạn trải nghiệm thưởng thức bánh ngọt dễ dàng nhất có thể.
+            </p>
+          </article>
+          <article class="promise-item">
+            <div class="promise-image">
+              <img
+                src="https://images.unsplash.com/photo-1511988617509-a57c8a288659?auto=format&fit=crop&w=900&q=85"
+                alt="Mọi người cùng chia sẻ niềm vui bên bàn bánh"
+                loading="lazy"
+              />
+            </div>
+            <h3>Cho mọi người</h3>
+            <p>
+              Love Cake nghiên cứu kĩ lưỡng vị bánh để phù hợp với khẩu vị của người Việt. Thanh mát, ngọt dịu hay đậm đà, ai cũng có thể tìm riêng cho mình một vị bánh để yêu thích.
+            </p>
+          </article>
+        </div>
+      </section>
     </main>
     <!-- Thẻ giữ chỗ cho Footer 📌 -->
     <div id="footer-placeholder"></div>
 
-    
     <script src="js/header&footer.js"></script>
     <script src="js/main.js"></script>
   </body>

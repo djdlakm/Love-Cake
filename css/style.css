@@ -1,3 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  --color-brand: #f43f5e;
+  --color-brand-hover: #e11d48;
+  --color-brand-light: #ff7597;
+  --color-brand-soft: #fff1f2;
+  --color-brand-border: #ffe4e6;
+  --color-brand-border-soft: #f4dce1;
+  --color-brand-border-overlay: rgb(255 228 230 / 20%);
+  --color-brand-border-tint: rgb(244 63 94 / 18%);
+  --color-brand-focus: rgb(244 63 94 / 35%);
+  --color-ink: #071224;
+  --color-text: #333333;
+  --color-text-muted: #626b78;
+  --color-text-subtle: #90a1b9;
+  --color-text-on-brand: #ffffff;
+  --color-surface: #ffffff;
+  --color-surface-translucent: rgb(255 255 255 / 88%);
+  --color-border-subtle: #f3f4f6;
+  --color-mobile-icon: #2b3a4a;
+  --color-footer-heading: #e0d1d5;
+  --color-shadow-light: rgb(0 0 0 / 5%);
+  --color-shadow-medium: rgb(0 0 0 / 15%);
+  --color-shadow-heavy: rgb(0 0 0 / 20%);
+  --color-shadow-brand: rgb(244 63 94 / 40%);
+  --color-shadow-ink-light: rgb(7 18 36 / 5%);
+  --color-shadow-ink-medium: rgb(7 18 36 / 12%);
+}
+
 /* ==========================================
    1. RESET & SETUP CHUNG 🌐
    ========================================== */
@@ -16,7 +46,7 @@ ul {
 }
 
 * {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Inter', sans-serif;
   font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;
@@ -42,20 +72,26 @@ ul {
 /* ==========================================
    2. HEADER CHUNG (DESKTOP) 🔝
    ========================================== */
-.header {
-  background-color: #ffffff;
-  border-bottom: 2px solid #ffe4e6;
-  padding: 12px 0;
+#header-placeholder {
   position: sticky;
   top: 0;
   z-index: 1000;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.header {
+  background-color: var(--color-surface);
+  border-bottom: 2px solid var(--color-brand-border);
+  padding: 2px 0;
+  box-shadow: 0 2px 10px var(--color-shadow-light);
 }
 
 .header .logo {
-  height: 50px;
-  width: auto;
+  width: 126px;
+  height: 72px;
   display: block;
+  object-fit: cover;
+  object-position: center;
+  filter: drop-shadow(3px 3px 3px var(--color-shadow-medium));
 }
 
 /* Menu Navbar */
@@ -76,7 +112,7 @@ ul {
 
 .header .navbar a {
   display: inline-block;
-  color: #333333;
+  color: var(--color-text);
   font-weight: 600;
   font-size: 16px;
   transition: all 0.2s ease;
@@ -88,12 +124,12 @@ ul {
 .header .navbar a:hover,
 .header .navbar li.active a,
 .header .navbar a.active {
-  color: #f43f5e;
+  color: var(--color-brand);
 }
 
 .header .navbar li.active a,
 .header .navbar a.active {
-  border-bottom: 2.5px solid #f43f5e;
+  border-bottom: 2.5px solid var(--color-brand);
   padding-bottom: 4px;
   border-radius: 0;
 }
@@ -102,21 +138,21 @@ ul {
 .cart-icon {
   position: relative;
   display: inline-flex;
-  color: #333333;
+  color: var(--color-text);
   font-size: 24px;
   transition: color 0.3s ease;
 }
 
 .cart-icon:hover {
-  color: #f43f5e;
+  color: var(--color-brand);
 }
 
 .cart-badge {
   position: absolute;
   top: -10px;
   right: -12px;
-  background-color: #f43f5e;
-  color: #ffffff;
+  background-color: var(--color-brand);
+  color: var(--color-text-on-brand);
   font-size: 11px;
   font-weight: 700;
   width: 18px;
@@ -131,9 +167,9 @@ ul {
    3. FOOTER CHUNG (DESKTOP) 🦶
    ========================================== */
 .footer {
-  background-color: #071224;
+  background-color: var(--color-ink);
   padding-top: 40px;
-  border-top: 2px solid #ffe4e6;
+  border-top: 2px solid var(--color-brand-border);
   position: relative;
 }
 
@@ -150,13 +186,16 @@ ul {
 }
 
 .footer .col1 .logo {
-  height: 40px;
+  width: 160px;
+  height: 92px;
   margin-bottom: 24px;
   display: block;
+  object-fit: cover;
+  object-position: center;
 }
 
 .footer h3 {
-  color: #e0d1d5;
+  color: var(--color-footer-heading);
   font-size: 18px;
   font-weight: 700;
   height: 40px;
@@ -177,7 +216,7 @@ ul {
 }
 
 .footer .col1 li {
-  color: #90a1b9;
+  color: var(--color-text-subtle);
   gap: 12px;
 }
 
@@ -188,7 +227,7 @@ ul {
 }
 
 .footer .col2 li {
-  color: #90a1b9;
+  color: var(--color-text-subtle);
   gap: 10px;
 }
 
@@ -197,19 +236,19 @@ ul {
 }
 
 .footer .col3 a {
-  color: #90a1b9;
+  color: var(--color-text-subtle);
   font-size: 14px;
   transition: all 0.2s ease;
 }
 
 .footer .col3 a:hover {
-  color: #f43f5e;
+  color: var(--color-brand);
   padding-left: 6px;
 }
 
 /* Phần bản quyền */
 .footer .bottom {
-  border-top: 1px solid rgba(255, 228, 230, 0.2);
+  border-top: 1px solid var(--color-brand-border-overlay);
   display: flex;
   justify-content: center;
   padding: 15px 0;
@@ -218,7 +257,7 @@ ul {
 .footer .bottom p {
   margin: 0;
   font-size: 14px;
-  color: #90a1b9;
+  color: var(--color-text-subtle);
 }
 
 /* Nút Scroll To Top */
@@ -229,12 +268,12 @@ ul {
   width: 45px;
   height: 45px;
   border-radius: 50%;
-  background-color: #f43f5e;
-  color: #ffffff;
+  background-color: var(--color-brand);
+  color: var(--color-text-on-brand);
   border: none;
   outline: none;
   cursor: pointer;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 10px var(--color-shadow-heavy);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -244,9 +283,9 @@ ul {
 }
 
 #scrollToTopBtn:hover {
-  background-color: #e11d48;
+  background-color: var(--color-brand-hover);
   transform: translateY(-5px);
-  box-shadow: 0 6px 15px rgba(244, 63, 94, 0.4);
+  box-shadow: 0 6px 15px var(--color-shadow-brand);
 }
 
 /* ==========================================
@@ -263,7 +302,7 @@ ul {
     background: none;
     border: none;
     font-size: 22px;
-    color: #2b3a4a;
+    color: var(--color-mobile-icon);
     cursor: pointer;
     padding: 5px;
     width: 40px;
@@ -277,7 +316,8 @@ ul {
   }
 
   .header .logo {
-    height: 40px;
+    width: 110px;
+    height: 63px;
   }
 
   .header .cart {
@@ -293,9 +333,9 @@ ul {
     left: 0 !important;
     width: 280px;
     height: 100vh;
-    background-color: #ffffff;
+    background-color: var(--color-surface);
     z-index: 9999;
-    box-shadow: 2px 0 12px rgba(0, 0, 0, 0.15);
+    box-shadow: 2px 0 12px var(--color-shadow-medium);
     transform: translateX(-100%);
     transition: transform 0.3s ease-in-out;
     padding: 0 !important;
@@ -312,8 +352,8 @@ ul {
     display: flex !important;
     justify-content: space-between;
     align-items: center;
-    background-color: #ff7597;
-    color: #ffffff;
+    background-color: var(--color-brand-light);
+    color: var(--color-text-on-brand);
     padding: 16px 20px;
     font-size: 18px;
     font-weight: 700;
@@ -322,7 +362,7 @@ ul {
   .menu-close {
     background: none;
     border: none;
-    color: #ffffff;
+    color: var(--color-text-on-brand);
     font-size: 26px;
     cursor: pointer;
     line-height: 1;
@@ -334,7 +374,7 @@ ul {
   }
 
   .header .navbar li {
-    border-bottom: 1px solid #f3f4f6;
+    border-bottom: 1px solid var(--color-border-subtle);
     width: 100%;
   }
 
@@ -346,7 +386,7 @@ ul {
 
   .header .navbar li.active a,
   .header .navbar a.active {
-    background-color: #fff1f2;
+    background-color: var(--color-brand-soft);
     border-bottom: none;
     padding-bottom: 15px;
   }

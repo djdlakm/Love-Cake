@@ -45,22 +45,24 @@ function initMobileMenu() {
 
 // 4. Hàm tự động Highlight trang hiện tại 📍
 function highlightCurrentPage() {
-  const currentPath = window.location.pathname.toLowerCase();
+  const normalizePath = (path) => {
+    const withoutIndex = path.toLowerCase().replace(/\/index\.html$/, '/');
+    return withoutIndex.replace(/\/+$/, '') || '/';
+  };
+  const currentPath = normalizePath(window.location.pathname);
   const navLinks = document.querySelectorAll('.navbar a');
 
   navLinks.forEach((link) => {
-    const linkPath = link.getAttribute('href').toLowerCase();
+    const linkPath = normalizePath(
+      new URL(link.href, window.location.href).pathname
+    );
     const parentLi = link.parentElement;
 
     if (parentLi) {
       parentLi.classList.remove('active');
     }
 
-    // So sánh linh hoạt đường dẫn
-    if (
-      currentPath.endsWith(linkPath) ||
-      (currentPath.endsWith('/') && linkPath.includes('index.html'))
-    ) {
+    if (currentPath === linkPath) {
       if (parentLi) {
         parentLi.classList.add('active');
       }
@@ -100,7 +102,8 @@ function loadComponents() {
           <ul>
             <li><a href="${BASE_URL}">Trang chủ</a></li>
             <li><a href="${BASE_URL}about.html">Giới thiệu</a></li>
-            <li><a href="${BASE_URL}shop.html">Cửa hàng</a></li>
+            <li><a href="${BASE_URL}shop.html">Sản phẩm</a></li>
+            <li><a href="${BASE_URL}offers.html">Khuyến Mãi</a></li>
             <li><a href="${BASE_URL}builder.html">Tự thiết kế bánh</a></li>
             <li><a href="${BASE_URL}contact.html">Liên hệ</a></li>
           </ul>
