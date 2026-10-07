@@ -51,13 +51,13 @@
   color: var(--about-rose);
 }
 
-.breadcrumb > span[aria-hidden='true'] {
+.breadcrumb-separator {
   color: var(--about-rose);
   font-size: 17px;
   line-height: 1;
 }
 
-.breadcrumb > span[aria-current='page'] {
+.breadcrumb-current {
   color: var(--about-ink);
   font-weight: 600;
 }
