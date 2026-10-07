@@ -1,27 +1,540 @@
 <!doctype html>
-<html lang="en">
+<html lang="vi">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Love Cake | Chi tiết sản phẩm</title>
+  
     <script
       src="https://kit.fontawesome.com/30260f1add.js"
       crossorigin="anonymous"
     ></script>
     <link rel="stylesheet" href="css/style.css" />
-    <title>Love Cake</title>
+    <link rel="stylesheet" href="css/product-detail.css" />
   </head>
   <body>
-    <!-- Thẻ giữ chỗ cho Header 📌 -->
+    <div class="ambient-bubbles" aria-hidden="true">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
     <div id="header-placeholder"></div>
 
-    <main>
+    <main class="detail-page-shell">
+      <section class="detail-product-card">
+        <div class="product-visual-panel">
+          <div class="product-badges">
+            <span class="product-badge">Đặc biệt</span>
+            <span class="fruit-badge">100% trái cây tươi</span>
+          </div>
 
+          <div class="gallery-card">
+            <img
+              id="mainProductImage"
+              src="assets/img/cart-cake.png"
+              alt="Bánh kem bento dâu tây"
+            />
+            <button class="gallery-nav gallery-prev" type="button" data-gallery-step="-1" aria-label="Ảnh trước">
+              <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+            </button>
+            <button class="gallery-nav gallery-next" type="button" data-gallery-step="1" aria-label="Ảnh tiếp theo">
+              <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+            </button>
+          </div>
+
+          <div class="image-toolbar">
+            <span class="image-count">1/3</span>
+            <i class="fa-regular fa-image"></i>
+          </div>
+
+          <div class="gallery-details-row">
+            <div class="thumb-row">
+              <button class="thumb active" data-image="assets/img/cart-cake.png" aria-label="Ảnh 1">
+                <img src="assets/img/cart-cake.png" alt="Bánh kem dâu tây trong hộp Bento" />
+              </button>
+              <button class="thumb" data-image="assets/dautay.jpg" aria-label="Ảnh 2">
+                <img src="assets/dautay.jpg" alt="Bánh kem với lớp kem tươi và dâu tây" />
+              </button>
+              <button class="thumb" data-image="assets/dautay2.jpg" aria-label="Ảnh 3">
+                <img src="assets/dautay2.jpg" alt="Dâu tây tươi" />
+              </button>
+            </div>
+
+            <div class="real-photo-note">
+              <i class="fa-solid fa-camera" aria-hidden="true"></i>
+              <span>Hình chụp thực tế 100% từ bếp Love Cake</span>
+            </div>
+          </div>
+
+          <div class="info-badge-list">
+            <div class="mini-review-card">
+              <div class="mini-review-icon pink">❤</div>
+              <div>
+                <strong>Tươi mới 100%</strong>
+                <span>Không dùng hương vị</span>
+              </div>
+            </div>
+            <div class="mini-review-card">
+              <div class="mini-review-icon peach">✦</div>
+              <div>
+                <strong>Thùng Gửi Lạnh</strong>
+                <span>Giữ bánh tươi ngon</span>
+              </div>
+            </div>
+            <div class="mini-review-card">
+              <div class="mini-review-icon mint">✦</div>
+              <div>
+                <strong>Tặng set đi kèm</strong>
+                <span>Nến, mũ giấy, dao dĩa</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-info-panel">
+          <div class="brand-line">Bánh Kem Handmade Thủ Công</div>
+
+          <h1 class="product-title">Bánh Kem Bento Dâu Tây Tươi (Hộp Bento Sinh Nhật)</h1>
+
+          <div class="meta-rating">
+            <div class="stars" aria-label="4.8 sao">
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+            </div>
+            <span class="score">4.8</span>
+            <span class="reviews-meta"><span id="reviewTotal">0</span> đánh giá thực tế</span>
+            <span class="badge-check">Đã bán 460+</span>
+            <a class="promo-hunt-link" href="offers.html">
+              <i class="fa-solid fa-gift" aria-hidden="true"></i>
+              Săn Mã Giảm Giá
+            </a>
+          </div>
+
+          <div class="price-row">
+            <span class="current-price">100.000đ</span>
+            <span class="old-price">120.000đ</span>
+            <span class="save-tag">Tiết kiệm -17%</span>
+          </div>
+
+          <p class="product-description">
+            Chiếc bánh kem dâu tây tươi với lớp bột Biscuit Genoise mềm mịn, hương
+            vị thanh ngọt dịu và phần nấm kem tươi sáng. Thiết kế gói giấy pastel
+            ngà, tạo độ ăn lành mạnh và có thể đặt làm quà tặng, giúp không gian
+            thêm phần riêng biệt. Sự phối hợp giữa màu sắc và hương vị tạo ra trải
+            nghiệm bánh mềm mịn, ngọt nhẹ, khó quên.
+          </p>
+
+          <div class="note-box">
+            <span class="note-icon"><i class="fa-solid fa-triangle-exclamation"></i></span>
+            <div class="note-content">
+              <strong>Thông tin cảnh báo dị ứng thực phẩm:</strong>
+              <p>
+                Bánh có chứa <strong>bơ sữa (lactose)</strong>, <strong>trứng gà</strong>, và
+                <strong>gluten từ bột mì</strong>. Vui lòng nhắn tin ghi chú cho tiệm nếu bạn cần
+                làm dòng bánh ít đường hoặc tùy chỉnh thành phần dị ứng.
+              </p>
+            </div>
+          </div>
+
+          <div class="ingredient-panel open">
+            <button class="ingredient-toggle" type="button" aria-expanded="true">
+              <span class="toggle-icon"><i class="fa-solid fa-seedling"></i></span>
+              <span class="ingredient-heading">
+                <strong>Nguyên liệu hữu cơ cao cấp chuẩn Organic</strong>
+                <small>Bấm để xem danh mục 6 nguyên liệu tuyển chọn</small>
+              </span>
+              <i class="fa-solid fa-chevron-down toggle-chevron"></i>
+            </button>
+
+            <div class="ingredient-content">
+              <div class="ingredient-grid">
+                <div class="ingredient-item">
+                  <div class="ingredient-icon">🌾</div>
+                  <div>
+                    <strong>Bột mì số 11</strong>
+                    <small class="ingredient-tag tag-green">Hữu cơ 100%</small>
+                  </div>
+                </div>
+                <div class="ingredient-item">
+                  <div class="ingredient-icon">🥚</div>
+                  <div>
+                    <strong>Trứng gà ta</strong>
+                    <small class="ingredient-tag tag-yellow">Chuẩn Organic</small>
+                  </div>
+                </div>
+                <div class="ingredient-item">
+                  <div class="ingredient-icon">🥛</div>
+                  <div>
+                    <strong>Kem President</strong>
+                    <small class="ingredient-tag tag-blue">Độ béo 35%</small>
+                  </div>
+                </div>
+                <div class="ingredient-item">
+                  <div class="ingredient-icon">🍓</div>
+                  <div>
+                    <strong>Dâu Tây Đà Lạt</strong>
+                    <small class="ingredient-tag tag-pink">Hái trong ngày</small>
+                  </div>
+                </div>
+                <div class="ingredient-item">
+                  <div class="ingredient-icon">🧈</div>
+                  <div>
+                    <strong>Bơ Normandie</strong>
+                    <small class="ingredient-tag tag-purple">Nhập khẩu Pháp</small>
+                  </div>
+                </div>
+                <div class="ingredient-item">
+                  <div class="ingredient-icon">🌿</div>
+                  <div>
+                    <strong>Vani Tahiti</strong>
+                    <small class="ingredient-tag tag-gray">Hương nguyên chất</small>
+                  </div>
+                </div>
+              </div>
+              <div class="extra-note">
+                <i class="fa-solid fa-circle-check"></i>
+                <span>Tiệm cam kết hoàn toàn không chất bảo quản công nghiệp hoặc hương liệu tổng hợp.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="supplement-panel">
+            <div class="supplement-header">
+              <div>
+                <h3>Phụ kiện được tặng</h3>
+                <p>Tự động kèm theo mỗi bánh, không tính thêm phí</p>
+              </div>
+            </div>
+
+            <div class="gift-list" aria-label="Các phụ kiện được tặng kèm">
+              <div class="gift-item" data-accessory="birthday-candles" data-accessory-name="Set nến sinh nhật">
+                <i class="fa-solid fa-check" aria-hidden="true"></i>
+                <span>Set nến sinh nhật</span>
+                <strong>Quà tặng</strong>
+              </div>
+              <div class="gift-item" data-accessory="birthday-cutlery" data-accessory-name="Set mũ giấy + Dao dĩa">
+                <i class="fa-solid fa-check" aria-hidden="true"></i>
+                <span>Set mũ giấy + Dao dĩa</span>
+                <strong>Quà tặng</strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="purchase-box">
+            <div class="purchase-header">
+              <span>Tổng tiền thanh toán</span>
+              <div class="qty-stepper">
+                <button type="button" class="qty-btn" data-action="minus">−</button>
+                <input id="quantityInput" type="number" value="1" min="1" max="99" />
+                <button type="button" class="qty-btn" data-action="plus">+</button>
+              </div>
+            </div>
+
+            <div class="purchase-total-row">
+              <div class="total-label">Tổng</div>
+              <div id="totalPrice" class="total-price">100.000đ</div>
+            </div>
+
+            <div class="cta-row">
+              <button type="button" class="btn-secondary">Thêm Vào Giỏ Hàng</button>
+              <button type="button" class="btn-primary">Mua Ngay</button>
+            </div>
+          </div>
+
+          <div class="trust-banner" aria-label="Cam kết chất lượng Love Cake Care">
+            <div class="trust-banner-header">
+              <div class="trust-banner-icon" aria-hidden="true">
+                <i class="fa-solid fa-shield-heart"></i>
+              </div>
+
+              <div class="trust-banner-copy">
+                <h3>Cam Kết Độc Quyền Love Cake Care</h3>
+                <p>Bảo hiểm 100% cho mỗi chiếc bánh giao đến tay quý khách</p>
+              </div>
+
+              <span class="trust-badge">LoveCake Care</span>
+            </div>
+
+            <div class="trust-banner-features">
+              <div class="trust-item">
+                <span class="trust-icon" aria-hidden="true">↩</span>
+                <span>1 Đổi hàng hoàn tiền 100% trong 30 phút</span>
+              </div>
+              <div class="trust-item">
+                <span class="trust-icon" aria-hidden="true">🎁</span>
+                <span>Giao xe máy thừa chuẩn tắc an toàn</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="review-section">
+        <div class="review-header-row">
+          <div>
+            <span class="section-tag">TRẢI NGHIỆM THỰC TẾ</span>
+            <h2>Đánh giá từ khách hàng</h2>
+          </div>
+          <div class="review-summary-box">
+            <span class="summary-score">4.8</span>
+            <span class="summary-stars">
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+            </span>
+            <button type="button" class="write-review-btn">Viết đánh giá</button>
+          </div>
+        </div>
+
+        <div class="review-tabs">
+          <button class="review-tab active" type="button" data-review-filter="all" aria-pressed="true">
+            Tất cả (<span class="review-tab-count">0</span>)
+          </button>
+          <button class="review-tab" type="button" data-review-filter="photo" aria-pressed="false">
+            Có ảnh chụp (<span class="review-tab-count">0</span>)
+          </button>
+          <button class="review-tab" type="button" data-review-filter="taste" aria-pressed="false">
+            Khen kem ngon béo nhẹ (<span class="review-tab-count">0</span>)
+          </button>
+          <button class="review-tab" type="button" data-review-filter="delivery" aria-pressed="false">
+            Giao đúng giờ (<span class="review-tab-count">0</span>)
+          </button>
+          <button class="review-tab" type="button" data-review-filter="design" aria-pressed="false">
+            Thiết kế đẹp (<span class="review-tab-count">0</span>)
+          </button>
+        </div>
+
+        <div class="review-list">
+          <article class="review-card" data-review-tags="photo taste delivery design">
+            <div class="review-author">
+              <div class="avatar avatar-pink">MN</div>
+              <div>
+                <strong>Mai Ngọc</strong>
+                <div class="review-meta">Chọn 20/10, 2 ngày trước</div>
+              </div>
+            </div>
+            <div class="review-stars">
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+            </div>
+            <p>
+              Bánh xuất sắc làm luôn shop nói đẹp, đúng như vào hình ảnh, kem chất lượng,
+              bánh mềm và rất đáng tiền. Mình rất thích cách shop đóng gói cẩn thận, quà
+              tặng đẹp và đúng hẹn. Hộp bánh đẹp, gói rất cẩn thận.
+            </p>
+            <div class="review-photos">
+              <img src="https://images.unsplash.com/photo-1559620192-032c4bc4674e?auto=format&fit=crop&w=400&q=80" alt="review 1" />
+              <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=400&q=80" alt="review 2" />
+            </div>
+          </article>
+
+          <article class="review-card" data-review-tags="photo taste design">
+            <div class="review-author">
+              <div class="avatar avatar-gold">TL</div>
+              <div>
+                <strong>Trần Linh</strong>
+                <div class="review-meta">Chọn 8/10, 5 ngày trước</div>
+              </div>
+            </div>
+            <div class="review-stars">
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+            </div>
+            <p>
+              Mua làm quà sinh nhật cho bạn thân, ai cũng khen bánh đẹp và vị ngon. Lớp
+              cream mềm, không quá ngọt, màu sắc bắt mắt và bánh rất tươi, đúng như mô
+              tả. Hộp đựng cũng rất chắc chắn và dễ mang đi.
+            </p>
+            <div class="review-photos">
+              <img src="https://images.unsplash.com/photo-1486427944299-d1955d23e34d?auto=format&fit=crop&w=400&q=80" alt="review 3" />
+            </div>
+          </article>
+        </div>
+
+        <button class="load-more-btn" type="button" hidden>Xem thêm đánh giá</button>
+      </section>
+
+      <section class="recommendations-section" aria-labelledby="recommendationsTitle">
+        <div class="recommendations-header">
+          <div>
+            <span class="section-tag">THÊM VỊ NGỌT NGÀO</span>
+            <h2 id="recommendationsTitle">Có thể bạn cũng thích</h2>
+          </div>
+          <div class="recommendations-controls" aria-label="Điều hướng sản phẩm gợi ý">
+            <button class="recommendations-nav" type="button" data-recommendations-step="-1" aria-label="Sản phẩm trước">
+              <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+            </button>
+            <button class="recommendations-nav" type="button" data-recommendations-step="1" aria-label="Sản phẩm tiếp theo">
+              <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="recommendations-grid" id="recommendationsTrack" tabindex="0" aria-label="Danh sách sản phẩm gợi ý, có thể cuộn ngang">
+          <article class="recommendation-card">
+            <img
+              src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?auto=format&fit=crop&w=800&q=85"
+              alt="Bánh kem dâu tươi trang trí trái cây"
+              loading="lazy"
+            />
+            <div class="recommendation-copy">
+              <span class="recommendation-label">Trái cây tươi</span>
+              <h3>Bánh kem dâu tươi</h3>
+            </div>
+          </article>
+
+          <article class="recommendation-card">
+            <img
+              src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=800&q=85"
+              alt="Bánh kem sinh nhật trang trí thủ công"
+              loading="lazy"
+            />
+            <div class="recommendation-copy">
+              <span class="recommendation-label">Làm thủ công</span>
+              <h3>Bánh kem sinh nhật</h3>
+            </div>
+          </article>
+
+          <article class="recommendation-card">
+            <img
+              src="https://images.unsplash.com/photo-1576618148400-f54bed99fcfd?auto=format&fit=crop&w=800&q=85"
+              alt="Bánh kem trang trí dâu tươi"
+              loading="lazy"
+            />
+            <div class="recommendation-copy">
+              <span class="recommendation-label">Được yêu thích</span>
+              <h3>Bánh kem dâu trang trí</h3>
+            </div>
+          </article>
+
+          <article class="recommendation-card">
+            <img
+              src="https://images.unsplash.com/photo-1559620192-032c4bc4674e?auto=format&fit=crop&w=800&q=85"
+              alt="Bánh kem bento mini trang trí dâu"
+              loading="lazy"
+            />
+            <div class="recommendation-copy">
+              <span class="recommendation-label">Bánh mini</span>
+              <h3>Bento dâu tây mini</h3>
+            </div>
+          </article>
+
+          <article class="recommendation-card">
+            <img
+              src="https://images.unsplash.com/photo-1486427944299-d1955d23e34d?auto=format&fit=crop&w=800&q=85"
+              alt="Cupcake kem tươi trang trí"
+              loading="lazy"
+            />
+            <div class="recommendation-copy">
+              <span class="recommendation-label">Tiệc trà</span>
+              <h3>Cupcake kem tươi</h3>
+            </div>
+          </article>
+
+          <article class="recommendation-card">
+            <img
+              src="https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=800&q=85"
+              alt="Bánh mousse trái cây"
+              loading="lazy"
+            />
+            <div class="recommendation-copy">
+              <span class="recommendation-label">Vị thanh mát</span>
+              <h3>Mousse trái cây</h3>
+            </div>
+          </article>
+        </div>
+      </section>
     </main>
-    <!-- Thẻ giữ chỗ cho Footer 📌 -->
+
+    <aside class="companion-widget" aria-label="Gợi ý mua kèm">
+      <div class="companion-header">
+        <span class="companion-heading">
+          <i class="fa-solid fa-fire-flame-curved" aria-hidden="true"></i>
+          <strong>GỢI Ý MUA KÈM</strong>
+        </span>
+        <button
+          class="companion-collapse"
+          type="button"
+          aria-label="Ẩn gợi ý mua kèm"
+          aria-controls="companionItems"
+          aria-expanded="true"
+        >
+          <i class="fa-solid fa-minus" aria-hidden="true"></i>
+        </button>
+      </div>
+
+      <div class="companion-items" id="companionItems">
+        <div class="companion-item">
+          <span class="companion-icon"><i class="fa-solid fa-hashtag" aria-hidden="true"></i></span>
+          <span class="companion-copy">
+            <strong>Bóng bay trang trí</strong>
+            <small>Ghi tên và số theo yêu cầu</small>
+            <span class="companion-price">35.000đ</span>
+          </span>
+          <button class="companion-add" type="button" data-accessory="balloons" data-price="35000" aria-label="Chọn bóng bay trang trí, 35.000đ" aria-pressed="false">
+            <i class="fa-solid fa-plus" aria-hidden="true"></i>
+          </button>
+        </div>
+
+        <div class="companion-item">
+          <span class="companion-icon"><i class="fa-solid fa-gift" aria-hidden="true"></i></span>
+          <span class="companion-copy">
+            <strong>Set trang trí sinh nhật</strong>
+            <small>Phụ kiện cho bữa tiệc thêm vui</small>
+            <span class="companion-price">65.000đ</span>
+          </span>
+          <button class="companion-add" type="button" data-accessory="birthday-set" data-price="65000" aria-label="Chọn set trang trí sinh nhật, 65.000đ" aria-pressed="false">
+            <i class="fa-solid fa-plus" aria-hidden="true"></i>
+          </button>
+        </div>
+
+        <div class="companion-item">
+          <span class="companion-icon"><i class="fa-solid fa-crown" aria-hidden="true"></i></span>
+          <span class="companion-copy">
+            <strong>Vương miện sinh nhật</strong>
+            <small>Điểm nhấn cho nhân vật chính</small>
+            <span class="companion-price">20.000đ</span>
+          </span>
+          <button class="companion-add" type="button" data-accessory="crown" data-price="20000" aria-label="Chọn vương miện sinh nhật, 20.000đ" aria-pressed="false">
+            <i class="fa-solid fa-plus" aria-hidden="true"></i>
+          </button>
+        </div>
+
+        <div class="companion-item">
+          <span class="companion-icon"><i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i></span>
+          <span class="companion-copy">
+            <strong>Pháo kim tuyến</strong>
+            <small>Tạo khoảnh khắc chúc mừng</small>
+            <span class="companion-price">25.000đ</span>
+          </span>
+          <button class="companion-add" type="button" data-accessory="confetti" data-price="25000" aria-label="Chọn pháo kim tuyến, 25.000đ" aria-pressed="false">
+            <i class="fa-solid fa-plus" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+      <span class="companion-status" aria-live="polite"></span>
+    </aside>
+
     <div id="footer-placeholder"></div>
 
-    
     <script src="js/header&footer.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/product-detail.js"></script>
   </body>
 </html>
