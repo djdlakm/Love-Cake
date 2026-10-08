@@ -3,25 +3,174 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Liên hệ Love Cake để được tư vấn về bánh, đơn hàng và dịch vụ."
+    />
     <script
       src="https://kit.fontawesome.com/30260f1add.js"
       crossorigin="anonymous"
     ></script>
     <link rel="stylesheet" href="css/style.css" />
-    <title>Love Cake</title>
+    <link rel="stylesheet" href="css/contact.css" />
+    <title>Liên hệ | Love Cake</title>
   </head>
   <body>
-    <!-- Thẻ giữ chỗ cho Header 📌 -->
     <div id="header-placeholder"></div>
 
-    <main>
+    <main class="contact-page">
+      <header class="contact-intro">
+        <p class="contact-eyebrow">LOVE CAKE LUÔN SẴN SÀNG LẮNG NGHE</p>
+        <h1>Liên Hệ Với Chúng Tôi</h1>
+        <p>
+          Chúng tôi luôn sẵn sàng lắng nghe và hỗ trợ bạn.<br />
+          Đừng ngần ngại liên hệ để đặt bánh theo yêu cầu hoặc nhận tư vấn miễn phí!
+        </p>
+      </header>
 
+      <section class="contact-information" aria-labelledby="contact-info-title">
+        <div class="contact-section-heading">
+          <h2 id="contact-info-title">Thông Tin Liên Hệ</h2>
+          <p>Đội ngũ Love Cake luôn sẵn lòng hỗ trợ bạn.</p>
+        </div>
+
+        <div class="contact-information-grid">
+          <div class="contact-details">
+            <article class="contact-card">
+              <span class="contact-card-icon" aria-hidden="true">
+                <i class="fa-solid fa-phone"></i>
+              </span>
+              <div>
+                <h3>Điện thoại liên hệ</h3>
+                <a href="tel:+84987654321">0987 654 321</a>
+                <p>Thứ 2 - Chủ nhật, 8:00 AM - 8:00 PM</p>
+              </div>
+            </article>
+
+            <article class="contact-card">
+              <span class="contact-card-icon" aria-hidden="true">
+                <i class="fa-regular fa-envelope"></i>
+              </span>
+              <div>
+                <h3>Email hỗ trợ</h3>
+                <a href="mailto:info@lovecake.com">info@lovecake.com</a>
+                <p>Chúng tôi sẽ phản hồi bạn sớm nhất.</p>
+              </div>
+            </article>
+
+            <article class="contact-card contact-hours">
+              <span class="contact-card-icon" aria-hidden="true">
+                <i class="fa-regular fa-clock"></i>
+              </span>
+              <div class="contact-hours-content">
+                <h3>Giờ mở cửa</h3>
+                <dl>
+                  <div><dt>Thứ 2 - Thứ 6</dt><dd>8:00 AM - 8:00 PM</dd></div>
+                  <div><dt>Thứ 7 - Chủ nhật</dt><dd>9:00 AM - 6:00 PM</dd></div>
+                </dl>
+              </div>
+            </article>
+          </div>
+
+          <article class="contact-card contact-address">
+            <div class="contact-address-heading">
+              <span class="contact-card-icon" aria-hidden="true">
+                <i class="fa-solid fa-location-dot"></i>
+              </span>
+              <div>
+                <h3>Địa chỉ cửa hàng</h3>
+                <p>12 Chùa Bộc, Kim Liên, Hà Nội</p>
+              </div>
+            </div>
+            <iframe
+              class="contact-map"
+              title="Bản đồ vị trí Love Cake tại 12 Chùa Bộc, Hà Nội"
+              src="https://www.google.com/maps?q=12%20Chua%20Boc%2C%20Kim%20Lien%2C%20Ha%20Noi&output=embed"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+            ></iframe>
+            <a
+              class="contact-directions"
+              href="https://www.google.com/maps/search/?api=1&query=12%20Chua%20Boc%2C%20Kim%20Lien%2C%20Ha%20Noi"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Chỉ đường đến cửa hàng
+              <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
+            </a>
+          </article>
+        </div>
+      </section>
+
+      <section class="contact-form-section" aria-labelledby="contact-form-title">
+        <div class="contact-section-heading">
+          <h2 id="contact-form-title">Gửi tin nhắn cho chúng tôi!</h2>
+          <p>Điền thông tin bên dưới, Love Cake sẽ liên hệ lại với bạn.</p>
+        </div>
+        <form class="contact-form" id="contactForm">
+          <label for="contactName">Họ và tên <span aria-hidden="true">*</span></label>
+          <input
+            id="contactName"
+            name="name"
+            type="text"
+            autocomplete="name"
+            placeholder="Nhập họ và tên"
+            required
+          />
+
+          <label for="contactPhone">Số điện thoại</label>
+          <input
+            id="contactPhone"
+            name="phone"
+            type="tel"
+            autocomplete="tel"
+            placeholder="Ví dụ: 0987 654 321"
+            pattern="[0-9+().\s-]{9,16}"
+          />
+
+          <label for="contactEmail">Email <span aria-hidden="true">*</span></label>
+          <input
+            id="contactEmail"
+            name="email"
+            type="email"
+            autocomplete="email"
+            placeholder="email@example.com"
+            required
+          />
+
+          <label for="contactMessage">Tin nhắn <span aria-hidden="true">*</span></label>
+          <textarea
+            id="contactMessage"
+            name="message"
+            rows="4"
+            placeholder="Bạn muốn đặt bánh, tư vấn hay cần hỗ trợ gì?"
+            required
+          ></textarea>
+
+          <button class="contact-submit" type="submit">Gửi tin nhắn</button>
+          <p class="contact-form-status" id="contactFormStatus" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <section class="contact-channels" aria-label="Kênh liên hệ nhanh">
+        <p>KÊNH HỖ TRỢ TRỰC TUYẾN TỨC THÌ (ONLINE)</p>
+        <div>
+          <a class="contact-channel contact-channel-zalo" href="https://zalo.me/0987654321" target="_blank" rel="noopener noreferrer">
+            <i class="fa-solid fa-comment-dots" aria-hidden="true"></i>
+            Nhắn Zalo
+          </a>
+          <a class="contact-channel contact-channel-email" href="mailto:info@lovecake.com">
+            <i class="fa-regular fa-envelope" aria-hidden="true"></i>
+            Gửi email
+          </a>
+        </div>
+      </section>
     </main>
-    <!-- Thẻ giữ chỗ cho Footer 📌 -->
+
     <div id="footer-placeholder"></div>
 
-    
     <script src="js/header&footer.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/contact.js"></script>
   </body>
 </html>
