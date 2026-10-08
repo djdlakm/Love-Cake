@@ -6,11 +6,31 @@ document.addEventListener("DOMContentLoaded", () => {
   const priceCell = document.querySelector(".price-cell");
   const summaryValue = document.querySelector(".summary-row .value");
   const summaryTotal = document.querySelector(".summary-total strong");
+  const checkoutBtn = document.querySelector(".checkout-btn");
 
   const unitPrice = 100000;
 
   function formatMoney(value) {
     return new Intl.NumberFormat("vi-VN").format(value) + "đ";
+  }
+
+  function saveCart(qty) {
+    try {
+      localStorage.setItem(
+        "cart",
+        JSON.stringify([{
+          name: "Bánh Bento kem dâu tây",
+          price: unitPrice,
+          quantity: qty,
+          image: "assets/img/cart-cake.png",
+          category: "cake",
+        }]),
+      );
+      return true;
+    } catch (error) {
+      console.error("Không thể lưu giỏ hàng.", error);
+      return false;
+    }
   }
 
   function updateCart() {
@@ -20,6 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
     totalCell.textContent = formatMoney(total);
     summaryValue.textContent = formatMoney(total);
     summaryTotal.textContent = formatMoney(total);
+    saveCart(qty);
   }
 
   minusBtn?.addEventListener("click", () => {
@@ -41,6 +62,15 @@ document.addEventListener("DOMContentLoaded", () => {
   if (priceCell) {
     priceCell.textContent = formatMoney(unitPrice);
   }
+
+  checkoutBtn?.addEventListener("click", () => {
+    const qty = Number(qtyValue.textContent.trim());
+    if (!saveCart(qty)) {
+      window.alert("Không thể lưu giỏ hàng. Vui lòng thử lại nhé.");
+      return;
+    }
+    window.location.href = "checkout.html";
+  });
 
   updateCart();
 });

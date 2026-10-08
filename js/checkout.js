@@ -4,6 +4,7 @@ const OFFER_CATALOG = {
     title:"Ngọt ngào tháng 10",
     description:"Giảm 10% cho đơn bánh ngọt từ 199.000đ.",
     requirement:"05/10/2026 – 31/10/2026",
+    image:"https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=1000&q=85",
     min:199000,
     rate:0.1,
     kind:"cake",
@@ -15,6 +16,7 @@ const OFFER_CATALOG = {
     title:"Giao bánh tận tâm",
     description:"Giảm phí giao hàng tối đa 20.000đ cho đơn từ 299.000đ.",
     requirement:"01/10/2026 – 15/10/2026",
+    image:"https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&w=1000&q=85",
     min:299000,
     maxDiscount:20000,
     kind:"shipping",
@@ -26,6 +28,7 @@ const OFFER_CATALOG = {
     title:"Tiệc vui thêm trọn",
     description:"Giảm 15% phụ kiện bánh cho đơn phụ kiện từ 99.000đ.",
     requirement:"01/10/2026 – 31/10/2026",
+    image:"https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=1000&q=85",
     min:99000,
     rate:0.15,
     kind:"accessory",
@@ -37,6 +40,7 @@ const OFFER_CATALOG = {
     title:"Đêm bánh bí ngô",
     description:"Giảm 20% bánh Halloween cho đơn từ 250.000đ.",
     requirement:"20/10/2026 – 31/10/2026",
+    image:"https://images.unsplash.com/photo-1565958011703-44f9829ba187?auto=format&fit=crop&w=1000&q=85",
     min:250000,
     rate:0.2,
     kind:"cake",
@@ -48,6 +52,7 @@ const OFFER_CATALOG = {
     title:"Mùa bánh Giáng Sinh",
     description:"Giảm 15% bánh khúc cây và bánh mùa lễ hội từ 350.000đ.",
     requirement:"01/12/2026 – 25/12/2026",
+    image:"https://images.unsplash.com/photo-1576618148400-f54bed99fcfd?auto=format&fit=crop&w=1000&q=85",
     min:350000,
     rate:0.15,
     kind:"cake",
@@ -59,6 +64,7 @@ const OFFER_CATALOG = {
     title:"Trăng ngọt đoàn viên",
     description:"Giảm 20% hộp bánh Trung Thu khi mua từ 2 hộp.",
     requirement:"01/09/2026 – 30/09/2026",
+    image:"https://images.unsplash.com/photo-1511988617509-a57c8a288659?auto=format&fit=crop&w=1000&q=85",
     minQuantity:2,
     rate:0.2,
     kind:"mooncake",
@@ -70,6 +76,7 @@ const OFFER_CATALOG = {
     title:"Sinh nhật thêm vui",
     description:"Giảm 50.000đ cho bánh sinh nhật từ 500.000đ.",
     requirement:"01/10/2026 – 31/10/2026",
+    image:"https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=1000&q=85",
     min:500000,
     amount:50000,
     kind:"cake",
@@ -149,7 +156,6 @@ $("phone").addEventListener("input",updateTransferContent);
 document.addEventListener("keydown",event=>{
   if(event.key==="Escape")setMobileMenuOpen(false);
   if(event.key==="Escape")hideCheckoutNotice();
-  if(event.key==="Escape"&&$("voucherModal").classList.contains("show"))closeVoucherModal();
 });
 
 function escapeHTML(s){
@@ -261,7 +267,6 @@ function updateTotals(){
   $("total").textContent=money(subtotal()+shippingFee()-discount());
   $("shippingBadge").textContent=shippingFee()===0?"0đ":"Từ 25.000đ";
   renderSelectedVoucher();
-  renderVoucherOptions();
 }
 
 function renderSelectedVoucher(){
@@ -269,6 +274,15 @@ function renderSelectedVoucher(){
   const selectedText=$("voucherSelectionText");
   const selectedCode=$("selectedVoucherCode");
   const card=$("voucherCard");
+  const image=$("voucherImage");
+  if(offer){
+    image.src=offer.image;
+    image.alt=`${offer.title} – ưu đãi Love Cake`;
+  }else{
+    image.removeAttribute("src");
+    image.alt="";
+  }
+  image.hidden=!offer;
   $("voucherName").textContent=offer?offer.title:"Chọn ưu đãi của bạn";
   $("voucherDescription").textContent=offer?offer.description:"Xem các mã đang áp dụng";
   $("voucherRequirement").textContent=offer?offer.requirement:"Chọn mã phù hợp với đơn hàng";
@@ -279,34 +293,6 @@ function renderSelectedVoucher(){
   selectedCode.textContent=voucher.active?offer.code:"";
   $("removeVoucher").classList.toggle("hidden",!voucher.active);
   card.classList.toggle("is-empty",!voucher.active);
-}
-
-function renderVoucherOptions(){
-  const options=$("voucherOptions");
-  options.innerHTML=Object.values(OFFER_CATALOG).map(offer=>{
-    const eligible=offer.active&&isOfferEligible(offer);
-    const selected=voucher.active&&voucher.code===offer.code;
-    const eligibilityNote=offerEligibilityMessage(offer);
-    return `
-      <article class="voucher-option${selected?" is-selected":""}${eligible?"":" is-disabled"}">
-        <div>
-          <h3>${escapeHTML(offer.title)}</h3>
-          <p>${escapeHTML(offer.description)} ${escapeHTML(offer.requirement)} ${escapeHTML(eligibilityNote)}</p>
-          <span class="voucher-option-code">${escapeHTML(offer.code)}</span>
-          <span class="voucher-option-status">${escapeHTML(offer.status)}</span>
-        </div>
-        <button type="button" data-offer-code="${escapeHTML(offer.code)}" ${eligible?"":"disabled"}>
-          ${selected?"Đang chọn":eligible?"Chọn mã":escapeHTML(offer.status)}
-        </button>
-      </article>
-    `;
-  }).join("");
-}
-
-function closeVoucherModal(){
-  $("voucherModal").classList.remove("show");
-  $("voucherModal").setAttribute("aria-hidden","true");
-  $("voucherSelect").focus();
 }
 
 function showCheckoutNotice(message){
@@ -370,33 +356,6 @@ $("removeVoucher").addEventListener("click",()=>{
     return;
   }
   updateTotals();
-});
-$("voucherSelect").addEventListener("click",()=>{
-  renderVoucherOptions();
-  $("voucherModal").classList.add("show");
-  $("voucherModal").setAttribute("aria-hidden","false");
-  $("closeVoucherModal").focus();
-});
-$("closeVoucherModal").addEventListener("click",closeVoucherModal);
-$("voucherModal").addEventListener("click",event=>{
-  if(event.target===$("voucherModal"))closeVoucherModal();
-});
-$("voucherOptions").addEventListener("click",event=>{
-  const button=event.target.closest("button[data-offer-code]");
-  if(!button||button.disabled)return;
-  const code=button.dataset.offerCode;
-  if(!OFFER_CATALOG[code]?.active)return;
-  try{
-    localStorage.setItem("selectedOffer",code);
-  }catch(error){
-    console.error("Không thể lưu mã ưu đãi đã chọn.",error);
-    closeVoucherModal();
-    showCheckoutNotice("Không thể lưu mã ưu đãi. Vui lòng kiểm tra bộ nhớ trình duyệt rồi thử lại nhé ♡");
-    return;
-  }
-  voucher={code,active:true};
-  updateTotals();
-  closeVoucherModal();
 });
 
 function validForm(){
