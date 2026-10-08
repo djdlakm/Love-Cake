@@ -1,26 +1,33 @@
 const contactForm = document.getElementById('contactForm');
-const contactFormStatus = document.getElementById('contactFormStatus');
+const contactSuccessDialog = document.getElementById('contactSuccessDialog');
+const contactSuccessClose = document.getElementById('contactSuccessClose');
+const contactSuccessConfirm = document.getElementById('contactSuccessConfirm');
+const contactSubmitButton = contactForm?.querySelector('.contact-submit');
+
+function closeContactSuccessDialog() {
+  contactSuccessDialog.hidden = true;
+  contactSubmitButton?.focus();
+}
 
 contactForm?.addEventListener('submit', (event) => {
   event.preventDefault();
 
   if (!contactForm.reportValidity()) return;
 
-  const formData = new FormData(contactForm);
-  const name = String(formData.get('name') || '').trim();
-  const phone = String(formData.get('phone') || '').trim();
-  const email = String(formData.get('email') || '').trim();
-  const message = String(formData.get('message') || '').trim();
-  const subject = `Liên hệ từ ${name}`;
-  const body = [
-    `Họ và tên: ${name}`,
-    `Số điện thoại: ${phone || 'Chưa cung cấp'}`,
-    `Email: ${email}`,
-    '',
-    'Nội dung:',
-    message,
-  ].join('\n');
+  contactForm.reset();
+  contactSuccessDialog.hidden = false;
+  contactSuccessClose.focus();
+});
 
-  contactFormStatus.textContent = 'Đang mở ứng dụng email để bạn gửi tin nhắn...';
-  window.location.href = `mailto:info@lovecake.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+contactSuccessClose?.addEventListener('click', closeContactSuccessDialog);
+contactSuccessConfirm?.addEventListener('click', closeContactSuccessDialog);
+
+contactSuccessDialog?.addEventListener('click', (event) => {
+  if (event.target === contactSuccessDialog) closeContactSuccessDialog();
+});
+
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape' && contactSuccessDialog && !contactSuccessDialog.hidden) {
+    closeContactSuccessDialog();
+  }
 });

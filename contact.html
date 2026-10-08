@@ -20,6 +20,16 @@
 
     <main class="contact-page">
       <header class="contact-intro">
+        <div class="contact-heart-doodles" aria-hidden="true">
+          <span>♥</span>
+          <span>♥</span>
+          <span>♥</span>
+          <span>♥</span>
+          <span>♥</span>
+          <span>♥</span>
+          <span>♥</span>
+          <span>♥</span>
+        </div>
         <p class="contact-eyebrow">LOVE CAKE LUÔN SẴN SÀNG LẮNG NGHE</p>
         <h1>Liên Hệ Với Chúng Tôi</h1>
         <p>
@@ -105,7 +115,7 @@
       <section class="contact-form-section" aria-labelledby="contact-form-title">
         <div class="contact-section-heading">
           <h2 id="contact-form-title">Gửi tin nhắn cho chúng tôi!</h2>
-          <p>Điền thông tin bên dưới, Love Cake sẽ liên hệ lại với bạn.</p>
+          <p>Điền thông tin bên dưới, Love Cake sẽ liên hệ lại với bạn trong vòng 15 phút</p>
         </div>
         <form class="contact-form" id="contactForm">
           <label for="contactName">Họ và tên <span aria-hidden="true">*</span></label>
@@ -148,7 +158,6 @@
           ></textarea>
 
           <button class="contact-submit" type="submit">Gửi tin nhắn</button>
-          <p class="contact-form-status" id="contactFormStatus" role="status" aria-live="polite"></p>
         </form>
       </section>
 
@@ -165,7 +174,40 @@
           </a>
         </div>
       </section>
+      <div class="contact-bottom-hearts" aria-hidden="true">
+        <span>♥</span>
+        <span>♥</span>
+        <span>♥</span>
+        <span>♥</span>
+        <span>♥</span>
+        <span>♥</span>
+        <span>♥</span>
+        <span>♥</span>
+      </div>
     </main>
+
+    <div class="contact-success-overlay" id="contactSuccessDialog" hidden>
+      <section
+        class="contact-success-dialog"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="contactSuccessTitle"
+        aria-describedby="contactSuccessMessage"
+      >
+        <button class="contact-success-close" id="contactSuccessClose" type="button" aria-label="Đóng thông báo">
+          <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+        </button>
+        <div class="contact-success-icon" aria-hidden="true">
+          <i class="fa-solid fa-check"></i>
+        </div>
+        <p class="contact-success-eyebrow">LOVE CAKE</p>
+        <h2 id="contactSuccessTitle">Gửi tin nhắn thành công!</h2>
+        <p id="contactSuccessMessage">
+          Cảm ơn bạn đã gửi lời nhắn đến Love Cake. Chúc bạn một ngày thật ngọt ngào!
+        </p>
+        <button class="contact-success-confirm" id="contactSuccessConfirm" type="button">Đã hiểu</button>
+      </section>
+    </div>
 
     <div id="footer-placeholder"></div>
 
