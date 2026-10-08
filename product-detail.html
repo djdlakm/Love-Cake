@@ -28,12 +28,11 @@
     <main class="detail-page-shell">
       <section class="detail-product-card">
         <div class="product-visual-panel">
-          <div class="product-badges">
-            <span class="product-badge">Đặc biệt</span>
-            <span class="fruit-badge">100% trái cây tươi</span>
-          </div>
-
           <div class="gallery-card">
+            <div class="product-badges">
+              <span class="product-badge">Đặc biệt</span>
+              <span class="fruit-badge">100% trái cây tươi</span>
+            </div>
             <img
               id="mainProductImage"
               src="assets/img/cart-cake.png"
@@ -71,35 +70,12 @@
             </div>
           </div>
 
-          <div class="info-badge-list">
-            <div class="mini-review-card">
-              <div class="mini-review-icon pink">❤</div>
-              <div>
-                <strong>Tươi mới 100%</strong>
-                <span>Không dùng hương vị</span>
-              </div>
-            </div>
-            <div class="mini-review-card">
-              <div class="mini-review-icon peach">✦</div>
-              <div>
-                <strong>Thùng Gửi Lạnh</strong>
-                <span>Giữ bánh tươi ngon</span>
-              </div>
-            </div>
-            <div class="mini-review-card">
-              <div class="mini-review-icon mint">✦</div>
-              <div>
-                <strong>Tặng set đi kèm</strong>
-                <span>Nến, mũ giấy, dao dĩa</span>
-              </div>
-            </div>
-          </div>
         </div>
 
         <div class="product-info-panel">
           <div class="brand-line">Bánh Kem Handmade Thủ Công</div>
 
-          <h1 class="product-title">Bánh Kem Bento Dâu Tây Tươi (Hộp Bento Sinh Nhật)</h1>
+          <h1 class="product-title">Bánh Kem Bento Dâu Tây Tươi</h1>
 
           <div class="meta-rating">
             <div class="stars" aria-label="4.8 sao">
@@ -144,67 +120,35 @@
             </div>
           </div>
 
-          <div class="ingredient-panel open">
-            <button class="ingredient-toggle" type="button" aria-expanded="true">
-              <span class="toggle-icon"><i class="fa-solid fa-seedling"></i></span>
-              <span class="ingredient-heading">
-                <strong>Nguyên liệu hữu cơ cao cấp chuẩn Organic</strong>
-                <small>Bấm để xem danh mục 6 nguyên liệu tuyển chọn</small>
-              </span>
-              <i class="fa-solid fa-chevron-down toggle-chevron"></i>
-            </button>
-
-            <div class="ingredient-content">
-              <div class="ingredient-grid">
-                <div class="ingredient-item">
-                  <div class="ingredient-icon">🌾</div>
-                  <div>
-                    <strong>Bột mì số 11</strong>
-                    <small class="ingredient-tag tag-green">Hữu cơ 100%</small>
-                  </div>
-                </div>
-                <div class="ingredient-item">
-                  <div class="ingredient-icon">🥚</div>
-                  <div>
-                    <strong>Trứng gà ta</strong>
-                    <small class="ingredient-tag tag-yellow">Chuẩn Organic</small>
-                  </div>
-                </div>
-                <div class="ingredient-item">
-                  <div class="ingredient-icon">🥛</div>
-                  <div>
-                    <strong>Kem President</strong>
-                    <small class="ingredient-tag tag-blue">Độ béo 35%</small>
-                  </div>
-                </div>
-                <div class="ingredient-item">
-                  <div class="ingredient-icon">🍓</div>
-                  <div>
-                    <strong>Dâu Tây Đà Lạt</strong>
-                    <small class="ingredient-tag tag-pink">Hái trong ngày</small>
-                  </div>
-                </div>
-                <div class="ingredient-item">
-                  <div class="ingredient-icon">🧈</div>
-                  <div>
-                    <strong>Bơ Normandie</strong>
-                    <small class="ingredient-tag tag-purple">Nhập khẩu Pháp</small>
-                  </div>
-                </div>
-                <div class="ingredient-item">
-                  <div class="ingredient-icon">🌿</div>
-                  <div>
-                    <strong>Vani Tahiti</strong>
-                    <small class="ingredient-tag tag-gray">Hương nguyên chất</small>
-                  </div>
-                </div>
-              </div>
-              <div class="extra-note">
-                <i class="fa-solid fa-circle-check"></i>
-                <span>Tiệm cam kết hoàn toàn không chất bảo quản công nghiệp hoặc hương liệu tổng hợp.</span>
-              </div>
-            </div>
-          </div>
+          <section class="ingredient-panel" aria-labelledby="ingredientsTitle">
+            <h2 id="ingredientsTitle">Thành phần</h2>
+            <ul class="ingredient-grid">
+              <li class="ingredient-item">
+                <strong>Bột mì số 11</strong>
+                <small class="ingredient-tag tag-green">Hữu cơ 100%</small>
+              </li>
+              <li class="ingredient-item">
+                <strong>Trứng gà ta</strong>
+                <small class="ingredient-tag tag-yellow">Chuẩn Organic</small>
+              </li>
+              <li class="ingredient-item">
+                <strong>Kem President</strong>
+                <small class="ingredient-tag tag-blue">Độ béo 35%</small>
+              </li>
+              <li class="ingredient-item">
+                <strong>Dâu Tây Đà Lạt</strong>
+                <small class="ingredient-tag tag-pink">Hái trong ngày</small>
+              </li>
+              <li class="ingredient-item">
+                <strong>Bơ Normandie</strong>
+                <small class="ingredient-tag tag-purple">Nhập khẩu Pháp</small>
+              </li>
+              <li class="ingredient-item">
+                <strong>Vani Tahiti</strong>
+                <small class="ingredient-tag tag-gray">Hương nguyên chất</small>
+              </li>
+            </ul>
+          </section>
 
           <div class="supplement-panel">
             <div class="supplement-header">
@@ -230,17 +174,12 @@
 
           <div class="purchase-box">
             <div class="purchase-header">
-              <span>Tổng tiền thanh toán</span>
+              <span>Số lượng</span>
               <div class="qty-stepper">
                 <button type="button" class="qty-btn" data-action="minus">−</button>
                 <input id="quantityInput" type="number" value="1" min="1" max="99" />
                 <button type="button" class="qty-btn" data-action="plus">+</button>
               </div>
-            </div>
-
-            <div class="purchase-total-row">
-              <div class="total-label">Tổng</div>
-              <div id="totalPrice" class="total-price">100.000đ</div>
             </div>
 
             <div class="cta-row">
@@ -254,7 +193,6 @@
               <div class="trust-banner-icon" aria-hidden="true">
                 <i class="fa-solid fa-shield-heart"></i>
               </div>
-
               <div class="trust-banner-copy">
                 <h3>Cam Kết Độc Quyền Love Cake Care</h3>
                 <p>Bảo hiểm 100% cho mỗi chiếc bánh giao đến tay quý khách</p>
@@ -266,11 +204,11 @@
             <div class="trust-banner-features">
               <div class="trust-item">
                 <span class="trust-icon" aria-hidden="true">↩</span>
-                <span>1 Đổi hàng hoàn tiền 100% trong 30 phút</span>
+                <span>Đổi hàng hoàn tiền 100% trong 30 phút</span>
               </div>
               <div class="trust-item">
                 <span class="trust-icon" aria-hidden="true">🎁</span>
-                <span>Giao xe máy thừa chuẩn tắc an toàn</span>
+                <span>Giao xe máy đúng quy trình an toàn</span>
               </div>
             </div>
           </div>
@@ -462,7 +400,7 @@
       </section>
     </main>
 
-    <aside class="companion-widget" aria-label="Gợi ý mua kèm">
+    <aside class="companion-widget is-collapsed" aria-label="Gợi ý mua kèm">
       <div class="companion-header">
         <span class="companion-heading">
           <i class="fa-solid fa-fire-flame-curved" aria-hidden="true"></i>
@@ -471,15 +409,15 @@
         <button
           class="companion-collapse"
           type="button"
-          aria-label="Ẩn gợi ý mua kèm"
+          aria-label="Mở gợi ý mua kèm"
           aria-controls="companionItems"
-          aria-expanded="true"
+          aria-expanded="false"
         >
-          <i class="fa-solid fa-minus" aria-hidden="true"></i>
+          <i class="fa-solid fa-gift" aria-hidden="true"></i>
         </button>
       </div>
 
-      <div class="companion-items" id="companionItems">
+      <div class="companion-items" id="companionItems" hidden>
         <div class="companion-item">
           <span class="companion-icon"><i class="fa-solid fa-hashtag" aria-hidden="true"></i></span>
           <span class="companion-copy">

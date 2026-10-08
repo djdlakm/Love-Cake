@@ -1,6 +1,5 @@
 const sizeOptions = document.querySelectorAll('.size-option');
 const qtyInput = document.getElementById('quantityInput');
-const totalPrice = document.getElementById('totalPrice');
 const mainProductImage = document.getElementById('mainProductImage');
 const thumbButtons = document.querySelectorAll('.thumb');
 const imageCount = document.querySelector('.image-count');
@@ -11,16 +10,25 @@ const reviewTotal = document.getElementById('reviewTotal');
 const loadMoreReviewsButton = document.querySelector('.load-more-btn');
 const recommendationsTrack = document.getElementById('recommendationsTrack');
 const recommendationControls = document.querySelectorAll('[data-recommendations-step]');
+const companionWidget = document.querySelector('.companion-widget');
 const companionCollapseButton = document.querySelector('.companion-collapse');
 const companionItems = document.querySelector('.companion-items');
 const companionAddButtons = document.querySelectorAll('.companion-add');
 const companionStatus = document.querySelector('.companion-status');
-const ingredientPanel = document.querySelector('.ingredient-panel');
-const ingredientToggle = document.querySelector('.ingredient-toggle');
 const currentPriceEl = document.querySelector('.current-price');
 const oldPriceEl = document.querySelector('.old-price');
 
 let selectedPrice = 100000;
+
+document.addEventListener('DOMContentLoaded', () => {
+  const footer = document.querySelector('#footer-placeholder .footer');
+  if (!footer || !companionWidget) return;
+
+  const footerObserver = new IntersectionObserver(([entry]) => {
+    companionWidget.classList.toggle('is-footer-visible', entry.isIntersecting);
+  });
+  footerObserver.observe(footer);
+});
 
 function formatCurrency(amount) {
   return `${amount.toLocaleString('vi-VN')}đ`;
@@ -44,11 +52,7 @@ function getIncludedAccessories() {
   }));
 }
 
-function updateTotal() {
-  const qty = Number(qtyInput.value) || 1;
-  const companionTotal = getSelectedCompanions().reduce((sum, item) => sum + item.price, 0);
-  const total = (selectedPrice + companionTotal) * qty;
-  totalPrice.textContent = formatCurrency(total);
+function updateCurrentPrice() {
   currentPriceEl.textContent = formatCurrency(selectedPrice);
 }
 
@@ -57,7 +61,7 @@ sizeOptions.forEach((button) => {
     sizeOptions.forEach((item) => item.classList.remove('active'));
     button.classList.add('active');
     selectedPrice = Number(button.dataset.price) || 100000;
-    updateTotal();
+    updateCurrentPrice();
   });
 });
 
@@ -73,7 +77,6 @@ document.querySelectorAll('.qty-btn').forEach((button) => {
     }
 
     qtyInput.value = value;
-    updateTotal();
   });
 });
 
@@ -81,7 +84,6 @@ qtyInput.addEventListener('input', () => {
   let value = Number(qtyInput.value) || 1;
   if (value < 1) value = 1;
   qtyInput.value = value;
-  updateTotal();
 });
 
 function animateCartFly(sourceButton) {
@@ -212,12 +214,21 @@ window.addEventListener('resize', updateRecommendationControls);
 updateRecommendationControls();
 
 companionCollapseButton?.addEventListener('click', () => {
-  const collapsed = !companionItems.hidden;
-  companionItems.hidden = collapsed;
-  companionCollapseButton.setAttribute('aria-expanded', String(!collapsed));
-  companionCollapseButton.setAttribute('aria-label', collapsed ? 'Mở gợi ý mua kèm' : 'Ẩn gợi ý mua kèm');
-  companionCollapseButton.innerHTML = `<i class="fa-solid ${collapsed ? 'fa-plus' : 'fa-minus'}" aria-hidden="true"></i>`;
+  companionItems.hidden = !companionItems.hidden;
+  const collapsed = companionItems.hidden;
+  companionWidget.classList.toggle('is-collapsed', collapsed);
+  companionCollapseButton.setAttribute('aria-expanded', String(!companionItems.hidden));
+  companionCollapseButton.setAttribute('aria-label', companionItems.hidden ? 'Mở gợi ý mua kèm' : 'Ẩn gợi ý mua kèm');
+  companionCollapseButton.innerHTML = `<i class="fa-solid ${collapsed ? 'fa-gift' : 'fa-minus'}" aria-hidden="true"></i>`;
 });
+
+if (companionCollapseButton && companionItems) {
+  companionItems.hidden = true;
+  companionWidget.classList.add('is-collapsed');
+  companionCollapseButton.setAttribute('aria-expanded', 'false');
+  companionCollapseButton.setAttribute('aria-label', 'Mở gợi ý mua kèm');
+  companionCollapseButton.innerHTML = '<i class="fa-solid fa-gift" aria-hidden="true"></i>';
+}
 
 companionAddButtons.forEach((button) => {
   button.addEventListener('click', () => {
@@ -228,14 +239,7 @@ companionAddButtons.forEach((button) => {
     button.innerHTML = `<i class="fa-solid ${selected ? 'fa-check' : 'fa-plus'}" aria-hidden="true"></i>`;
     button.closest('.companion-item').classList.toggle('is-selected', selected);
     companionStatus.textContent = `${itemName} ${selected ? 'đã được chọn' : 'đã bỏ chọn'}`;
-    updateTotal();
   });
-});
-
-ingredientToggle.addEventListener('click', () => {
-  ingredientPanel.classList.toggle('open');
-  const expanded = ingredientPanel.classList.contains('open');
-  ingredientToggle.setAttribute('aria-expanded', expanded);
 });
 
 const initialReviewPageSize = 4;
@@ -292,4 +296,4 @@ loadMoreReviewsButton.addEventListener('click', () => {
 });
 
 updateReviewList();
-updateTotal();
+updateCurrentPrice();
