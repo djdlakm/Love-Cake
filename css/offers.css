@@ -35,11 +35,11 @@
 }
 
 .offers-breadcrumb a:hover,
-.offers-breadcrumb > span[aria-hidden='true'] {
+.offers-breadcrumb-separator {
   color: var(--color-brand);
 }
 
-.offers-breadcrumb > span[aria-current='page'] {
+.offers-breadcrumb-current {
   color: var(--color-ink);
   font-weight: 600;
 }
