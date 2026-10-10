@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const summaryValue = document.querySelector(".summary-row .value");
   const summaryTotal = document.querySelector(".summary-total strong");
   const checkoutBtn = document.querySelector(".checkout-btn");
+  const cartLayout = document.querySelector(".cart-layout");
   const cartTable = document.querySelector(".cart-table");
   const emptyCartState = document.querySelector(".empty-cart-state");
   const cartCount = document.querySelector(".cart-count");
@@ -25,6 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (cartTable) cartTable.style.display = isEmpty ? "none" : "block";
     if (emptyCartState) emptyCartState.classList.toggle("hidden", !isEmpty);
     if (cartSummary) cartSummary.style.display = isEmpty ? "none" : "block";
+    if (cartLayout) cartLayout.classList.toggle("is-empty", isEmpty);
     if (cartCount) cartCount.textContent = isEmpty ? "0 sản phẩm" : "1 sản phẩm";
 
     const summaryAmount = document.querySelector(".summary-row .value");

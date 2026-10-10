@@ -76,6 +76,10 @@ body {
   align-items: start;
 }
 
+.cart-layout.is-empty {
+  grid-template-columns: minmax(0, 1fr);
+}
+
 .cart-main {
   min-width: 0;
 }
