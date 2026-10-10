@@ -54,7 +54,7 @@ function highlightCurrentPage() {
 
   navLinks.forEach((link) => {
     const linkPath = normalizePath(
-      new URL(link.href, window.location.href).pathname
+      new URL(link.href, window.location.href).pathname,
     );
     const parentLi = link.parentElement;
 
@@ -103,7 +103,6 @@ function loadComponents() {
             <li><a href="${BASE_URL}">Trang chủ</a></li>
             <li><a href="${BASE_URL}about.html">Giới thiệu</a></li>
             <li><a href="${BASE_URL}product.html">Sản phẩm</a></li>
-            <li><a href="${BASE_URL}offers.html">Khuyến Mãi</a></li>
             <li><a href="${BASE_URL}builder.html">Tự thiết kế bánh</a></li>
             <li><a href="${BASE_URL}contact.html">Liên hệ</a></li>
           </ul>
@@ -122,49 +121,51 @@ function loadComponents() {
 
   const footerHTML = `
     <footer class="footer">
-      <button id="scrollToTopBtn">
+      <button id="scrollToTopBtn" aria-label="Lên đầu trang">
         <i class="fa-solid fa-chevron-up"></i>
       </button>
 
-      <div class="container">
-        <div class="col1">
-          <img class="logo" src="${BASE_URL}assets/img/logo.png" alt="logo" />
+      <div class="container footer-content">
+        <div class="col1 footer-brand">
+          <a href="${BASE_URL}" class="logo-wrapper brand">
+            <img src="${BASE_URL}assets/img/logo.png" alt="Love Cake" class="logo" />
+          </a>
+          <p class="footer-about">
+            Tiệm bánh handmade với nguyên liệu hữu cơ, mang đến những
+            chiếc bánh ngọt ngào và đầy yêu thương.
+          </p>
+        </div>
+
+        <div class="col2 footer-links">
+          <h3>Liên kết nhanh</h3>
           <ul>
-            <li>
-              <p>📍</p>
-              <p>12 Chùa Bộc, Kim Liên, Hà Nội</p>
-            </li>
-            <li>
-              <p>📞</p>
-              <p>0987654321</p>
-            </li>
-            <li>
-              <p>✉️</p>
-              <p>info@lovecake.com</p>
-            </li>
+            <li><a href="${BASE_URL}">Trang chủ</a></li>
+            <li><a href="${BASE_URL}about.html">Giới thiệu</a></li>
+            <li><a href="${BASE_URL}product.html">Sản phẩm</a></li>
+            <li><a href="${BASE_URL}builder.html">Tự thiết kế bánh</a></li>
+            <li><a href="${BASE_URL}contact.html">Liên hệ</a></li>
           </ul>
         </div>
 
-        <div class="col2">
+        <div class="col3 footer-contact">
+          <h3>Liên hệ</h3>
+          <ul>
+            <li><span class="contact-icon">📍</span><span>123 Cầu Giấy, Hà Nội</span></li>
+            <li><span class="contact-icon">📞</span><span>0901 234 567</span></li>
+            <li><span class="contact-icon">✉️</span><a href="mailto:info@lovecake.vn" class="contact-mail">info@lovecake.vn</a></li>
+          </ul>
+          <div class="footer-social">
+            <a href="#" class="social-btn" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#" class="social-btn" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" class="social-btn" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+          </div>
+        </div>
+
+        <div class="col4 footer-hours">
           <h3>Giờ mở cửa</h3>
           <ul>
-            <li>
-              <p>Thứ 2 - Thứ 6</p>
-              <p>: 8:00 AM - 8:00 PM</p>
-            </li>
-            <li>
-              <p>Thứ 7 - Chủ nhật</p>
-              <p>: 9:00 AM - 6:00 PM</p>
-            </li>
-          </ul>
-        </div>
-
-        <div class="col3">
-          <h3>Chính sách</h3>
-          <ul>
-            <li><a href="${BASE_URL}policy/privacy.html">Chính sách bảo mật</a></li>
-            <li><a href="${BASE_URL}policy/payment.html">Chính sách thanh toán</a></li>
-            <li><a href="${BASE_URL}policy/shipping.html">Chính sách giao hàng</a></li>
+            <li><span>Thứ 2 – Thứ 6</span><span class="hours">7:00 – 21:00</span></li>
+            <li><span>Thứ 7 - Chủ Nhật</span><span class="hours">7:00 – 22:00</span></li>
           </ul>
         </div>
       </div>

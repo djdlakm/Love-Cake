@@ -1,30 +1,11 @@
-
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap');
 :root {
-  --home-max: 1900px;
-  --home-gutter: clamp(20px, 2.5vw, 48px);
-  --home-heading: #1b2540;
-  --home-text: #475569;
-  --home-muted: #94a3b8;
-  --home-cream: #fffaf5;
-  --home-blush: #fff4f3;
-  --home-pink-pill: #ffe4e9;
-  --home-star: #fbbf24;
-  --home-font-body: 'Outfit', 'Inter', sans-serif;
-  --home-font-heading: 'Playfair Display', Georgia, serif;
-}
-
-/* style.css đặt `* { font-family: Inter; font-weight: 400 }` nên phải ghi đè
-   trực tiếp lên phần tử. :where() giữ độ ưu tiên thấp để class bên dưới thắng. */
-.header :where(p, a, span, strong, button, li, div, nav, h3),
-.shop-page :where(p, a, span, strong, button, li, div, h1, h2, h3, label),
-.footer :where(p, a, span, strong, button, li, div, h3) {
-  font-family: var(--home-font-body);
+  --home-max: 1200px;
+  --home-gutter: 24px;
 }
 
 .shop-page {
-  color: var(--home-heading);
-  background: var(--home-cream);
+  color: var(--color-ink);
+  background: var(--color-surface);
 }
 
 .shop-page img {
@@ -74,7 +55,7 @@
 
 .section-label {
   margin: 0 0 10px;
-  color: #fb6f8a;
+  color: var(--color-brand);
   font-size: 14px;
   font-weight: 500;
   letter-spacing: 2px;
@@ -82,91 +63,28 @@
 }
 
 /* ==========================================
-   2. HEADER (THEO FIGMA) 🔝
-   ========================================== */
-.header {
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  background-color: var(--color-surface);
-}
-
-.header .container {
-  max-width: var(--home-max);
-  min-height: 66px;
-  padding: 0 var(--home-gutter);
-}
-
-.brand {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.brand-icon {
-  font-size: 26px;
-  line-height: 1;
-}
-
-.brand-name {
-  color: var(--color-brand);
-  font-family: var(--home-font-heading);
-  font-size: 24px;
-  font-weight: 700;
-  letter-spacing: 0.3px;
-}
-
-.header .navbar li.active a,
-.header .navbar a.active {
-  color: var(--color-brand);
-  border-bottom-width: 2px;
-}
-
-.header-actions {
-  display: flex;
-  align-items: center;
-  gap: 28px;
-}
-
-.header .cart-icon {
-  color: #334155;
-}
-
-.btn-order {
-  padding: 10px 20px;
-  border-radius: 12px;
-  font-size: 14px;
-  font-weight: 600;
-  box-shadow: none;
-}
-
-.btn-order:hover {
-  box-shadow: 0 6px 16px var(--color-shadow-brand);
-}
-
-/* ==========================================
-   3. (Banner, sidebar, lưới sản phẩm ở các mục 4-8 bên dưới)
-   ========================================== */
-
-/* ==========================================
    4. BANNER TIÊU ĐỀ 🌸
    ========================================== */
 .page-banner {
   padding: 38px 0 34px;
-  border-bottom: 1px solid #f8e4e9;
-  background: linear-gradient(135deg, #ffe3ea 0%, #fff0f3 55%, #fff6f2 100%);
+  border-bottom: 1px solid var(--color-brand-border-soft);
+  background: linear-gradient(
+    135deg,
+    var(--color-brand-border) 0%,
+    var(--color-brand-soft) 55%,
+    var(--color-surface) 100%
+  );
 }
 
 .page-banner .section-label {
   margin-bottom: 8px;
-  color: #fb6f8a;
+  color: var(--color-brand-light);
   font-weight: 600;
 }
 
 .page-title {
   margin: 0;
-  color: var(--home-heading);
-  font-family: var(--home-font-heading);
+  color: var(--color-ink);
   font-size: clamp(32px, 3vw, 46px);
   font-weight: 700;
   line-height: 1.2;
@@ -174,7 +92,7 @@
 
 .page-count {
   margin: 8px 0 0;
-  color: #64748b;
+  color: var(--color-text-muted);
   font-size: 14px;
 }
 
@@ -197,9 +115,9 @@
    ========================================== */
 .shop-sidebar {
   position: sticky;
-  top: 90px; /* cao hơn header sticky (~66px) một đoạn */
+  top: 90px;
   padding: 24px;
-  border: 1px solid #f9e6ea;
+  border: 1px solid var(--color-brand-border-soft);
   border-radius: 24px;
   background: var(--color-surface);
 }
@@ -210,21 +128,20 @@
 
 .filter-title {
   margin: 0 0 14px;
-  color: var(--home-heading);
+  color: var(--color-ink);
   font-size: 15px;
   font-weight: 600;
 }
 
-/* Ô tìm kiếm */
 .search-box {
   display: flex;
   align-items: center;
   gap: 10px;
   padding: 0 14px;
-  border: 1px solid #f8d9e0;
+  border: 1px solid var(--color-brand-border);
   border-radius: 14px;
   background: var(--color-surface);
-  color: var(--home-muted);
+  color: var(--color-text-subtle);
   transition: all 0.2s ease;
 }
 
@@ -244,13 +161,12 @@
   border: none;
   outline: none;
   background: transparent;
-  color: var(--home-heading);
-  font-family: var(--home-font-body);
+  color: var(--color-ink);
   font-size: 14px;
 }
 
 .search-box input::placeholder {
-  color: var(--home-muted);
+  color: var(--color-text-subtle);
 }
 
 /* Bỏ nút "x" mặc định của input[type=search] trên Chrome/Safari */
@@ -258,7 +174,6 @@
   display: none;
 }
 
-/* Danh sách danh mục */
 .category-filter li {
   margin-bottom: 4px;
 }
@@ -272,20 +187,15 @@
   border: none;
   border-radius: 14px;
   background: transparent;
-  color: var(--home-text);
-  font-family: var(--home-font-body);
+  color: var(--color-text-muted);
   font-size: 15px;
   text-align: left;
   cursor: pointer;
   transition: all 0.2s ease;
 }
 
-.category-item span {
-  font-family: var(--home-font-body);
-}
-
 .category-num {
-  color: var(--home-muted);
+  color: var(--color-text-subtle);
   font-size: 13px;
 }
 
@@ -322,8 +232,8 @@
     to right,
     var(--color-brand) 0%,
     var(--color-brand) var(--fill),
-    #f3dde2 var(--fill),
-    #f3dde2 100%
+    var(--color-brand-border-soft) var(--fill),
+    var(--color-brand-border-soft) 100%
   );
   outline: none;
   cursor: pointer;
@@ -379,7 +289,7 @@
 }
 
 .price-min {
-  color: var(--home-muted);
+  color: var(--color-text-subtle);
 }
 
 .price-max {
@@ -391,11 +301,10 @@
 .btn-clear {
   width: 100%;
   padding: 13px 16px;
-  border: 1px solid #fbd3dc;
+  border: 1px solid var(--color-brand-border);
   border-radius: 14px;
   background: var(--color-surface);
   color: var(--color-brand);
-  font-family: var(--home-font-body);
   font-size: 15px;
   font-weight: 600;
   cursor: pointer;
@@ -428,7 +337,7 @@
 
 .shop-card {
   overflow: hidden;
-  border: 1px solid #f9eef0;
+  border: 1px solid var(--color-brand-border-soft);
   border-radius: 20px;
   background: var(--color-surface);
   box-shadow: 0 4px 18px var(--color-shadow-ink-light);
@@ -437,8 +346,8 @@
 
 .shop-card:hover {
   transform: translateY(-3px);
-  border-color: #fbc9d3;
-  box-shadow: 0 12px 30px rgb(244 63 94 / 14%);
+  border-color: var(--color-brand-light);
+  box-shadow: 0 12px 30px var(--color-brand-border-tint);
 }
 
 .shop-media {
@@ -457,7 +366,7 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: rgb(7 18 36 / 12%);
+  background: var(--color-shadow-ink-medium);
   opacity: 0;
   transition: opacity 0.3s ease;
 }
@@ -477,8 +386,8 @@
   z-index: 1;
   padding: 7px 16px;
   border-radius: 999px;
-  background: rgb(255 255 255 / 94%);
-  color: #334155;
+  background: var(--color-surface-translucent);
+  color: var(--color-text);
   font-size: 12.5px;
   font-weight: 600;
   white-space: nowrap;
@@ -498,7 +407,7 @@
 
 .shop-category {
   margin: 0;
-  color: #fb6f8a;
+  color: var(--color-brand-light);
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 1px;
@@ -513,7 +422,7 @@
 }
 
 .shop-name a {
-  color: #111c33;
+  color: var(--color-ink);
   font-size: inherit;
   font-weight: 600;
   transition: color 0.2s ease;
@@ -535,7 +444,7 @@
 }
 
 .rating-num {
-  color: var(--home-muted);
+  color: var(--color-text-subtle);
   font-size: 12px;
 }
 
@@ -549,7 +458,6 @@
 
 .shop-price {
   color: var(--color-brand);
-  font-family: var(--home-font-heading);
   font-size: 17px;
   font-weight: 700;
 }
@@ -560,7 +468,6 @@
   border-radius: 999px;
   background: var(--color-brand);
   color: var(--color-text-on-brand);
-  font-family: var(--home-font-body);
   font-size: 12.5px;
   font-weight: 600;
   cursor: pointer;
@@ -587,7 +494,7 @@
    ========================================== */
 .no-results {
   padding: 72px 20px;
-  border: 1px dashed #f4c6d0;
+  border: 1px dashed var(--color-brand-border-soft);
   border-radius: 24px;
   background: var(--color-surface);
   text-align: center;
@@ -606,186 +513,17 @@
 
 .no-results h3 {
   margin: 0 0 6px;
-  color: var(--home-heading);
+  color: var(--color-ink);
   font-size: 20px;
   font-weight: 600;
 }
 
 .no-results p {
   margin: 0;
-  color: var(--home-text);
+  color: var(--color-text-muted);
   font-size: 15px;
 }
 
-/* ==========================================
-   9. FOOTER (THEO FIGMA) 🦶
-   ========================================== */
-.footer {
-  padding-top: 60px;
-  border-top: none;
-  background-color: var(--color-ink);
-}
-
-.footer .container {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  max-width: var(--home-max);
-  margin: 0 auto 48px;
-  padding: 0 var(--home-gutter);
-}
-
-.footer .col1,
-.footer .col2,
-.footer .col3,
-.footer .col4 {
-  min-width: 0;
-}
-
-.brand-light .brand-name {
-  color: #ff5c7c;
-}
-
-.footer-about {
-  max-width: 290px;
-  margin: 18px 0 22px;
-  color: var(--home-muted);
-  font-size: 14px;
-  line-height: 1.75;
-}
-
-.footer-social {
-  display: flex;
-  gap: 12px;
-}
-
-.social-btn {
-  display: grid;
-  place-items: center;
-  width: 36px;
-  height: 36px;
-  border-radius: 10px;
-  background: #1c2940;
-  color: var(--home-muted);
-  font-size: 14px;
-  transition: all 0.25s ease;
-}
-
-.social-btn:hover {
-  background: var(--color-brand);
-  color: var(--color-text-on-brand);
-  transform: translateY(-3px);
-}
-
-/* Tiêu đề cột: ghi đè h3 của style.css */
-.footer h3 {
-  display: block;
-  margin: 0 0;
-  color: var(--color-text-on-brand);
-  letter-spacing: 0.6px;
-  text-transform: uppercase;
-}
-
-/* Cột 2: liên kết nhanh */
-.footer .col2 li {
-  display: block;
-  margin-bottom: 14px;
-}
-
-.footer .col2 a {
-  color: var(--home-muted);
-  font-size: 14.5px;
-  transition: all 0.2s ease;
-}
-
-.footer .col2 a:hover {
-  color: var(--color-brand);
-  padding-left: 6px;
-}
-
-/* Cột 3: liên hệ */
-.footer .col3 li {
-  gap: 12px;
-  margin-bottom: 18px;
-  color: var(--home-muted);
-  font-size: 14.5px;
-}
-
-.contact-icon {
-  width: 20px;
-  text-align: center;
-}
-
-/* Email màu hồng như Figma (ghi đè `.footer .col3 a` của style.css) */
-.footer .col3 .contact-mail {
-  color: #ff5c7c;
-  font-size: 14.5px;
-}
-
-.footer .col3 .contact-mail:hover {
-  padding-left: 0;
-  color: #ff849c;
-  text-decoration: underline;
-}
-
-/* Cột 4: giờ mở cửa */
-.footer .col4 li {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  margin-bottom: 14px;
-  color: var(--home-muted);
-  font-size: 14.5px;
-}
-
-.footer .col4 .hours {
-  color: #ff4469;
-  font-weight: 600;
-}
-
-.open-status {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-top: 22px;
-  padding: 12px 16px;
-  border-radius: 12px;
-  background: #1d1530;
-  color: #22c55e;
-  font-size: 13px;
-  font-weight: 500;
-}
-
-.status-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #22c55e;
-  box-shadow: 0 0 0 4px rgb(34 197 94 / 20%);
-  animation: pulseDot 2s ease-in-out infinite;
-}
-
-@keyframes pulseDot {
-  0%,
-  100% {
-    box-shadow: 0 0 0 4px rgb(34 197 94 / 20%);
-  }
-  50% {
-    box-shadow: 0 0 0 7px rgb(34 197 94 / 5%);
-  }
-}
-
-.footer .bottom {
-  border-top: 1px solid rgb(255 255 255 / 8%);
-}
-
-.footer .bottom p {
-  color: #64748b;
-}
-
-/* ==========================================
-   10. TABLET (≤ 1024px) - PHẦN CỦA TRANG 📱
-   ========================================== */
 @media screen and (max-width: 1024px) {
   .shop-layout {
     padding: 32px 0 56px;
@@ -796,7 +534,6 @@
     gap: 24px;
   }
 
-  /* Sidebar thành khối ngang phía trên danh sách */
   .shop-sidebar {
     position: static;
     display: grid;
@@ -838,9 +575,6 @@
   }
 }
 
-/* ==========================================
-   11. MOBILE (≤ 767px) - PHẦN CỦA TRANG 📲
-   ========================================== */
 @media screen and (max-width: 767px) {
   .page-banner {
     padding: 28px 0 24px;
@@ -879,62 +613,7 @@
   }
 }
 
-/* ==========================================
-   12. TABLET / MOBILE - PHẦN HEADER & FOOTER 📱
-   ========================================== */
-@media screen and (max-width: 1024px) {
-  /* Header: menu trượt đã có trong style.css, chỉ chỉnh phần khác */
-  .header .container {
-    min-height: 62px;
-  }
-
-  .header .cart {
-    gap: 16px;
-  }
-
-  .header-actions {
-    gap: 16px;
-  }
-
-  .menu-toggle {
-    width: auto;
-  }
-
-  /* Footer 2 cột */
-  .footer .container {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 36px 30px;
-    margin: 0 auto 40px;
-  }
-}
-
-@media screen and (max-width: 767px) {
-  .btn-order {
-    display: none;
-  }
-
-  .brand-name {
-    font-size: 21px;
-  }
-
-  .footer {
-    padding-top: 44px;
-  }
-
-  .footer .container {
-    grid-template-columns: 1fr;
-    gap: 32px;
-    margin-bottom: 32px;
-  }
-
-  .footer h3 {
-    margin-bottom: 16px;
-  }
-}
-
-/* Người dùng tắt hiệu ứng chuyển động */
 @media (prefers-reduced-motion: reduce) {
-  .status-dot,
   .btn,
   .shop-card,
   .shop-media img,
@@ -947,16 +626,9 @@
 }
 
 .page-title {
-  font-family: 'Playfair Display', serif;
   font-weight: 700;
   letter-spacing: normal;
   word-spacing: normal;
-  font-variation-settings: normal;
-}
-
-.header .logo {
-  transform: translateX(15px);
-  filter: drop-shadow(0 3px 5px rgb(244 63 94 / 18%));
 }
 
 /* ==========================================
@@ -981,8 +653,7 @@
   border: none;
   border-radius: 14px;
   background: transparent;
-  color: var(--home-text);
-  font-family: var(--home-font-body);
+  color: var(--color-text-muted);
   font-size: 15px;
   text-align: left;
   cursor: pointer;
@@ -1019,7 +690,7 @@
 }
 
 .shop-result-count {
-  color: #64748b;
+  color: var(--color-text-muted);
   font-size: 14px;
 }
 
@@ -1030,7 +701,7 @@
 }
 
 .sort-box label {
-  color: #475569;
+  color: var(--color-text-muted);
   font-size: 14px;
   font-weight: 600;
 }
@@ -1038,16 +709,16 @@
 .sort-box select {
   min-width: 190px;
   padding: 10px 14px;
-  border: 1px solid #f3dce1;
+  border: 1px solid var(--color-brand-border-soft);
   border-radius: 12px;
   background: var(--color-surface);
-  color: var(--home-text);
-  font-family: var(--home-font-body);
+  color: var(--color-text-muted);
   font-size: 14px;
   cursor: pointer;
   outline: none;
-  transition: border-color 0.2s ease,
-              box-shadow 0.2s ease;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .sort-box select:hover {
@@ -1059,13 +730,11 @@
   box-shadow: 0 0 0 3px var(--color-brand-focus);
 }
 
-
 /* ==========================================
    TABLET
    ========================================== */
 
 @media screen and (max-width: 1024px) {
-
   .occasion-list {
     display: flex;
     flex-direction: row;
@@ -1079,16 +748,13 @@
     border-radius: 999px;
     background: var(--color-brand-soft);
   }
-
 }
-
 
 /* ==========================================
    MOBILE
    ========================================== */
 
 @media screen and (max-width: 767px) {
-
   .shop-toolbar {
     align-items: flex-start;
     flex-direction: column;
@@ -1103,5 +769,4 @@
     flex: 1;
     min-width: 0;
   }
-
 }

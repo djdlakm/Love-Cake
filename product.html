@@ -20,44 +20,7 @@
     <link rel="stylesheet" href="css/product.css" />
   </head>
   <body>
-    <!-- ==================== HEADER ==================== -->
-    <header class="header">
-      <div class="container">
-        <!-- Nút 3 gạch (chỉ hiện trên mobile/tablet) -->
-        <button class="menu-toggle" id="menuToggle" aria-label="Mở menu">
-          <i class="fas fa-bars"></i>
-        </button>
-
-        <!-- Logo -->
-        <a href="index.html" class="logo-wrapper brand">
-          <img src="assets/img/logo.png" alt="Love Cake" class="logo">
-        </a>
-
-        <!-- Menu điều hướng -->
-        <nav class="navbar" aria-label="Menu chính">
-          <div class="menu-header">
-            <span>Menu</span>
-            <button class="menu-close" id="menuClose" aria-label="Đóng menu">&times;</button>
-          </div>
-          <ul>
-            <li><a href="index.html">Trang Chủ</a></li>
-            <li><a href="about.html">Giới Thiệu</a></li>
-            <li class="active"><a href="shop.html">Danh Mục Sản Phẩm</a></li>
-            <li><a href="builder.html">Tự Thiết Kế Bánh</a></li>
-            <li><a href="contact.html">Liên Hệ</a></li>
-          </ul>
-        </nav>
-
-        <!-- Giỏ hàng + nút Đặt Ngay -->
-        <div class="cart header-actions">
-          <a href="cart.html" class="cart-icon" aria-label="Giỏ hàng">
-            <i class="fas fa-shopping-cart"></i>
-            <span class="cart-badge">3</span>
-          </a>
-          <a href="shop.html" class="btn btn-primary btn-order">Đặt Ngay</a>
-        </div>
-      </div>
-    </header>
+    <div id="header-placeholder"></div>
 
     <main class="shop-page">
       <!-- ==================== BANNER TIÊU ĐỀ ==================== -->
@@ -92,62 +55,98 @@
               <h2 class="filter-title">Danh mục</h2>
               <ul class="category-filter" id="categoryFilter">
                 <li>
-                  <button type="button" class="category-item active" data-category="all">
+                  <button
+                    type="button"
+                    class="category-item active"
+                    data-category="all"
+                  >
                     <span>Tất cả</span><span class="category-num">9</span>
                   </button>
                 </li>
                 <li>
-                  <button type="button" class="category-item" data-category="Bánh Kem">
+                  <button
+                    type="button"
+                    class="category-item"
+                    data-category="Bánh Kem"
+                  >
                     <span>Bánh Kem</span><span class="category-num">5</span>
                   </button>
                 </li>
                 <li>
-                  <button type="button" class="category-item" data-category="Bánh Lạnh">
+                  <button
+                    type="button"
+                    class="category-item"
+                    data-category="Bánh Lạnh"
+                  >
                     <span>Bánh Lạnh</span><span class="category-num">1</span>
                   </button>
                 </li>
                 <li>
-                  <button type="button" class="category-item" data-category="Bánh Mì">
+                  <button
+                    type="button"
+                    class="category-item"
+                    data-category="Bánh Mì"
+                  >
                     <span>Bánh Mì</span><span class="category-num">1</span>
                   </button>
                 </li>
                 <li>
-                  <button type="button" class="category-item" data-category="Cupcake">
+                  <button
+                    type="button"
+                    class="category-item"
+                    data-category="Cupcake"
+                  >
                     <span>Cupcake</span><span class="category-num">2</span>
                   </button>
                 </li>
               </ul>
             </div>
-<!-- Dịp -->
-<div class="filter-block">
-  <h2 class="filter-title">Dịp</h2>
+            <!-- Dịp -->
+            <div class="filter-block">
+              <h2 class="filter-title">Dịp</h2>
 
-  <ul class="occasion-list">
-    <li>
-      <button type="button" class="occasion-item active" data-occasion="all">
-        <span>Tất cả</span>
-      </button>
-    </li>
+              <ul class="occasion-list">
+                <li>
+                  <button
+                    type="button"
+                    class="occasion-item active"
+                    data-occasion="all"
+                  >
+                    <span>Tất cả</span>
+                  </button>
+                </li>
 
-    <li>
-      <button type="button" class="occasion-item" data-occasion="Sinh nhật">
-        <span>Sinh nhật</span>
-      </button>
-    </li>
+                <li>
+                  <button
+                    type="button"
+                    class="occasion-item"
+                    data-occasion="Sinh nhật"
+                  >
+                    <span>Sinh nhật</span>
+                  </button>
+                </li>
 
-    <li>
-      <button type="button" class="occasion-item" data-occasion="Cưới">
-        <span>Cưới</span>
-      </button>
-    </li>
+                <li>
+                  <button
+                    type="button"
+                    class="occasion-item"
+                    data-occasion="Cưới"
+                  >
+                    <span>Cưới</span>
+                  </button>
+                </li>
 
-    <li>
-      <button type="button" class="occasion-item" data-occasion="Lễ">
-        <span>Lễ</span>
-      </button>
-    </li>
-  </ul>
-</div>
+                <li>
+                  <button
+                    type="button"
+                    class="occasion-item"
+                    data-occasion="Lễ"
+                  >
+                    <span>Lễ</span>
+                  </button>
+                </li>
+              </ul>
+            </div>
             <!-- Khoảng giá -->
             <div class="filter-block">
               <h2 class="filter-title">Khoảng giá</h2>
@@ -167,350 +166,405 @@
               </div>
             </div>
 
-            <button type="button" class="btn-clear" id="clearFilters">Xoá bộ lọc</button>
+            <button type="button" class="btn-clear" id="clearFilters">
+              Xoá bộ lọc
+            </button>
           </aside>
 
- 
           <!-- ---------- Lưới sản phẩm ---------- -->
           <div class="shop-content">
-                     <div class="shop-toolbar">
-  <div class="shop-result-count">
-    <span id="productCount">9</span> sản phẩm
-  </div>
+            <div class="shop-toolbar">
+              <div class="shop-result-count">
+                <span id="productCount">9</span> sản phẩm
+              </div>
 
-  <div class="sort-box">
-    <label for="sortSelect">Sắp xếp:</label>
-    <select id="sortSelect">
-      <option value="default">Mặc định</option>
-      <option value="price-asc">Giá: thấp → cao</option>
-      <option value="price-desc">Giá: cao → thấp</option>
-      <option value="newest">Mới nhất</option>
-      <option value="bestseller">Bán chạy</option>
-    </select>
-  </div>
-</div>
+              <div class="sort-box">
+                <label for="sortSelect">Sắp xếp:</label>
+                <select id="sortSelect">
+                  <option value="default">Mặc định</option>
+                  <option value="price-asc">Giá: thấp → cao</option>
+                  <option value="price-desc">Giá: cao → thấp</option>
+                  <option value="newest">Mới nhất</option>
+                  <option value="bestseller">Bán chạy</option>
+                </select>
+              </div>
+            </div>
             <div class="shop-grid" id="productGrid">
+              <article
+                class="shop-card"
+                data-id="1"
+                data-name="Bánh Kem Dâu Tây"
+                data-category="Bánh Kem"
+                data-price="350000"
+                data-occasion="Sinh nhật,Lễ"
+                data-date="2026-10-01"
+                data-sales="125"
+              >
+                <a href="product-detail.html?id=1" class="shop-media">
+                  <img
+                    src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=900&q=80"
+                    alt="Bánh Kem Dâu Tây"
+                    loading="lazy"
+                  />
+                  <span class="shop-overlay">Xem chi tiết</span>
+                </a>
+                <div class="shop-body">
+                  <p class="shop-category">Bánh Kem</p>
+                  <h3 class="shop-name">
+                    <a href="product-detail.html?id=1">Bánh Kem Dâu Tây</a>
+                  </h3>
+                  <div class="shop-rating">
+                    <span class="stars" aria-label="4.9 sao">★★★★★</span>
+                    <span class="rating-num">4.9</span>
+                  </div>
+                  <div class="shop-footer">
+                    <span class="shop-price">350.000đ</span>
+                    <button
+                      type="button"
+                      class="btn-add-sm"
+                      data-id="1"
+                      data-name="Bánh Kem Dâu Tây"
+                      data-price="350000"
+                    >
+                      + Thêm
+                    </button>
+                  </div>
+                </div>
+              </article>
 
-            <article class="shop-card" data-id="1" data-name="Bánh Kem Dâu Tây" data-category="Bánh Kem" data-price="350000" data-occasion="Sinh nhật,Lễ"
-  data-date="2026-10-01"
-  data-sales="125">
-              <a href="product-detail.html?id=1" class="shop-media">
-                <img
-                  src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=900&q=80"
-                  alt="Bánh Kem Dâu Tây"
-                  loading="lazy"
-                />
-                <span class="shop-overlay">Xem chi tiết</span>
-              </a>
-              <div class="shop-body">
-                <p class="shop-category">Bánh Kem</p>
-                <h3 class="shop-name">
-                  <a href="product-detail.html?id=1">Bánh Kem Dâu Tây</a>
-                </h3>
-                <div class="shop-rating">
-                  <span class="stars" aria-label="4.9 sao">★★★★★</span>
-                  <span class="rating-num">4.9</span>
+              <article
+                class="shop-card"
+                data-id="2"
+                data-name="Fondant Hoa Hồng"
+                data-category="Bánh Kem"
+                data-price="480000"
+                data-occasion="Cưới,Lễ"
+                data-date="2026-10-01"
+                data-sales="98"
+              >
+                <a href="product-detail.html?id=2" class="shop-media">
+                  <img
+                    src="https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?auto=format&fit=crop&w=900&q=80"
+                    alt="Fondant Hoa Hồng"
+                    loading="lazy"
+                  />
+                  <span class="shop-overlay">Xem chi tiết</span>
+                </a>
+                <div class="shop-body">
+                  <p class="shop-category">Bánh Kem</p>
+                  <h3 class="shop-name">
+                    <a href="product-detail.html?id=2">Fondant Hoa Hồng</a>
+                  </h3>
+                  <div class="shop-rating">
+                    <span class="stars" aria-label="4.8 sao">★★★★★</span>
+                    <span class="rating-num">4.8</span>
+                  </div>
+                  <div class="shop-footer">
+                    <span class="shop-price">480.000đ</span>
+                    <button
+                      type="button"
+                      class="btn-add-sm"
+                      data-id="2"
+                      data-name="Fondant Hoa Hồng"
+                      data-price="480000"
+                    >
+                      + Thêm
+                    </button>
+                  </div>
                 </div>
-                <div class="shop-footer">
-                  <span class="shop-price">350.000đ</span>
-                  <button
-                    type="button"
-                    class="btn-add-sm"
-                    data-id="1"
-                    data-name="Bánh Kem Dâu Tây"
-                    data-price="350000"
-                  >
-                    + Thêm
-                  </button>
-                </div>
-              </div>
-            </article>
+              </article>
 
-            <article class="shop-card" data-id="2" data-name="Fondant Hoa Hồng" data-category="Bánh Kem" data-price="480000"data-occasion="Cưới,Lễ"
-                    data-date="2026-10-01"
-                    data-sales="98">
-              <a href="product-detail.html?id=2" class="shop-media">
-                <img
-                  src="https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?auto=format&fit=crop&w=900&q=80"
-                  alt="Fondant Hoa Hồng"
-                  loading="lazy"
-                />
-                <span class="shop-overlay">Xem chi tiết</span>
-              </a>
-              <div class="shop-body">
-                <p class="shop-category">Bánh Kem</p>
-                <h3 class="shop-name">
-                  <a href="product-detail.html?id=2">Fondant Hoa Hồng</a>
-                </h3>
-                <div class="shop-rating">
-                  <span class="stars" aria-label="4.8 sao">★★★★★</span>
-                  <span class="rating-num">4.8</span>
+              <article
+                class="shop-card"
+                data-id="3"
+                data-name="Bánh Kem Vani Trắng"
+                data-category="Bánh Kem"
+                data-price="290000"
+                data-occasion="Sinh nhật,Cưới"
+                data-date="2026-09-20"
+                data-sales="86"
+              >
+                <a href="product-detail.html?id=3" class="shop-media">
+                  <img
+                    src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?auto=format&fit=crop&w=900&q=80"
+                    alt="Bánh Kem Vani Trắng"
+                    loading="lazy"
+                  />
+                  <span class="shop-overlay">Xem chi tiết</span>
+                </a>
+                <div class="shop-body">
+                  <p class="shop-category">Bánh Kem</p>
+                  <h3 class="shop-name">
+                    <a href="product-detail.html?id=3">Bánh Kem Vani Trắng</a>
+                  </h3>
+                  <div class="shop-rating">
+                    <span class="stars" aria-label="4.7 sao">★★★★★</span>
+                    <span class="rating-num">4.7</span>
+                  </div>
+                  <div class="shop-footer">
+                    <span class="shop-price">290.000đ</span>
+                    <button
+                      type="button"
+                      class="btn-add-sm"
+                      data-id="3"
+                      data-name="Bánh Kem Vani Trắng"
+                      data-price="290000"
+                    >
+                      + Thêm
+                    </button>
+                  </div>
                 </div>
-                <div class="shop-footer">
-                  <span class="shop-price">480.000đ</span>
-                  <button
-                    type="button"
-                    class="btn-add-sm"
-                    data-id="2"
-                    data-name="Fondant Hoa Hồng"
-                    data-price="480000"
-                    
-                  >
-                    + Thêm
-                  </button>
-                </div>
-              </div>
-            </article>
+              </article>
 
-            <article class="shop-card" data-id="3" data-name="Bánh Kem Vani Trắng" data-category="Bánh Kem" data-price="290000" data-occasion="Sinh nhật,Cưới"
-                    data-date="2026-09-20" 
-                    data-sales="86">
-              <a href="product-detail.html?id=3" class="shop-media">
-                <img
-                  src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?auto=format&fit=crop&w=900&q=80"
-                  alt="Bánh Kem Vani Trắng"
-                  loading="lazy"
-                />
-                <span class="shop-overlay">Xem chi tiết</span>
-              </a>
-              <div class="shop-body">
-                <p class="shop-category">Bánh Kem</p>
-                <h3 class="shop-name">
-                  <a href="product-detail.html?id=3">Bánh Kem Vani Trắng</a>
-                </h3>
-                <div class="shop-rating">
-                  <span class="stars" aria-label="4.7 sao">★★★★★</span>
-                  <span class="rating-num">4.7</span>
+              <article
+                class="shop-card"
+                data-id="4"
+                data-name="Cupcake Pastel Mix"
+                data-category="Cupcake"
+                data-price="55000"
+                data-occasion="Sinh nhật,Lễ"
+                data-date="2026-10-03"
+                data-sales="156"
+              >
+                <a href="product-detail.html?id=4" class="shop-media">
+                  <img
+                    src="https://images.unsplash.com/photo-1519869325930-281384150729?auto=format&fit=crop&w=900&q=80"
+                    alt="Cupcake Pastel Mix"
+                    loading="lazy"
+                  />
+                  <span class="shop-overlay">Xem chi tiết</span>
+                </a>
+                <div class="shop-body">
+                  <p class="shop-category">Cupcake</p>
+                  <h3 class="shop-name">
+                    <a href="product-detail.html?id=4">Cupcake Pastel Mix</a>
+                  </h3>
+                  <div class="shop-rating">
+                    <span class="stars" aria-label="5 sao">★★★★★</span>
+                    <span class="rating-num">5</span>
+                  </div>
+                  <div class="shop-footer">
+                    <span class="shop-price">55.000đ</span>
+                    <button
+                      type="button"
+                      class="btn-add-sm"
+                      data-id="4"
+                      data-name="Cupcake Pastel Mix"
+                      data-price="55000"
+                    >
+                      + Thêm
+                    </button>
+                  </div>
                 </div>
-                <div class="shop-footer">
-                  <span class="shop-price">290.000đ</span>
-                  <button
-                    type="button"
-                    class="btn-add-sm"
-                    data-id="3"
-                    data-name="Bánh Kem Vani Trắng"
-                    data-price="290000"
-                    
-                  >
-                    + Thêm
-                  </button>
-                </div>
-              </div>
-            </article>
+              </article>
 
-            <article class="shop-card" data-id="4" data-name="Cupcake Pastel Mix" data-category="Cupcake" data-price="55000" data-occasion="Sinh nhật,Lễ"
-                    data-date="2026-10-03" 
-                    data-sales="156">
-              <a href="product-detail.html?id=4" class="shop-media">
-                <img
-                  src="https://images.unsplash.com/photo-1519869325930-281384150729?auto=format&fit=crop&w=900&q=80"
-                  alt="Cupcake Pastel Mix"
-                  loading="lazy"
-                />
-                <span class="shop-overlay">Xem chi tiết</span>
-              </a>
-              <div class="shop-body">
-                <p class="shop-category">Cupcake</p>
-                <h3 class="shop-name">
-                  <a href="product-detail.html?id=4">Cupcake Pastel Mix</a>
-                </h3>
-                <div class="shop-rating">
-                  <span class="stars" aria-label="5 sao">★★★★★</span>
-                  <span class="rating-num">5</span>
+              <article
+                class="shop-card"
+                data-id="5"
+                data-name="Bánh Kem Nến Hồng"
+                data-category="Bánh Kem"
+                data-price="420000"
+                data-occasion="Sinh nhật"
+                data-date="2026-09-28"
+                data-sales="112"
+              >
+                <a href="product-detail.html?id=5" class="shop-media">
+                  <img
+                    src="https://images.unsplash.com/photo-1558636508-e0db3814bd1d?auto=format&fit=crop&w=900&q=80"
+                    alt="Bánh Kem Nến Hồng"
+                    loading="lazy"
+                  />
+                  <span class="shop-overlay">Xem chi tiết</span>
+                </a>
+                <div class="shop-body">
+                  <p class="shop-category">Bánh Kem</p>
+                  <h3 class="shop-name">
+                    <a href="product-detail.html?id=5">Bánh Kem Nến Hồng</a>
+                  </h3>
+                  <div class="shop-rating">
+                    <span class="stars" aria-label="4.8 sao">★★★★★</span>
+                    <span class="rating-num">4.8</span>
+                  </div>
+                  <div class="shop-footer">
+                    <span class="shop-price">420.000đ</span>
+                    <button
+                      type="button"
+                      class="btn-add-sm"
+                      data-id="5"
+                      data-name="Bánh Kem Nến Hồng"
+                      data-price="420000"
+                    >
+                      + Thêm
+                    </button>
+                  </div>
                 </div>
-                <div class="shop-footer">
-                  <span class="shop-price">55.000đ</span>
-                  <button
-                    type="button"
-                    class="btn-add-sm"
-                    data-id="4"
-                    data-name="Cupcake Pastel Mix"
-                    data-price="55000"
-                    
-                  >
-                    + Thêm
-                  </button>
-                </div>
-              </div>
-            </article>
+              </article>
 
-            <article class="shop-card" data-id="5" data-name="Bánh Kem Nến Hồng" data-category="Bánh Kem" data-price="420000"  data-occasion="Sinh nhật"
-                    data-date="2026-09-28" 
-                    data-sales="112">
-              <a href="product-detail.html?id=5" class="shop-media">
-                <img
-                  src="https://images.unsplash.com/photo-1558636508-e0db3814bd1d?auto=format&fit=crop&w=900&q=80"
-                  alt="Bánh Kem Nến Hồng"
-                  loading="lazy"
-                />
-                <span class="shop-overlay">Xem chi tiết</span>
-              </a>
-              <div class="shop-body">
-                <p class="shop-category">Bánh Kem</p>
-                <h3 class="shop-name">
-                  <a href="product-detail.html?id=5">Bánh Kem Nến Hồng</a>
-                </h3>
-                <div class="shop-rating">
-                  <span class="stars" aria-label="4.8 sao">★★★★★</span>
-                  <span class="rating-num">4.8</span>
+              <article
+                class="shop-card"
+                data-id="6"
+                data-name="Cupcake Red Velvet"
+                data-category="Cupcake"
+                data-price="30000"
+                data-occasion="Sinh nhật,Lễ"
+                data-date="2026-09-15"
+                data-sales="184"
+              >
+                <a href="product-detail.html?id=6" class="shop-media">
+                  <img
+                    src="https://images.unsplash.com/photo-1486427944299-d1955d23e34d?auto=format&fit=crop&w=900&q=80"
+                    alt="Cupcake Red Velvet"
+                    loading="lazy"
+                  />
+                  <span class="shop-overlay">Xem chi tiết</span>
+                </a>
+                <div class="shop-body">
+                  <p class="shop-category">Cupcake</p>
+                  <h3 class="shop-name">
+                    <a href="product-detail.html?id=6">Cupcake Red Velvet</a>
+                  </h3>
+                  <div class="shop-rating">
+                    <span class="stars" aria-label="4.9 sao">★★★★★</span>
+                    <span class="rating-num">4.9</span>
+                  </div>
+                  <div class="shop-footer">
+                    <span class="shop-price">30.000đ</span>
+                    <button
+                      type="button"
+                      class="btn-add-sm"
+                      data-id="6"
+                      data-name="Cupcake Red Velvet"
+                      data-price="30000"
+                    >
+                      + Thêm
+                    </button>
+                  </div>
                 </div>
-                <div class="shop-footer">
-                  <span class="shop-price">420.000đ</span>
-                  <button
-                    type="button"
-                    class="btn-add-sm"
-                    data-id="5"
-                    data-name="Bánh Kem Nến Hồng"
-                    data-price="420000"
-                   
-                  >
-                    + Thêm
-                  </button>
-                </div>
-              </div>
-            </article>
+              </article>
 
-            <article class="shop-card" data-id="6" data-name="Cupcake Red Velvet" data-category="Cupcake" data-price="30000"   data-occasion="Sinh nhật,Lễ"
-                    data-date="2026-09-15" 
-                    data-sales="184">
-              <a href="product-detail.html?id=6" class="shop-media">
-                <img
-                  src="https://images.unsplash.com/photo-1486427944299-d1955d23e34d?auto=format&fit=crop&w=900&q=80"
-                  alt="Cupcake Red Velvet"
-                  loading="lazy"
-                />
-                <span class="shop-overlay">Xem chi tiết</span>
-              </a>
-              <div class="shop-body">
-                <p class="shop-category">Cupcake</p>
-                <h3 class="shop-name">
-                  <a href="product-detail.html?id=6">Cupcake Red Velvet</a>
-                </h3>
-                <div class="shop-rating">
-                  <span class="stars" aria-label="4.9 sao">★★★★★</span>
-                  <span class="rating-num">4.9</span>
+              <article
+                class="shop-card"
+                data-id="7"
+                data-name="Cheesecake Việt Quất"
+                data-category="Bánh Lạnh"
+                data-price="380000"
+                data-occasion="Sinh nhật,Lễ"
+                data-date="2026-09-30"
+                data-sales="91"
+              >
+                <a href="product-detail.html?id=7" class="shop-media">
+                  <img
+                    src="https://images.unsplash.com/photo-1533134242443-d4fd215305ad?auto=format&fit=crop&w=900&q=80"
+                    alt="Cheesecake Việt Quất"
+                    loading="lazy"
+                  />
+                  <span class="shop-overlay">Xem chi tiết</span>
+                </a>
+                <div class="shop-body">
+                  <p class="shop-category">Bánh Lạnh</p>
+                  <h3 class="shop-name">
+                    <a href="product-detail.html?id=7">Cheesecake Việt Quất</a>
+                  </h3>
+                  <div class="shop-rating">
+                    <span class="stars" aria-label="4.8 sao">★★★★★</span>
+                    <span class="rating-num">4.8</span>
+                  </div>
+                  <div class="shop-footer">
+                    <span class="shop-price">380.000đ</span>
+                    <button
+                      type="button"
+                      class="btn-add-sm"
+                      data-id="7"
+                      data-name="Cheesecake Việt Quất"
+                      data-price="380000"
+                    >
+                      + Thêm
+                    </button>
+                  </div>
                 </div>
-                <div class="shop-footer">
-                  <span class="shop-price">30.000đ</span>
-                  <button
-                    type="button"
-                    class="btn-add-sm"
-                    data-id="6"
-                    data-name="Cupcake Red Velvet"
-                    data-price="30000"
-                  
-                  >
-                    + Thêm
-                  </button>
-                </div>
-              </div>
-            </article>
+              </article>
 
-            <article class="shop-card" data-id="7" data-name="Cheesecake Việt Quất" data-category="Bánh Lạnh" data-price="380000" data-occasion="Sinh nhật,Lễ"
-                    data-date="2026-09-30" 
-                    data-sales="91">
-              <a href="product-detail.html?id=7" class="shop-media">
-                <img
-                  src="https://images.unsplash.com/photo-1533134242443-d4fd215305ad?auto=format&fit=crop&w=900&q=80"
-                  alt="Cheesecake Việt Quất"
-                  loading="lazy"
-                />
-                <span class="shop-overlay">Xem chi tiết</span>
-              </a>
-              <div class="shop-body">
-                <p class="shop-category">Bánh Lạnh</p>
-                <h3 class="shop-name">
-                  <a href="product-detail.html?id=7">Cheesecake Việt Quất</a>
-                </h3>
-                <div class="shop-rating">
-                  <span class="stars" aria-label="4.8 sao">★★★★★</span>
-                  <span class="rating-num">4.8</span>
+              <article
+                class="shop-card"
+                data-id="8"
+                data-name="Croissant Bơ Pháp"
+                data-category="Bánh Mì"
+                data-price="45000"
+                data-occasion="Lễ"
+                data-date="2026-10-05"
+                data-sales="143"
+              >
+                <a href="product-detail.html?id=8" class="shop-media">
+                  <img
+                    src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=900&q=80"
+                    alt="Croissant Bơ Pháp"
+                    loading="lazy"
+                  />
+                  <span class="shop-overlay">Xem chi tiết</span>
+                </a>
+                <div class="shop-body">
+                  <p class="shop-category">Bánh Mì</p>
+                  <h3 class="shop-name">
+                    <a href="product-detail.html?id=8">Croissant Bơ Pháp</a>
+                  </h3>
+                  <div class="shop-rating">
+                    <span class="stars" aria-label="4.7 sao">★★★★★</span>
+                    <span class="rating-num">4.7</span>
+                  </div>
+                  <div class="shop-footer">
+                    <span class="shop-price">45.000đ</span>
+                    <button
+                      type="button"
+                      class="btn-add-sm"
+                      data-id="8"
+                      data-name="Croissant Bơ Pháp"
+                      data-price="45000"
+                    >
+                      + Thêm
+                    </button>
+                  </div>
                 </div>
-                <div class="shop-footer">
-                  <span class="shop-price">380.000đ</span>
-                  <button
-                    type="button"
-                    class="btn-add-sm"
-                    data-id="7"
-                    data-name="Cheesecake Việt Quất"
-                    data-price="380000"
-                   
-                  >
-                    + Thêm
-                  </button>
-                </div>
-              </div>
-            </article>
+              </article>
 
-            <article class="shop-card" data-id="8" data-name="Croissant Bơ Pháp" data-category="Bánh Mì" data-price="45000"  data-occasion="Lễ"
-                    data-date="2026-10-05" 
-                    data-sales="143">
-              <a href="product-detail.html?id=8" class="shop-media">
-                <img
-                  src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=900&q=80"
-                  alt="Croissant Bơ Pháp"
-                  loading="lazy"
-                />
-                <span class="shop-overlay">Xem chi tiết</span>
-              </a>
-              <div class="shop-body">
-                <p class="shop-category">Bánh Mì</p>
-                <h3 class="shop-name">
-                  <a href="product-detail.html?id=8">Croissant Bơ Pháp</a>
-                </h3>
-                <div class="shop-rating">
-                  <span class="stars" aria-label="4.7 sao">★★★★★</span>
-                  <span class="rating-num">4.7</span>
+              <article
+                class="shop-card"
+                data-id="9"
+                data-name="Bánh Kem 3 Tầng"
+                data-category="Bánh Kem"
+                data-price="750000"
+                data-occasion="Sinh nhật,Lễ, Cưới"
+              >
+                <a href="product-detail.html?id=9" class="shop-media">
+                  <img
+                    src="https://images.unsplash.com/photo-1535254973040-607b474cb50d?auto=format&fit=crop&w=900&q=80"
+                    alt="Bánh Kem 3 Tầng"
+                    loading="lazy"
+                  />
+                  <span class="shop-overlay">Xem chi tiết</span>
+                </a>
+                <div class="shop-body">
+                  <p class="shop-category">Bánh Kem</p>
+                  <h3 class="shop-name">
+                    <a href="product-detail.html?id=9">Bánh Kem 3 Tầng</a>
+                  </h3>
+                  <div class="shop-rating">
+                    <span class="stars" aria-label="5 sao">★★★★★</span>
+                    <span class="rating-num">5</span>
+                  </div>
+                  <div class="shop-footer">
+                    <span class="shop-price">750.000đ</span>
+                    <button
+                      type="button"
+                      class="btn-add-sm"
+                      data-id="9"
+                      data-name="Bánh Kem 3 Tầng"
+                      data-price="750000"
+                    >
+                      + Thêm
+                    </button>
+                  </div>
                 </div>
-                <div class="shop-footer">
-                  <span class="shop-price">45.000đ</span>
-                  <button
-                    type="button"
-                    class="btn-add-sm"
-                    data-id="8"
-                    data-name="Croissant Bơ Pháp"
-                    data-price="45000"
-                   
-                  >
-                    + Thêm
-                  </button>
-                </div>
-              </div>
-            </article>
-
-            <article class="shop-card" data-id="9" data-name="Bánh Kem 3 Tầng" data-category="Bánh Kem" data-price="750000"  data-occasion="Sinh nhật,Lễ, Cưới" >
-              <a href="product-detail.html?id=9" class="shop-media">
-                <img
-                  src="https://images.unsplash.com/photo-1535254973040-607b474cb50d?auto=format&fit=crop&w=900&q=80"
-                  alt="Bánh Kem 3 Tầng"
-                  loading="lazy"
-                />
-                <span class="shop-overlay">Xem chi tiết</span>
-              </a>
-              <div class="shop-body">
-                <p class="shop-category">Bánh Kem</p>
-                <h3 class="shop-name">
-                  <a href="product-detail.html?id=9">Bánh Kem 3 Tầng</a>
-                </h3>
-                <div class="shop-rating">
-                  <span class="stars" aria-label="5 sao">★★★★★</span>
-                  <span class="rating-num">5</span>
-                </div>
-                <div class="shop-footer">
-                  <span class="shop-price">750.000đ</span>
-                  <button
-                    type="button"
-                    class="btn-add-sm"
-                    data-id="9"
-                    data-name="Bánh Kem 3 Tầng"
-                    data-price="750000"
-                  
-                  >
-                    + Thêm
-                  </button>
-                </div>
-              </div>
-            </article>
+              </article>
             </div>
 
             <!-- Hiện khi lọc không có kết quả -->
@@ -524,66 +578,7 @@
       </section>
     </main>
 
-    <!-- ==================== FOOTER ==================== -->
-    <footer class="footer">
-      <div class="container">
-        <!-- Cột 1: Thương hiệu -->
-        <div class="col1 footer-brand">
-          <a href="index.html" class="logo-wrapper brand">
-          <img src="assets/img/logo.png" alt="Love Cake" class="logo">
-         </a>
-          <p class="footer-about">
-            Tiệm bánh handmade cao cấp với nguyên liệu hữu cơ, mang đến những
-            chiếc bánh ngọt ngào và đầy yêu thương.
-          </p>
-          <div class="footer-social">
-            <a href="#" class="social-btn" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-            <a href="#" class="social-btn" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-            <a href="#" class="social-btn" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
-          </div>
-        </div>
-
-        <!-- Cột 2: Liên kết nhanh -->
-        <div class="col2 footer-links">
-          <h3>Liên kết nhanh</h3>
-          <ul>
-            <li><a href="index.html">→ Trang Chủ</a></li>
-            <li><a href="about.html">→ Giới Thiệu</a></li>
-            <li><a href="shop.html">→ Danh Mục Sản Phẩm</a></li>
-            <li><a href="builder.html">→ Tự Thiết Kế Bánh</a></li>
-            <li><a href="contact.html">→ Liên Hệ</a></li>
-          </ul>
-        </div>
-
-        <!-- Cột 3: Liên hệ -->
-        <div class="col3 footer-contact">
-          <h3>Liên hệ</h3>
-          <ul>
-            <li><span class="contact-icon">📍</span><span>123 Cầu Giấy, Hà Nội</span></li>
-            <li><span class="contact-icon">📞</span><span>0901 234 567</span></li>
-            <li><span class="contact-icon">✉️</span><a href="mailto:hello@lovecake.vn" class="contact-mail">hello@lovecake.vn</a></li>
-          </ul>
-        </div>
-
-        <!-- Cột 4: Giờ mở cửa -->
-        <div class="col4 footer-hours">
-          <h3>Giờ mở cửa</h3>
-          <ul>
-            <li><span>Thứ 2 – Thứ 6</span><span class="hours">7:00 – 21:00</span></li>
-            <li><span>Thứ 7</span><span class="hours">7:00 – 22:00</span></li>
-            <li><span>Chủ Nhật</span><span class="hours">8:00 – 20:00</span></li>
-          </ul>
-          <div class="open-status">
-            <span class="status-dot"></span>
-            <span>Đang mở cửa</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="bottom">
-        <p>© 2024 Love Cake. Tất cả quyền được bảo lưu. Made with 💗 in Hà Nội</p>
-      </div>
-    </footer>
+    <div id="footer-placeholder"></div>
 
     <script src="js/header&footer.js"></script>
     <script src="js/shop.js"></script>

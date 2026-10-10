@@ -1,9 +1,4 @@
 .about-page {
-  --about-ink: var(--color-ink);
-  --about-muted: var(--color-text-muted);
-  --about-rose: var(--color-brand);
-  --about-blush: var(--color-brand-soft);
-  --about-border: var(--color-brand-border-soft);
   color: var(--color-ink);
 }
 
@@ -15,51 +10,12 @@
 
 .about-hero {
   padding: 24px 24px 46px;
-  background: var(--about-blush);
+  background: var(--color-brand-soft);
 }
 
 .about-hero-inner {
   width: min(1200px, 100%);
   margin: 0 auto;
-}
-
-.breadcrumb {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  width: fit-content;
-  max-width: 100%;
-  margin: 0 auto 28px;
-  padding: 10px 18px;
-  border: 1px solid var(--color-brand-border-tint);
-  border-radius: 999px;
-  background: var(--color-surface-translucent);
-  box-shadow: 0 5px 18px var(--color-shadow-ink-light);
-  color: var(--about-muted);
-  font-size: 13px;
-  white-space: nowrap;
-}
-
-.breadcrumb a {
-  color: var(--about-muted);
-  font-weight: 500;
-  transition: color 180ms ease;
-}
-
-.breadcrumb a:hover {
-  color: var(--about-rose);
-}
-
-.breadcrumb-separator {
-  color: var(--about-rose);
-  font-size: 17px;
-  line-height: 1;
-}
-
-.breadcrumb-current {
-  color: var(--about-ink);
-  font-weight: 600;
 }
 
 .about-hero .eyebrow {
@@ -75,14 +31,14 @@
 }
 
 .about-hero h1 span {
-  color: var(--about-rose);
+  color: var(--color-brand);
   font-weight: 700;
 }
 
 .about-hero-copy {
   max-width: 620px;
   margin: 18px 0 0;
-  color: var(--about-muted);
+  color: var(--color-text-muted);
   font-size: 16px;
   line-height: 1.8;
 }
@@ -139,7 +95,7 @@
 
 .eyebrow {
   margin: 0 0 12px;
-  color: var(--about-rose);
+  color: var(--color-brand);
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 1.4px;
@@ -161,7 +117,7 @@
 
 .story-copy > p:not(.eyebrow) {
   margin: 0 0 14px;
-  color: var(--about-muted);
+  color: var(--color-text-muted);
   font-size: 15px;
   font-weight: 400;
   line-height: 1.8;
@@ -173,9 +129,9 @@
   gap: 12px;
   margin-top: 12px;
   padding: 12px 18px;
-  border: 1px solid var(--about-rose);
+  border: 1px solid var(--color-brand);
   border-radius: 6px;
-  background: var(--about-rose);
+  background: var(--color-brand);
   color: var(--color-text-on-brand);
   font-size: 14px;
   font-weight: 600;
@@ -206,7 +162,7 @@
 
 .team-section {
   padding: 78px 24px 88px;
-  background: var(--about-blush);
+  background: var(--color-brand-soft);
 }
 
 .section-heading,
@@ -224,7 +180,7 @@
 .section-heading > p:last-child {
   max-width: 570px;
   margin: 15px auto 0;
-  color: var(--about-muted);
+  color: var(--color-text-muted);
   font-size: 14px;
   line-height: 1.8;
 }
@@ -240,7 +196,7 @@
 .chef-card {
   overflow: hidden;
   background: var(--color-surface);
-  border: 1px solid var(--about-border);
+  border: 1px solid var(--color-brand-border-soft);
   border-radius: 8px;
 }
 
@@ -256,7 +212,7 @@
 
 .chef-role {
   margin: 0 0 7px;
-  color: var(--about-rose);
+  color: var(--color-brand);
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 1px;
@@ -272,7 +228,7 @@
 .chef-info > p:last-child {
   max-width: 360px;
   margin: 0 auto;
-  color: var(--about-muted);
+  color: var(--color-text-muted);
   font-size: 13px;
   font-weight: 500;
   line-height: 1.7;
@@ -303,7 +259,7 @@
   margin-bottom: 22px;
   overflow: hidden;
   border-radius: 8px;
-  background: var(--about-blush);
+
 }
 
 .promise-image img {
@@ -324,7 +280,7 @@
 .promise-item > p {
   max-width: 290px;
   margin: 0 auto;
-  color: var(--about-muted);
+  color: var(--color-text-muted);
   font-size: 12px;
   font-weight: 500;
   line-height: 1.8;
@@ -334,10 +290,6 @@
 @media (max-width: 760px) {
   .about-hero {
     padding: 20px 18px 34px;
-  }
-
-  .breadcrumb {
-    margin-bottom: 22px;
   }
 
   .about-hero h1 {
@@ -477,7 +429,6 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .breadcrumb a,
   .story-link span,
   .promise-image img {
     transition: none;
