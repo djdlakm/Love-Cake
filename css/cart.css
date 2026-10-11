@@ -463,8 +463,9 @@ body {
   font-size:23px;
   font-weight:800;
   color:#9f2145;
-  margin:3px 0 13px}
+  margin:3px 0 13px
 }
+
 .summary-header>b{
   background:#ffdce5;
   color:var(--pink);
