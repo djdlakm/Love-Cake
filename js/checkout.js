@@ -14,8 +14,8 @@ const OFFER_CATALOG = {
   SHIPBANH20: {
     code:"SHIPBANH20",
     title:"Giao bánh tận tâm",
-    description:"Giảm phí giao hàng tối đa 20.000đ cho đơn từ 299.000đ.",
-    requirement:"01/10/2026 – 15/10/2026",
+    description:"Giảm phí ship đến 20.000đ, đơn từ 299.000đ.",
+    requirement:"HSD 15/10/2026",
     image:"https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&w=1000&q=85",
     min:299000,
     maxDiscount:20000,
@@ -85,8 +85,10 @@ const OFFER_CATALOG = {
   }
 };
 
+
 let cart = loadCart();
 let voucher = getStoredVoucher();
+
 
 function getStoredVoucher(){
   try{
@@ -98,6 +100,7 @@ function getStoredVoucher(){
     return {code:"", active:false};
   }
 }
+
 
 function loadCart(){
   try{
@@ -120,8 +123,10 @@ function loadCart(){
   }
 }
 
+
 const $=id=>document.getElementById(id);
 const money=n=>new Intl.NumberFormat("vi-VN").format(Math.max(0,Math.round(n)))+"đ";
+
 
 function setMobileMenuOpen(isOpen){
   const navbar=document.querySelector(".navbar");
@@ -130,6 +135,7 @@ function setMobileMenuOpen(isOpen){
   navbar.classList.toggle("active",isOpen);
   toggle.setAttribute("aria-expanded",String(isOpen));
 }
+
 
 function saveCart({manuallyCleared=false,orderCompleted=false}={}){
   try{
@@ -143,24 +149,36 @@ function saveCart({manuallyCleared=false,orderCompleted=false}={}){
   }
 }
 
-$("menuToggle").addEventListener("click",()=>setMobileMenuOpen(true));
-$("menuClose").addEventListener("click",()=>setMobileMenuOpen(false));
-document.querySelectorAll(".navbar a").forEach(link=>{
-  link.addEventListener("click",()=>setMobileMenuOpen(false));
-});
-$("scrollToTopBtn").addEventListener("click",()=>{
-  window.scrollTo({top:0,behavior:"smooth"});
-});
+
+function initializeHeaderControls(){
+  $("menuToggle").addEventListener("click",()=>setMobileMenuOpen(true));
+  $("menuClose").addEventListener("click",()=>setMobileMenuOpen(false));
+  document.querySelectorAll(".navbar a").forEach(link=>{
+    link.addEventListener("click",()=>setMobileMenuOpen(false));
+  });
+}
+
+
+if(document.readyState==="loading"){
+  document.addEventListener("DOMContentLoaded",initializeHeaderControls,{once:true});
+}else{
+  initializeHeaderControls();
+}
+
+
 $("fullName").addEventListener("input",updateTransferContent);
 $("phone").addEventListener("input",updateTransferContent);
 document.addEventListener("keydown",event=>{
   if(event.key==="Escape")setMobileMenuOpen(false);
   if(event.key==="Escape")hideCheckoutNotice();
+  if(event.key==="Escape")hideVoucherModal();
 });
+
 
 function escapeHTML(s){
   return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
 }
+
 
 function updateTransferContent(){
   const name=$("fullName").value.trim();
@@ -170,15 +188,18 @@ function updateTransferContent(){
     :"Họ và tên người đặt + SĐT";
 }
 
+
 function updateCartBadge(){
   const badge=document.querySelector(".cart-badge");
   if(badge)badge.textContent=String(cart.reduce((total,item)=>total+item.quantity,0));
 }
 
+
 function renderCart(){
   const itemCount=cart.reduce((total,item)=>total+item.quantity,0);
   $("itemCount").textContent=`${itemCount} sản phẩm`;
   updateCartBadge();
+
 
   $("cartList").innerHTML=cart.length?cart.map((item,i)=>`
     <div class="cart-product">
@@ -195,7 +216,8 @@ function renderCart(){
       </div>
       <button class="remove" type="button" data-action="remove" data-index="${i}">♧</button>
     </div>
-  `).join(""):'<p class="empty-cart">Giỏ hàng đang trống. Hãy quay lại giỏ hàng để chọn bánh nhé.</p>';
+  `).join(""):'<p class="empty-cart">Giỏ hàng đang trống. Bạn hãy quay lại giỏ hàng để chọn bánh nhé ♡</p>';
+
 
   $("summaryItems").innerHTML=cart.map(item=>`
     <div class="summary-item">
@@ -208,8 +230,10 @@ function renderCart(){
     </div>
   `).join("");
 
+
   updateTotals();
 }
+
 
 $("cartList").addEventListener("click",e=>{
   const btn=e.target.closest("button[data-action]");
@@ -221,6 +245,7 @@ $("cartList").addEventListener("click",e=>{
   saveCart({manuallyCleared:!cart.length});
   renderCart();
 });
+
 
 function receiveType(){
   return document.querySelector('input[name="receiveType"]:checked')?.value||"delivery";
@@ -260,14 +285,27 @@ function discount(){
   if(offer.amount) return Math.min(offer.amount,subtotal());
   return Math.round(subtotal()*offer.rate);
 }
+function calculateTotals(){
+  const subtotalAmount=subtotal();
+  const shippingAmount=shippingFee();
+  const discountAmount=discount();
+  return {
+    subtotal:subtotalAmount,
+    shipping:shippingAmount,
+    discount:discountAmount,
+    total:subtotalAmount+shippingAmount-discountAmount
+  };
+}
 function updateTotals(){
-  $("subtotal").textContent=money(subtotal());
-  $("shipping").textContent=money(shippingFee());
-  $("discount").textContent=discount()>0?"-"+money(discount()):money(0);
-  $("total").textContent=money(subtotal()+shippingFee()-discount());
-  $("shippingBadge").textContent=shippingFee()===0?"0đ":"Từ 25.000đ";
+  const totals=calculateTotals();
+  $("subtotal").textContent=money(totals.subtotal);
+  $("shipping").textContent=money(totals.shipping);
+  $("discount").textContent=totals.discount>0?"-"+money(totals.discount):money(0);
+  $("total").textContent=money(totals.total);
+  $("shippingBadge").textContent=totals.shipping===0?"0đ":"Từ 25.000đ";
   renderSelectedVoucher();
 }
+
 
 function renderSelectedVoucher(){
   const offer=OFFER_CATALOG[voucher.code];
@@ -284,9 +322,6 @@ function renderSelectedVoucher(){
   }
   image.hidden=!offer;
   $("voucherName").textContent=offer?offer.title:"Chọn ưu đãi của bạn";
-  $("voucherDescription").textContent=offer?offer.description:"Xem các mã đang áp dụng";
-  $("voucherRequirement").textContent=offer?offer.requirement:"Chọn mã phù hợp với đơn hàng";
-  $("voucherCode").textContent=offer?offer.code:"—";
   selectedText.textContent=voucher.active
     ?(isOfferEligible(offer)?"Đã áp dụng mã":`Đã chọn mã · ${offerEligibilityMessage(offer)}`)
     :"Chưa chọn mã ưu đãi";
@@ -295,6 +330,76 @@ function renderSelectedVoucher(){
   card.classList.toggle("is-empty",!voucher.active);
 }
 
+
+function renderVoucherOptions(){
+  $("voucherOptions").innerHTML=Object.values(OFFER_CATALOG).map(offer=>{
+    const eligible=isOfferEligible(offer);
+    const selected=voucher.active&&voucher.code===offer.code;
+    const status=selected?"Đang được chọn":eligible?"Có thể áp dụng":offerEligibilityMessage(offer);
+    return `
+      <article class="voucher-option${selected?" is-selected":""}${eligible?"":" is-disabled"}">
+        <div class="voucher-option-info">
+          <div class="voucher-option-meta">
+            <span class="voucher-option-code">${escapeHTML(offer.code)}</span>
+            <span class="voucher-option-status">${escapeHTML(status)}</span>
+          </div>
+          <h3>${escapeHTML(offer.title)}</h3>
+          <p>${escapeHTML(offer.description)}</p>
+        </div>
+        <button type="button" data-voucher-code="${escapeHTML(offer.code)}" ${eligible?"":"disabled"}>
+          ${selected?"Đang chọn":eligible?"Áp dụng":"Chưa dùng được"}
+        </button>
+      </article>
+    `;
+  }).join("");
+}
+
+
+function hideVoucherModal(){
+  const modal=$("voucherModal");
+  if(!modal)return;
+  modal.classList.remove("show");
+  modal.setAttribute("aria-hidden","true");
+}
+
+
+function showVoucherModal(){
+  renderVoucherOptions();
+  const modal=$("voucherModal");
+  modal.classList.add("show");
+  modal.setAttribute("aria-hidden","false");
+  $("closeVoucherModal").focus();
+}
+
+
+function applyVoucher(code){
+  const offer=OFFER_CATALOG[code];
+  if(!offer||!isOfferEligible(offer))return;
+  try{
+    localStorage.setItem("selectedOffer",code);
+  }catch(error){
+    console.error("Không thể lưu mã ưu đãi đã chọn.",error);
+    hideVoucherModal();
+    showCheckoutNotice("Không thể lưu mã ưu đãi. Vui lòng thử lại nhé ♡");
+    return;
+  }
+  voucher={code,active:true};
+  hideVoucherModal();
+  updateTotals();
+}
+
+
+$("voucherSelect").addEventListener("click",showVoucherModal);
+$("closeVoucherModal").addEventListener("click",hideVoucherModal);
+$("voucherModal").addEventListener("click",event=>{
+  if(event.target===$("voucherModal"))hideVoucherModal();
+});
+$("voucherOptions").addEventListener("click",event=>{
+  const button=event.target.closest("button[data-voucher-code]");
+  if(button&&!button.disabled)applyVoucher(button.dataset.voucherCode);
+});
+
+
 function showCheckoutNotice(message){
   $("noticeMessage").textContent=message;
   $("checkoutNotice").classList.add("show");
@@ -302,16 +407,19 @@ function showCheckoutNotice(message){
   $("confirmNotice").focus();
 }
 
+
 function hideCheckoutNotice(){
   $("checkoutNotice").classList.remove("show");
   $("checkoutNotice").setAttribute("aria-hidden","true");
 }
+
 
 $("confirmNotice").addEventListener("click",hideCheckoutNotice);
 $("closeNotice").addEventListener("click",hideCheckoutNotice);
 $("checkoutNotice").addEventListener("click",event=>{
   if(event.target===$("checkoutNotice"))hideCheckoutNotice();
 });
+
 
 document.querySelectorAll('input[name="receiveType"]').forEach(r=>{
   r.addEventListener("change",()=>{
@@ -323,6 +431,7 @@ document.querySelectorAll('input[name="receiveType"]').forEach(r=>{
   });
 });
 
+
 document.querySelectorAll('input[name="payment"]').forEach(r=>{
   r.addEventListener("change",()=>{
     document.querySelectorAll(".payment-option").forEach(x=>x.classList.remove("selected"));
@@ -330,6 +439,7 @@ document.querySelectorAll('input[name="payment"]').forEach(r=>{
     $("onlineBox").classList.toggle("hidden",r.value!=="online");
   });
 });
+
 
 $("store").addEventListener("change",e=>{
   if(!e.target.value){
@@ -345,6 +455,7 @@ $("store").addEventListener("change",e=>{
   $("mapBox").classList.remove("hidden");
 });
 
+
 $("removeVoucher").addEventListener("click",()=>{
   voucher.active=false;
   voucher.code="";
@@ -357,6 +468,7 @@ $("removeVoucher").addEventListener("click",()=>{
   }
   updateTotals();
 });
+
 
 function validForm(){
   if(!$("fullName").value.trim()||!$("phone").value.trim()||!$("receiveTime").value){
@@ -379,6 +491,7 @@ function validForm(){
   return true;
 }
 
+
 $("placeOrder").addEventListener("click",()=>{
   if(!validForm())return;
   const paymentMethod=document.querySelector('input[name="payment"]:checked')?.value;
@@ -392,6 +505,7 @@ $("placeOrder").addEventListener("click",()=>{
   createSuccessBalloons();
   $("successScreen").classList.add("show");
 
+
   setTimeout(()=>{
     $("successScreen").classList.remove("show");
     fillInvoice();
@@ -401,6 +515,7 @@ $("placeOrder").addEventListener("click",()=>{
     renderCart();
   },3000);
 });
+
 
 function createSuccessBalloons(){
   const box=$("successBalloons");
@@ -417,6 +532,7 @@ function createSuccessBalloons(){
     box.appendChild(b);
   }
 }
+
 
 function createFloatingBalloon(){
   if(document.querySelector(".success-screen.show"))return;
@@ -439,17 +555,21 @@ function scheduleBalloons(){
 }
 scheduleBalloons();
 
+
 function fillInvoice(){
   const now=new Date();
   const code="LC"+now.getFullYear()+String(now.getMonth()+1).padStart(2,"0")+String(now.getDate()).padStart(2,"0")+Math.floor(100+Math.random()*900);
+
 
   $("invoiceCode").textContent=code;
   $("invoiceDate").textContent=now.toLocaleDateString("vi-VN");
   $("billName").textContent=$("fullName").value.trim();
   $("billPhone").textContent=$("phone").value.trim();
 
+
   const d=new Date($("receiveTime").value);
   $("billReceive").textContent=isNaN(d)?$("receiveTime").value:d.toLocaleString("vi-VN");
+
 
   let address="";
   if(receiveType()==="delivery"){
@@ -459,6 +579,7 @@ function fillInvoice(){
   }
   $("billAddress").textContent=address;
 
+
   $("billItems").innerHTML=cart.map(x=>`
     <div class="bill-row">
       <span>${escapeHTML(x.name)}</span>
@@ -467,14 +588,15 @@ function fillInvoice(){
     </div>
   `).join("");
 
+
   const pay=document.querySelector('input[name="payment"]:checked')?.value;
-  const orderTotal=subtotal()+shippingFee()-discount();
+  const totals=calculateTotals();
   const paidByBank=pay==="online";
-  $("billSubtotal").textContent=money(subtotal());
-  $("billShipping").textContent=money(shippingFee());
-  $("billDiscount").textContent="-"+money(discount());
+  $("billSubtotal").textContent=money(totals.subtotal);
+  $("billShipping").textContent=money(totals.shipping);
+  $("billDiscount").textContent=totals.discount>0?"-"+money(totals.discount):money(0);
   $("billDueLabel").textContent="AMOUNT DUE";
-  $("billTotal").textContent=money(paidByBank?0:orderTotal);
+  $("billTotal").textContent=money(totals.total);
   $("billPayment").textContent=paidByBank
     ?"Chuyển khoản ngân hàng / Ví điện tử"
     :"Tiền mặt khi nhận bánh (COD)";
@@ -483,8 +605,10 @@ function fillInvoice(){
     :"Chưa thanh toán · Thanh toán khi nhận bánh";
 }
 
+
 $("closeInvoice").addEventListener("click",()=>$("invoiceModal").classList.remove("show"));
 $("printBill").addEventListener("click",()=>window.print());
 $("continueShopping").addEventListener("click",()=>window.location.href="../Love-Cake/index.html");
+
 
 renderCart();
