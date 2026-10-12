@@ -144,7 +144,7 @@ document.querySelector('.btn-secondary')?.addEventListener('click', (event) => {
       price: selectedPrice + companionTotal,
       accessories,
       accessoryKey,
-      image: 'assets/img/cart-cake.png',
+      image: 'assets/banhdautay2.jpg',
       quantity,
     });
   }
