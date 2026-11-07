@@ -8,38 +8,13 @@ const loadMoreReviewsButton = document.querySelector('.load-more-btn');
 const recommendationsTrack = document.getElementById('recommendationsTrack');
 const recommendationsSection = document.querySelector('.recommendations-section');
 const recommendationControls = document.querySelectorAll('[data-recommendations-step]');
-const companionWidget = document.querySelector('.companion-widget');
-const companionCollapseButton = document.querySelector('.companion-collapse');
-const companionItems = document.querySelector('.companion-items');
-const companionAddButtons = document.querySelectorAll('.companion-add');
-const companionStatus = document.querySelector('.companion-status');
 const currentPriceEl = document.querySelector('.current-price');
 const oldPriceEl = document.querySelector('.old-price');
 
 let selectedPrice = 100000;
 
-document.addEventListener('DOMContentLoaded', () => {
-  const footer = document.querySelector('#footer-placeholder .footer');
-  if (!footer || !companionWidget) return;
-
-  const footerObserver = new IntersectionObserver(([entry]) => {
-    companionWidget.classList.toggle('is-footer-visible', entry.isIntersecting);
-  });
-  footerObserver.observe(footer);
-});
-
 function formatCurrency(amount) {
   return `${amount.toLocaleString('vi-VN')}đ`;
-}
-
-function getSelectedCompanions() {
-  return [...companionAddButtons]
-    .filter((button) => button.getAttribute('aria-pressed') === 'true')
-    .map((button) => ({
-      id: button.dataset.accessory,
-      name: button.closest('.companion-item').querySelector('.companion-copy strong').textContent,
-      price: Number(button.dataset.price) || 0,
-    }));
 }
 
 function updateCurrentPrice() {
@@ -117,10 +92,8 @@ function animateCartFly(sourceButton) {
 document.querySelector('.btn-secondary')?.addEventListener('click', (event) => {
   const productId = 'BLC-2026';
   const quantity = Math.max(1, Number(qtyInput.value) || 1);
-  const selectedCompanions = getSelectedCompanions();
-  const companionTotal = selectedCompanions.reduce((sum, item) => sum + item.price, 0);
-  const accessories = selectedCompanions;
-  const accessoryKey = accessories.map((item) => item.id).join('|');
+  const accessories = [];
+  const accessoryKey = '';
   const cart = JSON.parse(localStorage.getItem('cart') || '[]');
   const existingItem = cart.find((item) => item.id === productId && (item.accessoryKey || '') === accessoryKey);
 
@@ -130,7 +103,7 @@ document.querySelector('.btn-secondary')?.addEventListener('click', (event) => {
     cart.push({
       id: productId,
       name: 'Bánh Kem Bento Dâu Tây Tươi (Hộp Bento Sinh Nhật)',
-      price: selectedPrice + companionTotal,
+      price: selectedPrice,
       accessories,
       accessoryKey,
       image: 'assets/banhdautay2.jpg',
@@ -280,40 +253,9 @@ if (recommendationsTrack && recommendationsSection && 'IntersectionObserver' in 
       startAutoScroll();
     }
   });
-  const handlePageHide = () => pauseAutoScroll();
-  const handlePageShow = () => startAutoScroll();
-  window.addEventListener('pagehide', handlePageHide);
-  window.addEventListener('pageshow', handlePageShow);
+  window.addEventListener('pagehide', pauseAutoScroll);
+  window.addEventListener('pageshow', startAutoScroll);
 }
-
-companionCollapseButton?.addEventListener('click', () => {
-  companionItems.hidden = !companionItems.hidden;
-  const collapsed = companionItems.hidden;
-  companionWidget.classList.toggle('is-collapsed', collapsed);
-  companionCollapseButton.setAttribute('aria-expanded', String(!companionItems.hidden));
-  companionCollapseButton.setAttribute('aria-label', companionItems.hidden ? 'Mở gợi ý mua kèm' : 'Ẩn gợi ý mua kèm');
-  companionCollapseButton.innerHTML = `<i class="fa-solid ${collapsed ? 'fa-gift' : 'fa-minus'}" aria-hidden="true"></i>`;
-});
-
-if (companionCollapseButton && companionItems) {
-  companionItems.hidden = true;
-  companionWidget.classList.add('is-collapsed');
-  companionCollapseButton.setAttribute('aria-expanded', 'false');
-  companionCollapseButton.setAttribute('aria-label', 'Mở gợi ý mua kèm');
-  companionCollapseButton.innerHTML = '<i class="fa-solid fa-gift" aria-hidden="true"></i>';
-}
-
-companionAddButtons.forEach((button) => {
-  button.addEventListener('click', () => {
-    const selected = button.getAttribute('aria-pressed') !== 'true';
-    const itemName = button.closest('.companion-item').querySelector('.companion-copy strong').textContent;
-    button.setAttribute('aria-pressed', String(selected));
-    button.setAttribute('aria-label', `${selected ? 'Bỏ chọn' : 'Chọn'} ${itemName.toLowerCase()}`);
-    button.innerHTML = `<i class="fa-solid ${selected ? 'fa-check' : 'fa-plus'}" aria-hidden="true"></i>`;
-    button.closest('.companion-item').classList.toggle('is-selected', selected);
-    companionStatus.textContent = `${itemName} ${selected ? 'đã được chọn' : 'đã bỏ chọn'}`;
-  });
-});
 
 const initialReviewPageSize = 4;
 let visibleReviewCount = initialReviewPageSize;
