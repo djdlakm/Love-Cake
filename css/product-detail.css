@@ -272,9 +272,13 @@ main.detail-page-shell {
   color: var(--text-dark);
 }
 
-/* Ingredients use a quiet two-column list instead of colorful badges. */
+/* Keep ingredient details together in one simple list. */
 .ingredient-panel {
   margin-top: 22px;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
 }
 
 .ingredient-panel h2 {
@@ -304,33 +308,38 @@ main.detail-page-shell {
 }
 
 .ingredient-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  column-gap: 24px;
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 6px;
   margin: 8px 0 0;
   padding: 0;
   list-style: none;
 }
 
 .ingredient-item {
-  display: flex;
-  min-width: 0;
+  display: inline-flex;
   align-items: baseline;
-  justify-content: space-between;
-  gap: 10px;
-  padding: 10px 0;
-  border-bottom: 1px solid var(--line);
+  gap: 4px;
 }
 
 .ingredient-item strong {
+  color: var(--text-mid);
   font-size: 13px;
-  font-weight: 550;
+  font-weight: 400;
+}
+
+.ingredient-item::after {
+  content: ",";
+  color: var(--text-mid);
+}
+
+.ingredient-item:last-child::after {
+  content: "";
 }
 
 .ingredient-item small {
   color: var(--text-soft);
   font-size: 11px;
-  text-align: right;
 }
 
 /* Keep quantity and purchase actions together. */
@@ -781,11 +790,24 @@ main.detail-page-shell {
 }
 
 @media (min-width: 981px) {
-  .detail-product-card {
-    align-items: stretch;
+  .detail-product-card,
+  .product-details-section,
+  .review-section,
+  .recommendations-section {
     width: calc(100% + 48px);
     margin-left: -24px;
+  }
+
+  .detail-product-card {
+    align-items: stretch;
     padding: 0 clamp(24px, 5vw, 72px);
+  }
+
+  .product-details-section,
+  .review-section,
+  .recommendations-section {
+    padding-right: clamp(24px, 5vw, 72px);
+    padding-left: clamp(24px, 5vw, 72px);
   }
 
   .product-visual-panel {
@@ -816,13 +838,25 @@ main.detail-page-shell {
 }
 
 @media (min-width: 1201px) {
-  .detail-product-card {
+  .detail-product-card,
+  .product-details-section,
+  .review-section,
+  .recommendations-section {
     width: 100vw;
     margin-left: calc(576px - 50vw);
   }
 }
 
 @media (max-width: 980px) {
+  .product-details-section,
+  .review-section,
+  .recommendations-section {
+    width: auto;
+    margin-left: 0;
+    padding-right: 0;
+    padding-left: 0;
+  }
+
   .detail-product-card {
     width: auto;
     margin-left: 0;
@@ -854,14 +888,6 @@ main.detail-page-shell {
   main.detail-page-shell {
     margin: 20px auto 48px;
     padding: 0 16px;
-  }
-
-  .ingredient-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .ingredient-item {
-    align-items: baseline;
   }
 
   .cta-row {
