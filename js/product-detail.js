@@ -1,14 +1,12 @@
 const sizeOptions = document.querySelectorAll('.size-option');
 const qtyInput = document.getElementById('quantityInput');
-const mainProductImage = document.getElementById('mainProductImage');
-const thumbButtons = document.querySelectorAll('.thumb');
-const imageCount = document.querySelector('.image-count');
-const galleryControls = document.querySelectorAll('[data-gallery-step]');
 const reviewTabs = document.querySelectorAll('.review-tab');
 const reviewCards = [...document.querySelectorAll('.review-card')];
 const reviewTotal = document.getElementById('reviewTotal');
+const reviewSectionTotal = document.getElementById('reviewSectionTotal');
 const loadMoreReviewsButton = document.querySelector('.load-more-btn');
 const recommendationsTrack = document.getElementById('recommendationsTrack');
+const recommendationsSection = document.querySelector('.recommendations-section');
 const recommendationControls = document.querySelectorAll('[data-recommendations-step]');
 const companionWidget = document.querySelector('.companion-widget');
 const companionCollapseButton = document.querySelector('.companion-collapse');
@@ -42,14 +40,6 @@ function getSelectedCompanions() {
       name: button.closest('.companion-item').querySelector('.companion-copy strong').textContent,
       price: Number(button.dataset.price) || 0,
     }));
-}
-
-function getIncludedAccessories() {
-  return [...document.querySelectorAll('.gift-item[data-accessory]')].map((item) => ({
-    id: item.dataset.accessory,
-    name: item.dataset.accessoryName,
-    price: 0,
-  }));
 }
 
 function updateCurrentPrice() {
@@ -128,9 +118,8 @@ document.querySelector('.btn-secondary')?.addEventListener('click', (event) => {
   const productId = 'BLC-2026';
   const quantity = Math.max(1, Number(qtyInput.value) || 1);
   const selectedCompanions = getSelectedCompanions();
-  const includedAccessories = getIncludedAccessories();
   const companionTotal = selectedCompanions.reduce((sum, item) => sum + item.price, 0);
-  const accessories = [...includedAccessories, ...selectedCompanions];
+  const accessories = selectedCompanions;
   const accessoryKey = accessories.map((item) => item.id).join('|');
   const cart = JSON.parse(localStorage.getItem('cart') || '[]');
   const existingItem = cart.find((item) => item.id === productId && (item.accessoryKey || '') === accessoryKey);
@@ -156,31 +145,6 @@ document.querySelector('.btn-secondary')?.addEventListener('click', (event) => {
   }
 
   animateCartFly(event.currentTarget);
-});
-
-let activeImageIndex = 0;
-
-function showProductImage(index) {
-  activeImageIndex = (index + thumbButtons.length) % thumbButtons.length;
-  const selectedThumb = thumbButtons[activeImageIndex];
-  if (!selectedThumb) return;
-
-  thumbButtons.forEach((thumb) => thumb.classList.remove('active'));
-  selectedThumb.classList.add('active');
-  mainProductImage.src = selectedThumb.dataset.image;
-  imageCount.textContent = `${activeImageIndex + 1}/${thumbButtons.length}`;
-}
-
-thumbButtons.forEach((thumb, index) => {
-  thumb.addEventListener('click', () => {
-    showProductImage(index);
-  });
-});
-
-galleryControls.forEach((control) => {
-  control.addEventListener('click', () => {
-    showProductImage(activeImageIndex + Number(control.dataset.galleryStep));
-  });
 });
 
 function updateRecommendationControls() {
@@ -212,6 +176,115 @@ recommendationControls.forEach((control) => {
 recommendationsTrack?.addEventListener('scroll', updateRecommendationControls, { passive: true });
 window.addEventListener('resize', updateRecommendationControls);
 updateRecommendationControls();
+
+if (recommendationsTrack && recommendationsSection && 'IntersectionObserver' in window) {
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  let sectionIsVisible = false;
+  let pointerIsOverSection = false;
+  let sectionHasFocus = false;
+  let direction = 1;
+  let previousFrameTime = 0;
+  let animationFrameId;
+
+  const shouldAnimate = () => (
+    sectionIsVisible
+    && !pointerIsOverSection
+    && !sectionHasFocus
+    && !document.hidden
+    && !reducedMotion.matches
+  );
+
+  const pauseAutoScroll = () => {
+    if (animationFrameId !== undefined) {
+      window.cancelAnimationFrame(animationFrameId);
+      animationFrameId = undefined;
+    }
+    previousFrameTime = 0;
+    recommendationsTrack.classList.remove('is-auto-scrolling');
+  };
+
+  const startAutoScroll = () => {
+    if (!shouldAnimate() || animationFrameId) return;
+    recommendationsTrack.classList.add('is-auto-scrolling');
+    animationFrameId = window.requestAnimationFrame(animateRecommendations);
+  };
+
+  const visibilityObserver = new IntersectionObserver(([entry]) => {
+    sectionIsVisible = entry.isIntersecting;
+    if (sectionIsVisible) {
+      startAutoScroll();
+    } else {
+      pauseAutoScroll();
+    }
+  });
+  visibilityObserver.observe(recommendationsSection);
+
+  recommendationsSection.addEventListener('pointerenter', () => {
+    pointerIsOverSection = true;
+    pauseAutoScroll();
+  });
+  recommendationsSection.addEventListener('pointerleave', () => {
+    pointerIsOverSection = false;
+    startAutoScroll();
+  });
+  recommendationsSection.addEventListener('focusin', () => {
+    sectionHasFocus = true;
+    pauseAutoScroll();
+  });
+  recommendationsSection.addEventListener('focusout', (event) => {
+    sectionHasFocus = recommendationsSection.contains(event.relatedTarget);
+    if (sectionHasFocus) {
+      pauseAutoScroll();
+    } else {
+      startAutoScroll();
+    }
+  });
+
+  const animateRecommendations = (time) => {
+    animationFrameId = undefined;
+    if (!shouldAnimate()) {
+      pauseAutoScroll();
+      return;
+    }
+
+    const elapsed = previousFrameTime ? Math.min(time - previousFrameTime, 50) : 0;
+    previousFrameTime = time;
+    const maxScroll = recommendationsTrack.scrollWidth - recommendationsTrack.clientWidth;
+    if (maxScroll > 0) {
+      const nextPosition = recommendationsTrack.scrollLeft + direction * elapsed * 0.035;
+      if (nextPosition >= maxScroll) {
+        recommendationsTrack.scrollLeft = maxScroll;
+        direction = -1;
+      } else if (nextPosition <= 0) {
+        recommendationsTrack.scrollLeft = 0;
+        direction = 1;
+      } else {
+        recommendationsTrack.scrollLeft = nextPosition;
+      }
+    }
+
+    animationFrameId = window.requestAnimationFrame(animateRecommendations);
+  };
+
+  reducedMotion.addEventListener('change', () => {
+    if (reducedMotion.matches) {
+      pauseAutoScroll();
+    } else {
+      startAutoScroll();
+    }
+  });
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      pauseAutoScroll();
+    } else {
+      startAutoScroll();
+    }
+  });
+  const handlePageHide = () => pauseAutoScroll();
+  const handlePageShow = () => startAutoScroll();
+  window.addEventListener('pagehide', handlePageHide);
+  window.addEventListener('pageshow', handlePageShow);
+}
 
 companionCollapseButton?.addEventListener('click', () => {
   companionItems.hidden = !companionItems.hidden;
@@ -254,6 +327,7 @@ function updateReviewList(resetVisibleCount = false) {
   });
 
   reviewTotal.textContent = reviewCards.length;
+  reviewSectionTotal.textContent = reviewCards.length;
   reviewTabs.forEach((tab) => {
     const filter = tab.dataset.reviewFilter;
     const count = filter === 'all'

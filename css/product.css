@@ -1,6 +1,6 @@
 :root {
   --home-max: 1200px;
-  --home-gutter: 24px;
+  --home-gutter: clamp(16px, 3vw, 32px);
 }
 
 .shop-page {
@@ -16,9 +16,9 @@
 
 /* Khung nội dung (đặt riêng trong .shop-page để không phụ thuộc style.css) */
 .shop-page .section-container {
-  width: min(var(--home-max), 100%);
+  width: min(var(--home-max), calc(100% - 2 * var(--home-gutter)));
   margin: 0 auto;
-  padding: 0 var(--home-gutter);
+  padding: 0;
 }
 
 .btn {
@@ -403,14 +403,20 @@
 
 .shop-body {
   padding: 16px 16px 16px;
+  background: linear-gradient(180deg, var(--color-surface) 0%, #fff9f8 100%);
 }
 
 .shop-category {
+  display: inline-flex;
   margin: 0;
-  color: var(--color-brand-light);
+  padding: 5px 9px;
+  border: 1px solid var(--color-brand-border);
+  border-radius: 999px;
+  background: var(--color-brand-soft);
+  color: var(--color-brand-hover);
   font-size: 11px;
   font-weight: 600;
-  letter-spacing: 1px;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
 }
 
@@ -434,18 +440,26 @@
 
 .shop-rating {
   display: flex;
+  width: fit-content;
   align-items: center;
   gap: 6px;
+  margin-top: 9px;
+  padding: 5px 9px;
+  border: 1px solid #f4e5c4;
+  border-radius: 8px;
+  background: #fffaf0;
 }
 
 .shop-rating .stars {
+  color: #d98b12;
   font-size: 11px;
   letter-spacing: 1px;
 }
 
 .rating-num {
-  color: var(--color-text-subtle);
+  color: #78571e;
   font-size: 12px;
+  font-weight: 600;
 }
 
 .shop-footer {
@@ -453,7 +467,11 @@
   align-items: center;
   justify-content: space-between;
   gap: 10px;
-  margin-top: 16px;
+  margin-top: 14px;
+  padding: 10px 12px;
+  border: 1px solid var(--color-brand-border);
+  border-radius: 12px;
+  background: #fff1f2;
 }
 
 .shop-price {

@@ -61,18 +61,21 @@ main.detail-page-shell {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 0.92fr);
   align-items: start;
-  gap: clamp(32px, 5vw, 64px);
+  gap: clamp(20px, 2.5vw, 32px);
 }
 
 .product-visual-panel {
   position: relative;
+  width: 100%;
+  max-width: 460px;
+  margin-inline: auto;
   min-width: 0;
 }
 
 .gallery-card {
   position: relative;
   width: 100%;
-  aspect-ratio: 4 / 4.6;
+  aspect-ratio: 1;
   overflow: hidden;
   border-radius: var(--radius);
   background: var(--surface-muted);
@@ -91,84 +94,6 @@ main.detail-page-shell {
   .gallery-card:hover img {
     transform: scale(1.025);
   }
-}
-
-.gallery-nav {
-  position: absolute;
-  top: 50%;
-  z-index: 1;
-  display: grid;
-  width: 40px;
-  height: 40px;
-  place-items: center;
-  margin-top: -20px;
-  border: 0;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.92);
-  color: var(--text-dark);
-  transition: background 0.2s ease, color 0.2s ease;
-}
-
-.gallery-nav:hover {
-  background: var(--primary);
-  color: #fff;
-}
-
-.gallery-prev {
-  left: 14px;
-}
-
-.gallery-next {
-  right: 14px;
-}
-
-.image-toolbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: 12px;
-  padding: 0 2px;
-  color: var(--text-soft);
-  font-size: 13px;
-}
-
-.image-count {
-  font-weight: 600;
-}
-
-.gallery-details-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  margin-top: 14px;
-}
-
-.thumb-row {
-  display: grid;
-  flex: 0 0 42%;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 8px;
-  min-width: 0;
-}
-
-.thumb {
-  overflow: hidden;
-  padding: 0;
-  border: 1px solid transparent;
-  border-radius: 8px;
-  background: var(--surface-muted);
-  transition: border-color 0.2s ease;
-}
-
-.thumb.active {
-  border-color: var(--primary);
-}
-
-.thumb img {
-  width: 100%;
-  aspect-ratio: 1;
-  object-fit: cover;
 }
 
 .real-photo-note {
@@ -786,18 +711,6 @@ main.detail-page-shell {
   line-height: 1.65;
 }
 
-.review-photos {
-  display: flex;
-  gap: 8px;
-}
-
-.review-photos img {
-  width: 72px;
-  height: 72px;
-  border-radius: 8px;
-  object-fit: cover;
-}
-
 .load-more-btn {
   display: flex;
   min-height: 40px;
@@ -845,9 +758,14 @@ main.detail-page-shell {
   overflow-x: auto;
   overscroll-behavior-inline: contain;
   scroll-behavior: smooth;
-  scroll-snap-type: x mandatory;
+  scroll-snap-type: x proximity;
   scrollbar-width: thin;
   touch-action: pan-x pan-y;
+}
+
+.recommendations-grid.is-auto-scrolling {
+  scroll-behavior: auto;
+  scroll-snap-type: none;
 }
 
 .recommendation-card {
@@ -870,15 +788,15 @@ main.detail-page-shell {
   padding: 10px 2px 4px;
 }
 
-.recommendation-label {
-  color: var(--text-soft);
-  font-size: 11px;
-}
-
 .recommendation-copy h3 {
   margin: 4px 0 0;
   font-size: 14px;
   font-weight: 600;
+}
+
+.recommendation-label {
+  color: var(--text-soft);
+  font-size: 11px;
 }
 
 /* Floating add-on picker remains functional but no longer competes with the page. */
@@ -1102,20 +1020,11 @@ main.detail-page-shell {
 
 @media (min-width: 981px) {
   .detail-product-card {
-    align-items: stretch;
+    align-items: start;
   }
 
   .product-visual-panel {
-    display: flex;
-    flex-direction: column;
-    position: sticky;
-    top: 88px;
-  }
-
-  .gallery-card {
-    flex: 1;
-    min-height: 0;
-    aspect-ratio: auto;
+    position: relative;
   }
 }
 
@@ -1148,16 +1057,6 @@ main.detail-page-shell {
   main.detail-page-shell {
     margin: 20px auto 48px;
     padding: 0 16px;
-  }
-
-  .gallery-details-row {
-    align-items: flex-start;
-    flex-direction: column;
-  }
-
-  .thumb-row {
-    width: 100%;
-    flex-basis: auto;
   }
 
   .ingredient-grid {

@@ -24,37 +24,12 @@
               src="assets/banhdautay2.jpg"
               alt="Bánh kem bento dâu tây"
             />
-            <button class="gallery-nav gallery-prev" type="button" data-gallery-step="-1" aria-label="Ảnh trước">
-              <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
-            </button>
-            <button class="gallery-nav gallery-next" type="button" data-gallery-step="1" aria-label="Ảnh tiếp theo">
-              <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
-            </button>
           </div>
 
-          <div class="image-toolbar">
-            <span class="image-count">1/3</span>
+          <div class="real-photo-note">
+            <i class="fa-solid fa-camera" aria-hidden="true"></i>
+            <span>Hình chụp thực tế 100% từ bếp Love Cake</span>
           </div>
-
-          <div class="gallery-details-row">
-            <div class="thumb-row">
-              <button class="thumb active" data-image="assets/banhdautay2.jpg" aria-label="Ảnh 1">
-                <img src="assets/banhdautay2.jpg" alt="Bánh kem dâu tây" />
-              </button>
-              <button class="thumb" data-image="assets/dautay.jpg" aria-label="Ảnh 2">
-                <img src="assets/dautay.jpg" alt="Bánh kem với lớp kem tươi và dâu tây" />
-              </button>
-              <button class="thumb" data-image="assets/dautay2.jpg" aria-label="Ảnh 3">
-                <img src="assets/dautay2.jpg" alt="Dâu tây tươi" />
-              </button>
-            </div>
-
-            <div class="real-photo-note">
-              <i class="fa-solid fa-camera" aria-hidden="true"></i>
-              <span>Hình chụp thực tế 100% từ bếp Love Cake</span>
-            </div>
-          </div>
-
         </div>
 
         <div class="product-info-panel">
@@ -85,28 +60,6 @@
             <span class="save-tag">Tiết kiệm -17%</span>
           </div>
 
-          <div class="supplement-panel">
-            <div class="supplement-header">
-              <div>
-                <h3>Phụ kiện được tặng</h3>
-                <p>Tự động kèm theo mỗi bánh, không tính thêm phí</p>
-              </div>
-            </div>
-
-            <div class="gift-list" aria-label="Các phụ kiện được tặng kèm">
-              <div class="gift-item" data-accessory="birthday-candles" data-accessory-name="Set nến sinh nhật">
-                <i class="fa-solid fa-check" aria-hidden="true"></i>
-                <span>Set nến sinh nhật</span>
-                <strong>Quà tặng</strong>
-              </div>
-              <div class="gift-item" data-accessory="birthday-cutlery" data-accessory-name="Set mũ giấy + Dao dĩa">
-                <i class="fa-solid fa-check" aria-hidden="true"></i>
-                <span>Set mũ giấy + Dao dĩa</span>
-                <strong>Quà tặng</strong>
-              </div>
-            </div>
-          </div>
-
           <div class="purchase-box">
             <div class="purchase-header">
               <span>Số lượng</span>
@@ -123,30 +76,6 @@
             </div>
           </div>
 
-          <div class="trust-banner" aria-label="Cam kết chất lượng Love Cake Care">
-            <div class="trust-banner-header">
-              <div class="trust-banner-icon" aria-hidden="true">
-                <i class="fa-solid fa-shield-heart"></i>
-              </div>
-              <div class="trust-banner-copy">
-                <h3>Cam Kết Độc Quyền Love Cake Care</h3>
-                <p>Bảo hiểm 100% cho mỗi chiếc bánh giao đến tay quý khách</p>
-              </div>
-
-              <span class="trust-badge">LoveCake Care</span>
-            </div>
-
-            <div class="trust-banner-features">
-              <div class="trust-item">
-                <span class="trust-icon" aria-hidden="true">↩</span>
-                <span>Đổi hàng hoàn tiền 100% trong 30 phút</span>
-              </div>
-              <div class="trust-item">
-                <span class="trust-icon" aria-hidden="true">🎁</span>
-                <span>Giao xe máy đúng quy trình an toàn</span>
-              </div>
-            </div>
-          </div>
         </div>
       </section>
 
@@ -214,13 +143,36 @@
             <li>Dùng dao sạch để cắt bánh; bảo quản lạnh phần còn lại và dùng sớm.</li>
           </ol>
         </section>
+
+        <div class="trust-banner" aria-label="Cam kết chất lượng Love Cake Care">
+          <div class="trust-banner-header">
+            <div class="trust-banner-icon" aria-hidden="true">
+              <i class="fa-solid fa-shield-heart"></i>
+            </div>
+            <div class="trust-banner-copy">
+              <h3>Cam Kết Độc Quyền Love Cake Care</h3>
+              <p>Bảo hiểm 100% cho mỗi chiếc bánh giao đến tay quý khách</p>
+            </div>
+
+            <span class="trust-badge">LoveCake Care</span>
+          </div>
+
+          <div class="trust-banner-features">
+            <div class="trust-item">
+              <span>Đổi hàng hoàn tiền 100% trong 30 phút</span>
+            </div>
+            <div class="trust-item">
+              <span>Giao xe máy đúng quy trình an toàn</span>
+            </div>
+          </div>
+        </div>
       </section>
 
       <section class="review-section">
         <div class="review-header-row">
           <div>
             <span class="section-tag">TRẢI NGHIỆM THỰC TẾ</span>
-            <h2>Đánh giá từ khách hàng</h2>
+            <h2>Đánh giá từ khách hàng (<span id="reviewSectionTotal">0</span>)</h2>
           </div>
           <div class="review-summary-box">
             <span class="summary-score">4.8</span>
@@ -239,9 +191,6 @@
           <button class="review-tab active" type="button" data-review-filter="all" aria-pressed="true">
             Tất cả (<span class="review-tab-count">0</span>)
           </button>
-          <button class="review-tab" type="button" data-review-filter="photo" aria-pressed="false">
-            Có ảnh chụp (<span class="review-tab-count">0</span>)
-          </button>
           <button class="review-tab" type="button" data-review-filter="taste" aria-pressed="false">
             Khen kem ngon béo nhẹ (<span class="review-tab-count">0</span>)
           </button>
@@ -254,7 +203,7 @@
         </div>
 
         <div class="review-list">
-          <article class="review-card" data-review-tags="photo taste delivery design">
+          <article class="review-card" data-review-tags="taste delivery design">
             <div class="review-author">
               <div class="avatar avatar-pink">MN</div>
               <div>
@@ -274,13 +223,9 @@
               bánh mềm và rất đáng tiền. Mình rất thích cách shop đóng gói cẩn thận, quà
               tặng đẹp và đúng hẹn. Hộp bánh đẹp, gói rất cẩn thận.
             </p>
-            <div class="review-photos">
-              <img src="https://images.unsplash.com/photo-1559620192-032c4bc4674e?auto=format&fit=crop&w=400&q=80" alt="review 1" />
-              <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=400&q=80" alt="review 2" />
-            </div>
           </article>
 
-          <article class="review-card" data-review-tags="photo taste design">
+          <article class="review-card" data-review-tags="taste design">
             <div class="review-author">
               <div class="avatar avatar-gold">TL</div>
               <div>
@@ -300,9 +245,6 @@
               cream mềm, không quá ngọt, màu sắc bắt mắt và bánh rất tươi, đúng như mô
               tả. Hộp đựng cũng rất chắc chắn và dễ mang đi.
             </p>
-            <div class="review-photos">
-              <img src="https://images.unsplash.com/photo-1486427944299-d1955d23e34d?auto=format&fit=crop&w=400&q=80" alt="review 3" />
-            </div>
           </article>
         </div>
 
@@ -371,6 +313,102 @@
             <div class="recommendation-copy">
               <span class="recommendation-label">Sắc hồng ngọt ngào</span>
               <h3>Bánh hồng</h3>
+            </div>
+          </article>
+
+          <article class="recommendation-card">
+            <img
+              src="assets/img/iu/11.jpg"
+              alt="Bánh Bento Hộp Quà Pastel trang trí nơ trắng"
+              loading="lazy"
+            />
+            <div class="recommendation-copy">
+              <span class="recommendation-label">Món quà ngọt ngào</span>
+              <h3>Bento Hộp Quà Pastel</h3>
+            </div>
+          </article>
+
+          <article class="recommendation-card">
+            <img
+              src="assets/img/iu/13.jpg"
+              alt="Bánh kem thỏ đôi đáng yêu"
+              loading="lazy"
+            />
+            <div class="recommendation-copy">
+              <span class="recommendation-label">Dành cho tín đồ dễ thương</span>
+              <h3>Bánh Thỏ Bunny Đôi</h3>
+            </div>
+          </article>
+
+          <article class="recommendation-card">
+            <img
+              src="assets/img/iu/15.jpg"
+              alt="Bánh kem sinh nhật trang trí hình vẽ vui nhộn"
+              loading="lazy"
+            />
+            <div class="recommendation-copy">
+              <span class="recommendation-label">Rộn ràng ngày sinh nhật</span>
+              <h3>Bánh Sinh Nhật Vui Nhộn</h3>
+            </div>
+          </article>
+
+          <article class="recommendation-card">
+            <img
+              src="assets/img/iu/16.jpg"
+              alt="Bánh kem xoài việt quất trang trí hoa kem"
+              loading="lazy"
+            />
+            <div class="recommendation-copy">
+              <span class="recommendation-label">Chua ngọt tươi mát</span>
+              <h3>Mango Blueberry</h3>
+            </div>
+          </article>
+
+          <article class="recommendation-card">
+            <img
+              src="assets/img/iu/17.jpg"
+              alt="Bánh kem vị xoài trang trí vịt con"
+              loading="lazy"
+            />
+            <div class="recommendation-copy">
+              <span class="recommendation-label">Tạo hình đáng yêu</span>
+              <h3>Bánh Vịt Con Xoài</h3>
+            </div>
+          </article>
+
+          <article class="recommendation-card">
+            <img
+              src="assets/img/iu/18.jpg"
+              alt="Bánh kem tím trang trí gương mặt ngộ nghĩnh"
+              loading="lazy"
+            />
+            <div class="recommendation-copy">
+              <span class="recommendation-label">Cá tính và nổi bật</span>
+              <h3>Bánh Gương Mặt Tím</h3>
+            </div>
+          </article>
+
+          <article class="recommendation-card">
+            <img
+              src="assets/img/iu/19.jpg"
+              alt="Bánh kem hồng viết lời chúc và trang trí nơ"
+              loading="lazy"
+            />
+            <div class="recommendation-copy">
+              <span class="recommendation-label">Gửi lời chúc yêu thương</span>
+              <h3>Bánh Lời Chúc Nơ Hồng</h3>
+            </div>
+          </article>
+
+          <article class="recommendation-card">
+            <img
+              src="assets/img/iu/20.jpg"
+              alt="Bánh kem việt quất phủ kem tươi"
+              loading="lazy"
+            />
+            <div class="recommendation-copy">
+              <span class="recommendation-label">Béo nhẹ, thơm vị quả mọng</span>
+              <h3>Bánh Kem Việt Quất</h3>
             </div>
           </article>
         </div>
