@@ -9,14 +9,12 @@
   <script src="https://kit.fontawesome.com/30260f1add.js" crossorigin="anonymous"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/checkout.css">
 </head>
 
 
 <body>
-  <!-- Bóng bay trang trí ngẫu nhiên -->
-  <div id="floatingBalloons"></div>
   <div id="header-placeholder">
   <header class="header">
     <div class="container">
@@ -103,9 +101,15 @@
             </label>
 
 
-            <label class="required-field">Thời gian nhận bánh<em>*</em>
-              <input id="receiveTime" type="datetime-local">
-            </label>
+            <div class="receive-datetime">
+              <label class="required-field">Ngày nhận bánh<em>*</em>
+                <input id="receiveDate" type="date" lang="vi">
+              </label>
+              <label class="required-field">Giờ nhận bánh<em>*</em>
+                <input id="receiveHour" type="time" lang="vi">
+              </label>
+            </div>
+            <input id="receiveTime" type="hidden">
 
 
             <label class="full">Ghi chú đơn hàng
@@ -121,7 +125,6 @@
             <span class="num">03</span>
             <div>
               <h2>Hình thức nhận hàng</h2>
-              <p>Chọn cách bạn muốn nhận bánh.</p>
             </div>
           </div>
 
@@ -152,7 +155,6 @@
 
           <div id="deliveryPanel" class="sub-panel">
             <div class="panel-heading">
-              <span>♧</span>
               <div>
                 <strong>Địa chỉ giao bánh</strong>
                 <small>Phí giao hàng được tính theo khu vực.</small>
@@ -234,7 +236,6 @@
             <span class="num">04</span>
             <div>
               <h2>Phương thức thanh toán</h2>
-              <p>Chọn phương thức thanh toán phù hợp.</p>
             </div>
           </div>
 
@@ -246,7 +247,6 @@
               <span class="pay-icon" aria-hidden="true"><i class="fa-solid fa-building-columns"></i></span>
               <span>
                 <strong>Chuyển khoản ngân hàng / Ví điện tử</strong>
-                <small>Quét QR hoặc chuyển khoản nhanh</small>
               </span>
               <span class="arrow">⌄</span>
             </label>
@@ -275,7 +275,6 @@
               <span class="pay-icon" aria-hidden="true"><i class="fa-solid fa-money-bill-wave"></i></span>
               <span>
                 <strong>Trả tiền mặt khi nhận hàng</strong>
-                <small>Thanh toán trực tiếp khi nhận bánh</small>
               </span>
             </label>
           </div>
@@ -289,7 +288,6 @@
           <div>
             <h2>Đơn hàng của bạn</h2>
           </div>
-          <b>♡</b>
         </div>
 
 
@@ -297,13 +295,12 @@
 
 
         <div class="voucher-title">
-          <span class="voucher-title-icon" aria-hidden="true"><i class="fa-solid fa-ticket"></i></span>
           <strong>Mã giảm giá</strong>
           <button type="button" id="voucherSelect" aria-haspopup="dialog" aria-controls="voucherModal">Chọn mã</button>
         </div>
 
 
-        <div class="voucher-card active" id="voucherCard">
+        <div class="voucher-card active" id="voucherCard" hidden>
           <img id="voucherImage" class="voucher-image" alt="" hidden>
           <div class="voucher-copy">
             <strong id="voucherName">Chọn ưu đãi của bạn</strong>
@@ -311,7 +308,7 @@
         </div>
 
 
-        <div class="voucher-selected">
+        <div class="voucher-selected" id="voucherStatus" hidden>
           <span id="voucherSelectionText">Chưa chọn mã ưu đãi</span>
           <b id="selectedVoucherCode"></b>
           <button type="button" id="removeVoucher">Bỏ chọn</button>
@@ -357,7 +354,6 @@
       <div class="voucher-modal-heading">
         <img class="voucher-modal-logo" src="assets/img/logo.png" alt="Love Cake">
         <div>
-          <p class="voucher-modal-eyebrow">ƯU ĐÃI LOVE CAKE</p>
           <h2 id="voucherModalTitle">Chọn mã giảm giá</h2>
           <p class="voucher-modal-intro">Chọn một mã phù hợp với đơn hàng của bạn.</p>
         </div>
@@ -428,87 +424,61 @@
   </div>
 
 
-  <!-- SUCCESS -->
-  <div id="successScreen" class="success-screen">
-    <div id="successBalloons"></div>
-    <div class="success-content">
-      <img class="success-logo" src="assets/img/logo.png" alt="Love Cake">
-      <p>LOVE CAKE ♡</p>
-      <h2 id="successTitle">ĐẶT HÀNG<br>THÀNH CÔNG!</h2>
-      <span>Cảm ơn bạn đã lựa chọn chúng mình ✦</span>
-    </div>
-  </div>
-
-
   <!-- BILL -->
   <div id="invoiceModal" class="invoice-modal">
     <div class="invoice">
       <button class="close" id="closeInvoice">×</button>
 
 
-      <div class="invoice-decor">🍩　🍪　🧁</div>
-
-
       <div class="invoice-head">
         <div class="invoice-brand">
           <img class="invoice-logo" src="assets/img/logo.png" alt="Love Cake">
-          <small>BAKERY & CAKE STORE</small>
         </div>
-        <h2>Invoice</h2>
+        <h2>HÓA ĐƠN LOVE CAKE</h2>
       </div>
 
-
-      <p class="invoice-slogan">Sweet treats, happy moments ♡</p>
-
-
       <div class="invoice-meta">
-        <span>Invoice No: <b id="invoiceCode"></b></span>
-        <span>Invoice Date: <b id="invoiceDate"></b></span>
+        <span>Mã đơn: <b id="invoiceCode"></b></span>
+        <span>Ngày đặt: <b id="invoiceDate"></b></span>
       </div>
 
 
       <div class="customer-info">
-        <p><b>Customer:</b> <span id="billName"></span></p>
-        <p><b>Phone:</b> <span id="billPhone"></span></p>
-        <p><b>Receive:</b> <span id="billReceive"></span></p>
-        <p><b>Address:</b> <span id="billAddress"></span></p>
+        <p><b>Khách hàng:</b> <span id="billName"></span></p>
+        <p><b>Điện thoại:</b> <span id="billPhone"></span></p>
+        <p><b>Thời gian nhận:</b> <span id="billReceive"></span></p>
+        <p><b>Địa chỉ:</b> <span id="billAddress"></span></p>
       </div>
 
 
       <div class="bill-table">
         <div class="bill-row head">
-          <span>Product</span>
-          <span>Qty</span>
-          <span>Price</span>
+          <span>Sản phẩm</span>
+          <span>SL</span>
+          <span>Thành tiền</span>
         </div>
         <div id="billItems"></div>
       </div>
 
 
       <div class="bill-total">
-        <div><span>Subtotal</span><b id="billSubtotal"></b></div>
-        <div><span>Delivery</span><b id="billShipping"></b></div>
-        <div><span>Discount</span><b id="billDiscount"></b></div>
-        <div class="final"><span id="billDueLabel">AMOUNT DUE</span><strong id="billTotal"></strong></div>
+        <div><span>Tạm tính</span><b id="billSubtotal"></b></div>
+        <div><span>Phí giao hàng</span><b id="billShipping"></b></div>
+        <div><span>Giảm giá</span><b id="billDiscount"></b></div>
+        <div class="final"><span id="billDueLabel">Tổng cộng</span><strong id="billTotal"></strong></div>
       </div>
 
 
       <div class="bill-payment">
-        <b>Payment:</b> <span id="billPayment"></span><br>
-        <b>Status:</b> <span id="billPaymentStatus"></span><br>
-        <b>Recipient:</b> Nguyen Xuan Duc Duong
-      </div>
-
-
-      <div class="bill-thanks">
-        <strong>Thanks for your sweet order ♡</strong>
-        <span>LOVE CAKE · base in Ha Noi</span>
+        <b>Thanh toán:</b> <span id="billPayment"></span><br>
+        <b>Trạng thái:</b> <span id="billPaymentStatus"></span><br>
+        <b>Người nhận:</b> Nguyen Xuan Duc Duong
       </div>
 
 
       <div class="bill-actions">
         <button id="printBill">Lưu hóa đơn PDF</button>
-        <button id="continueShopping">♡ Tiếp tục mua hàng</button>
+        <button id="continueShopping">Tiếp tục mua hàng</button>
       </div>
     </div>
   </div>
