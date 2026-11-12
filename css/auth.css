@@ -22,29 +22,49 @@ a {
   display: grid;
   min-height: 100vh;
   place-items: center;
-  padding: 48px 24px 24px;
+  padding: 24px;
   background:
-    radial-gradient(ellipse at 12% 18%, var(--color-brand-border-soft), transparent 29%),
-    radial-gradient(ellipse at 90% 82%, var(--color-brand-border), transparent 30%),
+    radial-gradient(
+      ellipse at 12% 18%,
+      var(--color-brand-border-soft),
+      transparent 29%
+    ),
+    radial-gradient(
+      ellipse at 90% 82%,
+      var(--color-brand-border),
+      transparent 30%
+    ),
     var(--color-brand-soft);
 }
 
 .back-link {
   position: absolute;
-  top: 28px;
-  left: max(32px, calc((100vw - 1200px) / 2));
-  display: inline-flex;
+  top: 14px;
+  left: 14px;
+  display: grid;
+  width: 40px;
+  height: 40px;
   align-items: center;
-  gap: 9px;
+  justify-items: center;
+  border-radius: 50%;
+  background: var(--color-brand-soft);
   color: var(--color-text-muted);
-  transition: color 0.2s ease;
+  font-size: 30px;
+  line-height: 1;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
 }
 
 .back-link:hover {
-  color: var(--color-brand-hover);
+  transform: rotate(90deg);
+  background: var(--color-brand);
+  color: var(--color-text-on-brand);
 }
 
 .auth-card {
+  position: relative;
   display: grid;
   width: min(100%, 1020px);
   min-height: 660px;
@@ -62,25 +82,15 @@ a {
   padding: 43px 32px 32px;
 }
 
-.brand {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-weight: 600;
-  color: var(--color-ink);
-}
-
 .brand img {
-  width: 43px;
-  height: 43px;
-  object-fit: contain;
+  margin: 0 auto;
+  width: 150px;
+  height: 72px;
+  display: block;
+  object-fit: cover;
+  object-position: center;
+  filter: drop-shadow(3px 3px 3px var(--color-shadow-medium));
 }
-
-.brand strong {
-  color: var(--color-brand);
-  font-weight: 700;
-}
-
 .auth-heading {
   margin-top: 32px;
 }
@@ -287,7 +297,11 @@ a {
   overflow: hidden;
   padding: 50px;
   background:
-    linear-gradient(180deg, var(--color-shadow-light) 8%, var(--color-shadow-heavy) 100%),
+    linear-gradient(
+      180deg,
+      var(--color-shadow-light) 8%,
+      var(--color-shadow-heavy) 100%
+    ),
     url('../assets/img/login.png') center / cover no-repeat,
     var(--color-brand-hover);
   color: var(--color-text-on-brand);
@@ -315,6 +329,7 @@ a {
 }
 
 .welcome-panel .eyebrow {
+  text-shadow: 1px 1px 3px black;
   color: var(--color-brand-border);
   font-size: 11px;
   white-space: nowrap;
@@ -330,12 +345,13 @@ a {
 .welcome-content > p:not(.eyebrow) {
   max-width: 330px;
   margin: 0;
-  color: color-mix(in srgb, var(--color-text-on-brand) 83%, transparent);
+  color: var(--color-text-on-brand);
   line-height: 1.8;
   font-weight: 400;
 }
 
 .welcome-caption {
+  text-shadow: 1px 1px 3px var(--color-brand-light);
   display: block;
   margin-top: 28px;
   color: var(--color-brand-border);
@@ -350,15 +366,6 @@ a {
 }
 
 @media (max-width: 760px) {
-  .auth-page {
-    padding: 64px 18px 20px;
-  }
-
-  .back-link {
-    top: 23px;
-    left: 20px;
-  }
-
   .auth-card {
     width: min(100%, 500px);
     min-height: auto;

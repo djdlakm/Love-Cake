@@ -108,11 +108,15 @@ function loadComponents() {
           </ul>
         </nav>
 
-        <!-- Giỏ hàng (Phải) 🛒 -->
-        <div class="cart">
+        <!-- Tài khoản và giỏ hàng (Phải) -->
+        <div class="header-actions">
+            <a href="${BASE_URL}login.html" class="account-link">
+              <i class="fas fa-user" aria-hidden="true"></i>
+              <span>Đăng nhập / Đăng ký</span>
+            </a>
             <a href="${BASE_URL}cart.html" class="cart-icon">
-                <i class="fas fa-shopping-cart"></i>
-                <span class="cart-badge">0</span>
+              <i class="fas fa-shopping-cart" aria-hidden="true"></i>
+              <span class="cart-badge">0</span>
             </a>
         </div>
       </div>

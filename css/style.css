@@ -135,6 +135,27 @@ ul {
 }
 
 /* Giỏ hàng (Cart Icon & Badge) */
+.header-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 20px;
+}
+
+.account-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--color-text);
+  font-size: 14px;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.account-link:hover {
+  color: var(--color-brand);
+}
+
 .cart-icon {
   position: relative;
   display: inline-flex;
@@ -448,10 +469,8 @@ ul {
     height: 63px;
   }
 
-  .header .cart {
-    width: 40px;
-    display: flex;
-    justify-content: flex-end;
+  .header-actions {
+    gap: 14px;
   }
 
   /* Menu trượt Off-Canvas */
