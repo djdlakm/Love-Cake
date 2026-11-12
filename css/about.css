@@ -10,6 +10,7 @@
 .about-hero {
   padding: 24px 24px 46px;
   background: var(--color-brand-soft);
+  border-radius: 0 0 28px 28px;
 }
 
 .about-hero-inner {

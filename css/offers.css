@@ -3,6 +3,7 @@
   padding: 54px 20px 42px;
   background: var(--color-brand-soft);
   text-align: center;
+  border-radius: 0 0 28px 28px;
 }
 
 .offers-eyebrow {
