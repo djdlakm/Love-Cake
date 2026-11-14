@@ -35,6 +35,10 @@
   box-sizing: border-box;
 }
 
+body {
+  margin: 0;
+}
+
 a {
   text-decoration: none;
 }
@@ -135,6 +139,27 @@ ul {
 }
 
 /* Giỏ hàng (Cart Icon & Badge) */
+.header-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 20px;
+}
+
+.account-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--color-text);
+  font-size: 14px;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.account-link:hover {
+  color: var(--color-brand);
+}
+
 .cart-icon {
   position: relative;
   display: inline-flex;
@@ -203,10 +228,12 @@ ul {
   width: 100%;
   justify-content: center;
   padding-bottom: 0px;
+  
 }
 
 .footer .footer-about {
-  max-width: 290px;
+  width: 100%;
+  max-width: 100%;
   margin: 18px 0 22px;
   color: var(--color-text-subtle);
   font-size: 14px;
@@ -323,7 +350,7 @@ ul {
   display: block;
   object-fit: cover;
   object-position: center;
-  margin: 0 auto 24px 40px;
+  margin: 0 auto 24px;
 }
 
 .footer h3 {
@@ -421,7 +448,8 @@ ul {
    ========================================== */
 @media screen and (max-width: 1024px) {
   .header .container {
-    padding: 0 15px;
+    position: relative;
+    padding: 15px 15px;
   }
 
   /* Nút 3 gạch Mở Menu */
@@ -443,15 +471,33 @@ ul {
     flex: 1;
   }
 
+  .header .logo-wrapper {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+
+  }
+
   .header .logo {
     width: 110px;
     height: 63px;
   }
 
-  .header .cart {
-    width: 40px;
-    display: flex;
-    justify-content: flex-end;
+  .header-actions {
+    gap: 14px;
+  }
+
+  .footer .footer-brand .logo {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .account-link span {
+    display: none;
+  }
+
+  .account-link {
+    font-size: 20px;
   }
 
   /* Menu trượt Off-Canvas */
@@ -574,7 +620,6 @@ ul {
     margin: 0 auto 32px;
     gap: 32px;
   }
-
   #scrollToTopBtn {
     width: 40px;
     height: 40px;
@@ -583,3 +628,5 @@ ul {
     font-size: 16px;
   }
 }
+
+
