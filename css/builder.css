@@ -1,0 +1,1257 @@
+/* ==========================================================================
+   LOVE CAKE STUDIO - CAKE DESIGNER MODULE
+   Toàn bộ CSS được đặt trong phạm vi .designer hoặc có tiền tố .designer-...
+   Tuyệt đối KHÔNG viết style toàn cục cho html, body, header, footer, a, ul.
+   ========================================================================== */
+
+/* ----------------- 1. Biến CSS Trong Phạm Vi .designer ----------------- */
+.designer {
+  --primary: #D94A73;
+  --primary-hover: #B8325A;
+  --primary-soft: #FFF2F6;
+  --primary-light: #FCE7F3;
+  --beige: #F5E6D3;
+  --beige-light: #FDF6EE;
+  --text: #2B2D42;
+  --text-muted: #6B7280;
+  --white: #FFFFFF;
+  --font: 'Montserrat', sans-serif;
+  --border-card: 2px solid #D94A73;
+  --border-soft: 1.5px solid #F0DBCF;
+  --shadow-soft: 0 12px 32px rgba(217, 74, 115, 0.12);
+  --shadow-sm: 0 4px 14px rgba(217, 74, 115, 0.08);
+  --shadow-hover: 0 8px 24px rgba(217, 74, 115, 0.2);
+  --radius-lg: 20px;
+  --radius-md: 14px;
+  --radius-sm: 10px;
+  --radius-pill: 999px;
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  font-family: var(--font);
+  color: var(--text);
+  max-width: 1220px;
+  margin: 0 auto;
+  padding: 30px 20px 60px;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.designer *,
+.designer *::before,
+.designer *::after {
+  box-sizing: border-box;
+  font-family: inherit;
+}
+
+/* ----------------- 2. Phần Đầu Trang Nội Dung (Hero) ----------------- */
+.designer-hero {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.designer-hero-sub {
+  display: inline-block;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--primary);
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  margin-bottom: 6px;
+}
+
+.designer-hero-title {
+  margin: 0 0 10px;
+  font-size: 32px;
+  font-weight: 400;
+  color: var(--text);
+  line-height: 1.25;
+  letter-spacing: -0.5px;
+}
+
+.designer-brand-accent {
+  color: var(--primary);
+  font-weight: 800;
+}
+
+.designer-hero-desc {
+  margin: 0 auto;
+  max-width: 600px;
+  font-size: 14.5px;
+  color: var(--text-muted);
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+/* ----------------- 3. Thanh Tiến Trình (Stepper 6 Bước) ----------------- */
+.designer-stepper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin: 0 auto 36px;
+  max-width: 940px;
+  padding: 12px 18px;
+  background-color: var(--beige-light);
+  border: 1px solid var(--beige);
+  border-radius: var(--radius-pill);
+  box-shadow: var(--shadow-sm);
+}
+
+.designer-step-item {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.designer-step-circle {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  border: 2px solid #e5d2c4;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12.5px;
+  font-weight: 700;
+  transition: var(--transition);
+}
+
+.designer-step-label {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--text-muted);
+  transition: var(--transition);
+  white-space: nowrap;
+}
+
+.designer-step-item.active .designer-step-circle {
+  background-color: var(--primary);
+  border-color: var(--primary);
+  color: var(--white);
+  box-shadow: 0 3px 10px rgba(217, 74, 115, 0.35);
+}
+
+.designer-step-item.active .designer-step-label {
+  color: var(--primary);
+  font-weight: 700;
+}
+
+.designer-step-item.completed .designer-step-circle {
+  background-color: var(--primary-soft);
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.designer-step-line {
+  flex: 1;
+  max-width: 32px;
+  height: 2px;
+  background-color: #ebd7c9;
+  transition: var(--transition);
+}
+
+.designer-step-line.active {
+  background-color: var(--primary);
+}
+
+/* ----------------- 4. Bố Cục Chính (Căn Giữa Khi Tắt Model Bánh) ----------------- */
+.designer-workspace {
+  display: block;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+/* ----------------- 5. Cột Trái: Bảng Điều Khiển (Panel) ----------------- */
+.designer-panel {
+  background-color: var(--beige-light);
+  border: var(--border-card);
+  border-radius: var(--radius-lg);
+  padding: 26px 24px 22px;
+  box-shadow: var(--shadow-soft);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Cảnh báo khi người dùng chưa chọn */
+.designer-alert-msg {
+  display: none;
+  align-items: center;
+  gap: 8px;
+  background-color: var(--primary-soft);
+  border: 1px solid var(--primary);
+  color: var(--primary);
+  padding: 8px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 12.5px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  animation: designer-fadeIn 0.25s ease;
+}
+
+.designer-alert-msg.visible {
+  display: flex;
+}
+
+/* Wizard Step Containers */
+.designer-wizard-step {
+  display: none;
+  animation: designer-slideUp 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.designer-wizard-step.active {
+  display: block;
+}
+
+.designer-step-heading {
+  margin-bottom: 18px;
+}
+
+.designer-step-badge {
+  display: inline-block;
+  background-color: var(--primary);
+  color: var(--white);
+  font-size: 10.5px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+}
+
+.designer-step-title {
+  margin: 0 0 4px;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.2px;
+}
+
+.designer-step-hint {
+  margin: 0;
+  font-size: 12.5px;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+/* ----------------- 6. Card & Radio Tuỳ Biến ----------------- */
+/* Lưới 2 cột cho Size bánh (Bước 1) */
+.designer-options-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+/* Danh sách 1 cột cho Cốt bánh, Nhân, Kem phủ (Bước 2, 3, 4) */
+.designer-options-list {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  margin-bottom: 12px;
+}
+
+/* Thẻ lựa chọn chung */
+.designer-option-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  background-color: var(--white);
+  border: 1.5px solid #ebd7c9;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: var(--transition);
+  user-select: none;
+}
+
+.designer-option-card:hover {
+  border-color: var(--primary);
+  background-color: #fff9fb;
+  box-shadow: var(--shadow-sm);
+  transform: translateY(-1px);
+}
+
+.designer-option-card input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Radio tròn tuỳ biến: viền #D94A73, khi chọn tô đầy #D94A73 */
+.designer-custom-radio {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid var(--primary);
+  background-color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: var(--transition);
+}
+
+.designer-custom-radio::after {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--primary);
+  opacity: 0;
+  transform: scale(0.4);
+  transition: var(--transition);
+}
+
+.designer-option-card:has(input[type="radio"]:checked) {
+  border-color: var(--primary);
+  background-color: var(--primary-soft);
+  box-shadow: 0 4px 14px rgba(217, 74, 115, 0.16);
+}
+
+.designer-option-card:has(input[type="radio"]:checked) .designer-custom-radio {
+  background-color: var(--white);
+  border-color: var(--primary);
+}
+
+.designer-option-card:has(input[type="radio"]:checked) .designer-custom-radio::after {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Chấm màu biểu trưng vị bánh */
+.designer-flavor-swatch {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.18);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.designer-option-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.designer-option-name-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+}
+
+.designer-option-name {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.designer-option-price {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.designer-option-desc {
+  font-size: 11.5px;
+  color: var(--text-muted);
+  margin-top: 2px;
+  line-height: 1.35;
+}
+
+/* ----------------- 7. Bước 5: Upload Ảnh & Lời Chúc ----------------- */
+.designer-field-group {
+  margin-bottom: 18px;
+}
+
+.designer-field-label {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+/* Radio chọn số lượng ảnh 1 / 4 */
+.designer-photo-count-radios {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.designer-count-radio {
+  position: relative;
+  cursor: pointer;
+}
+
+.designer-count-radio input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.designer-count-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 10px 12px;
+  background-color: var(--white);
+  border: 1.5px solid #ebd7c9;
+  border-radius: var(--radius-md);
+  text-align: center;
+  transition: var(--transition);
+}
+
+.designer-count-box i {
+  font-size: 18px;
+  color: var(--primary);
+}
+
+.designer-count-box strong {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.designer-count-box small {
+  font-size: 10.5px;
+  color: var(--text-muted);
+}
+
+.designer-count-radio:hover .designer-count-box {
+  border-color: var(--primary);
+  background-color: #fff9fb;
+}
+
+.designer-count-radio:has(input:checked) .designer-count-box {
+  border-color: var(--primary);
+  background-color: var(--primary-soft);
+  box-shadow: 0 4px 12px rgba(217, 74, 115, 0.16);
+}
+
+/* Dropzone Kéo-Thả */
+.designer-dropzone {
+  position: relative;
+  background-color: var(--white);
+  border: 2px dashed var(--primary);
+  border-radius: var(--radius-md);
+  padding: 20px 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: var(--transition);
+  margin-bottom: 12px;
+}
+
+.designer-dropzone.dragover {
+  background-color: var(--primary-soft);
+  transform: scale(1.01);
+}
+
+.designer-file-input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.designer-drop-icon-wrap {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background-color: var(--primary-soft);
+  color: var(--primary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  margin-bottom: 6px;
+}
+
+.designer-drop-text {
+  margin: 0 0 4px;
+  font-size: 13px;
+  color: var(--text);
+  font-weight: 500;
+}
+
+.designer-upload-btn-text {
+  color: var(--primary);
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+.designer-drop-hint {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+/* Lưới Thumbnail Ảnh Upload (Viền nét đứt #D94A73, Nút XOÁ #D94A73 theo Section 4 Step 5) */
+.designer-thumbs-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+.designer-thumb-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.designer-thumb-box {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background-color: var(--white);
+  border: 1.5px dashed var(--primary);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.designer-thumb-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.designer-thumb-empty-label {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.designer-btn-del-thumb {
+  width: 100%;
+  padding: 3px 0;
+  background-color: var(--primary);
+  color: var(--white);
+  border: none;
+  border-radius: 4px;
+  font-size: 10.5px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition);
+  line-height: 1.2;
+}
+
+.designer-btn-del-thumb:hover {
+  background-color: var(--primary-hover);
+}
+
+/* Ô nhập văn bản lời chúc */
+.designer-input-wrapper {
+  position: relative;
+}
+
+.designer-text-input {
+  width: 100%;
+  padding: 11px 14px;
+  background-color: var(--white);
+  border: 1.5px solid #ebd7c9;
+  border-radius: var(--radius-md);
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--text);
+  outline: none;
+  transition: var(--transition);
+}
+
+.designer-text-input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(217, 74, 115, 0.15);
+}
+
+.designer-input-hint {
+  display: block;
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 4px;
+  line-height: 1.35;
+}
+
+/* Ô nhập textarea ghi chú cho tiệm bánh (Bước 5) */
+.designer-textarea-wrapper {
+  position: relative;
+}
+
+.designer-textarea {
+  width: 100%;
+  padding: 12px 14px;
+  background-color: var(--white);
+  border: 1.5px solid #ebd7c9;
+  border-radius: var(--radius-md);
+  font-family: var(--font);
+  font-size: 13.5px;
+  color: var(--text);
+  outline: none;
+  resize: vertical;
+  min-height: 90px;
+  transition: var(--transition);
+  line-height: 1.5;
+  box-sizing: border-box;
+}
+
+.designer-textarea:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(217, 74, 115, 0.15);
+}
+
+.designer-char-counter {
+  text-align: right;
+  font-size: 11.5px;
+  color: var(--text-muted);
+  margin-top: 5px;
+}
+
+/* Gợi ý dặn dò nhanh (Quick tags) */
+.designer-quick-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.designer-quick-tag {
+  background-color: var(--white);
+  border: 1.5px solid #ebd7c9;
+  border-radius: var(--radius-pill);
+  padding: 7px 14px;
+  font-size: 12px;
+  font-family: var(--font);
+  font-weight: 600;
+  color: var(--text);
+  cursor: pointer;
+  transition: var(--transition);
+  outline: none;
+}
+
+.designer-quick-tag:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+  background-color: var(--primary-soft);
+  transform: translateY(-1px);
+}
+
+.designer-quick-tag.active {
+  background-color: var(--primary);
+  border-color: var(--primary);
+  color: var(--white);
+  box-shadow: 0 3px 8px rgba(217, 74, 115, 0.25);
+}
+
+/* ----------------- 8. Thẻ Tóm Tắt Đơn Hàng (Sau Bước 5) ----------------- */
+.designer-summary-card {
+  margin-top: 20px;
+  background-color: var(--white);
+  border: 1.5px solid var(--primary);
+  border-radius: var(--radius-md);
+  padding: 16px 18px;
+  box-shadow: var(--shadow-sm);
+}
+
+.designer-summary-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--primary);
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px dashed rgba(217, 74, 115, 0.3);
+}
+
+.designer-summary-title {
+  margin: 0;
+  font-size: 14.5px;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.designer-summary-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.designer-summary-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12.5px;
+  color: #4b5563;
+}
+
+.designer-summary-row strong {
+  font-weight: 600;
+  color: var(--text);
+  text-align: right;
+  max-width: 65%;
+  word-break: break-word;
+}
+
+.designer-summary-divider {
+  height: 1px;
+  background-color: #f1e4dc;
+  margin: 4px 0;
+}
+
+.designer-summary-total-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 2px;
+}
+
+.designer-summary-total-row span {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.designer-total-price {
+  font-size: 19px;
+  font-weight: 800;
+  color: var(--primary);
+}
+
+/* ----------------- 9. Nút Điều Hướng Chân Bảng (Nav Footer) ----------------- */
+.designer-nav-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid #ebd7c9;
+  flex-wrap: wrap;
+}
+
+.designer-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: none;
+  border-radius: var(--radius-pill);
+  font-size: 13.5px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition);
+  padding: 10px 20px;
+}
+
+/* Nút Quay lại ◀ */
+.designer-btn-prev {
+  background-color: #e5e7eb;
+  color: #6b7280;
+}
+
+.designer-btn-prev:not(:disabled):hover {
+  background-color: #d1d5db;
+  color: var(--text);
+}
+
+.designer-btn-prev:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Nút Tiếp theo ▶ & Nút Thêm vào giỏ hàng */
+.designer-btn-next {
+  background-color: var(--primary);
+  color: var(--white);
+  box-shadow: 0 4px 14px rgba(217, 74, 115, 0.3);
+  margin-left: auto;
+}
+
+.designer-btn-next:hover {
+  background-color: var(--primary-hover);
+  box-shadow: 0 6px 18px rgba(217, 74, 115, 0.4);
+  transform: translateY(-1px);
+}
+
+/* Nút Làm lại từ đầu (viền #D94A73, nền trắng theo Section 5) */
+.designer-btn-reset {
+  background-color: var(--white);
+  color: var(--primary);
+  border: 1.5px solid var(--primary);
+  padding: 8px 14px;
+  font-size: 12px;
+}
+
+.designer-btn-reset:hover {
+  background-color: var(--primary-soft);
+  transform: translateY(-1px);
+}
+
+/* ----------------- 10. Cột Phải: Sân Khấu Xem Trước Bánh ----------------- */
+.designer-preview-stage {
+  position: relative;
+  min-height: 520px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-lg);
+  padding: 30px 20px;
+  overflow: hidden;
+}
+
+/* Nền trang trí nhẹ họa tiết trái tim hồng/be theo Section 3 */
+.designer-stage-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #fffbf9;
+  background-image: 
+    radial-gradient(#fce7f3 15%, transparent 16%),
+    radial-gradient(#f5e6d3 15%, transparent 16%);
+  background-size: 40px 40px;
+  background-position: 0 0, 20px 20px;
+  opacity: 0.55;
+  border-radius: var(--radius-lg);
+  pointer-events: none;
+}
+
+.designer-cake-assembly {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+/* Đĩa Sứ Hoa Văn Ren (Lace Doily Plate SVG) */
+.designer-doily-plate {
+  position: absolute;
+  bottom: 35px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 460px;
+  height: 160px;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.designer-doily-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* ----------------- 11. Khối Bánh Sinh Nhật 3D Phẳng ----------------- */
+.designer-cake-3d {
+  position: relative;
+  z-index: 5;
+  width: 320px;
+  margin-bottom: 75px;
+  transition: transform 0.3s ease, filter 0.3s ease;
+  filter: drop-shadow(0 18px 30px rgba(43, 45, 66, 0.16));
+}
+
+/* Hiệu ứng nảy nhẹ (bounce) khi đổi lựa chọn theo Section 6 */
+.designer-cake-3d.designer-bounce {
+  animation: designer-bounceKeyframes 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.designer-cake-body {
+  position: relative;
+  width: 320px;
+}
+
+/* Mặt trên bánh (Top Surface) */
+.designer-cake-top {
+  position: relative;
+  width: 320px;
+  height: 88px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  /* Lớp bóng elip bán trong suốt tạo độ mịn mượt */
+  background-image: radial-gradient(ellipse at 45% 36%, 
+    rgba(255, 255, 255, 0.75) 0%, 
+    rgba(255, 255, 255, 0.25) 55%, 
+    rgba(0, 0, 0, 0.08) 100%
+  );
+  box-shadow: 
+    inset 0 2px 4px rgba(255, 255, 255, 0.9),
+    inset 0 -3px 8px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  margin-bottom: -44px;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease;
+}
+
+/* Vòng bông kem đùn viền SVG */
+.designer-piping-ring-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 320px;
+  height: 88px;
+  pointer-events: none;
+  z-index: 12;
+  overflow: visible;
+}
+
+/* Khu vực ảnh in ăn được trên mặt bánh (Đã tắt và ẩn theo yêu cầu A2) */
+.designer-photo-stage {
+  display: none !important;
+}
+
+.designer-single-photo-box {
+  width: 100%;
+  height: 100%;
+}
+
+.designer-single-photo-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Lưới ảnh 4 góc (2x2) */
+.designer-grid-photo-box {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 2px;
+  padding: 2px;
+}
+
+.designer-grid-photo-box.hidden {
+  display: none;
+}
+
+.designer-grid-slot {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 2px;
+}
+
+.designer-grid-slot img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Thân bánh trước (Front Cylinder) */
+.designer-cake-front {
+  position: relative;
+  width: 320px;
+  height: 155px;
+  border-radius: 0 0 160px 160px / 0 0 44px 44px;
+  background-color: #ffffff;
+  /* Lớp bóng khối trụ 3D */
+  background-image: linear-gradient(90deg, 
+    rgba(0, 0, 0, 0.15) 0%, 
+    rgba(255, 255, 255, 0.4) 25%, 
+    rgba(255, 255, 255, 0.15) 75%, 
+    rgba(0, 0, 0, 0.16) 100%
+  );
+  box-shadow: 
+    0 16px 30px rgba(0, 0, 0, 0.14),
+    inset 0 -10px 18px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-top: none;
+  z-index: 6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: background-color 0.3s ease;
+}
+
+/* Đường vân kem nghệ thuật thể hiện Cốt bánh & Nhân kem theo A4 */
+.designer-flavor-ribbon {
+  position: absolute;
+  left: 0;
+  right: 0;
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0.88;
+  transition: background-color 0.3s ease;
+}
+
+/* Đường vân cốt bánh (nằm ở tầng dưới thân bánh) */
+.designer-sponge-ribbon {
+  bottom: 22px;
+  height: 9px;
+  background-color: #fce7a2;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.12);
+}
+
+/* Đường vân nhân kem (nằm ở khoảng giữa thân bánh) */
+.designer-filling-ribbon {
+  bottom: 50px;
+  height: 6px;
+  background-color: #4f46e5;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+}
+
+/* Dòng chữ nặn kem 3D uốn cong font Montserrat theo A7 */
+.designer-piped-message-wrap {
+  position: absolute;
+  top: 10px;
+  left: 0;
+  right: 0;
+  height: 140px;
+  pointer-events: none;
+  z-index: 15;
+}
+
+.designer-curved-text-svg {
+  width: 320px;
+  height: 140px;
+  overflow: visible;
+}
+
+.designer-curved-svg-text {
+  font-family: var(--font);
+  font-weight: 800;
+  font-size: 22px;
+  letter-spacing: 1.2px;
+  fill: var(--primary);
+  dominant-baseline: central;
+}
+
+.designer-curved-svg-text tspan {
+  stroke-width: 0.8px;
+  stroke: rgba(255, 255, 255, 0.9);
+  paint-order: stroke fill;
+}
+
+/* Bảng chú thích vị cốt & nhân mini (Flavor Legend theo A4) */
+.designer-flavor-legend {
+  position: absolute;
+  bottom: 8px;
+  z-index: 20;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: rgba(255, 255, 255, 0.94);
+  border: 1.5px solid #ebd7c9;
+  border-radius: var(--radius-pill);
+  padding: 6px 14px;
+  box-shadow: var(--shadow-sm);
+  backdrop-filter: blur(4px);
+}
+
+.designer-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.designer-legend-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.15);
+}
+
+.designer-legend-text {
+  font-size: 11.5px;
+  color: var(--text-muted);
+}
+
+.designer-legend-text strong {
+  color: var(--text);
+  font-weight: 700;
+}
+
+.designer-legend-sep {
+  color: #d1d5db;
+  font-size: 12px;
+}
+
+/* ----------------- 12. Toast Thông Báo (Góc Trên Bên Phải A12) ----------------- */
+.designer-toast {
+  position: fixed;
+  top: 30px;
+  right: 30px;
+  z-index: 9999;
+  background-color: var(--white);
+  border: 2px solid var(--primary);
+  border-radius: var(--radius-md);
+  padding: 14px 18px;
+  box-shadow: 0 12px 36px rgba(217, 74, 115, 0.25);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transform: translateX(120%);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
+  max-width: 380px;
+}
+
+.designer-toast.active {
+  transform: translateX(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.designer-toast-icon {
+  font-size: 26px;
+  line-height: 1;
+}
+
+.designer-toast-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.designer-toast-title {
+  margin: 0 0 2px;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.designer-toast-msg {
+  font-size: 12px;
+  color: #4b5563;
+  line-height: 1.35;
+}
+
+.designer-toast-link {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--primary);
+  text-decoration: none;
+  margin-left: 8px;
+  white-space: nowrap;
+}
+
+.designer-toast-link:hover {
+  text-decoration: underline;
+}
+
+/* ----------------- 13. Keyframe Animations ----------------- */
+@keyframes designer-fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes designer-slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes designer-bounceKeyframes {
+  0%, 100% {
+    transform: translateY(0) scale(var(--designer-scale, 1));
+  }
+  50% {
+    transform: translateY(-8px) scale(calc(var(--designer-scale, 1) * 1.025));
+  }
+}
+
+@keyframes designer-shakeKeyframes {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-6px); }
+  40%, 80% { transform: translateX(6px); }
+}
+
+.designer-shake {
+  animation: designer-shakeKeyframes 0.35s ease-in-out;
+}
+
+/* ----------------- 14. Responsive Layout (Dưới 768px: Bánh Trên, Bảng Dưới) ----------------- */
+@media (max-width: 768px) {
+  .designer {
+    padding: 20px 14px 40px;
+  }
+
+  .designer-hero-title {
+    font-size: 25px;
+  }
+
+  .designer-stepper {
+    padding: 10px 14px;
+    gap: 4px;
+    margin-bottom: 24px;
+  }
+
+  .designer-step-label {
+    display: none; /* Ẩn chữ nhãn stepper trên điện thoại để tiết kiệm diện tích */
+  }
+
+  .designer-step-circle {
+    width: 28px;
+    height: 28px;
+    font-size: 12px;
+  }
+
+  .designer-step-line {
+    max-width: 26px;
+  }
+
+  .designer-panel {
+    padding: 20px 16px 18px;
+  }
+
+  .designer-doily-plate {
+    width: 360px;
+    height: 130px;
+    bottom: 25px;
+  }
+
+  .designer-cake-3d {
+    width: 270px;
+    margin-bottom: 60px;
+  }
+
+  .designer-cake-body,
+  .designer-cake-top,
+  .designer-cake-front,
+  .designer-piping-ring-svg,
+  .designer-curved-text-svg {
+    width: 270px;
+  }
+
+  .designer-curved-svg-text {
+    font-size: 19px;
+  }
+
+  .designer-toast {
+    top: 15px;
+    right: 15px;
+    left: 15px;
+    max-width: calc(100% - 30px);
+  }
+}

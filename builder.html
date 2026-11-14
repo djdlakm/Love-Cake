@@ -3,25 +3,399 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tự Thiết Kế Bánh - Love Cake Studio</title>
+    <!-- Google Fonts: Duy nhất 1 font Montserrat -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Font Awesome -->
     <script
       src="https://kit.fontawesome.com/30260f1add.js"
       crossorigin="anonymous"
     ></script>
     <link rel="stylesheet" href="css/style.css" />
-    <title>Love Cake</title>
+    <link rel="stylesheet" href="css/builder.css" />
   </head>
   <body>
-    <!-- Thẻ giữ chỗ cho Header 📌 -->
+    <!-- Thẻ giữ chỗ cho Header chung của Love Cake 📌 -->
     <div id="header-placeholder"></div>
 
-    <main>
+    <!-- KHU VỰC TỰ THIẾT KẾ BÁNH (NẰM GIỮA HEADER & FOOTER) -->
+    <main class="designer" id="cake-designer">
+      <!-- Phần đầu trang nội dung -->
+      <header class="designer-hero">
+        <span class="designer-hero-sub">TỰ THIẾT KẾ</span>
+        <h1 class="designer-hero-title">
+          Làm bánh cùng <span class="designer-brand-accent">Love Cake</span>
+        </h1>
+        <p class="designer-hero-desc">
+          Tự tay phối màu, chọn cốt bánh và gửi gắm thông điệp ngọt ngào dành riêng cho người bạn yêu thương.
+        </p>
+      </header>
 
+      <!-- Thanh tiến trình (Stepper) 6 bước -->
+      <nav class="designer-stepper" aria-label="Các bước thiết kế bánh">
+        <div class="designer-step-item active" data-step="1">
+          <div class="designer-step-circle">1</div>
+          <span class="designer-step-label">Kích thước</span>
+        </div>
+        <div class="designer-step-line"></div>
+        <div class="designer-step-item" data-step="2">
+          <div class="designer-step-circle">2</div>
+          <span class="designer-step-label">Cốt bánh</span>
+        </div>
+        <div class="designer-step-line"></div>
+        <div class="designer-step-item" data-step="3">
+          <div class="designer-step-circle">3</div>
+          <span class="designer-step-label">Nhân kem</span>
+        </div>
+        <div class="designer-step-line"></div>
+        <div class="designer-step-item" data-step="4">
+          <div class="designer-step-circle">4</div>
+          <span class="designer-step-label">Kem phủ</span>
+        </div>
+        <div class="designer-step-line"></div>
+        <div class="designer-step-item" data-step="5">
+          <div class="designer-step-circle">5</div>
+          <span class="designer-step-label">Ghi chú</span>
+        </div>
+        <div class="designer-step-line"></div>
+        <div class="designer-step-item" data-step="6">
+          <div class="designer-step-circle">6</div>
+          <span class="designer-step-label">Lời chúc</span>
+        </div>
+      </nav>
+
+      <!-- Bố cục chính 2 cột (Desktop ~40% / ~60%) -->
+      <div class="designer-workspace">
+        
+        <!-- Cột Trái (~40%): Bảng điều khiển nền be, viền #D94A73 2px, bo góc 20px -->
+        <section class="designer-panel" aria-label="Bảng tùy chỉnh thiết kế bánh">
+          <!-- Cảnh báo lỗi rung khi chưa chọn -->
+          <div class="designer-alert-msg" id="designerAlertMsg" role="alert">
+            <i class="fa-solid fa-circle-exclamation"></i>
+            <span>Vui lòng chọn một tùy chọn trước khi tiếp tục ✿</span>
+          </div>
+
+          <!-- BƯỚC 1: Chọn Kích Thước Bánh -->
+          <div class="designer-wizard-step active" id="designerStep1" data-step-num="1">
+            <div class="designer-step-heading">
+              <span class="designer-step-badge">BƯỚC 1 / 6</span>
+              <h2 class="designer-step-title">Chọn kích thước bánh</h2>
+              <p class="designer-step-hint">Bánh tròn thủ công 1 tầng chuẩn tiệm Love Cake, cốt bánh xốp mềm thơm bơ.</p>
+            </div>
+            <div class="designer-options-grid" id="designerSizeOptions">
+              <!-- Render động từ JS -->
+            </div>
+          </div>
+
+          <!-- BƯỚC 2: Chọn Cốt Bánh -->
+          <div class="designer-wizard-step" id="designerStep2" data-step-num="2">
+            <div class="designer-step-heading">
+              <span class="designer-step-badge">BƯỚC 2 / 6</span>
+              <h2 class="designer-step-title">Chọn vị cốt bánh</h2>
+              <p class="designer-step-hint">Cốt bông lan mềm ẩm, nướng tươi thủ công mỗi sáng tại xưởng bánh.</p>
+            </div>
+            <div class="designer-options-list" id="designerSpongeOptions">
+              <!-- Render động từ JS -->
+            </div>
+          </div>
+
+          <!-- BƯỚC 3: Chọn Nhân Kem -->
+          <div class="designer-wizard-step" id="designerStep3" data-step-num="3">
+            <div class="designer-step-heading">
+              <span class="designer-step-badge">BƯỚC 3 / 6</span>
+              <h2 class="designer-step-title">Chọn nhân kem xen kẽ</h2>
+              <p class="designer-step-hint">Lớp mứt quả tươi nấu thủ công và kem mịn xen kẽ giữa các lớp cốt bánh.</p>
+            </div>
+            <div class="designer-options-list" id="designerFillingOptions">
+              <!-- Render động từ JS -->
+            </div>
+          </div>
+
+          <!-- BƯỚC 4: Chọn Kem Phủ Toàn Thân & Viền Đùn -->
+          <div class="designer-wizard-step" id="designerStep4" data-step-num="4">
+            <div class="designer-step-heading">
+              <span class="designer-step-badge">BƯỚC 4 / 6</span>
+              <h2 class="designer-step-title">Chọn loại kem phủ toàn bánh</h2>
+              <p class="designer-step-hint">Phủ mịn toàn bộ thân bánh kèm các bông kem đùn tròn xinh viền quanh mép mặt bánh.</p>
+            </div>
+            <div class="designer-options-list" id="designerFrostingOptions">
+              <!-- Render động từ JS -->
+            </div>
+          </div>
+
+          <!-- =========================================================================
+               [GHI CHÚ]: TOÀN BỘ CODE CŨ BƯỚC ẢNH IN ĐƯỢC TẮT VÀ LƯU DẠNG GHI CHÚ
+               =========================================================================
+          <div class="designer-wizard-step" id="designerStepPhoto_DISABLED">
+            <div class="designer-step-heading">
+              <span class="designer-step-badge">BƯỚC ẢNH IN (TẠM TẮT)</span>
+              <h2 class="designer-step-title">Chọn ảnh in kỷ niệm</h2>
+            </div>
+            <div class="designer-field-group">
+              <label class="designer-field-label">Số lượng ảnh in ăn được:</label>
+              <div class="designer-photo-count-radios">
+                <input type="radio" name="designer-photo-count-disabled" value="1" checked /> 1 ảnh
+                <input type="radio" name="designer-photo-count-disabled" value="4" /> 4 ảnh
+              </div>
+            </div>
+            <div class="designer-field-group">
+              <input type="file" id="designerPhotoFileInputDisabled" accept="image/*" />
+              <div class="designer-thumbs-grid" id="designerThumbsGridDisabled"></div>
+            </div>
+          </div>
+          ========================================================================= -->
+
+          <!-- BƯỚC 5: Ghi Chú Cho Tiệm Bánh -->
+          <div class="designer-wizard-step" id="designerStep5" data-step-num="5">
+            <div class="designer-step-heading">
+              <span class="designer-step-badge">BƯỚC 5 / 6</span>
+              <h2 class="designer-step-title">Ghi chú cho tiệm bánh</h2>
+            </div>
+
+            <!-- Ô nhập ghi chú đơn hàng (không gợi ý) -->
+            <div class="designer-field-group">
+              <label class="designer-field-label" for="designerNoteInput">✿ Ghi chú:</label>
+              <div class="designer-textarea-wrapper">
+                <textarea
+                  id="designerNoteInput"
+                  class="designer-textarea"
+                  rows="4"
+                  maxlength="200"
+                  placeholder="Nhập ghi chú..."
+                ></textarea>
+              </div>
+              <div class="designer-char-counter">
+                <span id="designerNoteCharCount">0</span>/200 ký tự
+              </div>
+            </div>
+          </div>
+
+          <!-- BƯỚC 6: Lời Chúc & Tóm Tắt Đơn Hàng -->
+          <div class="designer-wizard-step" id="designerStep6" data-step-num="6">
+            <div class="designer-step-heading">
+              <span class="designer-step-badge">BƯỚC 6 / 6</span>
+              <h2 class="designer-step-title">Lời chúc & Tóm tắt đơn hàng</h2>
+            </div>
+
+            <!-- Ô nhập lời chúc trên bánh -->
+            <div class="designer-field-group">
+              <label class="designer-field-label" for="designerMessageInput">✿ Lời chúc:</label>
+              <div class="designer-input-wrapper">
+                <input
+                  type="text"
+                  id="designerMessageInput"
+                  class="designer-text-input"
+                  maxlength="26"
+                  value="Happy Birthday Love"
+                  placeholder="Nhập lời chúc..."
+                />
+              </div>
+    
+            </div>
+
+            <!-- Thẻ Tóm Tắt Đơn Hàng -->
+            <div class="designer-summary-card" id="designerSummaryCard">
+              <div class="designer-summary-header">
+                <i class="fa-solid fa-receipt"></i>
+                <h3 class="designer-summary-title">Tóm tắt</h3>
+              </div>
+              <div class="designer-summary-rows">
+                <div class="designer-summary-row">
+                  <span>Kích thước bánh:</span>
+                  <strong id="designerSumSize">Size Nhỏ (15cm)</strong>
+                </div>
+                <div class="designer-summary-row">
+                  <span>Cốt bánh:</span>
+                  <strong id="designerSumSponge">Vanilla</strong>
+                </div>
+                <div class="designer-summary-row">
+                  <span>Nhân kem:</span>
+                  <strong id="designerSumFilling">Việt quất</strong>
+                </div>
+                <div class="designer-summary-row">
+                  <span>Kem phủ:</span>
+                  <strong id="designerSumFrosting">Kem tươi</strong>
+                </div>
+                <div class="designer-summary-row">
+                  <span>Lời chúc trên bánh:</span>
+                  <strong id="designerSumMessage">Happy Birthday</strong>
+                </div>
+                <div class="designer-summary-row" id="designerSumNoteRow" style="display: none;">
+                  <span>Ghi chú cho tiệm:</span>
+                  <strong id="designerSumNote">—</strong>
+                </div>
+                <div class="designer-summary-divider"></div>
+                <div class="designer-summary-total-row">
+                  <span>Tổng giá tạm tính:</span>
+                  <span class="designer-total-price" id="designerSumTotal">260.000đ</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Thanh điều hướng chân bảng điều khiển -->
+          <footer class="designer-nav-footer">
+            <button type="button" class="designer-btn designer-btn-prev" id="designerBtnPrev" disabled>
+              <span>◀</span> Quay lại
+            </button>
+            <button type="button" class="designer-btn designer-btn-next" id="designerBtnNext">
+              Tiếp theo <span>▶</span>
+            </button>
+            <button type="button" class="designer-btn designer-btn-reset" id="designerBtnReset" title="Đặt lại thiết kế về ban đầu">
+              <i class="fa-solid fa-rotate-left"></i> Làm lại từ đầu
+            </button>
+          </footer>
+        </section>
+
+        <!-- =========================================================================
+             [GHI CHÚ]: TOÀN BỘ PHẦN MODEL BÁNH SVG/CSS ĐÃ ĐƯỢC CHUYỂN THÀNH GHI CHÚ THEO YÊU CẦU
+             (Lưu trữ đầy đủ code sân khấu xem trước, đĩa bánh ren hoa, khối bánh 3D và hoa kem)
+             ========================================================================= -->
+        <!--
+        <section class="designer-preview-stage" aria-label="Khu vực xem trước bánh">
+          [-- Nền hoa văn trái tim hồng/be trang trí nhẹ nhàng --]
+          <div class="designer-stage-bg" aria-hidden="true"></div>
+
+          [-- Cụm bánh & đĩa ren SVG --]
+          <div class="designer-cake-assembly" id="designerCakeAssembly">
+            
+            [-- Đĩa sứ ren hoa văn (Lace Doily Plate) bằng SVG theo A5 --]
+            <div class="designer-doily-plate">
+              <svg class="designer-doily-svg" viewBox="0 0 460 160" width="460" height="160" aria-label="Đĩa bánh ren hoa">
+                <defs>
+                  <filter id="doilyPinkShadow" x="-10%" y="-10%" width="120%" height="130%">
+                    <feDropShadow dx="0" dy="16" stdDeviation="16" flood-color="rgba(217, 74, 115, 0.16)" />
+                    <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="rgba(43, 45, 66, 0.06)" />
+                  </filter>
+                  <linearGradient id="ceramicGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="#ffffff" />
+                    <stop offset="100%" stop-color="#FDF6EE" />
+                  </linearGradient>
+                  [-- Pattern lỗ dập ren nhỏ trang trí viền --]
+                  <pattern id="laceHolePattern" width="16" height="16" patternUnits="userSpaceOnUse">
+                    <circle cx="8" cy="8" r="1.5" fill="#e8d5c4" />
+                  </pattern>
+                </defs>
+
+                [-- Vành ren dập hoa văn dải bèo ren uốn lượn bên ngoài --]
+                <g filter="url(#doilyPinkShadow)">
+                  [-- Đĩa ren lớn ngoài cùng --]
+                  <ellipse cx="230" cy="80" rx="212" ry="70" fill="#FDF6EE" stroke="#EBD7C9" stroke-width="1.5" />
+                  
+                  [-- Dải ren dập lượn sóng viền ngoài (Scalloped Lace Edge) --]
+                  <ellipse cx="230" cy="80" rx="198" ry="65" fill="none" stroke="#D94A73" stroke-width="1" stroke-dasharray="6, 5" opacity="0.45" />
+
+                  [-- Mặt đĩa sứ chính màu be sáng #FDF6EE --]
+                  <ellipse cx="230" cy="80" rx="180" ry="58" fill="url(#ceramicGrad)" stroke="#E5D0C0" stroke-width="1.2" />
+
+                  [-- Vòng chỉ hồng trang nhã bên trong lòng đĩa --]
+                  <ellipse cx="230" cy="80" rx="160" ry="50" fill="none" stroke="#D94A73" stroke-width="0.8" stroke-dasharray="4, 4" opacity="0.3" />
+                </g>
+              </svg>
+            </div>
+
+            [-- Khối bánh sinh nhật 3D phẳng SVG/CSS cập nhật NGAY LẬP TỨC --]
+            <div class="designer-cake-3d" id="designerCake3D">
+              
+              [-- THÂN BÁNH TRỤ 3D (Phủ kem toàn bộ & có 2 đường vân cốt + nhân theo A4) --]
+              <div class="designer-cake-body" id="designerCakeBody">
+                
+                [-- Mặt trên bánh (Top Surface) --]
+                <div class="designer-cake-top" id="designerCakeTop">
+                  
+                  [-- Vòng các bông kem đùn (Piping Dollops) SVG viền quanh mặt bánh theo Section 4 Step 4 & A6 --]
+                  <svg class="designer-piping-ring-svg" viewBox="0 0 320 88" width="320" height="88" id="designerPipingSvg">
+                    <defs>
+                      <filter id="dollopShadow" x="-20%" y="-20%" width="140%" height="140%">
+                        <feDropShadow dx="0" dy="2" stdDeviation="1.5" flood-color="rgba(0,0,0,0.12)" />
+                      </filter>
+                    </defs>
+                    <g id="designerPipingGroup">
+                      [-- Render động qua JS: các bông kem đùn tròn có viền #D94A73 --]
+                    </g>
+                  </svg>
+
+                </div>
+
+                [-- Thân bánh trước (Front Cylinder Body) --]
+                <div class="designer-cake-front" id="designerCakeFront">
+                  
+                  [-- Đường vân kem nghệ thuật thể hiện Cốt bánh theo A4 --]
+                  <div class="designer-flavor-ribbon designer-sponge-ribbon" id="designerSpongeRibbon" title="Màu cốt bánh"></div>
+
+                  [-- Đường vân kem nghệ thuật thể hiện Nhân kem theo A4 --]
+                  <div class="designer-flavor-ribbon designer-filling-ribbon" id="designerFillingRibbon" title="Màu nhân kem"></div>
+
+                  [-- Dòng chữ lời chúc nặn kem uốn cong font Montserrat theo A7 --]
+                  <div class="designer-piped-message-wrap">
+                    <svg class="designer-curved-text-svg" viewBox="0 0 320 140" width="320" height="140">
+                      <defs>
+                        [-- Cung đường cong uốn lượn tự nhiên giữa thân bánh --]
+                        <path id="designerTextCurvePath" d="M 16 75 Q 160 102 304 75" fill="none" />
+                        [-- Bộ lọc nổi kem 3D --]
+                        <filter id="designerPiped3dGlow" x="-10%" y="-10%" width="120%" height="120%">
+                          <feDropShadow dx="0" dy="1.5" stdDeviation="1.2" flood-color="rgba(0,0,0,0.22)" />
+                          <feDropShadow dx="0" dy="3" stdDeviation="2.5" flood-color="rgba(217, 74, 115, 0.18)" />
+                        </filter>
+                      </defs>
+                      <text class="designer-curved-svg-text" filter="url(#designerPiped3dGlow)">
+                        <textPath id="designerCurvedTextPath" href="#designerTextCurvePath" startOffset="50%" text-anchor="middle">
+                          Happy Birthday Love
+                        </textPath>
+                      </text>
+                    </svg>
+                  </div>
+
+                </div>
+
+              </div>
+            </div>
+
+            [-- Bảng chú thích vị Cốt bánh & Nhân kem mini (Flavor Legend theo A4) --]
+            <div class="designer-flavor-legend" id="designerFlavorLegend">
+              <div class="designer-legend-item">
+                <span class="designer-legend-dot" id="legendSpongeDot" style="background-color: #fce7a2;"></span>
+                <span class="designer-legend-text">Cốt: <strong id="legendSpongeName">Vanilla</strong></span>
+              </div>
+              <div class="designer-legend-sep">•</div>
+              <div class="designer-legend-item">
+                <span class="designer-legend-dot" id="legendFillingDot" style="background-color: #4f46e5;"></span>
+                <span class="designer-legend-text">Nhân: <strong id="legendFillingName">Việt quất</strong></span>
+              </div>
+              <div class="designer-legend-sep">•</div>
+              <div class="designer-legend-item">
+                <span class="designer-legend-dot" id="legendFrostingDot" style="background-color: #ffffff; border: 1px solid #ccc;"></span>
+                <span class="designer-legend-text">Kem: <strong id="legendFrostingName">Kem tươi</strong></span>
+              </div>
+            </div>
+
+          </div>
+        </section>
+        -->
+
+      </div>
+
+      <!-- Toast thông báo thêm vào giỏ hàng trượt từ góc trên bên phải theo A12 -->
+      <div class="designer-toast" id="designerToast" role="alert" aria-live="assertive">
+        <div class="designer-toast-icon">💗</div>
+        <div class="designer-toast-content">
+          <strong class="designer-toast-title">Thành công!</strong>
+          <span class="designer-toast-msg">Đã thêm bánh thiết kế vào giỏ hàng 💗</span>
+        </div>
+        <a href="cart.html" class="designer-toast-link">Xem giỏ hàng ➔</a>
+      </div>
     </main>
-    <!-- Thẻ giữ chỗ cho Footer 📌 -->
+
+    <!-- Thẻ giữ chỗ cho Footer chung của Love Cake 📌 -->
     <div id="footer-placeholder"></div>
 
-  
     <script src="js/header&footer.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/builder.js"></script>
   </body>
 </html>
