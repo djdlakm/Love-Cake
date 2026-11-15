@@ -114,21 +114,7 @@ const OFFER_CATALOG = {
 
 
 let cart = loadCart();
-let voucher = getStoredVoucher();
-
-
-
-
-function getStoredVoucher(){
-  try{
-    const savedCode=localStorage.getItem("selectedOffer");
-    if(!savedCode || !OFFER_CATALOG[savedCode]?.active) return {code:"", active:false};
-    return {code:savedCode, active:true};
-  }catch(error){
-    console.error("Không thể đọc mã ưu đãi đã chọn.",error);
-    return {code:"", active:false};
-  }
-}
+let voucher = {code:"",active:false};
 
 
 
@@ -496,14 +482,6 @@ function showVoucherModal(){
 function applyVoucher(code){
   const offer=OFFER_CATALOG[code];
   if(!offer||!isOfferEligible(offer))return;
-  try{
-    localStorage.setItem("selectedOffer",code);
-  }catch(error){
-    console.error("Không thể lưu mã ưu đãi đã chọn.",error);
-    hideVoucherModal();
-    showCheckoutNotice("Không thể lưu mã ưu đãi. Vui lòng thử lại nhé ♡");
-    return;
-  }
   voucher={code,active:true};
   hideVoucherModal();
   updateTotals();
@@ -597,13 +575,6 @@ $("store").addEventListener("change",e=>{
 $("removeVoucher").addEventListener("click",()=>{
   voucher.active=false;
   voucher.code="";
-  try{
-    localStorage.removeItem("selectedOffer");
-  }catch(error){
-    console.error("Không thể xóa mã ưu đãi đã lưu.",error);
-    showCheckoutNotice("Không thể cập nhật mã ưu đãi. Vui lòng thử lại nhé ♡");
-    return;
-  }
   updateTotals();
 });
 
