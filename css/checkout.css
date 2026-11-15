@@ -85,6 +85,12 @@ body{margin:0}
 .checkout-page textarea{resize:vertical;min-height:58px}
 .checkout-page #note{font-size:14px}
 .checkout-page input:focus,.checkout-page select:focus,.checkout-page textarea:focus{border-color:var(--color-brand-light);box-shadow:0 0 0 3px var(--color-brand-focus)}
+.checkout-page input::placeholder,.checkout-page #note::placeholder{color:#757575;opacity:1}
+.checkout-page #receiveDate,.checkout-page #receiveHour{color:#757575}
+.checkout-page #receiveDate.has-value,.checkout-page #receiveHour.has-value{color:#18794e}
+.checkout-page select:not(.has-value){color:#757575}
+.checkout-page .has-value{border-color:#38a169;background:#f0fff4;color:#18794e;font-weight:700}
+.checkout-page .has-value:focus{border-color:#38a169;box-shadow:0 0 0 3px rgb(56 161 105 / 25%)}
 
 
 .receive-tabs{display:grid;grid-template-columns:1fr 1fr;gap:9px}
@@ -151,7 +157,7 @@ body{margin:0}
 .voucher-title #voucherSelect:hover{background:var(--soft);border-color:var(--pink)}
 .voucher-title #voucherSelect:focus-visible{outline:3px solid var(--color-brand-focus);outline-offset:2px}
 .voucher-card{
-  position:relative;min-height:92px;padding:10px 14px;border:1px solid #f2d4dc;border-radius:15px;overflow:hidden;
+  position:relative;min-height:68px;padding:8px 12px;border:1px solid #f2d4dc;border-radius:15px;overflow:hidden;
   background:linear-gradient(115deg,#fff1f5 0%,#fff 64%);display:flex;align-items:center;gap:14px;color:var(--pink-dark);
   box-shadow:0 6px 18px rgb(104 54 66 / 7%);transition:border-color .2s ease,box-shadow .2s ease
 }
@@ -161,11 +167,13 @@ body{margin:0}
 .voucher-card.is-empty{min-height:72px;justify-content:center;border-style:dashed;border-color:#f0d5dc;background:linear-gradient(110deg,#fff8fa,#fff);box-shadow:none}
 .voucher-card.is-empty:before{width:3px;background:#f5b5c4}
 .voucher-card.is-empty:after{right:-42px;top:-55px;opacity:.55}
-.voucher-image{width:88px;height:68px;flex:none;object-fit:cover;border:2px solid #fff;border-radius:11px;box-shadow:0 4px 12px rgb(104 54 66 / 14%)}
-.voucher-copy{position:relative;z-index:1;min-width:0;display:flex;flex:1;align-items:center}
+.voucher-card-icon{position:relative;z-index:1;display:grid;place-items:center;flex:none;width:42px;height:42px;border:1px solid #f8dce4;border-radius:10px;background:#fff0f4;color:var(--pink);font-size:16px}
+.voucher-card-icon i{transform:rotate(-45deg)}
+.voucher-copy{position:relative;z-index:1;min-width:0;display:flex;flex:1;flex-direction:column;align-items:flex-start;gap:2px}
 .voucher-card strong{color:#713347;font-size:15px;line-height:1.35;font-weight:800}
+.voucher-description{margin:0;color:#75636a;font-size:12px;line-height:1.5}
 .voucher-card.is-empty strong{color:#a07884;font-size:13px;font-weight:700}
-.voucher-selected{position:relative;padding:8px 84px 8px 10px;margin-top:6px;border-radius:6px;background:#eafff0;color:#398653;font-size:12px;font-weight:600}.voucher-selected button{position:absolute;top:0;right:8px;border:0;background:none;color:#df5f7e;font-size:11px;font-weight:700}
+.voucher-selected{display:flex;flex-wrap:wrap;align-items:center;gap:4px 6px;padding:8px 10px;margin-top:6px;border-radius:6px;background:#eafff0;color:#398653;font-size:12px;font-weight:600;line-height:1.4}.voucher-selected span{min-width:0}.voucher-selected b{white-space:nowrap}.voucher-selected button{flex:none;margin-left:auto;padding:2px 0;border:0;background:none;color:#df5f7e;font-size:11px;font-weight:700;line-height:1.4}
 .voucher-modal{position:fixed;inset:0;z-index:1300;display:none;align-items:center;justify-content:center;padding:16px;background:rgb(43 25 32 / 55%);backdrop-filter:blur(7px)}
 .voucher-modal.show{display:flex}
 .voucher-dialog{position:relative;width:min(680px,100%);max-height:min(88vh,780px);overflow:auto;padding:clamp(18px,4vw,30px);border:1px solid #f1d8df;border-radius:24px;background:#fff;box-shadow:0 28px 80px rgb(7 18 36 / 30%)}
@@ -213,10 +221,36 @@ body{margin:0}
 .totals .grand{align-items:center;padding:9px 0 12px}.grand span{font-weight:800;font-size:13px}.grand strong{font-size:24px;color:var(--pink)}
 .place-order{width:100%;border:0;background:var(--pink);color:#fff;border-radius:9px;padding:13px 14px;display:flex;justify-content:center;position:relative;font-weight:800;font-size:15px;box-shadow:0 7px 18px rgba(244,63,94,.23);transition:.2s}.place-order span{font-weight:900}.place-order b{position:absolute;right:14px}.place-order:hover{background:var(--pink2);transform:translateY(-1px)}
 .secure{text-align:center;background:#faf7f7;color:#a49197;border-radius:8px;padding:8px;font-size:8px;margin-top:8px}
-.privacy{font-size:8px;line-height:1.5;color:#a18f94}.privacy a{color:var(--pink)}
+.privacy{font-size:8px;line-height:1.5;color:#a18f94;text-align:center}.privacy a{color:var(--pink)}
 .thank-you{margin:15px -16px -16px;padding:18px;text-align:left;background:#fff1f5;color:var(--pink);font-size:13px;font-weight:600;min-height:96px;display:flex;align-items:center;justify-content:flex-start;gap:16px}
 .thank-you img{flex:0 0 88px;width:88px;height:76px;object-fit:contain}
 .thank-you span{font-weight:600;white-space:nowrap}
+
+
+.footer{position:relative;padding-top:40px;border-top:2px solid var(--color-brand-border);background:var(--color-ink);font-family:"Montserrat",sans-serif}
+.footer .container.footer-content{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));align-items:start;gap:30px;width:min(1200px,calc(100% - 48px));max-width:1200px;margin:0 auto 48px;padding:0}
+.footer .col1,.footer .col2,.footer .col3,.footer .col4{min-width:0}
+.footer .footer-brand .logo-wrapper{display:flex;width:100%;justify-content:center}
+.footer .col1 .logo{display:block;width:160px;height:92px;margin:0 auto;object-fit:cover;object-position:center}
+.footer .footer-about{max-width:290px;margin:18px 0 22px;color:var(--color-text-subtle);font-size:14px;line-height:1.75}
+.footer .footer-social{display:flex;align-items:center;gap:30px}
+.footer .social-btn{display:grid;width:36px;height:36px;place-items:center;border-radius:10px;background:rgb(255 255 255 / 8%);color:var(--color-text-subtle);font-size:14px;transition:background-color .18s ease,color .18s ease}
+.footer .social-btn:hover{color:var(--color-brand-light)}
+.footer h3{height:auto;margin:0 0 20px;color:var(--color-text-on-brand);font-size:18px;font-weight:700;letter-spacing:.6px;text-transform:uppercase}
+.footer ul{margin:0;padding:0;list-style:none}
+.footer .footer-links li{display:block;margin-bottom:14px}
+.footer .footer-links a,.footer .contact-mail{color:var(--color-text-subtle);font-size:14px;transition:color .18s ease,padding-left .18s ease}
+.footer .footer-links a:hover{padding-left:6px;color:var(--color-brand)}
+.footer .footer-contact li,.footer .footer-hours li{display:flex;align-items:center;gap:12px;margin-bottom:18px;color:var(--color-text-subtle);font-size:14px;line-height:1.5}
+.footer .contact-icon{flex:0 0 20px;text-align:center}
+.footer .contact-mail,.footer .hours{color:var(--color-brand-light)}
+.footer .contact-mail:hover{text-decoration:underline}
+.footer .footer-hours li{justify-content:space-between}
+.footer .hours{font-weight:600;white-space:nowrap}
+.footer .bottom{display:flex;justify-content:center;padding:15px 0;border-top:1px solid var(--color-brand-border-overlay)}
+.footer .bottom p{margin:0;color:var(--color-text-subtle);font-size:14px}
+#scrollToTopBtn{position:absolute;top:20px;right:20px;width:45px;height:45px;border:0;border-radius:50%;background:var(--pink);color:var(--color-text-on-brand);display:flex;align-items:center;justify-content:center;font-size:18px;cursor:pointer;box-shadow:0 4px 10px var(--color-shadow-heavy);transition:all .3s ease}
+#scrollToTopBtn:hover{background:var(--pink2);transform:translateY(-5px);box-shadow:0 6px 15px var(--color-shadow-brand)}
 
 
 .checkout-notice{position:fixed;inset:0;z-index:1200;display:none;align-items:center;justify-content:center;padding:20px;background:rgb(43 25 32 / 48%);backdrop-filter:blur(6px)}
@@ -269,6 +303,25 @@ body{margin:0}
 @media(max-width:950px){
   .layout{grid-template-columns:1fr}.summary{position:static}
 }
+@media(max-width:1024px){
+  .header .container{min-height:68px;padding:0 15px}
+  .menu-toggle{display:block;background:none;border:0;color:#2b3a4a;font-size:22px;cursor:pointer;padding:5px;width:40px;text-align:left}
+  .logo-wrapper{flex:1}
+  .header .logo{width:110px;height:63px}
+  .header .navbar{position:fixed;top:0;left:0;width:280px;height:100vh;background:var(--color-surface);z-index:9999;box-shadow:2px 0 12px var(--color-shadow-medium);transform:translateX(-100%);transition:transform .3s ease-in-out;padding:0;margin:0;display:flex;flex-direction:column}
+  .header .navbar.active{transform:translateX(0)}
+  .header .menu-header{display:flex;justify-content:space-between;align-items:center;background:var(--color-brand-light);color:#fff;padding:16px 20px;font-size:18px;font-weight:700}
+  .menu-close{background:none;border:0;color:#fff;font-size:26px;cursor:pointer;line-height:1}
+  .header .navbar ul{flex-direction:column;align-items:stretch;gap:0}
+  .header .navbar li{border-bottom:1px solid var(--color-border-subtle);width:100%}
+  .header .navbar a{display:block;padding:15px 20px;font-size:15px}
+  .header .navbar li.active a,.header .navbar a.active{background:var(--color-brand-soft);border-bottom:none;padding-bottom:15px}
+  .footer .container.footer-content{grid-template-columns:repeat(2,minmax(0,1fr));margin:0 auto 40px;gap:36px 30px}
+}
+@media(max-width:767px){
+  .footer .container.footer-content{grid-template-columns:1fr;margin:0 auto 32px;gap:32px}
+  #scrollToTopBtn{width:40px;height:40px;top:15px;right:15px;font-size:16px}
+}
 @media(max-width:700px){
   .checkout-page{padding:18px 12px 50px}.hero h1{font-size:40px}.hero-cake{width:110px;height:100px;margin-right:0}
   .form-grid{grid-template-columns:1fr}.form-grid .full{grid-column:auto}.receive-tabs{grid-template-columns:1fr}
@@ -312,7 +365,6 @@ body{margin:0}
 .summary-item small{font-size:12px}
 .voucher-title strong{font-size:17px}
 .voucher-title button{font-size:12px}
-.voucher-image{width:76px;height:60px}
 .voucher-card strong{font-size:14px}
 .voucher-selected{font-size:13px}
 .voucher-selected button{font-size:12px}
@@ -401,7 +453,6 @@ body{margin:0}
   transition:none;
 }
 .voucher-card:after,.voucher-card.is-empty:after{display:none}
-.voucher-image{border-radius:5px;box-shadow:none}
 .voucher-dialog{
   border-radius:10px;
   box-shadow:0 8px 24px rgb(7 18 36 / 12%);

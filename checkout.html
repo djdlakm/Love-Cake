@@ -14,6 +14,44 @@
 
 <body>
   <div id="header-placeholder">
+  <header class="header">
+    <div class="container">
+      <button class="menu-toggle" id="menuToggle" type="button" aria-label="Mở menu" aria-expanded="false">
+        <i class="fas fa-bars" aria-hidden="true"></i>
+      </button>
+      <a href="index.html" class="logo-wrapper" aria-label="Love Cake - Trang chủ">
+        <img class="logo" src="assets/img/logo.png" alt="Love Cake">
+      </a>
+      <nav class="navbar" aria-label="Điều hướng chính">
+        <div class="menu-header">
+          <span>Menu</span>
+          <button class="menu-close" id="menuClose" type="button" aria-label="Đóng menu">&times;</button>
+        </div>
+        <ul>
+          <li><a href="index.html">Trang chủ</a></li>
+          <li><a href="about.html">Giới thiệu</a></li>
+          <li><a href="shop.html">Sản phẩm</a></li>
+          <li><a href="offers.html">Khuyến Mãi</a></li>
+          <li><a href="builder.html">Tự thiết kế bánh</a></li>
+          <li><a href="contact.html">Liên hệ</a></li>
+        </ul>
+
+
+      </nav>
+
+
+      <div class="cart">
+        <a href="cart.html" class="cart-icon" aria-label="Giỏ hàng">
+          <i class="fas fa-shopping-cart" aria-hidden="true"></i>
+          <span class="cart-badge">0</span>
+        </a>
+      </div>
+
+
+    </div>
+
+
+  </header>
   </div>
 
 
@@ -32,7 +70,7 @@
           <div class="card-title">
             <span class="num">01</span>
             <div>
-              <h2>Sản phẩm trong giỏ hàng <small id="itemCount">2 sản phẩm</small></h2>
+              <h2>Sản phẩm trong giỏ hàng</h2>
             </div>
             <a href="cart.html" class="back-cart">← Quay lại giỏ hàng</a>
           </div>
@@ -124,13 +162,12 @@
 
 
             <div class="form-grid">
-              <label class="required-field">Thành phố / Tỉnh<em>*</em>
+              <label class="required-field">Thành phố/Tỉnh<em>*</em>
                 <select id="city">
                   <option value="">Chọn thành phố</option>
                   <option selected>Hà Nội</option>
-                  <option>Hồ Chí Minh</option>
-                  <option>Đà Nẵng</option>
-                  <option>Hải Phòng</option>
+                  <option>Bắc Ninh</option>
+                  <option>Hưng Yên</option>
                   <option>Khác</option>
                 </select>
               </label>
@@ -219,6 +256,7 @@
               </div>
 
 
+
               <div class="bank-info">
                 <div class="recipient-title">THÔNG TIN NGƯỜI NHẬN</div>
                 <strong>Nguyen Xuan Duc Duong</strong>
@@ -261,9 +299,12 @@
 
 
         <div class="voucher-card active" id="voucherCard" hidden>
-          <img id="voucherImage" class="voucher-image" alt="" hidden>
+          <span class="voucher-card-icon" aria-hidden="true">
+            <i class="fa-solid fa-tag"></i>
+          </span>
           <div class="voucher-copy">
             <strong id="voucherName">Chọn ưu đãi của bạn</strong>
+            <p id="voucherDescription" class="voucher-description"></p>
           </div>
         </div>
 
@@ -293,9 +334,8 @@
 
 
         <p class="privacy">
-          Thông tin cá nhân của bạn sẽ được sử dụng để xử lý đơn hàng,
-          tăng trải nghiệm sử dụng website, và cho các mục đích cụ thể khác
-          được mô tả trong <a href="https://thuhuongcake.vn/gio-hang" target="_blank">chính sách riêng tư</a>.
+          Thông tin cá nhân của bạn sẽ được sử dụng để xử lý đơn hàng và các mục đích khác được nêu rõ trong
+          <a href="policy/privacy.html">Chính sách quyền riêng tư</a>.
         </p>
 
 
@@ -324,6 +364,47 @@
 
 
   <div id="footer-placeholder">
+  <footer class="footer">
+    <button id="scrollToTopBtn" type="button" aria-label="Lên đầu trang">
+      <i class="fa-solid fa-chevron-up" aria-hidden="true"></i>
+    </button>
+
+
+    <div class="container">
+      <div class="col1">
+        <img class="logo" src="assets/img/logo.png" alt="Love Cake">
+        <ul>
+          <li><span aria-hidden="true">📍</span><p>12 Chùa Bộc, Kim Liên, Hà Nội</p></li>
+          <li><span aria-hidden="true">📞</span><p>0987654321</p></li>
+          <li><span aria-hidden="true">✉️</span><p>info@lovecake.com</p></li>
+        </ul>
+      </div>
+
+
+      <div class="col2">
+        <h3>Giờ mở cửa</h3>
+        <ul>
+          <li><p>Thứ 2 - Thứ 6</p><p>: 8:00 AM - 8:00 PM</p></li>
+          <li><p>Thứ 7 - Chủ nhật</p><p>: 9:00 AM - 6:00 PM</p></li>
+        </ul>
+      </div>
+
+
+      <div class="col3">
+        <h3>Chính sách</h3>
+        <ul>
+          <li><a href="policy/privacy.html">Chính sách bảo mật</a></li>
+          <li><a href="policy/payment.html">Chính sách thanh toán</a></li>
+          <li><a href="policy/shipping.html">Chính sách giao hàng</a></li>
+        </ul>
+      </div>
+    </div>
+
+
+    <div class="bottom">
+      <p>© 2026 Love Cake. All rights reserved.</p>
+    </div>
+  </footer>
   </div>
 
 
@@ -403,6 +484,7 @@
   </div>
 
 
+  <script src="js/header&footer.js"></script>
   <script src="js/checkout.js"></script>
   <script src="js/header&footer.js"></script>
   <script src="js/main.js"></script>

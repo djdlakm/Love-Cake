@@ -1,4 +1,18 @@
 const OFFER_CATALOG = {
+  LOVECAKE11: {
+    code:"LOVECAKE11",
+    title:"Tháng 11 – Sinh nhật Love Cake",
+    description:"Giảm 10% cho đơn hàng từ 100.000đ.",
+    requirement:"01/11/2026 – 30/11/2026",
+    startsAt:"2026-11-01",
+    endsAt:"2026-11-30",
+    image:"https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=1000&q=85",
+    min:100000,
+    rate:0.1,
+    kind:"cake",
+    active:true,
+    status:"Đang áp dụng"
+  },
   BANHNGOT10: {
     code:"BANHNGOT10",
     title:"Ngọt ngào tháng 10",
@@ -138,6 +152,24 @@ function loadCart(){
 const $=id=>document.getElementById(id);
 const money=n=>new Intl.NumberFormat("vi-VN").format(Math.max(0,Math.round(n)))+"đ";
 
+const markFieldComplete=field=>field.classList.toggle("has-value",Boolean(field.value.trim()));
+
+["city","district","ward"].forEach(id=>{
+  const select=$(id);
+  markFieldComplete(select);
+  select.addEventListener("change",()=>markFieldComplete(select));
+});
+markFieldComplete($("store"));
+const addressField=$("address");
+markFieldComplete(addressField);
+addressField.addEventListener("input",()=>markFieldComplete(addressField));
+
+["fullName","phone","receiveDate","receiveHour","note"].forEach(id=>{
+  const field=$(id);
+  markFieldComplete(field);
+  field.addEventListener("input",()=>markFieldComplete(field));
+});
+
 
 function setMobileMenuOpen(isOpen){
   const navbar=document.querySelector(".navbar");
@@ -214,10 +246,12 @@ function updateCartBadge(){
   if(badge)badge.textContent=String(cart.reduce((total,item)=>total+item.quantity,0));
 }
 
+$("scrollToTopBtn").addEventListener("click",()=>{
+  window.scrollTo({top:0,behavior:"smooth"});
+});
+
 
 function renderCart(){
-  const itemCount=cart.reduce((total,item)=>total+item.quantity,0);
-  $("itemCount").textContent=`${itemCount} sản phẩm`;
   updateCartBadge();
 
 
@@ -344,18 +378,10 @@ function renderSelectedVoucher(){
   const selectedText=$("voucherSelectionText");
   const selectedCode=$("selectedVoucherCode");
   const card=$("voucherCard");
-  const image=$("voucherImage");
   card.hidden=!voucher.active;
   $("voucherStatus").hidden=!voucher.active;
-  if(offer){
-    image.src=offer.image;
-    image.alt=`${offer.title} – ưu đãi Love Cake`;
-  }else{
-    image.removeAttribute("src");
-    image.alt="";
-  }
-  image.hidden=!offer;
   $("voucherName").textContent=offer?offer.title:"Chọn ưu đãi của bạn";
+  $("voucherDescription").textContent=offer?offer.description:"";
   selectedText.textContent=voucher.active
     ?(isOfferEligible(offer)?"Đã áp dụng mã":`Đã chọn mã · ${offerEligibilityMessage(offer)}`)
     :"Chưa chọn mã ưu đãi";
@@ -476,6 +502,7 @@ document.querySelectorAll('input[name="payment"]').forEach(r=>{
 
 
 $("store").addEventListener("change",e=>{
+  markFieldComplete(e.target);
   if(!e.target.value){
     $("mapBox").classList.add("hidden");
     return;
@@ -582,14 +609,14 @@ function fillInvoice(){
     ?"Chuyển khoản ngân hàng / Ví điện tử"
     :"Tiền mặt khi nhận bánh (COD)";
   $("billPaymentStatus").textContent=paidByBank
-    ?"Đã thanh toán"
+    ?"Chờ xác nhận thanh toán"
     :"Chưa thanh toán";
 }
 
 
 $("closeInvoice").addEventListener("click",()=>$("invoiceModal").classList.remove("show"));
 $("printBill").addEventListener("click",()=>window.print());
-$("continueShopping").addEventListener("click",()=>window.location.href="../Love-Cake/index.html");
+$("continueShopping").addEventListener("click",()=>window.location.href="product.html");
 
 
 renderCart();
