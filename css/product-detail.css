@@ -100,7 +100,7 @@ main.detail-page-shell {
   align-items: center;
   gap: 7px;
   color: var(--text-soft);
-  font-size: 12px;
+  font-size: 14px;
   line-height: 1.4;
 }
 
@@ -221,7 +221,7 @@ main.detail-page-shell {
 .product-description {
   margin: 16px 0 20px;
   color: var(--text-mid);
-  font-size: 14px;
+  font-size: 15px;
   line-height: 1.75;
 }
 
@@ -282,7 +282,7 @@ main.detail-page-shell {
 
 .ingredient-panel h2 {
   margin: 0;
-  font-size: 16px;
+  font-size: 17px;
   font-weight: 650;
 }
 
@@ -292,7 +292,7 @@ main.detail-page-shell {
 
 .usage-panel h2 {
   margin: 0;
-  font-size: 16px;
+  font-size: 17px;
   font-weight: 650;
 }
 
@@ -302,7 +302,7 @@ main.detail-page-shell {
   margin: 10px 0 0;
   padding-left: 20px;
   color: var(--text-mid);
-  font-size: 13px;
+  font-size: 14px;
   line-height: 1.6;
 }
 
@@ -323,7 +323,7 @@ main.detail-page-shell {
 
 .ingredient-item strong {
   color: var(--text-mid);
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 400;
 }
 
