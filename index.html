@@ -16,31 +16,37 @@
     <div id="header-placeholder"></div>
 
     <main class="home-page">
-      <!-- ==================== 1. HERO ==================== -->
-      <section class="hero" aria-labelledby="hero-title">
-        <div class="hero-inner">
-          <div class="hero-content">
-            <span class="hero-badge"> Tiệm bánh handmade Hà Nội</span>
+      <!-- ==================== 1. HERO SLIDER ==================== -->
+<section class="hero" aria-label="Ảnh nổi bật Love Cake">
+  <div class="hero-slider" id="heroSlider">
+    <div class="hero-track">
+      <div class="hero-slide active">
+        <img src="assets/bia1.jpg" alt="Bánh kem sinh nhật hồng" />
+      </div>
+      <div class="hero-slide">
+        <img src="assets/bia2.jpg" alt="Bánh kem Love Cake" loading="lazy" />
+      </div>
+    </div>
 
-            <h1 id="hero-title" class="hero-title">
-              Ngọt Ngào Từng<br />
-              <span class="hero-title-accent">Chiếc Bánh</span>
-            </h1>
+    <button type="button" class="hero-arrow hero-prev" aria-label="Ảnh trước">
+      <i class="fa-solid fa-chevron-left"></i>
+    </button>
+    <button type="button" class="hero-arrow hero-next" aria-label="Ảnh sau">
+      <i class="fa-solid fa-chevron-right"></i>
+    </button>
 
-            <p class="hero-desc">
-              Mỗi chiếc bánh tại Love Cake được làm thủ công từ nguyên liệu hữu
-              cơ cao cấp, mang đậm tình yêu và sự tỉ mỉ của người thợ bánh.
-            </p>
+    <div class="hero-dots" aria-label="Chọn ảnh">
+      <button type="button" class="hero-dot active" aria-label="Ảnh 1"></button>
+      <button type="button" class="hero-dot" aria-label="Ảnh 2"></button>
+      <button type="button" class="hero-dot" aria-label="Ảnh 3"></button>
+    </div>
+  </div>
 
-            <div class="hero-actions">
-              <a href="product.html" class="btn btn-primary">Đặt Bánh Ngay</a>
-              <a href="builder.html" class="btn btn-secondary"
-                >Tự Thiết Kế </a
-              >
-            </div>
-          </div>
-        </div>
-      </section>
+  <div class="hero-actions">
+    <a href="product.html" class="btn btn-secondary">Đặt Bánh Ngay</a>
+    <a href="builder.html" class="btn btn-secondary">Tự Thiết Kế</a>
+  </div>
+</section>
 
       <!-- ==================== 2. DANH MỤC ==================== -->
       <section class="categories" aria-labelledby="categories-title">
@@ -402,6 +408,7 @@
     </div>
 
     <script src="js/header&footer.js"></script>
+    <script src="js/add-to-cart.js"></script>
     <script src="js/main.js"></script>
     <script src="js/home.js"></script>
   </body>
