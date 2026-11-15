@@ -111,8 +111,12 @@ const OFFER_CATALOG = {
 };
 
 
+
+
 let cart = loadCart();
 let voucher = getStoredVoucher();
+
+
 
 
 function getStoredVoucher(){
@@ -125,6 +129,8 @@ function getStoredVoucher(){
     return {code:"", active:false};
   }
 }
+
+
 
 
 function loadCart(){
@@ -149,10 +155,14 @@ function loadCart(){
 }
 
 
+
+
 const $=id=>document.getElementById(id);
 const money=n=>new Intl.NumberFormat("vi-VN").format(Math.max(0,Math.round(n)))+"đ";
 
+
 const markFieldComplete=field=>field.classList.toggle("has-value",Boolean(field.value.trim()));
+
 
 ["city","district","ward"].forEach(id=>{
   const select=$(id);
@@ -164,11 +174,14 @@ const addressField=$("address");
 markFieldComplete(addressField);
 addressField.addEventListener("input",()=>markFieldComplete(addressField));
 
+
 ["fullName","phone","receiveDate","receiveHour","note"].forEach(id=>{
   const field=$(id);
   markFieldComplete(field);
   field.addEventListener("input",()=>markFieldComplete(field));
 });
+
+
 
 
 function setMobileMenuOpen(isOpen){
@@ -178,6 +191,8 @@ function setMobileMenuOpen(isOpen){
   navbar.classList.toggle("active",isOpen);
   toggle.setAttribute("aria-expanded",String(isOpen));
 }
+
+
 
 
 function saveCart({manuallyCleared=false,orderCompleted=false}={}){
@@ -193,6 +208,8 @@ function saveCart({manuallyCleared=false,orderCompleted=false}={}){
 }
 
 
+
+
 function initializeHeaderControls(){
   $("menuToggle").addEventListener("click",()=>setMobileMenuOpen(true));
   $("menuClose").addEventListener("click",()=>setMobileMenuOpen(false));
@@ -202,11 +219,15 @@ function initializeHeaderControls(){
 }
 
 
+
+
 if(document.readyState==="loading"){
   document.addEventListener("DOMContentLoaded",initializeHeaderControls,{once:true});
 }else{
   initializeHeaderControls();
 }
+
+
 
 
 $("fullName").addEventListener("input",updateTransferContent);
@@ -220,9 +241,13 @@ document.addEventListener("keydown",event=>{
 });
 
 
+
+
 function escapeHTML(s){
   return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
 }
+
+
 
 
 function updateTransferContent(){
@@ -234,6 +259,8 @@ function updateTransferContent(){
 }
 
 
+
+
 function syncReceiveTime(){
   const date=$("receiveDate").value;
   const time=$("receiveHour").value;
@@ -241,18 +268,25 @@ function syncReceiveTime(){
 }
 
 
+
+
 function updateCartBadge(){
   const badge=document.querySelector(".cart-badge");
   if(badge)badge.textContent=String(cart.reduce((total,item)=>total+item.quantity,0));
 }
+
 
 $("scrollToTopBtn").addEventListener("click",()=>{
   window.scrollTo({top:0,behavior:"smooth"});
 });
 
 
+
+
 function renderCart(){
   updateCartBadge();
+
+
 
 
   $("cartList").innerHTML=cart.length?cart.map((item,i)=>`
@@ -260,7 +294,15 @@ function renderCart(){
       <div class="product-image">${item.image?`<img src="${escapeHTML(item.image)}" alt="">`:"🍰"}</div>
       <div class="product-info">
         <strong>${escapeHTML(item.name)}</strong>
-        <small>Size tiêu chuẩn · Vị bánh</small>
+        ${item.customDetails ? `
+          <small style="display:block; line-height: 1.35; margin-top: 2px;">
+            ${item.customDetails.size ? `${escapeHTML(item.customDetails.size)} • ` : ''}
+            ${item.customDetails.sponge ? `Cốt ${escapeHTML(item.customDetails.sponge)} • ` : ''}
+            ${item.customDetails.filling ? `Nhân ${escapeHTML(item.customDetails.filling)}` : ''}
+            ${item.customDetails.toppingsText && item.customDetails.toppingsText !== 'Không lấy topping' ? `<br>Topping: ${escapeHTML(item.customDetails.toppingsText)}` : ''}
+            ${item.customDetails.message && item.customDetails.message !== 'Không có' ? `<br>Lời chúc: "${escapeHTML(item.customDetails.message)}"` : ''}
+          </small>
+        ` : '<small>Size tiêu chuẩn · Vị bánh</small>'}
       </div>
       <div class="product-price">${money(item.price*item.quantity)}</div>
       <div class="qty">
@@ -275,11 +317,14 @@ function renderCart(){
   `).join(""):'<p class="empty-cart">Giỏ hàng đang trống. Bạn hãy quay lại giỏ hàng để chọn bánh nhé ♡</p>';
 
 
+
+
   $("summaryItems").innerHTML=cart.map(item=>`
     <div class="summary-item">
       <div class="summary-img">${item.image?`<img src="${escapeHTML(item.image)}" alt="">`:"🍰"}</div>
       <div>
         <strong>${escapeHTML(item.name)}</strong>
+        ${item.customDetails?.toppingsText && item.customDetails.toppingsText !== 'Không lấy topping' ? `<small style="display:block; color:#9ca3af; font-size:11px;">Topping: ${escapeHTML(item.customDetails.toppingsText)}</small>` : ''}
         <small>${item.quantity} × ${money(item.price)}</small>
       </div>
       <b>${money(item.price*item.quantity)}</b>
@@ -287,8 +332,12 @@ function renderCart(){
   `).join("");
 
 
+
+
   updateTotals();
 }
+
+
 
 
 $("cartList").addEventListener("click",e=>{
@@ -301,6 +350,8 @@ $("cartList").addEventListener("click",e=>{
   saveCart({manuallyCleared:!cart.length});
   renderCart();
 });
+
+
 
 
 function receiveType(){
@@ -373,6 +424,8 @@ function updateTotals(){
 }
 
 
+
+
 function renderSelectedVoucher(){
   const offer=OFFER_CATALOG[voucher.code];
   const selectedText=$("voucherSelectionText");
@@ -389,6 +442,8 @@ function renderSelectedVoucher(){
   $("removeVoucher").classList.toggle("hidden",!voucher.active);
   card.classList.toggle("is-empty",!voucher.active);
 }
+
+
 
 
 function renderVoucherOptions(){
@@ -415,12 +470,16 @@ function renderVoucherOptions(){
 }
 
 
+
+
 function hideVoucherModal(){
   const modal=$("voucherModal");
   if(!modal)return;
   modal.classList.remove("show");
   modal.setAttribute("aria-hidden","true");
 }
+
+
 
 
 function showVoucherModal(){
@@ -430,6 +489,8 @@ function showVoucherModal(){
   modal.setAttribute("aria-hidden","false");
   $("closeVoucherModal").focus();
 }
+
+
 
 
 function applyVoucher(code){
@@ -449,6 +510,8 @@ function applyVoucher(code){
 }
 
 
+
+
 $("voucherSelect").addEventListener("click",showVoucherModal);
 $("closeVoucherModal").addEventListener("click",hideVoucherModal);
 $("voucherModal").addEventListener("click",event=>{
@@ -460,6 +523,8 @@ $("voucherOptions").addEventListener("click",event=>{
 });
 
 
+
+
 function showCheckoutNotice(message){
   $("noticeMessage").textContent=message;
   $("checkoutNotice").classList.add("show");
@@ -468,10 +533,14 @@ function showCheckoutNotice(message){
 }
 
 
+
+
 function hideCheckoutNotice(){
   $("checkoutNotice").classList.remove("show");
   $("checkoutNotice").setAttribute("aria-hidden","true");
 }
+
+
 
 
 $("confirmNotice").addEventListener("click",hideCheckoutNotice);
@@ -479,6 +548,8 @@ $("closeNotice").addEventListener("click",hideCheckoutNotice);
 $("checkoutNotice").addEventListener("click",event=>{
   if(event.target===$("checkoutNotice"))hideCheckoutNotice();
 });
+
+
 
 
 document.querySelectorAll('input[name="receiveType"]').forEach(r=>{
@@ -492,6 +563,8 @@ document.querySelectorAll('input[name="receiveType"]').forEach(r=>{
 });
 
 
+
+
 document.querySelectorAll('input[name="payment"]').forEach(r=>{
   r.addEventListener("change",()=>{
     document.querySelectorAll(".payment-option").forEach(x=>x.classList.remove("selected"));
@@ -499,6 +572,8 @@ document.querySelectorAll('input[name="payment"]').forEach(r=>{
     $("onlineBox").classList.toggle("hidden",r.value!=="online");
   });
 });
+
+
 
 
 $("store").addEventListener("change",e=>{
@@ -517,6 +592,8 @@ $("store").addEventListener("change",e=>{
 });
 
 
+
+
 $("removeVoucher").addEventListener("click",()=>{
   voucher.active=false;
   voucher.code="";
@@ -529,6 +606,8 @@ $("removeVoucher").addEventListener("click",()=>{
   }
   updateTotals();
 });
+
+
 
 
 function validForm(){
@@ -554,6 +633,8 @@ function validForm(){
 }
 
 
+
+
 $("placeOrder").addEventListener("click",()=>{
   if(!validForm())return;
   fillInvoice();
@@ -564,9 +645,13 @@ $("placeOrder").addEventListener("click",()=>{
 });
 
 
+
+
 function fillInvoice(){
   const now=new Date();
   const code="LC"+now.getFullYear()+String(now.getMonth()+1).padStart(2,"0")+String(now.getDate()).padStart(2,"0")+Math.floor(100+Math.random()*900);
+
+
 
 
   $("invoiceCode").textContent=code;
@@ -575,8 +660,12 @@ function fillInvoice(){
   $("billPhone").textContent=$("phone").value.trim();
 
 
+
+
   const d=new Date($("receiveTime").value);
   $("billReceive").textContent=isNaN(d)?$("receiveTime").value:d.toLocaleString("vi-VN");
+
+
 
 
   let address="";
@@ -588,6 +677,8 @@ function fillInvoice(){
   $("billAddress").textContent=address;
 
 
+
+
   $("billItems").innerHTML=cart.map(x=>`
     <div class="bill-row">
       <span>${escapeHTML(x.name)}</span>
@@ -595,6 +686,8 @@ function fillInvoice(){
       <span>${money(x.price*x.quantity)}</span>
     </div>
   `).join("");
+
+
 
 
   const pay=document.querySelector('input[name="payment"]:checked')?.value;
@@ -614,9 +707,16 @@ function fillInvoice(){
 }
 
 
+
+
 $("closeInvoice").addEventListener("click",()=>$("invoiceModal").classList.remove("show"));
 $("printBill").addEventListener("click",()=>window.print());
 $("continueShopping").addEventListener("click",()=>window.location.href="product.html");
 
 
+
+
 renderCart();
+
+
+

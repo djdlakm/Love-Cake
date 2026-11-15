@@ -19,6 +19,8 @@ body{margin:0}
 .hero-cake{display:block;width:190px;height:150px;object-fit:cover;object-position:center;border-radius:18px;filter:drop-shadow(0 8px 8px rgba(244,63,94,.16));transform:rotate(3deg);margin-right:8%}
 
 
+
+
 .layout{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:20px;align-items:start}
 .left{display:grid;gap:30px}
 .card,.summary{
@@ -27,14 +29,10 @@ body{margin:0}
   border-radius:15px;
   box-shadow:0 8px 28px rgba(104,54,66,.045);
 }
-.left>.card{border-color:#f2cbd5;box-shadow:0 10px 30px rgba(104,54,66,.11)}
+.left>.card{border-color:#ddcec8;box-shadow:0 4px 16px rgba(76,55,47,.09)}
 .card{padding:17px}
-.card-title{display:flex;align-items:center;gap:11px;margin-bottom:14px}
-.num{
-  flex:none;background:var(--pink);color:#fff;border-radius:9px;
-  min-width:34px;height:34px;display:grid;place-items:center;text-align:center;font-size:12px;font-weight:800
-}
-.card-title h2{font-size:14px;line-height:1.2;margin:1px 0 3px}
+.card-title{display:flex;align-items:center;gap:11px;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid #e8dfda}
+.card-title h2{color:#9f2145;font-size:14px;line-height:1.2;margin:1px 0 3px}
 .card-title h2 small{font-size:10px;color:#b69ca3;font-weight:500;margin-left:7px}
 .card-title p{font-size:10px;color:#ad9ca0;margin:0}
 .back-cart{
@@ -46,6 +44,8 @@ body{margin:0}
 }
 .back-cart:hover{background:#ffe2ea;border-color:#e88ca4;transform:translateY(-1px)}
 .back-cart:focus-visible{outline:3px solid var(--color-brand-focus);outline-offset:2px}
+
+
 
 
 .cart-product{
@@ -67,6 +67,8 @@ body{margin:0}
 .remove{width:26px;height:28px;display:grid;place-items:center;border:0;border-radius:5px;background:none;color:#a99a9e;font-size:13px;cursor:pointer}
 .remove:hover{background:#faf7f3;color:#754c43}
 .remove:focus-visible{outline:2px solid var(--color-brand-focus);outline-offset:2px}
+
+
 
 
 .form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
@@ -91,6 +93,19 @@ body{margin:0}
 .checkout-page select:not(.has-value){color:#757575}
 .checkout-page .has-value{border-color:#38a169;background:#f0fff4;color:#18794e;font-weight:700}
 .checkout-page .has-value:focus{border-color:#38a169;box-shadow:0 0 0 3px rgb(56 161 105 / 25%)}
+.checkout-page input:-webkit-autofill,
+.checkout-page input:-webkit-autofill:hover,
+.checkout-page input:autofill{
+  border-color:#38a169;
+  -webkit-box-shadow:0 0 0 1000px #f0fff4 inset;
+  box-shadow:0 0 0 1000px #f0fff4 inset;
+  -webkit-text-fill-color:#18794e;
+  caret-color:#18794e
+}
+.checkout-page input:-webkit-autofill:focus,
+.checkout-page input:autofill:focus{box-shadow:0 0 0 1000px #f0fff4 inset,0 0 0 3px rgb(56 161 105 / 25%)}
+
+
 
 
 .receive-tabs{display:grid;grid-template-columns:1fr 1fr;gap:9px}
@@ -128,6 +143,8 @@ body{margin:0}
 .map-box>a{display:block;padding:8px 10px;color:var(--pink);font-size:9px;text-decoration:none}
 
 
+
+
 .payment{display:grid;gap:8px}
 .payment-option{padding:11px}
 .arrow{margin-left:auto;color:var(--pink)}
@@ -139,6 +156,8 @@ body{margin:0}
 .payment-qr{display:block;width:145px;height:auto;max-width:100%;border:4px solid #fff;border-radius:10px;box-shadow:0 0 0 1px #eadde1}
 .qr-placeholder small{font-size:8px;color:#9e8c91}
 .bank-info{font-size:9px;line-height:1.45}.recipient-title{font-size:8px;color:var(--pink);font-weight:800;margin-bottom:2px}.bank-info>strong{font-size:11px}.bank-info p{margin:3px 0;color:#89767d}
+
+
 
 
 .summary{padding:16px;position:sticky;top:15px}
@@ -227,6 +246,8 @@ body{margin:0}
 .thank-you span{font-weight:600;white-space:nowrap}
 
 
+
+
 .footer{position:relative;padding-top:40px;border-top:2px solid var(--color-brand-border);background:var(--color-ink);font-family:"Montserrat",sans-serif}
 .footer .container.footer-content{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));align-items:start;gap:30px;width:min(1200px,calc(100% - 48px));max-width:1200px;margin:0 auto 48px;padding:0}
 .footer .col1,.footer .col2,.footer .col3,.footer .col4{min-width:0}
@@ -253,6 +274,8 @@ body{margin:0}
 #scrollToTopBtn:hover{background:var(--pink2);transform:translateY(-5px);box-shadow:0 6px 15px var(--color-shadow-brand)}
 
 
+
+
 .checkout-notice{position:fixed;inset:0;z-index:1200;display:none;align-items:center;justify-content:center;padding:20px;background:rgb(43 25 32 / 48%);backdrop-filter:blur(6px)}
 .checkout-notice.show{display:flex}
 .notice-card{position:relative;width:min(440px,100%);padding:34px 32px 30px;border:1px solid #f3d4dc;border-radius:24px;background:linear-gradient(155deg,#fff 0%,#fffafb 62%,#fff0f4 100%);box-shadow:0 26px 80px rgb(7 18 36 / 26%);text-align:center;animation:noticeIn .25s ease-out}
@@ -270,6 +293,8 @@ body{margin:0}
 .notice-confirm:hover{transform:translateY(-2px);box-shadow:0 10px 22px rgb(244 63 94 / 32%)}
 .notice-confirm:focus-visible,.notice-close:focus-visible{outline:3px solid var(--color-brand-focus);outline-offset:3px}
 @keyframes noticeIn{from{opacity:0;transform:translateY(10px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
+
+
 
 
 .invoice-modal{position:fixed;inset:0;background:rgba(52,25,32,.55);backdrop-filter:blur(5px);display:none;align-items:center;justify-content:center;padding:20px;z-index:1100;overflow:auto}
@@ -298,6 +323,8 @@ body{margin:0}
 .bill-thanks{text-align:center;border-top:1px dashed #e4cbd1;padding-top:13px}.bill-thanks strong{font-size:18px;font-weight:700;color:#d97795;display:block}.bill-thanks span{font-size:10px;color:#a38e95}
 .bill-actions{display:flex;gap:8px;margin-top:17px}.bill-actions button{flex:1;border:0;border-radius:8px;padding:10px;background:var(--pink);color:#fff;font-weight:800;font-size:12px;display:flex;align-items:center;justify-content:center;gap:7px}.bill-actions button svg{width:17px;height:17px;flex:none}.bill-actions button+button{background:#fff0f4;color:var(--pink);border:1px solid #ffc4d2}
 @keyframes invoiceIn{from{opacity:0;transform:translateY(50px) rotate(1deg)}to{opacity:1;transform:none}}
+
+
 
 
 @media(max-width:950px){
@@ -335,6 +362,8 @@ body{margin:0}
   .invoice{position:absolute;left:0;top:0;width:100%;box-shadow:none}
   .bill-actions,.close{display:none!important}
 }
+
+
 
 
 .breadcrumb{font-size:16px}
@@ -386,6 +415,8 @@ body{margin:0}
 .bill-actions button{font-size:15px}
 
 
+
+
 @media(max-width:700px){
   .hero h1{font-size:40px}
   .hero p{font-size:17px}
@@ -412,6 +443,7 @@ body{margin:0}
   .invoice-meta,.customer-info,.bill-row,.bill-total>div,.bill-payment{font-size:14px}
 }
 
+
 .receive-datetime{grid-column:1/-1;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
 @media(max-width:950px){
   .layout{grid-template-columns:minmax(0,1fr)}
@@ -420,8 +452,9 @@ body{margin:0}
   .receive-datetime{grid-template-columns:1fr}
 }
 
+
 .card,.summary{border-radius:8px;box-shadow:none}
-.left>.card{border-color:var(--line);box-shadow:none}
+.left>.card,.summary{border-color:#ddcec8;box-shadow:0 4px 16px rgba(76,55,47,.09)}
 .receive-option,.payment-option{
   border:1px solid #e8e1dc;
   border-radius:6px;
@@ -496,6 +529,7 @@ body{margin:0}
 .notice-card,.invoice{border-radius:10px;box-shadow:0 8px 24px rgb(7 18 36 / 12%)}
 .notice-card,.invoice{animation:none}
 
+
 @media(max-width:600px){
   .voucher-dialog{border-radius:10px}
 }
@@ -551,3 +585,6 @@ body{margin:0}
   .invoice-head h2{font-size:12px}
   .bill-row{grid-template-columns:minmax(0,1fr) 36px 100px;padding-right:4px;padding-left:4px}
 }
+
+
+
