@@ -42,6 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const registerPassword = document.getElementById('register-password');
   const confirmPassword = document.getElementById('confirm-password');
+  const registerForm = document.getElementById('register-panel');
   const validatePasswordMatch = () => {
     confirmPassword.setCustomValidity(
       confirmPassword.value && confirmPassword.value !== registerPassword.value
@@ -52,4 +53,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   registerPassword.addEventListener('input', validatePasswordMatch);
   confirmPassword.addEventListener('input', validatePasswordMatch);
+  registerForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+    window.location.href = 'index.html';
+  });
 });
