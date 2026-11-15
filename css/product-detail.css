@@ -274,10 +274,8 @@ main.detail-page-shell {
 /* Keep ingredient details together in one simple list. */
 .ingredient-panel {
   margin-top: 22px;
-  padding: 16px;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  background: var(--surface);
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--line);
 }
 
 .ingredient-panel h2 {
@@ -550,6 +548,10 @@ main.detail-page-shell {
   line-height: 1.2;
 }
 
+#reviewSectionTotal {
+  font-weight: 700;
+}
+
 .review-summary-box {
   display: flex;
   align-items: center;
@@ -647,7 +649,7 @@ main.detail-page-shell {
   font-weight: 650;
 }
 
-.review-author strong {
+.review-author > div > strong {
   display: block;
   font-size: 13px;
   font-weight: 650;
