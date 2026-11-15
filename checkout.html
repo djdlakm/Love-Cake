@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
 
 
+
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Thanh toán | Love Cake</title>
   <script src="https://kit.fontawesome.com/30260f1add.js" crossorigin="anonymous"></script>
@@ -12,9 +14,59 @@
 </head>
 
 
+
+
 <body>
   <div id="header-placeholder">
+  <header class="header">
+    <div class="container">
+      <button class="menu-toggle" id="menuToggle" type="button" aria-label="Mở menu" aria-expanded="false">
+        <i class="fas fa-bars" aria-hidden="true"></i>
+      </button>
+      <a href="index.html" class="logo-wrapper" aria-label="Love Cake - Trang chủ">
+        <img class="logo" src="assets/img/logo.png" alt="Love Cake">
+      </a>
+      <nav class="navbar" aria-label="Điều hướng chính">
+        <div class="menu-header">
+          <span>Menu</span>
+          <button class="menu-close" id="menuClose" type="button" aria-label="Đóng menu">&times;</button>
+        </div>
+        <ul>
+          <li><a href="index.html">Trang chủ</a></li>
+          <li><a href="about.html">Giới thiệu</a></li>
+          <li><a href="shop.html">Sản phẩm</a></li>
+          <li><a href="offers.html">Khuyến Mãi</a></li>
+          <li><a href="builder.html">Tự thiết kế bánh</a></li>
+          <li><a href="contact.html">Liên hệ</a></li>
+        </ul>
+
+
+
+
+      </nav>
+
+
+
+
+      <div class="cart">
+        <a href="cart.html" class="cart-icon" aria-label="Giỏ hàng">
+          <i class="fas fa-shopping-cart" aria-hidden="true"></i>
+          <span class="cart-badge">0</span>
+        </a>
+      </div>
+
+
+
+
+    </div>
+
+
+
+
+  </header>
   </div>
+
+
 
 
   <main class="checkout-page">
@@ -27,12 +79,13 @@
       <div class="left">
 
 
+
+
         <!-- SẢN PHẨM -->
         <section class="card">
           <div class="card-title">
-            <span class="num">01</span>
             <div>
-              <h2>Sản phẩm trong giỏ hàng <small id="itemCount">2 sản phẩm</small></h2>
+              <h2>Sản phẩm trong giỏ hàng</h2>
             </div>
             <a href="cart.html" class="back-cart">← Quay lại giỏ hàng</a>
           </div>
@@ -40,14 +93,17 @@
         </section>
 
 
+
+
         <!-- THÔNG TIN -->
         <section class="card">
           <div class="card-title">
-            <span class="num">02</span>
             <div>
               <h2>Thông tin người đặt</h2>
             </div>
           </div>
+
+
 
 
           <div class="form-grid">
@@ -56,9 +112,13 @@
             </label>
 
 
+
+
             <label class="required-field">Số điện thoại<em>*</em>
               <input id="phone" type="tel" placeholder="Ví dụ: 0988 123 456">
             </label>
+
+
 
 
             <div class="receive-datetime">
@@ -72,6 +132,8 @@
             <input id="receiveTime" type="hidden">
 
 
+
+
             <label class="full">Ghi chú đơn hàng
               <textarea id="note" placeholder="Ví dụ: Viết chữ Happy Birthday lên bánh, giao trước 18h..."></textarea>
             </label>
@@ -79,14 +141,17 @@
         </section>
 
 
+
+
         <!-- NHẬN HÀNG -->
         <section class="card">
           <div class="card-title">
-            <span class="num">03</span>
             <div>
               <h2>Hình thức nhận hàng</h2>
             </div>
           </div>
+
+
 
 
           <div class="receive-tabs">
@@ -101,6 +166,8 @@
             </label>
 
 
+
+
             <label class="receive-option">
               <input type="radio" name="receiveType" value="pickup">
               <span class="circle"></span>
@@ -113,6 +180,8 @@
           </div>
 
 
+
+
           <div id="deliveryPanel" class="sub-panel">
             <div class="panel-heading">
               <div>
@@ -123,17 +192,20 @@
             </div>
 
 
+
+
             <div class="form-grid">
-              <label class="required-field">Thành phố / Tỉnh<em>*</em>
+              <label class="required-field">Thành phố/Tỉnh<em>*</em>
                 <select id="city">
                   <option value="">Chọn thành phố</option>
                   <option selected>Hà Nội</option>
-                  <option>Hồ Chí Minh</option>
-                  <option>Đà Nẵng</option>
-                  <option>Hải Phòng</option>
+                  <option>Bắc Ninh</option>
+                  <option>Hưng Yên</option>
                   <option>Khác</option>
                 </select>
               </label>
+
+
 
 
               <label class="required-field">Quận / Huyện<em>*</em>
@@ -147,6 +219,8 @@
               </label>
 
 
+
+
               <label class="required-field">Phường / Xã<em>*</em>
                 <select id="ward">
                   <option value="">Chọn phường / xã</option>
@@ -157,11 +231,15 @@
               </label>
 
 
+
+
               <label class="required-field">Địa chỉ cụ thể<em>*</em>
                 <input id="address" placeholder="Số nhà, tên đường...">
               </label>
             </div>
           </div>
+
+
 
 
           <div id="pickupPanel" class="sub-panel hidden">
@@ -173,6 +251,8 @@
                 <option value="Love Cake - Đống Đa|Hà Nội|21.0160,105.8302">Love Cake - Đống Đa</option>
               </select>
             </label>
+
+
 
 
             <div id="mapBox" class="map-box hidden">
@@ -190,14 +270,17 @@
         </section>
 
 
+
+
         <!-- THANH TOÁN -->
         <section class="card">
           <div class="card-title">
-            <span class="num">04</span>
             <div>
               <h2>Phương thức thanh toán</h2>
             </div>
           </div>
+
+
 
 
           <div class="payment">
@@ -212,11 +295,17 @@
             </label>
 
 
+
+
             <div id="onlineBox" class="online-box">
               <div class="qr-placeholder">
                 <img class="payment-qr" src="assets/img/qr.png" alt="Mã QR thanh toán Techcombank">
                 <small>Quét QR để thanh toán</small>
               </div>
+
+
+
+
 
 
               <div class="bank-info">
@@ -227,6 +316,8 @@
                 <p>Nội dung CK: <b id="transferContent">Họ và tên người đặt + SĐT</b></p>
               </div>
             </div>
+
+
 
 
             <label class="payment-option">
@@ -242,6 +333,8 @@
       </div>
 
 
+
+
       <!-- SUMMARY -->
       <aside class="summary">
         <div class="summary-top">
@@ -251,7 +344,11 @@
         </div>
 
 
+
+
         <div id="summaryItems"></div>
+
+
 
 
         <div class="voucher-title">
@@ -260,12 +357,19 @@
         </div>
 
 
+
+
         <div class="voucher-card active" id="voucherCard" hidden>
-          <img id="voucherImage" class="voucher-image" alt="" hidden>
+          <span class="voucher-card-icon" aria-hidden="true">
+            <i class="fa-solid fa-tag"></i>
+          </span>
           <div class="voucher-copy">
             <strong id="voucherName">Chọn ưu đãi của bạn</strong>
+            <p id="voucherDescription" class="voucher-description"></p>
           </div>
         </div>
+
+
 
 
         <div class="voucher-selected" id="voucherStatus" hidden>
@@ -273,6 +377,8 @@
           <b id="selectedVoucherCode"></b>
           <button type="button" id="removeVoucher">Bỏ chọn</button>
         </div>
+
+
 
 
         <div class="totals">
@@ -284,19 +390,26 @@
         </div>
 
 
+
+
         <button id="placeOrder" class="place-order">
           <span>ĐẶT HÀNG</span>
         </button>
 
 
+
+
         <div class="secure"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> Thanh toán an toàn &amp; bảo mật</div>
 
 
+
+
         <p class="privacy">
-          Thông tin cá nhân của bạn sẽ được sử dụng để xử lý đơn hàng,
-          tăng trải nghiệm sử dụng website, và cho các mục đích cụ thể khác
-          được mô tả trong <a href="https://thuhuongcake.vn/gio-hang" target="_blank">chính sách riêng tư</a>.
+          Thông tin cá nhân của bạn sẽ được sử dụng để xử lý đơn hàng và các mục đích khác được nêu rõ trong
+          <a href="policy/privacy.html">Chính sách quyền riêng tư</a>.
         </p>
+
+
 
 
         <div class="thank-you">
@@ -306,6 +419,8 @@
       </aside>
     </div>
   </main>
+
+
 
 
   <div id="voucherModal" class="voucher-modal" aria-hidden="true">
@@ -323,8 +438,61 @@
   </div>
 
 
+
+
   <div id="footer-placeholder">
+  <footer class="footer">
+    <button id="scrollToTopBtn" type="button" aria-label="Lên đầu trang">
+      <i class="fa-solid fa-chevron-up" aria-hidden="true"></i>
+    </button>
+
+
+
+
+    <div class="container">
+      <div class="col1">
+        <img class="logo" src="assets/img/logo.png" alt="Love Cake">
+        <ul>
+          <li><span aria-hidden="true">📍</span><p>12 Chùa Bộc, Kim Liên, Hà Nội</p></li>
+          <li><span aria-hidden="true">📞</span><p>0987654321</p></li>
+          <li><span aria-hidden="true">✉️</span><p>info@lovecake.com</p></li>
+        </ul>
+      </div>
+
+
+
+
+      <div class="col2">
+        <h3>Giờ mở cửa</h3>
+        <ul>
+          <li><p>Thứ 2 - Thứ 6</p><p>: 8:00 AM - 8:00 PM</p></li>
+          <li><p>Thứ 7 - Chủ nhật</p><p>: 9:00 AM - 6:00 PM</p></li>
+        </ul>
+      </div>
+
+
+
+
+      <div class="col3">
+        <h3>Chính sách</h3>
+        <ul>
+          <li><a href="policy/privacy.html">Chính sách bảo mật</a></li>
+          <li><a href="policy/payment.html">Chính sách thanh toán</a></li>
+          <li><a href="policy/shipping.html">Chính sách giao hàng</a></li>
+        </ul>
+      </div>
+    </div>
+
+
+
+
+    <div class="bottom">
+      <p>© 2026 Love Cake. All rights reserved.</p>
+    </div>
+  </footer>
   </div>
+
+
 
 
   <div id="checkoutNotice" class="checkout-notice" aria-hidden="true">
@@ -343,10 +511,14 @@
   </div>
 
 
+
+
   <!-- BILL -->
   <div id="invoiceModal" class="invoice-modal">
     <div class="invoice">
       <button class="close" id="closeInvoice">×</button>
+
+
 
 
       <div class="invoice-head">
@@ -356,10 +528,13 @@
         <h2>HÓA ĐƠN LOVE CAKE</h2>
       </div>
 
+
       <div class="invoice-meta">
         <span>Mã đơn: <b id="invoiceCode"></b></span>
         <span>Ngày đặt: <b id="invoiceDate"></b></span>
       </div>
+
+
 
 
       <div class="customer-info">
@@ -368,6 +543,8 @@
         <p><b>Thời gian nhận:</b> <span id="billReceive"></span></p>
         <p><b>Địa chỉ:</b> <span id="billAddress"></span></p>
       </div>
+
+
 
 
       <div class="bill-table">
@@ -380,6 +557,8 @@
       </div>
 
 
+
+
       <div class="bill-total">
         <div><span>Tạm tính</span><b id="billSubtotal"></b></div>
         <div><span>Phí giao hàng</span><b id="billShipping"></b></div>
@@ -388,11 +567,15 @@
       </div>
 
 
+
+
       <div class="bill-payment">
         <b>Thanh toán:</b> <span id="billPayment"></span><br>
         <b>Trạng thái:</b> <span id="billPaymentStatus"></span><br>
         <b>Người nhận:</b> Nguyen Xuan Duc Duong
       </div>
+
+
 
 
       <div class="bill-actions">
@@ -403,6 +586,9 @@
   </div>
 
 
+
+
+  <script src="js/header&footer.js"></script>
   <script src="js/checkout.js"></script>
   <script src="js/header&footer.js"></script>
   <script src="js/main.js"></script>

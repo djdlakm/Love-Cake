@@ -16,31 +16,37 @@
     <div id="header-placeholder"></div>
 
     <main class="home-page">
-      <!-- ==================== 1. HERO ==================== -->
-      <section class="hero" aria-labelledby="hero-title">
-        <div class="hero-inner">
-          <div class="hero-content">
-            <span class="hero-badge"> Tiệm bánh handmade Hà Nội</span>
+      <!-- ==================== 1. HERO SLIDER ==================== -->
+<section class="hero" aria-label="Ảnh nổi bật Love Cake">
+  <div class="hero-slider" id="heroSlider">
+    <div class="hero-track">
+      <a href="product.html" class="hero-slide active">
+        <img src="assets/bia1.jpg" alt="Bánh kem sinh nhật hồng" />
+      </a>
+      <a href="product.html" class="hero-slide">
+        <img src="assets/bia2.jpg" alt="Bánh kem Love Cake" loading="lazy" />
+      </a>
+    </div>
 
-            <h1 id="hero-title" class="hero-title">
-              Ngọt Ngào Từng<br />
-              <span class="hero-title-accent">Chiếc Bánh</span>
-            </h1>
+    <button type="button" class="hero-arrow hero-prev" aria-label="Ảnh trước">
+      <i class="fa-solid fa-chevron-left"></i>
+    </button>
+    <button type="button" class="hero-arrow hero-next" aria-label="Ảnh sau">
+      <i class="fa-solid fa-chevron-right"></i>
+    </button>
 
-            <p class="hero-desc">
-              Mỗi chiếc bánh tại Love Cake được làm thủ công từ nguyên liệu hữu
-              cơ cao cấp, mang đậm tình yêu và sự tỉ mỉ của người thợ bánh.
-            </p>
+    <div class="hero-dots" aria-label="Chọn ảnh">
+      <button type="button" class="hero-dot active" aria-label="Ảnh 1"></button>
+      <button type="button" class="hero-dot" aria-label="Ảnh 2"></button>
+  
+    </div>
+  </div>
 
-            <div class="hero-actions">
-              <a href="product.html" class="btn btn-primary">Đặt Bánh Ngay</a>
-              <a href="builder.html" class="btn btn-secondary"
-                >Tự Thiết Kế </a
-              >
-            </div>
-          </div>
-        </div>
-      </section>
+  <div class="hero-actions">
+    <a href="product.html" class="btn btn-secondary">Đặt Bánh Ngay</a>
+    <a href="builder.html" class="btn btn-secondary">Tự Thiết Kế</a>
+  </div>
+</section>
 
       <!-- ==================== 2. DANH MỤC ==================== -->
       <section class="categories" aria-labelledby="categories-title">
@@ -58,7 +64,6 @@
                style="--card-img: url('../assets/iu.png');">
               <h3 class="category-name">Bánh Kem</h3>
               <p class="category-desc">Sinh nhật, cưới hỏi, kỷ niệm</p>
-              <span class="category-count">24 sản phẩm</span>
             </a>
 
             <a href="product.html?cat=banh-lanh" 
@@ -66,7 +71,6 @@
                style="--card-img: url('../assets/bl.jpg');">
               <h3 class="category-name">Bánh Lạnh</h3>
               <p class="category-desc">Cheesecake, mousse tươi mát</p>
-              <span class="category-count">12 sản phẩm</span>
             </a>
 
             <a href="product.html?cat=banh-mi" 
@@ -74,7 +78,6 @@
                style="--card-img: url('../assets/banh_my.jpg');">
               <h3 class="category-name">Bánh Mì</h3>
               <p class="category-desc">Croissant, brioche thơm bơ</p>
-              <span class="category-count">18 sản phẩm</span>
             </a>
 
             <a href="product.html?cat=cupcake" 
@@ -82,7 +85,6 @@
                style="--card-img: url('../assets/cupcake.jpg');">
               <h3 class="category-name">Cupcake</h3>
               <p class="category-desc">Nhỏ xinh, đủ màu sắc</p>
-              <span class="category-count">30 sản phẩm</span>
             </a>
           </div>
         </div>
@@ -381,13 +383,15 @@
         >
           &times;
         </button>
-        <img
+        <a href="offers.html" class="popup-link">
+          <img
           class="promo-image"
           src="assets/anhsale.jpg"
           alt="Hot Deal! Flash Sale khủng: giảm 15% cho bánh sô-cô-la, giảm 10% cho bánh tự thiết kế"
           width="1024"
           height="1024"
         />
+        </a>
         <a
           href="product.html"
           class="promo-hotspot promo-hotspot-order"
@@ -402,6 +406,7 @@
     </div>
 
     <script src="js/header&footer.js"></script>
+    <script src="js/add-to-cart.js"></script>
     <script src="js/main.js"></script>
     <script src="js/home.js"></script>
   </body>

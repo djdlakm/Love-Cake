@@ -20,10 +20,10 @@ document.addEventListener("DOMContentLoaded", function () {
 function updateCartBadge() {
   // 1. Lấy danh sách giỏ hàng từ localStorage (nếu chưa có thì trả về mảng rỗng)
   const cart = JSON.parse(localStorage.getItem('cart')) || [];
-  
+
   // 2. Tính tổng số lượng tất cả các sản phẩm
   const totalQuantity = cart.reduce((sum, item) => sum + item.quantity, 0);
-  
+
   // 3. Tìm thẻ span hiển thị số đếm và cập nhật giao diện
   const cartBadge = document.querySelector('.cart-badge');
   if (cartBadge) {
@@ -36,12 +36,96 @@ document.addEventListener('DOMContentLoaded', updateCartBadge);
 
 /* ==========================================
    HOME.JS - Trang chủ Love Cake
-   1. Popup quảng cáo Flash Sale
+   1. Slider ảnh hero
+   2. Slider đánh giá khách hàng
+   3. Popup quảng cáo Flash Sale
    ========================================== */
 document.addEventListener('DOMContentLoaded', () => {
+  initHeroSlider();
+  initTestimonials();
   initPromoPopup();
 });
 
+/* ==========================================
+   1. SLIDER ẢNH HERO
+   ========================================== */
+function initHeroSlider() {
+  const slider = document.getElementById('heroSlider');
+  if (!slider) return;
+
+  const slides = slider.querySelectorAll('.hero-slide');
+  const dots = slider.querySelectorAll('.hero-dot');
+  const prev = slider.querySelector('.hero-prev');
+  const next = slider.querySelector('.hero-next');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const INTERVAL = 5000; // ms - thời gian giữa 2 lần tự chuyển ảnh
+
+  let current = 0;
+  let timer = null;
+
+  function show(index) {
+    current = (index + slides.length) % slides.length;
+    slides.forEach((s, i) => s.classList.toggle('active', i === current));
+    dots.forEach((d, i) => d.classList.toggle('active', i === current));
+  }
+
+  function stop() {
+    clearInterval(timer);
+  }
+
+  function start() {
+    if (reduceMotion || slides.length < 2) return;
+    stop();
+    timer = setInterval(() => show(current + 1), INTERVAL);
+  }
+
+  if (prev) prev.addEventListener('click', () => { show(current - 1); start(); });
+  if (next) next.addEventListener('click', () => { show(current + 1); start(); });
+  dots.forEach((dot, i) => {
+    dot.addEventListener('click', () => { show(i); start(); });
+  });
+
+  slider.addEventListener('mouseenter', stop);
+  slider.addEventListener('mouseleave', start);
+
+  start();
+}
+
+/* ==========================================
+   2. SLIDER ĐÁNH GIÁ KHÁCH HÀNG
+   ========================================== */
+function initTestimonials() {
+  const slides = document.querySelectorAll('.testimonial-slide');
+  const dots = document.querySelectorAll('.testimonial-dots .dot');
+  if (!slides.length) return;
+
+  let current = 0;
+  let timer = null;
+
+  function show(index) {
+    current = index;
+    slides.forEach((s, i) => s.classList.toggle('active', i === index));
+    dots.forEach((d, i) => d.classList.toggle('active', i === index));
+  }
+
+  function restart() {
+    clearInterval(timer);
+    timer = setInterval(() => show((current + 1) % slides.length), 6000);
+  }
+
+  dots.forEach((dot, i) => {
+    dot.addEventListener('click', () => {
+      show(i);
+      restart();
+    });
+  });
+
+  restart();
+}
+
+/* ==========================================
+   3. POPUP QUẢNG CÁO FLASH SALE
+   ========================================== */
 function initPromoPopup() {
   const modal = document.getElementById('promoModal');
   if (!modal) return;
