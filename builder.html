@@ -60,7 +60,7 @@
         <div class="designer-step-line"></div>
         <div class="designer-step-item" data-step="5">
           <div class="designer-step-circle">5</div>
-          <span class="designer-step-label">Ghi chú</span>
+          <span class="designer-step-label">Topping</span>
         </div>
         <div class="designer-step-line"></div>
         <div class="designer-step-item" data-step="6">
@@ -150,28 +150,25 @@
           </div>
           ========================================================================= -->
 
-          <!-- BƯỚC 5: Ghi Chú Cho Tiệm Bánh -->
+          <!-- BƯỚC 5: Chọn Topping Trang Trí Bánh -->
           <div class="designer-wizard-step" id="designerStep5" data-step-num="5">
             <div class="designer-step-heading">
               <span class="designer-step-badge">BƯỚC 5 / 6</span>
-              <h2 class="designer-step-title">Ghi chú cho tiệm bánh</h2>
+              <h2 class="designer-step-title">Chọn topping trên bánh</h2>
+              <p class="designer-step-hint">Chọn tối đa 3 loại topping trang trí (Miễn phí 1 loại đầu tiên, từ loại thứ 2 +15.000đ/loại).</p>
             </div>
 
-            <!-- Ô nhập ghi chú đơn hàng (không gợi ý) -->
-            <div class="designer-field-group">
-              <label class="designer-field-label" for="designerNoteInput">✿ Ghi chú:</label>
-              <div class="designer-textarea-wrapper">
-                <textarea
-                  id="designerNoteInput"
-                  class="designer-textarea"
-                  rows="4"
-                  maxlength="200"
-                  placeholder="Nhập ghi chú..."
-                ></textarea>
-              </div>
-              <div class="designer-char-counter">
-                <span id="designerNoteCharCount">0</span>/200 ký tự
-              </div>
+            <!-- Thanh trạng thái số lượng topping đã chọn -->
+            <div class="designer-topping-status-bar">
+              <span class="designer-topping-count-info" id="designerToppingCountInfo">Đã chọn: <strong>0/3</strong> loại</span>
+              <button type="button" class="designer-btn-clear-topping" id="designerBtnClearTopping" title="Không dùng topping trang trí">
+                <i class="fa-solid fa-ban"></i> Không lấy topping
+              </button>
+            </div>
+
+            <!-- Danh sách lựa chọn Topping -->
+            <div class="designer-options-grid" id="designerToppingOptions">
+              <!-- Render động từ JS -->
             </div>
           </div>
 
@@ -221,13 +218,13 @@
                   <span>Kem phủ:</span>
                   <strong id="designerSumFrosting">Kem tươi</strong>
                 </div>
+                <div class="designer-summary-row" id="designerSumToppingRow">
+                  <span>Topping trên bánh:</span>
+                  <strong id="designerSumTopping">Không lấy topping (0đ)</strong>
+                </div>
                 <div class="designer-summary-row">
                   <span>Lời chúc trên bánh:</span>
                   <strong id="designerSumMessage">Happy Birthday</strong>
-                </div>
-                <div class="designer-summary-row" id="designerSumNoteRow" style="display: none;">
-                  <span>Ghi chú cho tiệm:</span>
-                  <strong id="designerSumNote">—</strong>
                 </div>
                 <div class="designer-summary-divider"></div>
                 <div class="designer-summary-total-row">
@@ -379,17 +376,6 @@
         -->
 
       </div>
-
-      <!-- Toast thông báo thêm vào giỏ hàng trượt từ góc trên bên phải theo A12 -->
-      <div class="designer-toast" id="designerToast" role="alert" aria-live="assertive">
-        <div class="designer-toast-icon">💗</div>
-        <div class="designer-toast-content">
-          <strong class="designer-toast-title">Thành công!</strong>
-          <span class="designer-toast-msg">Đã thêm bánh thiết kế vào giỏ hàng 💗</span>
-        </div>
-        <a href="cart.html" class="designer-toast-link">Xem giỏ hàng ➔</a>
-      </div>
-    </main>
 
     <!-- Thẻ giữ chỗ cho Footer chung của Love Cake 📌 -->
     <div id="footer-placeholder"></div>

@@ -226,7 +226,15 @@ function renderCart(){
       <div class="product-image">${item.image?`<img src="${escapeHTML(item.image)}" alt="">`:"🍰"}</div>
       <div class="product-info">
         <strong>${escapeHTML(item.name)}</strong>
-        <small>Size tiêu chuẩn · Vị bánh</small>
+        ${item.customDetails ? `
+          <small style="display:block; line-height: 1.35; margin-top: 2px;">
+            ${item.customDetails.size ? `${escapeHTML(item.customDetails.size)} • ` : ''}
+            ${item.customDetails.sponge ? `Cốt ${escapeHTML(item.customDetails.sponge)} • ` : ''}
+            ${item.customDetails.filling ? `Nhân ${escapeHTML(item.customDetails.filling)}` : ''}
+            ${item.customDetails.toppingsText && item.customDetails.toppingsText !== 'Không lấy topping' ? `<br>Topping: ${escapeHTML(item.customDetails.toppingsText)}` : ''}
+            ${item.customDetails.message && item.customDetails.message !== 'Không có' ? `<br>Lời chúc: "${escapeHTML(item.customDetails.message)}"` : ''}
+          </small>
+        ` : '<small>Size tiêu chuẩn · Vị bánh</small>'}
       </div>
       <div class="product-price">${money(item.price*item.quantity)}</div>
       <div class="qty">
@@ -246,6 +254,7 @@ function renderCart(){
       <div class="summary-img">${item.image?`<img src="${escapeHTML(item.image)}" alt="">`:"🍰"}</div>
       <div>
         <strong>${escapeHTML(item.name)}</strong>
+        ${item.customDetails?.toppingsText && item.customDetails.toppingsText !== 'Không lấy topping' ? `<small style="display:block; color:#9ca3af; font-size:11px;">Topping: ${escapeHTML(item.customDetails.toppingsText)}</small>` : ''}
         <small>${item.quantity} × ${money(item.price)}</small>
       </div>
       <b>${money(item.price*item.quantity)}</b>

@@ -133,6 +133,40 @@
         color: '#4a2818', // Nâu bóng ganache
         swirlColor: '#3d1f11',
       }
+    },
+
+    // Bước 5: Topping trang trí bánh (6 loại theo A1)
+    toppings: {
+      sprinkles: {
+        id: 'sprinkles',
+        name: 'Cốm sắc màu',
+        color: '#f43f5e'
+      },
+      pearls: {
+        id: 'pearls',
+        name: 'Kẹo bi đường ngọc trai',
+        color: '#e2e8f0'
+      },
+      strawberry: {
+        id: 'strawberry',
+        name: 'Dâu tây tươi',
+        color: '#dc2626'
+      },
+      choco_chips: {
+        id: 'choco_chips',
+        name: 'Socola chip',
+        color: '#451a03'
+      },
+      oreo: {
+        id: 'oreo',
+        name: 'Vụn bánh Oreo',
+        color: '#1e293b'
+      },
+      pocky: {
+        id: 'pocky',
+        name: 'Bánh que Pocky',
+        color: '#d97706'
+      }
     }
   };
 
@@ -143,9 +177,7 @@
     sponge: 'vanilla', // Mặc định Vanilla theo A9
     filling: 'blueberry', // Mặc định Việt quất theo A9
     frosting: 'whipping', // Mặc định Kem tươi theo A9
-    note: '', // Ghi chú dặn dò riêng cho tiệm bánh theo yêu cầu
-    photoCount: 1, // (Code cũ: ảnh in tạm tắt)
-    photos: ['assets/img/cart-cake.png'],
+    toppings: [], // Mảng ID các topping được chọn (tối đa 3 theo A2)
     message: 'Happy Birthday Love', // Mặc định lời chúc theo A9
     totalPrice: 260000
   };
@@ -164,9 +196,10 @@
     fillingOptions: document.getElementById('designerFillingOptions'),
     frostingOptions: document.getElementById('designerFrostingOptions'),
 
-    // Bước 5: Ghi chú cho tiệm bánh
-    noteInput: document.getElementById('designerNoteInput'),
-    noteCharCount: document.getElementById('designerNoteCharCount'),
+    // Bước 5: Topping trên bánh
+    toppingOptions: document.getElementById('designerToppingOptions'),
+    toppingCountInfo: document.getElementById('designerToppingCountInfo'),
+    btnClearTopping: document.getElementById('designerBtnClearTopping'),
 
     // Bước 6: Lời chúc & Tóm tắt
     messageInput: document.getElementById('designerMessageInput'),
@@ -181,9 +214,8 @@
     sumSponge: document.getElementById('designerSumSponge'),
     sumFilling: document.getElementById('designerSumFilling'),
     sumFrosting: document.getElementById('designerSumFrosting'),
+    sumTopping: document.getElementById('designerSumTopping'),
     sumMessage: document.getElementById('designerSumMessage'),
-    sumNoteRow: document.getElementById('designerSumNoteRow'),
-    sumNote: document.getElementById('designerSumNote'),
     sumTotal: document.getElementById('designerSumTotal'),
 
     // Mô hình bánh xem trước
@@ -295,6 +327,66 @@
         `)
         .join('');
     }
+
+    // 5.5. Render Bước 5: Topping trên bánh
+    renderToppingOptions();
+  }
+
+  // ----------------- 5.5. Tính Toán Phụ Phí Topping (A3) -----------------
+  function calculateToppingSurcharge(count) {
+    if (count <= 1) return 0;
+    return (count - 1) * 15000;
+  }
+
+  // ----------------- 5.6. Render Danh Sách Topping (Bước 5) -----------------
+  function renderToppingOptions() {
+    if (!dom.toppingOptions) return;
+
+    const selectedCount = state.toppings.length;
+    const isMaxReached = selectedCount >= 3;
+
+    dom.toppingOptions.innerHTML = Object.values(CAKE_CONFIG.toppings)
+      .map(tp => {
+        const isChecked = state.toppings.includes(tp.id);
+        const isDisabled = isMaxReached && !isChecked;
+
+        // Xác định nhãn giá hiển thị
+        let priceLabel = 'Miễn phí';
+        if (isChecked) {
+          const idx = state.toppings.indexOf(tp.id);
+          priceLabel = idx === 0 ? 'Miễn phí' : '+15.000đ';
+        } else {
+          priceLabel = selectedCount === 0 ? 'Miễn phí' : '+15.000đ';
+        }
+
+        return `
+          <label class="designer-option-card ${isChecked ? 'checked' : ''} ${isDisabled ? 'disabled' : ''}">
+            <input
+              type="checkbox"
+              name="cake-topping-choice"
+              value="${tp.id}"
+              ${isChecked ? 'checked' : ''}
+              ${isDisabled ? 'disabled' : ''}
+            />
+            <span class="designer-custom-checkbox"></span>
+            <span class="designer-flavor-swatch" style="background-color: ${tp.color};"></span>
+            <div class="designer-option-content">
+              <div class="designer-option-name-row">
+                <span class="designer-option-name">${tp.name}</span>
+                <span class="designer-option-price">${priceLabel}</span>
+              </div>
+            </div>
+          </label>
+        `;
+      })
+      .join('');
+
+    // Cập nhật thanh đếm topping
+    if (dom.toppingCountInfo) {
+      const surcharge = calculateToppingSurcharge(selectedCount);
+      const surchargeText = surcharge > 0 ? ` (+${formatMoney(surcharge)})` : '';
+      dom.toppingCountInfo.innerHTML = `Đã chọn: <strong>${selectedCount}/3</strong> loại${surchargeText}`;
+    }
   }
 
   /* =========================================================================
@@ -380,8 +472,9 @@
     const spSurcharge = spObj.surcharge || 0;
     const flSurcharge = flObj.surcharge || 0;
     const frSurcharge = frObj.surcharge || 0;
+    const toppingSurcharge = calculateToppingSurcharge(state.toppings.length);
 
-    state.totalPrice = basePrice + spSurcharge + flSurcharge + frSurcharge;
+    state.totalPrice = basePrice + spSurcharge + flSurcharge + frSurcharge + toppingSurcharge;
     return state.totalPrice;
   }
 
@@ -425,16 +518,21 @@
     if (dom.sumSponge) dom.sumSponge.textContent = spObj.name;
     if (dom.sumFilling) dom.sumFilling.textContent = flObj.name;
     if (dom.sumFrosting) dom.sumFrosting.textContent = frObj.name;
-    if (dom.sumMessage) dom.sumMessage.textContent = state.message || '(Không lời chúc)';
-    if (dom.sumNoteRow && dom.sumNote) {
-      const noteTrimmed = (state.note || '').trim();
-      if (noteTrimmed) {
-        dom.sumNoteRow.style.display = 'flex';
-        dom.sumNote.textContent = noteTrimmed;
+
+    // Cập nhật dòng Topping trên tóm tắt theo A5
+    if (dom.sumTopping) {
+      if (state.toppings.length === 0) {
+        dom.sumTopping.textContent = 'Không lấy topping (0đ)';
       } else {
-        dom.sumNoteRow.style.display = 'none';
+        const toppingNames = state.toppings.map(id => CAKE_CONFIG.toppings[id]?.name || id).join(', ');
+        const surcharge = calculateToppingSurcharge(state.toppings.length);
+        dom.sumTopping.textContent = surcharge > 0
+          ? `${toppingNames} (+${formatMoney(surcharge)})`
+          : `${toppingNames} (Miễn phí)`;
       }
     }
+
+    if (dom.sumMessage) dom.sumMessage.textContent = state.message || '(Không lời chúc)';
     if (dom.sumTotal) dom.sumTotal.textContent = formatMoney(state.totalPrice);
   }
 
@@ -470,7 +568,7 @@
 
     if (dom.btnNext) {
       if (state.step === 6) {
-        dom.btnNext.innerHTML = '<i class="fa-solid fa-cart-shopping"></i> Thêm vào giỏ hàng 💗';
+        dom.btnNext.innerHTML = '<i class="fa-solid fa-cart-shopping"></i> Thêm vào giỏ hàng';
       } else {
         dom.btnNext.innerHTML = 'Tiếp theo <span>▶</span>';
       }
@@ -536,19 +634,26 @@
   }
   ========================================================================= */
 
-  // ----------------- 12. Thêm Vào Giỏ Hàng & LocalStorage -----------------
+  // ----------------- 12. Thêm Vào Giỏ Hàng & Chuyển Trang Giỏ Hàng -----------------
   function addToCart() {
     let cart = [];
     try {
       cart = JSON.parse(localStorage.getItem('cart')) || [];
+      if (!Array.isArray(cart)) cart = [];
     } catch (e) {
       cart = [];
     }
 
-    const szObj = CAKE_CONFIG.sizes[state.size];
-    const spObj = CAKE_CONFIG.sponges[state.sponge];
-    const flObj = CAKE_CONFIG.fillings[state.filling];
-    const frObj = CAKE_CONFIG.frostings[state.frosting];
+    const szObj = CAKE_CONFIG.sizes[state.size] || CAKE_CONFIG.sizes.small;
+    const spObj = CAKE_CONFIG.sponges[state.sponge] || CAKE_CONFIG.sponges.vanilla;
+    const flObj = CAKE_CONFIG.fillings[state.filling] || CAKE_CONFIG.fillings.blueberry;
+    const frObj = CAKE_CONFIG.frostings[state.frosting] || CAKE_CONFIG.frostings.whipping;
+
+    const toppingNames = state.toppings.map(id => CAKE_CONFIG.toppings[id]?.name || id);
+    const toppingSurcharge = calculateToppingSurcharge(state.toppings.length);
+    const toppingsText = toppingNames.length > 0
+      ? (toppingSurcharge > 0 ? `${toppingNames.join(', ')} (+${formatMoney(toppingSurcharge)})` : `${toppingNames.join(', ')} (Miễn phí)`)
+      : 'Không lấy topping';
 
     const cakeItem = {
       id: 'custom-cake-' + Date.now(),
@@ -556,13 +661,14 @@
       price: state.totalPrice,
       quantity: 1,
       image: 'assets/img/cart-cake.png',
-      category: 'custom-cake',
+      category: 'cake',
       customDetails: {
         size: szObj.name,
         sponge: spObj.name,
         filling: flObj.name,
         frosting: frObj.name,
-        note: state.note || 'Không có',
+        toppings: toppingNames,
+        toppingsText: toppingsText,
         message: state.message || 'Không có'
       }
     };
@@ -574,7 +680,7 @@
       console.warn('Không thể lưu giỏ hàng vào LocalStorage', e);
     }
 
-    // Phát CustomEvent cart:updated theo đúng yêu cầu mục 5
+    // Phát CustomEvent cart:updated theo chuẩn website
     window.dispatchEvent(new CustomEvent('cart:updated', { detail: cart }));
 
     // Cập nhật số lượng giỏ hàng trên header nếu có hàm updateCartBadge
@@ -588,8 +694,8 @@
       }
     }
 
-    // Hiển thị Toast thông báo thành công
-    showToast();
+    // Chuyển trang sang giỏ hàng ngay lập tức
+    window.location.href = 'cart.html';
   }
 
   function showToast() {
@@ -607,11 +713,9 @@
     state.sponge = 'vanilla';
     state.filling = 'blueberry';
     state.frosting = 'whipping';
-    state.note = '';
+    state.toppings = [];
     state.message = 'Happy Birthday Love';
 
-    if (dom.noteInput) dom.noteInput.value = '';
-    if (dom.noteCharCount) dom.noteCharCount.textContent = '0';
     if (dom.messageInput) dom.messageInput.value = state.message;
 
     renderAllOptionCards();
@@ -678,22 +782,36 @@
       });
     }
 
-    // 14.7. Nhập Ghi Chú Đơn Hàng (Bước 5)
-    if (dom.noteInput) {
-      dom.noteInput.addEventListener('input', (e) => {
-        state.note = e.target.value;
-        if (dom.noteCharCount) {
-          dom.noteCharCount.textContent = state.note.length;
-        }
-        if (dom.sumNoteRow && dom.sumNote) {
-          const noteTrimmed = (state.note || '').trim();
-          if (noteTrimmed) {
-            dom.sumNoteRow.style.display = 'flex';
-            dom.sumNote.textContent = noteTrimmed;
+    // 14.7. Chọn Topping Trên Bánh (Bước 5)
+    if (dom.toppingOptions) {
+      dom.toppingOptions.addEventListener('change', (e) => {
+        if (e.target.name === 'cake-topping-choice') {
+          const val = e.target.value;
+          if (e.target.checked) {
+            if (state.toppings.length < 3) {
+              if (!state.toppings.includes(val)) {
+                state.toppings.push(val);
+              }
+            } else {
+              e.target.checked = false;
+              showAlert('Bạn chỉ có thể chọn tối đa 3 loại topping ✿');
+              return;
+            }
           } else {
-            dom.sumNoteRow.style.display = 'none';
+            state.toppings = state.toppings.filter(id => id !== val);
           }
+          renderToppingOptions();
+          updateCakeVisuals();
         }
+      });
+    }
+
+    // Nút "Không lấy topping"
+    if (dom.btnClearTopping) {
+      dom.btnClearTopping.addEventListener('click', () => {
+        state.toppings = [];
+        renderToppingOptions();
+        updateCakeVisuals();
       });
     }
 
