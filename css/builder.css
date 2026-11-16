@@ -29,7 +29,9 @@
 
   font-family: var(--font);
   color: var(--text);
-  max-width: 1220px;
+  width: 100%;
+  max-width: 1200px;
+  min-height: calc(100vh - 400px);
   margin: 0 auto;
   padding: 30px 20px 60px;
   box-sizing: border-box;
