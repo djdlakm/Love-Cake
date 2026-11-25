@@ -67,20 +67,20 @@
             </button>
           </div>
 
-          <div
+          <form
             class="auth-form"
             id="login-panel"
             data-auth-panel="login"
             role="tabpanel"
             aria-labelledby="login-tab"
           >
-            <label for="login-email">Email</label>
+            <label for="login-email">Email hoặc số điện thoại</label>
             <input
               id="login-email"
-              name="email"
-              type="email"
-              autocomplete="email"
-              placeholder="Email"
+              name="identity"
+              type="text"
+              autocomplete="username"
+              placeholder="Email hoặc SĐT"
               required
             />
 
@@ -108,13 +108,20 @@
                 <input id="remember-me" name="remember" type="checkbox" />
                 <span>Ghi nhớ đăng nhập</span>
               </label>
-              <span class="muted-note">Quên mật khẩu?</span>
+              <a class="muted-note" href="auth.html">Quên mật khẩu?</a>
             </div>
 
-            <button class="submit-button" type="button">
-              <a href="index.html">Đăng nhập</a>
+            <button class="submit-button" type="submit">
+              Đăng nhập
             </button>
-          </div>
+            <p
+              class="form-notice"
+              id="login-message"
+              role="status"
+              aria-live="polite"
+              hidden
+            ></p>
+          </form>
 
           <form
             class="auth-form"
@@ -138,9 +145,9 @@
             <input
               id="register-email"
               name="email"
-              type="email"
-              autocomplete="email"
-              placeholder="Email"
+              type="text"
+              autocomplete="username"
+              placeholder="Email hoặc SĐT"
               required
             />
 
@@ -184,6 +191,13 @@
               required
             />
             <button class="submit-button" type="submit">Tạo tài khoản</button>
+            <p
+              class="form-notice"
+              id="register-message"
+              role="status"
+              aria-live="polite"
+              hidden
+            ></p>
           </form>
           <p class="auth-footer">
             Cần hỗ trợ?
@@ -207,6 +221,7 @@
       </section>
 
       <p class="page-caption">© 2026 Love Cake. Made with love in Hà Nội.</p>
+      <div class="auth-toast" id="auth-toast" role="status" aria-live="polite" hidden></div>
     </main>
     <script src="js/auth.js"></script>
   </body>

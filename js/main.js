@@ -1,20 +1,194 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const normalizePath = (path) => {
-    const withoutIndex = path.toLowerCase().replace(/\/index\.html$/, "/");
-    return withoutIndex.replace(/\/+$/, "") || "/";
-  };
-  const currentPath = normalizePath(window.location.pathname);
+  // 1. Lấy tên file hoặc đường dẫn hiện tại trên thanh địa chỉ 📍
+  const currentPath = window.location.pathname;
+
+  // 2. Chọn tất cả các thẻ <a> nằm trong menu navigation 🔗
   const navLinks = document.querySelectorAll(".navbar a");
 
+  // 3. Duyệt qua từng liên kết để kiểm tra
   navLinks.forEach((link) => {
-    const linkPath = normalizePath(
-      new URL(link.href, window.location.href).pathname
-    );
-    if (linkPath === currentPath) {
-      link.classList.add("active");
+    const linkPath = link.getAttribute("href");
+
+    // Nếu đường dẫn hiện tại trùng với href của thẻ a
+    if (
+      linkPath === currentPath ||
+      (currentPath === "/" && linkPath === "/") ||
+      (linkPath !== "/" && currentPath.endsWith(linkPath))
+    ) {
+      link.classList.add("active"); // 🌟 Thêm class active
     }
   });
+
+  // Cập nhật trạng thái tài khoản trong header sau khi header/footer được tạo.
+  const accountLink = document.querySelector(".header .account-link");
+  if (accountLink) {
+    const baseUrl = window.location.pathname.toLowerCase().includes("/policy/")
+      ? "../"
+      : "./";
+    let currentUser = null;
+    try {
+      currentUser = JSON.parse(localStorage.getItem("LOVE_CAKE_CURRENT_USER") || "null");
+    } catch (error) {
+      console.error("Không thể đọc phiên đăng nhập:", error);
+    }
+
+    if (currentUser && typeof currentUser.name === "string") {
+      const safeName = currentUser.name.replace(/[&<>"']/g, (character) => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;",
+      })[character]);
+      const accountTarget = `${baseUrl}account.html`;
+      accountLink.outerHTML = `
+        <div class="account-menu">
+          <button class="account-link is-authenticated" type="button" aria-expanded="false" aria-haspopup="true">
+            <span class="header-account-avatar" aria-hidden="true">${safeName.charAt(0).toUpperCase()}</span>
+            <span id="account-label">Chào, ${safeName}</span>
+            <span class="account-menu__chevron" aria-hidden="true">⌄</span>
+          </button>
+          <div class="account-dropdown" hidden>
+            ${currentUser.role === "admin"
+              ? `<a href="${baseUrl}admin.html">Trang quản trị</a>`
+              : `<a href="${accountTarget}">Trang cá nhân</a>
+                 <a href="${accountTarget}#orders">Lịch sử đơn hàng</a>`}
+            <button type="button" data-account-logout>Đăng xuất</button>
+          </div>
+        </div>`;
+      const trigger = document.querySelector(".account-menu .account-link");
+      const dropdown = document.querySelector(".account-dropdown");
+      trigger.addEventListener("click", () => {
+        const isOpen = trigger.getAttribute("aria-expanded") === "true";
+        trigger.setAttribute("aria-expanded", String(!isOpen));
+        dropdown.hidden = isOpen;
+      });
+      document.addEventListener("click", (event) => {
+        if (!event.target.closest(".account-menu")) {
+          dropdown.hidden = true;
+          trigger.setAttribute("aria-expanded", "false");
+        }
+      });
+      document.querySelector("[data-account-logout]").addEventListener("click", () => {
+        localStorage.removeItem("LOVE_CAKE_CURRENT_USER");
+        localStorage.removeItem("loveCakeUser");
+        sessionStorage.removeItem("loveCakeUser");
+        window.location.href = `${baseUrl}index.html`;
+      });
+    } else {
+      accountLink.href = "auth.html";
+      const accountLabel = accountLink.querySelector("#account-label");
+      if (accountLabel) accountLabel.textContent = "Đăng nhập / Đăng ký";
+    }
+  }
+
+  initializeHeroSlider();
+  initializePromoPopup();
 });
+
+function initializeHeroSlider() {
+  const slider = document.getElementById("heroSlider");
+  if (!slider) return;
+
+  const slides = Array.from(slider.querySelectorAll(".hero-slide"));
+  const dots = Array.from(slider.querySelectorAll(".hero-dot"));
+  const previousButton = slider.querySelector(".hero-prev");
+  const nextButton = slider.querySelector(".hero-next");
+  const autoplayInterval = Number(slider.dataset.autoplayInterval);
+  const prefersReducedMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+  if (!slides.length) return;
+
+  let activeIndex = slides.findIndex((slide) => slide.classList.contains("active"));
+  if (activeIndex < 0) activeIndex = 0;
+  let autoplayTimer;
+
+  const showSlide = (index) => {
+    activeIndex = (index + slides.length) % slides.length;
+    slides.forEach((slide, slideIndex) => {
+      const isActive = slideIndex === activeIndex;
+      slide.classList.toggle("active", isActive);
+      slide.setAttribute("aria-hidden", String(!isActive));
+    });
+    dots.forEach((dot, dotIndex) => {
+      const isActive = dotIndex === activeIndex;
+      dot.classList.toggle("active", isActive);
+      if (isActive) {
+        dot.setAttribute("aria-current", "true");
+      } else {
+        dot.removeAttribute("aria-current");
+      }
+    });
+  };
+
+  const restartAutoplay = () => {
+    window.clearInterval(autoplayTimer);
+    if (
+      slides.length < 2 ||
+      !Number.isFinite(autoplayInterval) ||
+      autoplayInterval <= 0 ||
+      prefersReducedMotion
+    ) {
+      return;
+    }
+    autoplayTimer = window.setInterval(
+      () => showSlide(activeIndex + 1),
+      autoplayInterval,
+    );
+  };
+  const selectSlide = (index) => {
+    showSlide(index);
+    restartAutoplay();
+  };
+
+  previousButton?.addEventListener("click", () => selectSlide(activeIndex - 1));
+  nextButton?.addEventListener("click", () => selectSlide(activeIndex + 1));
+  dots.forEach((dot, index) => {
+    dot.addEventListener("click", () => selectSlide(index));
+  });
+  showSlide(activeIndex);
+  restartAutoplay();
+}
+
+function initializePromoPopup() {
+  const popup = document.getElementById("promoModal");
+  if (!popup) return;
+
+  let closeTimer;
+  const closePopup = () => {
+    if (popup.hidden || popup.classList.contains("is-closing")) return;
+    popup.classList.remove("is-open");
+    popup.classList.add("is-closing");
+    window.clearTimeout(closeTimer);
+    closeTimer = window.setTimeout(() => {
+      popup.hidden = true;
+      popup.classList.remove("is-closing");
+      document.removeEventListener("keydown", handleEscape);
+    }, 350);
+  };
+  const handleEscape = (event) => {
+    if (event.key === "Escape") closePopup();
+  };
+
+  popup.querySelectorAll("[data-promo-close]").forEach((control) => {
+    control.addEventListener("click", closePopup);
+  });
+  window.setTimeout(() => {
+    popup.hidden = false;
+    popup.classList.remove("is-closing");
+    popup.classList.add("is-open");
+    document.addEventListener("keydown", handleEscape);
+    popup.querySelector(".promo-close")?.focus();
+  }, 1200);
+}
+
+// scroll to top button
+const scrollTopButton = document.querySelector("#scrollToTopBtn");
+scrollTopButton?.addEventListener("click", function () {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth" // Cuộn mượt mà
+  });
+})
 
 // Hàm cập nhật số lượng hiển thị trên icon giỏ hàng 🎈
 function updateCartBadge() {
@@ -33,185 +207,3 @@ function updateCartBadge() {
 
 // Chạy hàm này ngay khi trang web tải xong 🚀
 document.addEventListener('DOMContentLoaded', updateCartBadge);
-
-/* ==========================================
-   HOME.JS - Trang chủ Love Cake
-   1. Slider ảnh hero
-   2. Slider đánh giá khách hàng
-   3. Popup quảng cáo Flash Sale
-   ========================================== */
-document.addEventListener('DOMContentLoaded', () => {
-  initHeroSlider();
-  initTestimonials();
-  initPromoPopup();
-});
-
-/* ==========================================
-   1. SLIDER ẢNH HERO
-   ========================================== */
-function initHeroSlider() {
-  const slider = document.getElementById('heroSlider');
-  if (!slider) return;
-
-  const slides = slider.querySelectorAll('.hero-slide');
-  const dots = slider.querySelectorAll('.hero-dot');
-  const prev = slider.querySelector('.hero-prev');
-  const next = slider.querySelector('.hero-next');
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const INTERVAL = 5000; // ms - thời gian giữa 2 lần tự chuyển ảnh
-
-  let current = 0;
-  let timer = null;
-
-  function show(index) {
-    current = (index + slides.length) % slides.length;
-    slides.forEach((s, i) => s.classList.toggle('active', i === current));
-    dots.forEach((d, i) => d.classList.toggle('active', i === current));
-  }
-
-  function stop() {
-    clearInterval(timer);
-  }
-
-  function start() {
-    if (reduceMotion || slides.length < 2) return;
-    stop();
-    timer = setInterval(() => show(current + 1), INTERVAL);
-  }
-
-  if (prev) prev.addEventListener('click', () => { show(current - 1); start(); });
-  if (next) next.addEventListener('click', () => { show(current + 1); start(); });
-  dots.forEach((dot, i) => {
-    dot.addEventListener('click', () => { show(i); start(); });
-  });
-
-  slider.addEventListener('mouseenter', stop);
-  slider.addEventListener('mouseleave', start);
-
-  start();
-}
-
-/* ==========================================
-   2. SLIDER ĐÁNH GIÁ KHÁCH HÀNG
-   ========================================== */
-function initTestimonials() {
-  const slides = document.querySelectorAll('.testimonial-slide');
-  const dots = document.querySelectorAll('.testimonial-dots .dot');
-  if (!slides.length) return;
-
-  let current = 0;
-  let timer = null;
-
-  function show(index) {
-    current = index;
-    slides.forEach((s, i) => s.classList.toggle('active', i === index));
-    dots.forEach((d, i) => d.classList.toggle('active', i === index));
-  }
-
-  function restart() {
-    clearInterval(timer);
-    timer = setInterval(() => show((current + 1) % slides.length), 6000);
-  }
-
-  dots.forEach((dot, i) => {
-    dot.addEventListener('click', () => {
-      show(i);
-      restart();
-    });
-  });
-
-  restart();
-}
-
-/* ==========================================
-   3. POPUP QUẢNG CÁO FLASH SALE
-   ========================================== */
-function initPromoPopup() {
-  const modal = document.getElementById('promoModal');
-  if (!modal) return;
-
-  // Đổi thành true nếu chỉ muốn hiện 1 lần cho mỗi phiên (đóng tab là hiện lại)
-  const SHOW_ONCE_PER_SESSION = false;
-  const STORAGE_KEY = 'lovecake_promo_seen';
-  const OPEN_DELAY = 400; // ms - chờ trang chủ hiện ra một chút rồi mới bật popup
-
-  if (SHOW_ONCE_PER_SESSION && readSession(STORAGE_KEY)) return;
-
-  const image = modal.querySelector('.promo-image');
-  const closeBtn = modal.querySelector('.promo-close');
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  let lastFocused = null;
-
-  function openPopup() {
-    lastFocused = document.activeElement;
-    modal.hidden = false;
-    document.body.style.overflow = 'hidden'; // khoá cuộn trang chính
-    // đợi 1 frame để trình duyệt áp dụng trạng thái ban đầu rồi mới chạy hiệu ứng
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => modal.classList.add('is-open'));
-    });
-    closeBtn.focus({ preventScroll: true });
-    document.addEventListener('keydown', onKeydown);
-    if (SHOW_ONCE_PER_SESSION) writeSession(STORAGE_KEY, '1');
-  }
-
-  function closePopup() {
-    document.removeEventListener('keydown', onKeydown);
-    const finish = () => {
-      modal.hidden = true;
-      modal.classList.remove('is-open', 'is-closing');
-      document.body.style.overflow = '';
-      if (lastFocused && lastFocused.focus) lastFocused.focus({ preventScroll: true });
-    };
-    if (reduceMotion) return finish();
-    modal.classList.add('is-closing');
-    setTimeout(finish, 280);
-  }
-
-  function onKeydown(e) {
-    if (e.key === 'Escape') {
-      closePopup();
-      return;
-    }
-    // Giữ phím Tab chỉ xoay vòng trong popup
-    if (e.key === 'Tab') {
-      const items = [...modal.querySelectorAll('button, a[href]')];
-      const first = items[0];
-      const last = items[items.length - 1];
-      if (e.shiftKey && document.activeElement === first) {
-        e.preventDefault();
-        last.focus();
-      } else if (!e.shiftKey && document.activeElement === last) {
-        e.preventDefault();
-        first.focus();
-      }
-    }
-  }
-
-  // Bấm nút X hoặc bấm ra vùng nền mờ đều đóng popup
-  modal.querySelectorAll('[data-promo-close]').forEach((el) => {
-    el.addEventListener('click', closePopup);
-  });
-
-  // Chỉ hiện popup khi ảnh đã tải xong (tránh khung trống); ảnh lỗi thì bỏ qua luôn
-  const start = () => setTimeout(openPopup, OPEN_DELAY);
-  if (image.complete && image.naturalWidth > 0) start();
-  else image.addEventListener('load', start, { once: true });
-}
-
-/* sessionStorage có thể bị chặn (chế độ riêng tư) nên luôn bọc try/catch */
-function readSession(key) {
-  try {
-    return sessionStorage.getItem(key);
-  } catch (e) {
-    return null;
-  }
-}
-
-function writeSession(key, value) {
-  try {
-    sessionStorage.setItem(key, value);
-  } catch (e) {
-    /* bỏ qua */
-  }
-}

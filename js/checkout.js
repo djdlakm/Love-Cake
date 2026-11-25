@@ -131,7 +131,14 @@ function loadCart(){
       price:Number(item.price??item.salePrice??item.unitPrice),
       quantity:Number(item.quantity??item.qty??1),
       image:String(item.image||item.img||item.thumbnail||""),
-      category:String(item.category||item.type||"")
+      category:String(item.category||item.type||""),
+      size:String(item.size||item.customDetails?.size||""),
+      customDetails:item.customDetails&&typeof item.customDetails==="object"
+        ?item.customDetails
+        :null,
+      accessories:Array.isArray(item.accessories)
+        ?item.accessories.map(accessory=>String(accessory))
+        :[]
     })).filter(item=>item.name&&Number.isFinite(item.price)&&item.price>0&&
       Number.isInteger(item.quantity)&&item.quantity>0);
   }catch(error){
@@ -146,11 +153,10 @@ function loadCart(){
 const $=id=>document.getElementById(id);
 const money=n=>new Intl.NumberFormat("vi-VN").format(Math.max(0,Math.round(n)))+"đ";
 
-
 const markFieldComplete=field=>field.classList.toggle("has-value",Boolean(field.value.trim()));
 
 
-["city","district","ward"].forEach(id=>{
+["city","ward"].forEach(id=>{
   const select=$(id);
   markFieldComplete(select);
   select.addEventListener("change",()=>markFieldComplete(select));
@@ -166,6 +172,35 @@ addressField.addEventListener("input",()=>markFieldComplete(addressField));
   markFieldComplete(field);
   field.addEventListener("input",()=>markFieldComplete(field));
 });
+
+function prefillCheckoutFromAccount(){
+  let currentUser=null;
+  try{
+    currentUser=JSON.parse(localStorage.getItem("LOVE_CAKE_CURRENT_USER")||"null");
+  }catch(error){
+    console.error("Không thể đọc hồ sơ để điền thông tin thanh toán.",error);
+    return;
+  }
+  if(!currentUser||currentUser.role==="admin")return;
+
+  const values={
+    fullName:currentUser.name||currentUser.fullName,
+    phone:currentUser.phone,
+    city:"Hà Nội",
+    ward:currentUser.ward,
+    address:currentUser.address
+  };
+  Object.entries(values).forEach(([id,value])=>{
+    if(value===null||value===undefined)return;
+    const field=$(id);
+    field.value=String(value);
+    const eventName=field.tagName==="SELECT"?"change":"input";
+    field.dispatchEvent(new Event(eventName,{bubbles:true}));
+  });
+  updateTransferContent();
+}
+
+prefillCheckoutFromAccount();
 
 
 
@@ -592,7 +627,7 @@ function validForm(){
     return false;
   }
   if(receiveType()==="delivery"){
-    if(!$("city").value||!$("district").value||!$("ward").value||!$("address").value.trim()){
+    if(!$("city").value||!$("ward").value||!$("address").value.trim()){
       showCheckoutNotice("Vui lòng điền đầy đủ địa chỉ giao bánh để chúng mình giao bánh đến đúng nơi nhé ♡");
       return false;
     }
@@ -608,7 +643,51 @@ function validForm(){
 
 $("placeOrder").addEventListener("click",()=>{
   if(!validForm())return;
-  fillInvoice();
+  const invoice=fillInvoice();
+  try{
+    const savedOrders=localStorage.getItem("LOVE_CAKE_ORDERS");
+    const orders=savedOrders?JSON.parse(savedOrders):[];
+    if(!Array.isArray(orders))throw new Error("Dữ liệu đơn hàng không hợp lệ.");
+    let currentUser=null;
+    try{
+      currentUser=JSON.parse(localStorage.getItem("LOVE_CAKE_CURRENT_USER")||"null");
+    }catch(error){
+      console.error("Không thể đọc phiên khách hàng khi đặt đơn.",error);
+    }
+    orders.push({
+      id:invoice.code,
+      userId:currentUser?.id||"",
+      email:currentUser?.email||"",
+      customerName:$("fullName").value.trim(),
+      phone:$("phone").value.trim(),
+      address:$("billAddress").textContent,
+      createdAt:invoice.createdAt,
+      receiveTime:invoice.receiveTime,
+      receiveType:invoice.receiveType,
+      paymentMethod:invoice.paymentMethod,
+      paymentStatus:invoice.paymentStatus,
+      note:invoice.note,
+      items:cart.map(item=>({
+        name:item.name,
+        size:item.size||"",
+        quantity:item.quantity,
+        price:item.price,
+        category:item.category||"",
+        customDetails:item.customDetails,
+        accessories:item.accessories
+      })),
+      subtotal:invoice.subtotal,
+      shipping:invoice.shipping,
+      discount:invoice.discount,
+      total:invoice.total,
+      status:"Đang xử lý"
+    });
+    localStorage.setItem("LOVE_CAKE_ORDERS",JSON.stringify(orders));
+  }catch(error){
+    console.error("Không thể lưu đơn hàng.",error);
+    showCheckoutNotice("Không thể lưu đơn hàng vào trình duyệt. Đơn hàng chưa được xác nhận, vui lòng thử lại nhé ♡");
+    return;
+  }
   $("invoiceModal").classList.add("show");
   cart=[];
   saveCart({orderCompleted:true});
@@ -641,7 +720,7 @@ function fillInvoice(){
 
   let address="";
   if(receiveType()==="delivery"){
-    address=[$("address").value,$("ward").value,$("district").value,$("city").value].filter(Boolean).join(", ");
+    address=[$("address").value,$("ward").value,$("city").value].filter(Boolean).join(", ");
   }else{
     address=$("store").options[$("store").selectedIndex].text;
   }
@@ -664,17 +743,32 @@ function fillInvoice(){
   const pay=document.querySelector('input[name="payment"]:checked')?.value;
   const totals=calculateTotals();
   const paidByBank=pay==="online";
+  const paymentMethod=paidByBank
+    ?"Chuyển khoản ngân hàng / Ví điện tử"
+    :"Tiền mặt khi nhận bánh (COD)";
+  const paymentStatus=paidByBank
+    ?"Chờ xác nhận thanh toán"
+    :"Chưa thanh toán";
   $("billSubtotal").textContent=money(totals.subtotal);
   $("billShipping").textContent=money(totals.shipping);
   $("billDiscount").textContent=totals.discount>0?"-"+money(totals.discount):money(0);
   $("billDueLabel").textContent="Tổng cộng";
   $("billTotal").textContent=money(totals.total);
-  $("billPayment").textContent=paidByBank
-    ?"Chuyển khoản ngân hàng / Ví điện tử"
-    :"Tiền mặt khi nhận bánh (COD)";
-  $("billPaymentStatus").textContent=paidByBank
-    ?"Chờ xác nhận thanh toán"
-    :"Chưa thanh toán";
+  $("billPayment").textContent=paymentMethod;
+  $("billPaymentStatus").textContent=paymentStatus;
+  return {
+    code,
+    createdAt:now.toISOString(),
+    receiveTime:$("billReceive").textContent,
+    receiveType:receiveType(),
+    paymentMethod,
+    paymentStatus,
+    note:$("note").value.trim(),
+    subtotal:totals.subtotal,
+    shipping:totals.shipping,
+    discount:totals.discount,
+    total:totals.total
+  };
 }
 
 

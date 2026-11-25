@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Quản lý thông tin và đơn hàng Love Cake của bạn.">
+    <title>Tài khoản của tôi | Love Cake</title>
+    <script src="https://kit.fontawesome.com/30260f1add.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/account.css">
+  </head>
+  <body class="account-document">
+    <!-- Header dùng chung được tạo trong js/header&footer.js -->
+    <div id="header-placeholder"></div>
+    <main class="account-page">
+      <header class="account-page__heading">
+        <p class="account-page__eyebrow">Góc nhỏ của bạn</p>
+        <h1>Tài khoản của tôi</h1>
+        <p>Quản lý thông tin cá nhân và theo dõi những chiếc bánh đang trên đường đến với bạn.</p>
+      </header>
+      <div class="account-layout">
+        <aside class="account-sidebar">
+          <div class="account-sidebar__identity">
+            <span class="account-avatar account-avatar-initial" id="account-avatar-initial" aria-hidden="true">K</span>
+            <div><strong id="account-sidebar-name">Khách hàng</strong><small id="account-sidebar-email"></small></div>
+          </div>
+          <nav class="account-nav" aria-label="Điều hướng tài khoản">
+            <button type="button" class="account-nav__item is-active" data-account-tab="profile">Thông tin tài khoản</button>
+            <button type="button" class="account-nav__item" data-account-tab="orders">Lịch sử đơn hàng</button>
+            <a class="account-nav__item" href="product.html">Tiếp tục mua sắm</a>
+            <button type="button" class="account-nav__item account-nav__logout" id="account-logout">Đăng xuất</button>
+          </nav>
+        </aside>
+        <section class="account-content">
+          <section class="account-panel" data-account-panel="profile">
+            <div class="account-panel__heading"><div><p class="account-page__eyebrow">Hồ sơ cá nhân</p><h2>Thông tin tài khoản</h2></div></div>
+            <form class="account-profile-form" id="account-profile-form" novalidate>
+              <label>Họ và tên<input id="profile-name" name="name" type="text" autocomplete="name" required></label>
+              <label>Email <span class="account-readonly">(không thể chỉnh sửa)</span><input id="profile-email" name="email" type="email" readonly></label>
+              <label>Số điện thoại<input id="profile-phone" name="phone" type="tel" inputmode="numeric" autocomplete="tel" required></label>
+              <label>Ngày sinh<input id="profile-birth-date" name="birthDate" type="date"></label>
+              <label>Giới tính<select id="profile-gender" name="gender"><option value="">Chọn giới tính</option><option value="Nữ">Nữ</option><option value="Nam">Nam</option><option value="Khác">Khác</option></select></label>
+              <label>Thành phố
+                <select id="profile-city" name="city">
+                  <option value="Hà Nội" selected>Hà Nội</option>
+                </select>
+              </label>
+              <label>Phường/Xã
+                <select id="profile-ward" name="ward" required>
+                  <option value="">Chọn phường/xã</option>
+                  <option value="Phường Ba Đình">Phường Ba Đình</option>
+                  <option value="Phường Ngọc Hà">Phường Ngọc Hà</option>
+                  <option value="Phường Giảng Võ">Phường Giảng Võ</option>
+                  <option value="Phường Hoàn Kiếm">Phường Hoàn Kiếm</option>
+                  <option value="Phường Cửa Nam">Phường Cửa Nam</option>
+                  <option value="Phường Tây Hồ">Phường Tây Hồ</option>
+                  <option value="Phường Long Biên">Phường Long Biên</option>
+                  <option value="Phường Cầu Giấy">Phường Cầu Giấy</option>
+                  <option value="Phường Yên Hòa">Phường Yên Hòa</option>
+                  <option value="Phường Ô Chợ Dừa">Phường Ô Chợ Dừa</option>
+                  <option value="Phường Láng">Phường Láng</option>
+                  <option value="Phường Kim Liên">Phường Kim Liên</option>
+                  <option value="Phường Đống Đa">Phường Đống Đa</option>
+                  <option value="Phường Hai Bà Trưng">Phường Hai Bà Trưng</option>
+                  <option value="Phường Bạch Mai">Phường Bạch Mai</option>
+                  <option value="Phường Hoàng Mai">Phường Hoàng Mai</option>
+                  <option value="Phường Thanh Xuân">Phường Thanh Xuân</option>
+                  <option value="Phường Hà Đông">Phường Hà Đông</option>
+                </select>
+              </label>
+              <label class="account-profile-form__wide">Địa chỉ cụ thể
+                <input id="profile-address" name="address" type="text" autocomplete="street-address" placeholder="Số nhà, tên đường...">
+              </label>
+              <p class="account-form-message" id="profile-message" role="status" aria-live="polite" hidden></p>
+              <button class="account-primary-button" type="submit">Lưu thay đổi</button>
+            </form>
+          </section>
+          <section class="account-panel" data-account-panel="orders" hidden>
+            <div class="account-panel__heading"><div><p class="account-page__eyebrow">Những khoảnh khắc ngọt ngào</p><h2>Lịch sử đơn hàng</h2></div></div>
+            <div class="account-orders" id="account-orders" aria-live="polite"></div>
+          </section>
+        </section>
+      </div>
+      <dialog class="account-order-dialog" id="account-order-dialog" aria-labelledby="account-order-dialog-title">
+        <button class="account-order-dialog__close" id="account-order-dialog-close" type="button" aria-label="Đóng chi tiết đơn hàng">&times;</button>
+        <div id="account-order-dialog-content"></div>
+      </dialog>
+      <dialog class="account-cancel-dialog" id="account-cancel-dialog" aria-labelledby="account-cancel-title">
+        <h2 id="account-cancel-title">Xác nhận hủy đơn hàng</h2>
+        <p id="account-cancel-message"></p>
+        <div class="account-cancel-dialog__actions">
+          <button class="account-cancel-dialog__keep" id="account-cancel-keep" type="button">Không, giữ đơn</button>
+          <button class="account-cancel-dialog__confirm" id="account-cancel-confirm" type="button">Xác nhận hủy</button>
+        </div>
+      </dialog>
+      <p class="account-toast" id="account-toast" role="status" aria-live="polite" hidden></p>
+    </main>
+    <!-- Footer dùng chung được tạo trong js/header&footer.js -->
+    <div id="footer-placeholder"></div>
+    <script src="js/header&footer.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/account.js"></script>
+  </body>
+</html>

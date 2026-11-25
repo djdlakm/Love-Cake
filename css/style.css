@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap');
 
 :root {
   --color-brand: #f43f5e;
@@ -35,10 +35,6 @@
   box-sizing: border-box;
 }
 
-body {
-  margin: 0;
-}
-
 a {
   text-decoration: none;
 }
@@ -50,7 +46,7 @@ ul {
 }
 
 * {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Inter', sans-serif;
   font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;
@@ -95,7 +91,6 @@ ul {
   display: block;
   object-fit: cover;
   object-position: center;
-  filter: drop-shadow(3px 3px 3px var(--color-shadow-medium));
 }
 
 /* Menu Navbar */
@@ -139,27 +134,6 @@ ul {
 }
 
 /* Giỏ hàng (Cart Icon & Badge) */
-.header-actions {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 20px;
-}
-
-.account-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  color: var(--color-text);
-  font-size: 14px;
-  font-weight: 600;
-  transition: color 0.3s ease;
-}
-
-.account-link:hover {
-  color: var(--color-brand);
-}
-
 .cart-icon {
   position: relative;
   display: inline-flex;
@@ -227,8 +201,7 @@ ul {
   flex: 0 0 auto;
   width: 100%;
   justify-content: center;
-  padding-bottom: 0px;
-  
+  padding-bottom: 0;
 }
 
 .footer .footer-about {
@@ -330,14 +303,6 @@ ul {
   white-space: nowrap;
 }
 
-.footer .bottom {
-  border-top: 1px solid var(--color-brand-border-overlay);
-}
-
-.footer .bottom p {
-  color: var(--color-text-subtle);
-}
-
 .footer .col1,
 .footer .col2,
 .footer .col3 {
@@ -347,10 +312,10 @@ ul {
 .footer .col1 .logo {
   width: 160px;
   height: 92px;
+  margin: 0 auto 24px;
   display: block;
   object-fit: cover;
   object-position: center;
-  margin: 0 auto 24px;
 }
 
 .footer h3 {
@@ -400,6 +365,10 @@ ul {
   transition: all 0.2s ease;
 }
 
+.footer .col3 a:hover {
+  color: var(--color-brand);
+  padding-left: 6px;
+}
 
 /* Phần bản quyền */
 .footer .bottom {
@@ -448,8 +417,7 @@ ul {
    ========================================== */
 @media screen and (max-width: 1024px) {
   .header .container {
-    position: relative;
-    padding: 15px 15px;
+    padding: 0 15px;
   }
 
   /* Nút 3 gạch Mở Menu */
@@ -471,33 +439,15 @@ ul {
     flex: 1;
   }
 
-  .header .logo-wrapper {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-
-  }
-
   .header .logo {
     width: 110px;
     height: 63px;
   }
 
-  .header-actions {
-    gap: 14px;
-  }
-
-  .footer .footer-brand .logo {
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .account-link span {
-    display: none;
-  }
-
-  .account-link {
-    font-size: 20px;
+  .header .cart {
+    width: 40px;
+    display: flex;
+    justify-content: flex-end;
   }
 
   /* Menu trượt Off-Canvas */
@@ -569,6 +519,7 @@ ul {
   .footer .container {
     flex-wrap: wrap;
     gap: 30px 20px;
+    width: calc(100% - 55px);
     margin-left: 35px;
     margin-right: 20px;
   }
@@ -589,6 +540,22 @@ ul {
   }
 }
 
+@media screen and (max-width: 767px) {
+  .header .header-actions {
+    gap: 6px;
+  }
+
+  .header .account-link #account-label {
+    max-width: 82px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .header .account-menu__chevron {
+    display: none;
+  }
+}
+
 /* ==========================================
    5. ĐIỆN THOẠI NHỎ (Màn hình < 768px) 📲
    ========================================== */
@@ -597,6 +564,9 @@ ul {
   .footer .container {
     flex-direction: column;
     gap: 25px;
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
   }
 
   .footer .col1,
@@ -604,6 +574,12 @@ ul {
   .footer .col3 {
     flex: 1 1 100%;
     width: 100%;
+  }
+
+  .footer .container.footer-content {
+    grid-template-columns: 1fr;
+    margin: 0 auto 32px;
+    gap: 32px;
   }
 
   .footer h3 {
@@ -615,11 +591,6 @@ ul {
     margin-bottom: 15px;
   }
 
-  .footer .container.footer-content {
-    grid-template-columns: 1fr;
-    margin: 0 auto 32px;
-    gap: 32px;
-  }
   #scrollToTopBtn {
     width: 40px;
     height: 40px;
@@ -629,4 +600,106 @@ ul {
   }
 }
 
+/* Điều khiển tài khoản trong header dùng chung. */
+.header .header-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 18px;
+}
 
+.header .account-menu {
+  position: relative;
+}
+
+.header .account-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 0;
+  border: 0;
+  background: transparent;
+  color: var(--color-text);
+  cursor: pointer;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.header .account-link:hover,
+.header .account-link.is-authenticated {
+  color: var(--color-brand-hover);
+}
+
+.header .header-account-avatar {
+  display: grid;
+  width: 30px;
+  height: 30px;
+  flex: 0 0 30px;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--color-brand-soft);
+  color: var(--color-brand-hover);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.account-avatar-initial {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.header .account-menu__chevron {
+  color: var(--color-text-muted);
+  font-size: 16px;
+}
+
+.header .account-dropdown {
+  position: absolute;
+  z-index: 1100;
+  top: calc(100% + 6px);
+  right: 0;
+  display: grid;
+  width: 190px;
+  padding: 7px;
+  border: 1px solid var(--color-brand-border-soft);
+  border-radius: 11px;
+  background: var(--color-surface);
+  box-shadow: 0 10px 28px var(--color-shadow-ink-medium);
+}
+
+.header .account-dropdown[hidden] {
+  display: none;
+}
+
+.header .account-dropdown a,
+.header .account-dropdown button {
+  padding: 10px 11px;
+  border: 0;
+  border-radius: 7px;
+  background: transparent;
+  color: var(--color-text);
+  cursor: pointer;
+  font: inherit;
+  font-size: 13px;
+  text-align: left;
+  text-decoration: none;
+}
+
+.header .account-dropdown a:hover,
+.header .account-dropdown button:hover {
+  background: var(--color-brand-soft);
+  color: var(--color-brand-hover);
+}
+
+@media screen and (max-width: 1024px) {
+  .header .header-actions {
+    gap: 10px;
+  }
+
+  .header .account-link {
+    gap: 5px;
+    font-size: 11px;
+  }
+}
