@@ -200,6 +200,14 @@ document.addEventListener("DOMContentLoaded", () => {
     window.location.href = "product.html";
   });
 
+  document.querySelector(".empty-primary-btn")?.addEventListener("click", () => {
+    window.location.href = "product.html";
+  });
+
+  document.querySelector(".empty-secondary-btn")?.addEventListener("click", () => {
+    window.location.href = "builder.html";
+  });
+
   checkoutBtn?.addEventListener("click", () => {
     const cart = getCart();
     if (cart.length === 0) {
