@@ -269,8 +269,12 @@
   }
 
   .hero-slider {
-    aspect-ratio: 16 / 10;
+    aspect-ratio: 1596 / 591;
     border-radius: 20px;
+  }
+
+  .hero-slide img {
+    object-fit: contain;
   }
 
   .hero-arrow {

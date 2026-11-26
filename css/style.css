@@ -69,6 +69,10 @@ ul {
   display: none;
 }
 
+.header .navbar .mobile-account-link {
+  display: none;
+}
+
 /* ==========================================
    2. HEADER CHUNG (DESKTOP) 🔝
    ========================================== */
@@ -119,14 +123,58 @@ ul {
   margin: 0;
 }
 
+.header .navbar .nav-dropdown {
+  position: relative;
+}
+
+.header .navbar .nav-dropdown-toggle {
+  display: none;
+}
+
+.header .navbar .nav-dropdown-menu {
+  position: absolute;
+  z-index: 1001;
+  top: 100%;
+  left: -16px;
+  display: none;
+  gap: 0;
+  min-width: 200px;
+  padding: 6px 0;
+  border: 1px solid var(--color-brand-border-soft);
+  border-radius: 6px;
+  background: var(--color-surface);
+  box-shadow: 0 8px 18px var(--color-shadow-ink-medium);
+}
+
+.header .navbar .nav-dropdown-menu a {
+  display: block;
+  padding: 9px 16px;
+  color: var(--color-text);
+  font-size: 15px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.header .navbar .nav-dropdown-menu a:hover {
+  background: var(--color-brand-soft);
+  color: var(--color-brand);
+}
+
+@media screen and (min-width: 1025px) {
+  .header .navbar .nav-dropdown:hover > .nav-dropdown-menu,
+  .header .navbar .nav-dropdown:focus-within > .nav-dropdown-menu {
+    display: grid;
+  }
+}
+
 /* Hover & Active hiệu ứng gạch thẳng vừa khít chữ */
 .header .navbar a:hover,
-.header .navbar li.active a,
+.header .navbar li.active > a,
 .header .navbar a.active {
   color: var(--color-brand);
 }
 
-.header .navbar li.active a,
+.header .navbar li.active > a,
 .header .navbar a.active {
   border-bottom: 2.5px solid var(--color-brand);
   padding-bottom: 4px;
@@ -417,6 +465,8 @@ ul {
    ========================================== */
 @media screen and (max-width: 1024px) {
   .header .container {
+    position: relative;
+    min-height: 67px;
     padding: 0 15px;
   }
 
@@ -433,10 +483,13 @@ ul {
     text-align: left;
   }
 
-  .logo-wrapper {
+  .header .logo-wrapper {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
     display: flex;
     justify-content: center;
-    flex: 1;
+    flex: 0 0 auto;
   }
 
   .header .logo {
@@ -497,9 +550,66 @@ ul {
     gap: 0;
   }
 
+  .header .navbar > ul {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+  }
+
   .header .navbar li {
     border-bottom: 1px solid var(--color-border-subtle);
     width: 100%;
+  }
+
+  .header .navbar .nav-dropdown {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 48px;
+  }
+
+  .header .navbar .nav-dropdown-toggle {
+    display: grid;
+    width: 48px;
+    place-items: center;
+    border: 0;
+    background: transparent;
+    color: var(--color-text-muted);
+    cursor: pointer;
+  }
+
+  .header .navbar .nav-dropdown-toggle i {
+    transition: transform 0.2s ease;
+  }
+
+  .header .navbar .nav-dropdown.is-expanded .nav-dropdown-toggle i {
+    transform: rotate(180deg);
+  }
+
+  .header .navbar .nav-dropdown-menu {
+    position: static;
+    grid-column: 1 / -1;
+    min-width: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: var(--color-brand-soft);
+    box-shadow: none;
+  }
+
+  .header .navbar .nav-dropdown.is-expanded > .nav-dropdown-menu {
+    display: grid;
+  }
+
+  .header .navbar .nav-dropdown-menu li {
+    border-bottom: 1px solid var(--color-brand-border);
+  }
+
+  .header .navbar .nav-dropdown-menu a {
+    padding: 12px 32px;
+    font-size: 14px;
+  }
+
+  .header .navbar .mobile-account-link {
+    display: list-item;
   }
 
   .header .navbar a {
@@ -508,11 +618,33 @@ ul {
     font-size: 15px;
   }
 
-  .header .navbar li.active a,
+  .header .navbar li.active > a,
   .header .navbar a.active {
     background-color: var(--color-brand-soft);
     border-bottom: none;
     padding-bottom: 15px;
+  }
+
+  .header .navbar li.nav-dropdown > a,
+  .header .navbar li.nav-dropdown > .nav-dropdown-toggle {
+    background-color: transparent;
+  }
+
+  .header .navbar li.nav-dropdown.is-expanded > a,
+  .header .navbar li.nav-dropdown.is-expanded > .nav-dropdown-toggle {
+    background-color: var(--color-brand-soft);
+  }
+
+  .header .navbar li.nav-dropdown.is-expanded {
+    background-color: var(--color-brand-soft);
+  }
+
+  .header .navbar li.nav-dropdown > a {
+    color: var(--color-text);
+  }
+
+  .header .navbar li.nav-dropdown.is-expanded > a {
+    color: var(--color-brand);
   }
 
   /* Footer 2 Cột trên Tablet */
@@ -545,10 +677,8 @@ ul {
     gap: 6px;
   }
 
-  .header .account-link #account-label {
-    max-width: 82px;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  .header .account-link.is-authenticated #account-label {
+    display: none;
   }
 
   .header .account-menu__chevron {
@@ -696,6 +826,10 @@ ul {
 @media screen and (max-width: 1024px) {
   .header .header-actions {
     gap: 10px;
+  }
+
+  .header-actions > .account-link:not(.is-authenticated) {
+    display: none;
   }
 
   .header .account-link {

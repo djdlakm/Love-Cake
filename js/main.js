@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const currentPath = window.location.pathname;
 
   // 2. Chọn tất cả các thẻ <a> nằm trong menu navigation 🔗
-  const navLinks = document.querySelectorAll(".navbar a");
+  const navLinks = document.querySelectorAll(".navbar > ul > li > a");
 
   // 3. Duyệt qua từng liên kết để kiểm tra
   navLinks.forEach((link) => {
@@ -21,6 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Cập nhật trạng thái tài khoản trong header sau khi header/footer được tạo.
   const accountLink = document.querySelector(".header .account-link");
+  const menuAccountLink = document.querySelector(".header .mobile-account-link a");
   if (accountLink) {
     const baseUrl = window.location.pathname.toLowerCase().includes("/policy/")
       ? "../"
@@ -56,6 +57,13 @@ document.addEventListener("DOMContentLoaded", function () {
             <button type="button" data-account-logout>Đăng xuất</button>
           </div>
         </div>`;
+      if (menuAccountLink) {
+        menuAccountLink.href =
+          currentUser.role === "admin"
+            ? `${baseUrl}admin.html`
+            : `${baseUrl}account.html`;
+        menuAccountLink.textContent = "Tài khoản";
+      }
       const trigger = document.querySelector(".account-menu .account-link");
       const dropdown = document.querySelector(".account-dropdown");
       trigger.addEventListener("click", () => {
@@ -79,6 +87,7 @@ document.addEventListener("DOMContentLoaded", function () {
       accountLink.href = "auth.html";
       const accountLabel = accountLink.querySelector("#account-label");
       if (accountLabel) accountLabel.textContent = "Đăng nhập / Đăng ký";
+      if (menuAccountLink) menuAccountLink.href = `${baseUrl}auth.html`;
     }
   }
 
