@@ -1,3 +1,4 @@
+
 const OFFER_CATALOG = {
   LOVECAKE11: {
     code:"LOVECAKE11",
@@ -110,14 +111,8 @@ const OFFER_CATALOG = {
   }
 };
 
-
-
-
 let cart = loadCart();
 let voucher = {code:"",active:false};
-
-
-
 
 function loadCart(){
   try{
@@ -147,14 +142,10 @@ function loadCart(){
   }
 }
 
-
-
-
 const $=id=>document.getElementById(id);
 const money=n=>new Intl.NumberFormat("vi-VN").format(Math.max(0,Math.round(n)))+"đ";
 
 const markFieldComplete=field=>field.classList.toggle("has-value",Boolean(field.value.trim()));
-
 
 ["city","ward"].forEach(id=>{
   const select=$(id);
@@ -165,7 +156,6 @@ markFieldComplete($("store"));
 const addressField=$("address");
 markFieldComplete(addressField);
 addressField.addEventListener("input",()=>markFieldComplete(addressField));
-
 
 ["fullName","phone","receiveDate","receiveHour","note"].forEach(id=>{
   const field=$(id);
@@ -202,9 +192,6 @@ function prefillCheckoutFromAccount(){
 
 prefillCheckoutFromAccount();
 
-
-
-
 function setMobileMenuOpen(isOpen){
   const navbar=document.querySelector(".navbar");
   const toggle=$("menuToggle");
@@ -212,9 +199,6 @@ function setMobileMenuOpen(isOpen){
   navbar.classList.toggle("active",isOpen);
   toggle.setAttribute("aria-expanded",String(isOpen));
 }
-
-
-
 
 function saveCart({manuallyCleared=false,orderCompleted=false}={}){
   try{
@@ -228,9 +212,6 @@ function saveCart({manuallyCleared=false,orderCompleted=false}={}){
   }
 }
 
-
-
-
 function initializeHeaderControls(){
   $("menuToggle").addEventListener("click",()=>setMobileMenuOpen(true));
   $("menuClose").addEventListener("click",()=>setMobileMenuOpen(false));
@@ -239,17 +220,11 @@ function initializeHeaderControls(){
   });
 }
 
-
-
-
 if(document.readyState==="loading"){
   document.addEventListener("DOMContentLoaded",initializeHeaderControls,{once:true});
 }else{
   initializeHeaderControls();
 }
-
-
-
 
 $("fullName").addEventListener("input",updateTransferContent);
 $("phone").addEventListener("input",updateTransferContent);
@@ -261,15 +236,9 @@ document.addEventListener("keydown",event=>{
   if(event.key==="Escape")hideVoucherModal();
 });
 
-
-
-
 function escapeHTML(s){
   return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
 }
-
-
-
 
 function updateTransferContent(){
   const name=$("fullName").value.trim();
@@ -279,36 +248,23 @@ function updateTransferContent(){
     :"Họ và tên người đặt + SĐT";
 }
 
-
-
-
 function syncReceiveTime(){
   const date=$("receiveDate").value;
   const time=$("receiveHour").value;
   $("receiveTime").value=date&&time?`${date}T${time}`:"";
 }
 
-
-
-
 function updateCartBadge(){
   const badge=document.querySelector(".cart-badge");
   if(badge)badge.textContent=String(cart.reduce((total,item)=>total+item.quantity,0));
 }
 
-
 $("scrollToTopBtn").addEventListener("click",()=>{
   window.scrollTo({top:0,behavior:"smooth"});
 });
 
-
-
-
 function renderCart(){
   updateCartBadge();
-
-
-
 
   $("cartList").innerHTML=cart.length?cart.map((item,i)=>`
     <div class="cart-product">
@@ -337,9 +293,6 @@ function renderCart(){
     </div>
   `).join(""):'<p class="empty-cart">Giỏ hàng đang trống. Bạn hãy quay lại giỏ hàng để chọn bánh nhé ♡</p>';
 
-
-
-
   $("summaryItems").innerHTML=cart.map(item=>`
     <div class="summary-item">
       <div class="summary-img">${item.image?`<img src="${escapeHTML(item.image)}" alt="">`:"🍰"}</div>
@@ -352,14 +305,8 @@ function renderCart(){
     </div>
   `).join("");
 
-
-
-
   updateTotals();
 }
-
-
-
 
 $("cartList").addEventListener("click",e=>{
   const btn=e.target.closest("button[data-action]");
@@ -371,9 +318,6 @@ $("cartList").addEventListener("click",e=>{
   saveCart({manuallyCleared:!cart.length});
   renderCart();
 });
-
-
-
 
 function receiveType(){
   return document.querySelector('input[name="receiveType"]:checked')?.value||"delivery";
@@ -444,9 +388,6 @@ function updateTotals(){
   renderSelectedVoucher();
 }
 
-
-
-
 function renderSelectedVoucher(){
   const offer=OFFER_CATALOG[voucher.code];
   const selectedText=$("voucherSelectionText");
@@ -463,9 +404,6 @@ function renderSelectedVoucher(){
   $("removeVoucher").classList.toggle("hidden",!voucher.active);
   card.classList.toggle("is-empty",!voucher.active);
 }
-
-
-
 
 function renderVoucherOptions(){
   $("voucherOptions").innerHTML=Object.values(OFFER_CATALOG).map(offer=>{
@@ -490,18 +428,12 @@ function renderVoucherOptions(){
   }).join("");
 }
 
-
-
-
 function hideVoucherModal(){
   const modal=$("voucherModal");
   if(!modal)return;
   modal.classList.remove("show");
   modal.setAttribute("aria-hidden","true");
 }
-
-
-
 
 function showVoucherModal(){
   renderVoucherOptions();
@@ -511,9 +443,6 @@ function showVoucherModal(){
   $("closeVoucherModal").focus();
 }
 
-
-
-
 function applyVoucher(code){
   const offer=OFFER_CATALOG[code];
   if(!offer||!isOfferEligible(offer))return;
@@ -521,9 +450,6 @@ function applyVoucher(code){
   hideVoucherModal();
   updateTotals();
 }
-
-
-
 
 $("voucherSelect").addEventListener("click",showVoucherModal);
 $("closeVoucherModal").addEventListener("click",hideVoucherModal);
@@ -535,9 +461,6 @@ $("voucherOptions").addEventListener("click",event=>{
   if(button&&!button.disabled)applyVoucher(button.dataset.voucherCode);
 });
 
-
-
-
 function showCheckoutNotice(message){
   $("noticeMessage").textContent=message;
   $("checkoutNotice").classList.add("show");
@@ -545,25 +468,16 @@ function showCheckoutNotice(message){
   $("confirmNotice").focus();
 }
 
-
-
-
 function hideCheckoutNotice(){
   $("checkoutNotice").classList.remove("show");
   $("checkoutNotice").setAttribute("aria-hidden","true");
 }
-
-
-
 
 $("confirmNotice").addEventListener("click",hideCheckoutNotice);
 $("closeNotice").addEventListener("click",hideCheckoutNotice);
 $("checkoutNotice").addEventListener("click",event=>{
   if(event.target===$("checkoutNotice"))hideCheckoutNotice();
 });
-
-
-
 
 document.querySelectorAll('input[name="receiveType"]').forEach(r=>{
   r.addEventListener("change",()=>{
@@ -575,9 +489,6 @@ document.querySelectorAll('input[name="receiveType"]').forEach(r=>{
   });
 });
 
-
-
-
 document.querySelectorAll('input[name="payment"]').forEach(r=>{
   r.addEventListener("change",()=>{
     document.querySelectorAll(".payment-option").forEach(x=>x.classList.remove("selected"));
@@ -585,9 +496,6 @@ document.querySelectorAll('input[name="payment"]').forEach(r=>{
     $("onlineBox").classList.toggle("hidden",r.value!=="online");
   });
 });
-
-
-
 
 $("store").addEventListener("change",e=>{
   markFieldComplete(e.target);
@@ -604,17 +512,11 @@ $("store").addEventListener("change",e=>{
   $("mapBox").classList.remove("hidden");
 });
 
-
-
-
 $("removeVoucher").addEventListener("click",()=>{
   voucher.active=false;
   voucher.code="";
   updateTotals();
 });
-
-
-
 
 function validForm(){
   syncReceiveTime();
@@ -637,9 +539,6 @@ function validForm(){
   }
   return true;
 }
-
-
-
 
 $("placeOrder").addEventListener("click",()=>{
   if(!validForm())return;
@@ -694,29 +593,17 @@ $("placeOrder").addEventListener("click",()=>{
   renderCart();
 });
 
-
-
-
 function fillInvoice(){
   const now=new Date();
   const code="LC"+now.getFullYear()+String(now.getMonth()+1).padStart(2,"0")+String(now.getDate()).padStart(2,"0")+Math.floor(100+Math.random()*900);
-
-
-
 
   $("invoiceCode").textContent=code;
   $("invoiceDate").textContent=now.toLocaleDateString("vi-VN");
   $("billName").textContent=$("fullName").value.trim();
   $("billPhone").textContent=$("phone").value.trim();
 
-
-
-
   const d=new Date($("receiveTime").value);
   $("billReceive").textContent=isNaN(d)?$("receiveTime").value:d.toLocaleString("vi-VN");
-
-
-
 
   let address="";
   if(receiveType()==="delivery"){
@@ -726,9 +613,6 @@ function fillInvoice(){
   }
   $("billAddress").textContent=address;
 
-
-
-
   $("billItems").innerHTML=cart.map(x=>`
     <div class="bill-row">
       <span>${escapeHTML(x.name)}</span>
@@ -736,9 +620,6 @@ function fillInvoice(){
       <span>${money(x.price*x.quantity)}</span>
     </div>
   `).join("");
-
-
-
 
   const pay=document.querySelector('input[name="payment"]:checked')?.value;
   const totals=calculateTotals();
@@ -771,17 +652,8 @@ function fillInvoice(){
   };
 }
 
-
-
-
 $("closeInvoice").addEventListener("click",()=>$("invoiceModal").classList.remove("show"));
 $("printBill").addEventListener("click",()=>window.print());
 $("continueShopping").addEventListener("click",()=>window.location.href="product.html");
 
-
-
-
 renderCart();
-
-
-
