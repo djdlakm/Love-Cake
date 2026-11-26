@@ -15,14 +15,14 @@
         name: 'Bento Mini (10cm)',
         shortName: 'Bento (10cm)',
         price: 160000,
-        scale: 0.84
+        scale: 0.72
       },
       small: {
         id: 'small',
         name: 'Size Nhỏ (15cm)',
         shortName: 'Size Nhỏ (15cm)',
         price: 260000,
-        scale: 1.0,
+        scale: 0.86,
         isPopular: true
       },
       medium: {
@@ -30,14 +30,14 @@
         name: 'Size Vừa (18cm)',
         shortName: 'Size Vừa (18cm)',
         price: 360000,
-        scale: 1.12
+        scale: 0.96
       },
       large: {
         id: 'large',
         name: 'Size Lớn (20cm)',
         shortName: 'Size Lớn (20cm)',
         price: 460000,
-        scale: 1.22
+        scale: 1.05
       }
     },
 
@@ -171,14 +171,18 @@
   };
 
   // ----------------- 2. Trạng Thái Hiện Tại Của Trình Thiết Kế -----------------
+  const MAX_PHOTOS = 8;
+  const INTRO_SESSION_KEY = 'loveCakeBuilderIntroShown';
+
   const state = {
     step: 1,
-    size: 'small', // Mặc định 15cm theo A9
-    sponge: 'vanilla', // Mặc định Vanilla theo A9
-    filling: 'blueberry', // Mặc định Việt quất theo A9
-    frosting: 'whipping', // Mặc định Kem tươi theo A9
-    toppings: [], // Mảng ID các topping được chọn (tối đa 3 theo A2)
-    message: 'Happy Birthday Love', // Mặc định lời chúc theo A9
+    size: 'small', // Mặc định 15cm
+    sponge: 'vanilla', // Mặc định Vanilla Pháp
+    filling: 'blueberry', // Mặc định Việt Quất
+    frosting: 'whipping', // Mặc định Kem tươi
+    toppings: [], // Mảng ID các topping được chọn (tối đa 3)
+    photos: [], // Mảng chuỗi ảnh nén base64 (tối đa 8 ảnh, không bắt buộc)
+    message: 'Happy Birthday Love', // Mặc định lời chúc
     totalPrice: 260000
   };
 
@@ -201,7 +205,13 @@
     toppingCountInfo: document.getElementById('designerToppingCountInfo'),
     btnClearTopping: document.getElementById('designerBtnClearTopping'),
 
-    // Bước 6: Lời chúc & Tóm tắt
+    // Bước 6: Cắm ảnh mặt bánh (Tối đa 8 ảnh)
+    photoInput: document.getElementById('designerPhotoInput'),
+    photoCountInfo: document.getElementById('designerPhotoCountInfo'),
+    btnClearPhotos: document.getElementById('designerBtnClearPhotos'),
+    photoThumbsGrid: document.getElementById('designerPhotoThumbsGrid'),
+
+    // Bước 7: Lời chúc & Tóm tắt
     messageInput: document.getElementById('designerMessageInput'),
 
     // Nút điều hướng
@@ -215,32 +225,35 @@
     sumFilling: document.getElementById('designerSumFilling'),
     sumFrosting: document.getElementById('designerSumFrosting'),
     sumTopping: document.getElementById('designerSumTopping'),
+    sumPhotos: document.getElementById('designerSumPhotos'),
     sumMessage: document.getElementById('designerSumMessage'),
     sumTotal: document.getElementById('designerSumTotal'),
 
-    // Mô hình bánh xem trước
-    // cake3D: document.getElementById('designerCake3D'),
-    // cakeTop: document.getElementById('designerCakeTop'),
-    // cakeFront: document.getElementById('designerCakeFront'),
-    // spongeRibbon: document.getElementById('designerSpongeRibbon'),
-    // fillingRibbon: document.getElementById('designerFillingRibbon'),
-    // pipingGroup: document.getElementById('designerPipingGroup'),
-    // singlePhotoBox: document.getElementById('designerSinglePhotoBox'),
-    // gridPhotoBox: document.getElementById('designerGridPhotoBox'),
-    // mainPhoto: document.getElementById('designerMainPhoto'),
-    // slotImg1: document.getElementById('designerSlotImg1'),
-    // slotImg2: document.getElementById('designerSlotImg2'),
-    // slotImg3: document.getElementById('designerSlotImg3'),
-    // slotImg4: document.getElementById('designerSlotImg4'),
-    // curvedTextPath: document.getElementById('designerCurvedTextPath'),
+    // Mô hình bánh xem trước SVG
+    cakeAssembly: document.getElementById('designerCakeAssembly'),
+    cakeScalable: document.getElementById('designerCakeScalable'),
+    cakeTop: document.getElementById('designerCakeTop'),
+    cakeSide: document.getElementById('designerCakeSide'),
+    spongeBand: document.getElementById('designerSpongeBand'),
+    fillingBand: document.getElementById('designerFillingBand'),
+    spongeTooltip: document.getElementById('designerSpongeTooltip'),
+    fillingTooltip: document.getElementById('designerFillingTooltip'),
+    curvedTextPath: document.getElementById('designerCurvedTextPath'),
 
-    // Flavor Legend
-    legendSpongeDot: document.getElementById('legendSpongeDot'),
-    legendSpongeName: document.getElementById('legendSpongeName'),
-    legendFillingDot: document.getElementById('legendFillingDot'),
-    legendFillingName: document.getElementById('legendFillingName'),
-    legendFrostingDot: document.getElementById('legendFrostingDot'),
-    legendFrostingName: document.getElementById('legendFrostingName'),
+    // Các lớp SVG Topping trên mặt bánh
+    toppingLayers: {
+      sprinkles: document.getElementById('toppingLayer-sprinkles'),
+      pearls: document.getElementById('toppingLayer-pearls'),
+      strawberry: document.getElementById('toppingLayer-strawberry'),
+      choco_chips: document.getElementById('toppingLayer-choco_chips'),
+      oreo: document.getElementById('toppingLayer-oreo'),
+      pocky: document.getElementById('toppingLayer-pocky')
+    },
+
+    // Pop-up giới thiệu bánh thực tế của shop
+    introModal: document.getElementById('designerIntroModal'),
+    introBackdrop: document.getElementById('designerIntroBackdrop'),
+    introCloseBtn: document.getElementById('designerIntroCloseBtn'),
 
     // Toast
     toast: document.getElementById('designerToast')
@@ -389,77 +402,120 @@
     }
   }
 
-  /* =========================================================================
-     [GHI CHÚ]: TẠM TẮT CODE LOGIC ẢNH IN (BƯỚC 5 CŨ)
-     =========================================================================
-  function renderThumbnails() {
-    if (!dom.thumbsGrid) return;
-    const maxSlots = state.photoCount;
-    let html = '';
-    for (let i = 0; i < maxSlots; i++) {
-      const hasPhoto = Boolean(state.photos[i]);
-      const imgSrc = state.photos[i] || 'assets/img/cart-cake.png';
-      html += `
-        <div class="designer-thumb-item">
-          <div class="designer-thumb-box" title="Ảnh vị trí ${i + 1}">
-            <img src="${imgSrc}" alt="Ảnh ${i + 1}" class="designer-thumb-img" />
-          </div>
-          ${hasPhoto ? `<button type="button" class="designer-btn-del-thumb" data-thumb-idx="${i}">XOÁ</button>` : ''}
-        </div>
-      `;
+  // ----------------- 6. Quản Lý Ảnh Cắm Mặt Bánh (Bước 6 - Tối đa 8 ảnh) -----------------
+  function compressImageFile(file) {
+    return new Promise((resolve) => {
+      const reader = new FileReader();
+      reader.onload = (ev) => {
+        const img = new Image();
+        img.onload = () => {
+          const maxDim = 280;
+          let width = img.width || maxDim;
+          let height = img.height || maxDim;
+          if (width > maxDim || height > maxDim) {
+            if (width >= height) {
+              height = Math.round((height * maxDim) / width);
+              width = maxDim;
+            } else {
+              width = Math.round((width * maxDim) / height);
+              height = maxDim;
+            }
+          }
+          const canvas = document.createElement('canvas');
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext('2d');
+          if (ctx) {
+            ctx.drawImage(img, 0, 0, width, height);
+            resolve(canvas.toDataURL('image/jpeg', 0.75));
+          } else {
+            resolve(ev.target.result);
+          }
+        };
+        img.onerror = () => resolve(ev.target.result);
+        img.src = ev.target.result;
+      };
+      reader.onerror = () => resolve(null);
+      reader.readAsDataURL(file);
+    });
+  }
+
+  async function handlePhotoFiles(fileList) {
+    if (!fileList || !fileList.length) return;
+    const imageFiles = Array.from(fileList).filter((f) => f.type && f.type.startsWith('image/'));
+    if (!imageFiles.length) {
+      showAlert('Vui lòng chỉ chọn tệp hình ảnh (JPG, PNG, WEBP...) ✿');
+      return;
     }
-    dom.thumbsGrid.innerHTML = html;
+
+    const remaining = MAX_PHOTOS - state.photos.length;
+    if (remaining <= 0) {
+      showAlert(`Bạn đã tải đủ tối đa ${MAX_PHOTOS} ảnh cắm trên bánh ✿`);
+      return;
+    }
+
+    if (imageFiles.length > remaining) {
+      showAlert(`Chỉ có thể thêm tối đa ${remaining} ảnh nữa (giới hạn ${MAX_PHOTOS} ảnh) ✿`);
+    } else {
+      hideAlert();
+    }
+
+    const accepted = imageFiles.slice(0, remaining);
+    const compressedList = await Promise.all(accepted.map(compressImageFile));
+    compressedList.forEach((dataUrl) => {
+      if (dataUrl && state.photos.length < MAX_PHOTOS) {
+        state.photos.push(dataUrl);
+      }
+    });
+
+    if (dom.photoInput) dom.photoInput.value = '';
+    renderPhotoThumbnails();
+    updateCakeVisuals();
   }
 
   function removePhotoAt(index) {
-    if (state.photos.length > 1) {
+    if (index >= 0 && index < state.photos.length) {
       state.photos.splice(index, 1);
-    } else {
-      state.photos[0] = 'assets/img/cart-cake.png';
-    }
-    renderThumbnails();
-    updateCakeVisuals();
-  }
-  ========================================================================= */
-
-  /* =========================================================================
-     [GHI CHÚ]: TẠM TẮT RENDER VÒNG BÔNG KEM PIPING SVG (MODEL BÁNH ĐÃ TẮT)
-     =========================================================================
-  function renderPipingDollops(frostingColor) {
-    if (!dom.pipingGroup) return;
-    dom.pipingGroup.innerHTML = '';
-    const totalDollops = 18;
-    const cx = 160;
-    const cy = 44;
-    const rx = 150;
-    const ry = 36;
-    const dollopR = 9;
-
-    for (let i = 0; i < totalDollops; i++) {
-      const angle = (i * 2 * Math.PI) / totalDollops;
-      const x = cx + rx * Math.cos(angle);
-      const y = cy + ry * Math.sin(angle);
-      const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
-      g.setAttribute('filter', 'url(#dollopShadow)');
-      const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-      circle.setAttribute('cx', x.toFixed(1));
-      circle.setAttribute('cy', y.toFixed(1));
-      circle.setAttribute('r', dollopR.toString());
-      circle.setAttribute('fill', frostingColor);
-      circle.setAttribute('stroke', '#D94A73');
-      circle.setAttribute('stroke-width', '0.9');
-      const innerDot = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-      innerDot.setAttribute('cx', x.toFixed(1));
-      innerDot.setAttribute('cy', (y - 1).toFixed(1));
-      innerDot.setAttribute('r', '2.5');
-      innerDot.setAttribute('fill', '#D94A73');
-      innerDot.setAttribute('opacity', '0.45');
-      g.appendChild(circle);
-      g.appendChild(innerDot);
-      dom.pipingGroup.appendChild(g);
+      renderPhotoThumbnails();
+      updateCakeVisuals();
+      hideAlert();
     }
   }
-  ========================================================================= */
+
+  function renderPhotoThumbnails() {
+    const count = state.photos.length;
+    if (dom.photoCountInfo) {
+      dom.photoCountInfo.innerHTML = count > 0
+        ? `Đã chọn: <strong>${count}/${MAX_PHOTOS}</strong> ảnh`
+        : `Đã chọn: <strong>0/${MAX_PHOTOS}</strong> ảnh (Không cắm ảnh)`;
+    }
+
+    if (!dom.photoThumbsGrid) return;
+    if (count === 0) {
+      dom.photoThumbsGrid.innerHTML = '';
+      return;
+    }
+
+    dom.photoThumbsGrid.innerHTML = state.photos
+      .map((src, idx) => `
+        <div class="designer-thumb-item">
+          <div class="designer-thumb-box" title="Ảnh cắm số ${idx + 1}">
+            <span class="designer-thumb-index">${idx + 1}</span>
+            <img src="${src}" alt="Ảnh cắm bánh ${idx + 1}" class="designer-thumb-img" />
+          </div>
+          <button type="button" class="designer-btn-del-thumb" data-photo-idx="${idx}">XOÁ</button>
+        </div>
+      `)
+      .join('');
+  }
+
+  // ----------------- 7. Hiệu Ứng Nảy Bánh -----------------
+  function triggerPulse(el, className) {
+    if (!el) return;
+    el.classList.remove(className);
+    void el.offsetWidth;
+    el.classList.add(className);
+  }
 
   // ----------------- 8. Tính Toán Tổng Giá Đơn Hàng -----------------
   function calculateTotal() {
@@ -478,48 +534,54 @@
     return state.totalPrice;
   }
 
-  // ----------------- 9. Cập Nhật Hiển Thị Chiếc Bánh (Real-Time SVG/CSS) -----------------
-  function updateCakeVisuals() {
+  // ----------------- 9. Cập Nhật Hiển Thị Chiếc Bánh (Real-Time SVG) -----------------
+  function updateCakeVisuals(changedSection) {
     const szObj = CAKE_CONFIG.sizes[state.size] || CAKE_CONFIG.sizes.small;
     const spObj = CAKE_CONFIG.sponges[state.sponge] || CAKE_CONFIG.sponges.vanilla;
     const flObj = CAKE_CONFIG.fillings[state.filling] || CAKE_CONFIG.fillings.blueberry;
     const frObj = CAKE_CONFIG.frostings[state.frosting] || CAKE_CONFIG.frostings.whipping;
 
-    /* =========================================================================
-       [GHI CHÚ]: TẠM TẮT LOGIC CẬP NHẬT MODEL BÁNH SVG/CSS VÌ MODEL ĐÃ ĐƯỢC CHUYỂN THÀNH GHI CHÚ
-       =========================================================================
-    if (dom.cake3D) {
-      dom.cake3D.style.setProperty('--designer-scale', szObj.scale);
-      dom.cake3D.style.transform = `scale(${szObj.scale})`;
-      dom.cake3D.classList.remove('designer-bounce');
-      void dom.cake3D.offsetWidth;
-      dom.cake3D.classList.add('designer-bounce');
+    // 9.1. Kích thước bánh co giãn mượt trên đĩa trơn
+    if (dom.cakeScalable) {
+      dom.cakeScalable.style.setProperty('--designer-scale', szObj.scale);
     }
-    if (dom.cakeTop) dom.cakeTop.style.backgroundColor = frObj.color;
-    if (dom.cakeFront) dom.cakeFront.style.backgroundColor = frObj.color;
-    renderPipingDollops(frObj.color);
-    if (dom.spongeRibbon) dom.spongeRibbon.style.backgroundColor = spObj.color;
-    if (dom.fillingRibbon) dom.fillingRibbon.style.backgroundColor = flObj.color;
-    if (dom.curvedTextPath) {
-      const msg = (state.message || '').trim();
-      dom.curvedTextPath.textContent = msg || 'Love Cake';
-    }
-    if (dom.legendSpongeDot) dom.legendSpongeDot.style.backgroundColor = spObj.color;
-    if (dom.legendSpongeName) dom.legendSpongeName.textContent = spObj.name;
-    if (dom.legendFillingDot) dom.legendFillingDot.style.backgroundColor = flObj.color;
-    if (dom.legendFillingName) dom.legendFillingName.textContent = flObj.name;
-    if (dom.legendFrostingDot) dom.legendFrostingDot.style.backgroundColor = frObj.color;
-    if (dom.legendFrostingName) dom.legendFrostingName.textContent = frObj.name;
-    ========================================================================= */
 
-    // 9.8. Cập nhật Thẻ Tóm Tắt Đơn Hàng (Sau Bước 6)
+    // 9.2. Màu kem phủ toàn thân & mặt trên bánh
+    if (dom.cakeSide) dom.cakeSide.setAttribute('fill', frObj.color);
+    if (dom.cakeTop) dom.cakeTop.setAttribute('fill', frObj.color);
+
+    // 9.3. Hai dải sọc trên thân bánh: Dải trên = Cốt bánh, Dải dưới = Nhân kem
+    if (dom.spongeBand) dom.spongeBand.setAttribute('fill', spObj.color);
+    if (dom.spongeTooltip) dom.spongeTooltip.textContent = `Cốt bánh: ${spObj.name}`;
+    if (dom.fillingBand) dom.fillingBand.setAttribute('fill', flObj.color);
+    if (dom.fillingTooltip) dom.fillingTooltip.textContent = `Nhân kem: ${flObj.name}`;
+
+    // 9.4. Cập nhật 6 lớp SVG Topping trên mặt bánh
+    Object.keys(dom.toppingLayers).forEach((key) => {
+      const layer = dom.toppingLayers[key];
+      if (layer) {
+        layer.classList.toggle('active', state.toppings.includes(key));
+      }
+    });
+
+    // 9.5. Cập nhật lời chúc viết tay màu #D94A73 giữa thân trước bánh
+    if (dom.curvedTextPath) {
+      const txt = (state.message || '').trim();
+      dom.curvedTextPath.textContent = txt || 'Love Cake';
+    }
+
+    // 9.6. Hiệu ứng nảy bánh nhẹ khi thay đổi lựa chọn
+    if (changedSection) {
+      triggerPulse(dom.cakeAssembly, 'designer-bounce');
+    }
+
+    // 9.7. Cập nhật Thẻ Tóm Tắt Đơn Hàng (Bước 7)
     calculateTotal();
     if (dom.sumSize) dom.sumSize.textContent = szObj.name;
     if (dom.sumSponge) dom.sumSponge.textContent = spObj.name;
     if (dom.sumFilling) dom.sumFilling.textContent = flObj.name;
     if (dom.sumFrosting) dom.sumFrosting.textContent = frObj.name;
 
-    // Cập nhật dòng Topping trên tóm tắt theo A5
     if (dom.sumTopping) {
       if (state.toppings.length === 0) {
         dom.sumTopping.textContent = 'Không lấy topping (0đ)';
@@ -532,13 +594,19 @@
       }
     }
 
+    if (dom.sumPhotos) {
+      dom.sumPhotos.textContent = state.photos.length > 0
+        ? `${state.photos.length} ảnh (Miễn phí)`
+        : 'Không cắm ảnh (0đ)';
+    }
+
     if (dom.sumMessage) dom.sumMessage.textContent = state.message || '(Không lời chúc)';
     if (dom.sumTotal) dom.sumTotal.textContent = formatMoney(state.totalPrice);
   }
 
-  // ----------------- 10. Điều Hướng Các Bước (Wizard) -----------------
+  // ----------------- 10. Điều Hướng Các Bước (Wizard 7 Bước) -----------------
   function goToStep(targetStep) {
-    if (targetStep < 1 || targetStep > 6) return;
+    if (targetStep < 1 || targetStep > 7) return;
     state.step = targetStep;
 
     // Cập nhật Stepper
@@ -567,7 +635,7 @@
     }
 
     if (dom.btnNext) {
-      if (state.step === 6) {
+      if (state.step === 7) {
         dom.btnNext.innerHTML = '<i class="fa-solid fa-cart-shopping"></i> Thêm vào giỏ hàng';
       } else {
         dom.btnNext.innerHTML = 'Tiếp theo <span>▶</span>';
@@ -576,10 +644,10 @@
   }
 
   function nextStep() {
-    if (state.step < 6) {
+    if (state.step < 7) {
       goToStep(state.step + 1);
     } else {
-      // Ở bước cuối, bấm nút sẽ thêm vào giỏ hàng
+      // Ở bước cuối (Bước 7), bấm nút sẽ thêm vào giỏ hàng
       addToCart();
     }
   }
@@ -595,7 +663,6 @@
     dom.alertMsg.querySelector('span').textContent = msg || 'Vui lòng chọn một tùy chọn trước khi tiếp tục ✿';
     dom.alertMsg.classList.add('visible');
 
-    // Hiệu ứng rung (shake animation)
     const currentStepEl = document.querySelector(`.designer-wizard-step[data-step-num="${state.step}"]`);
     if (currentStepEl) {
       currentStepEl.classList.remove('designer-shake');
@@ -609,30 +676,6 @@
       dom.alertMsg.classList.remove('visible');
     }
   }
-
-  /* =========================================================================
-     [GHI CHÚ]: TẠM TẮT XỬ LÝ UPLOAD ẢNH (BƯỚC 5 CŨ)
-     =========================================================================
-  function handleFiles(files) {
-    if (!files || !files.length) return;
-    const fileList = Array.from(files).slice(0, state.photoCount);
-    let loadedCount = 0;
-    const newPhotos = [];
-    fileList.forEach((file) => {
-      if (!file.type.startsWith('image/')) return;
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        newPhotos.push(e.target.result);
-        loadedCount++;
-        if (loadedCount === fileList.length) {
-          state.photos = newPhotos;
-          updateCakeVisuals();
-        }
-      };
-      reader.readAsDataURL(file);
-    });
-  }
-  ========================================================================= */
 
   // ----------------- 12. Thêm Vào Giỏ Hàng & Chuyển Trang Giỏ Hàng -----------------
   function addToCart() {
@@ -655,12 +698,15 @@
       ? (toppingSurcharge > 0 ? `${toppingNames.join(', ')} (+${formatMoney(toppingSurcharge)})` : `${toppingNames.join(', ')} (Miễn phí)`)
       : 'Không lấy topping';
 
+    const photosCount = state.photos.length;
+    const photosText = photosCount > 0 ? `${photosCount} ảnh (Miễn phí)` : 'Không cắm ảnh';
+
     const cakeItem = {
       id: 'custom-cake-' + Date.now(),
       name: `Bánh Thiết Kế Love Cake (${szObj.name})`,
       price: state.totalPrice,
       quantity: 1,
-      image: 'assets/img/cart-cake.png',
+      image: 'assets/img/custom-cake-default.jpg',
       category: 'cake',
       customDetails: {
         size: szObj.name,
@@ -669,6 +715,9 @@
         frosting: frObj.name,
         toppings: toppingNames,
         toppingsText: toppingsText,
+        photosCount: photosCount,
+        photosText: photosText,
+        photos: state.photos.slice(),
         message: state.message || 'Không có'
       }
     };
@@ -677,13 +726,18 @@
     try {
       localStorage.setItem('cart', JSON.stringify(cart));
     } catch (e) {
-      console.warn('Không thể lưu giỏ hàng vào LocalStorage', e);
+      // Dự phòng nếu dung lượng localStorage đầy: giữ lại số lượng & text, bỏ bớt dữ liệu ảnh nhị phân
+      cakeItem.customDetails.photos = [];
+      try {
+        localStorage.setItem('cart', JSON.stringify(cart));
+      } catch (innerErr) {
+        console.warn('Không thể lưu giỏ hàng vào LocalStorage', innerErr);
+      }
     }
 
     // Phát CustomEvent cart:updated theo chuẩn website
     window.dispatchEvent(new CustomEvent('cart:updated', { detail: cart }));
 
-    // Cập nhật số lượng giỏ hàng trên header nếu có hàm updateCartBadge
     if (typeof window.updateCartBadge === 'function') {
       window.updateCartBadge();
     } else {
@@ -706,7 +760,7 @@
     }, 3500);
   }
 
-  // ----------------- 13. Làm Lại Từ Đầu (Reset) -----------------
+  // ----------------- 13. Làm Lại Từ Đầu (Reset theo A15) -----------------
   function resetDesigner() {
     state.step = 1;
     state.size = 'small';
@@ -714,23 +768,67 @@
     state.filling = 'blueberry';
     state.frosting = 'whipping';
     state.toppings = [];
+    state.photos = [];
     state.message = 'Happy Birthday Love';
 
+    if (dom.photoInput) dom.photoInput.value = '';
     if (dom.messageInput) dom.messageInput.value = state.message;
 
     renderAllOptionCards();
+    renderPhotoThumbnails();
     updateCakeVisuals();
     goToStep(1);
   }
 
-  // ----------------- 14. Gắn Kết Sự Kiện (Bind Events) -----------------
+  // ----------------- 14. Pop-up Giới Thiệu Ảnh Bánh Thực Tế (theo A2, A3, A4) -----------------
+  function openIntroModal() {
+    if (!dom.introModal) return;
+    dom.introModal.classList.add('is-open');
+    dom.introModal.setAttribute('aria-hidden', 'false');
+  }
+
+  function closeIntroModal() {
+    if (!dom.introModal) return;
+    dom.introModal.classList.remove('is-open');
+    dom.introModal.setAttribute('aria-hidden', 'true');
+  }
+
+  function initIntroModal() {
+    if (!dom.introModal) return;
+
+    // Chỉ tự động hiện 1 lần đầu tiên trong phiên truy cập (A2)
+    let alreadyShown = false;
+    try {
+      alreadyShown = sessionStorage.getItem(INTRO_SESSION_KEY) === '1';
+      if (!alreadyShown) {
+        sessionStorage.setItem(INTRO_SESSION_KEY, '1');
+      }
+    } catch (e) {
+      alreadyShown = false;
+    }
+
+    if (!alreadyShown) {
+      openIntroModal();
+    }
+
+    if (dom.introCloseBtn) dom.introCloseBtn.addEventListener('click', closeIntroModal);
+    if (dom.introBackdrop) dom.introBackdrop.addEventListener('click', closeIntroModal);
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && dom.introModal.classList.contains('is-open')) {
+        closeIntroModal();
+      }
+    });
+  }
+
+  // ----------------- 15. Gắn Kết Sự Kiện (Bind Events) -----------------
   function bindEvents() {
-    // 14.1. Điều hướng nút Trước & Tiếp theo
+    // 15.1. Điều hướng nút Trước & Tiếp theo
     if (dom.btnPrev) dom.btnPrev.addEventListener('click', prevStep);
     if (dom.btnNext) dom.btnNext.addEventListener('click', nextStep);
     if (dom.btnReset) dom.btnReset.addEventListener('click', resetDesigner);
 
-    // 14.2. Stepper click
+    // 15.2. Stepper click
     dom.stepperItems.forEach((item) => {
       item.addEventListener('click', () => {
         const s = Number(item.getAttribute('data-step'));
@@ -738,51 +836,51 @@
       });
     });
 
-    // 14.3. Chọn Size Bánh (Bước 1)
+    // 15.3. Chọn Size Bánh (Bước 1)
     if (dom.sizeOptions) {
       dom.sizeOptions.addEventListener('change', (e) => {
         if (e.target.name === 'cake-size-choice') {
           state.size = e.target.value;
           renderAllOptionCards();
-          updateCakeVisuals();
+          updateCakeVisuals('size');
         }
       });
     }
 
-    // 14.4. Chọn Cốt Bánh (Bước 2)
+    // 15.4. Chọn Cốt Bánh (Bước 2)
     if (dom.spongeOptions) {
       dom.spongeOptions.addEventListener('change', (e) => {
         if (e.target.name === 'cake-sponge-choice') {
           state.sponge = e.target.value;
           renderAllOptionCards();
-          updateCakeVisuals();
+          updateCakeVisuals('sponge');
         }
       });
     }
 
-    // 14.5. Chọn Nhân Kem (Bước 3)
+    // 15.5. Chọn Nhân Kem (Bước 3)
     if (dom.fillingOptions) {
       dom.fillingOptions.addEventListener('change', (e) => {
         if (e.target.name === 'cake-filling-choice') {
           state.filling = e.target.value;
           renderAllOptionCards();
-          updateCakeVisuals();
+          updateCakeVisuals('filling');
         }
       });
     }
 
-    // 14.6. Chọn Kem Phủ (Bước 4)
+    // 15.6. Chọn Kem Phủ (Bước 4)
     if (dom.frostingOptions) {
       dom.frostingOptions.addEventListener('change', (e) => {
         if (e.target.name === 'cake-frosting-choice') {
           state.frosting = e.target.value;
           renderAllOptionCards();
-          updateCakeVisuals();
+          updateCakeVisuals('frosting');
         }
       });
     }
 
-    // 14.7. Chọn Topping Trên Bánh (Bước 5)
+    // 15.7. Chọn Topping Trên Bánh (Bước 5)
     if (dom.toppingOptions) {
       dom.toppingOptions.addEventListener('change', (e) => {
         if (e.target.name === 'cake-topping-choice') {
@@ -801,21 +899,47 @@
             state.toppings = state.toppings.filter(id => id !== val);
           }
           renderToppingOptions();
-          updateCakeVisuals();
+          updateCakeVisuals('toppings');
         }
       });
     }
 
-    // Nút "Không lấy topping"
     if (dom.btnClearTopping) {
       dom.btnClearTopping.addEventListener('click', () => {
         state.toppings = [];
         renderToppingOptions();
-        updateCakeVisuals();
+        updateCakeVisuals('toppings');
       });
     }
 
-    // 14.8. Nhập lời chúc (Bước 6)
+    // 15.8. Tải ảnh cắm mặt bánh (Bước 6 - Tối đa 8 ảnh)
+    if (dom.photoInput) {
+      dom.photoInput.addEventListener('change', (e) => {
+        handlePhotoFiles(e.target.files);
+      });
+    }
+
+    if (dom.photoThumbsGrid) {
+      dom.photoThumbsGrid.addEventListener('click', (e) => {
+        const delBtn = e.target.closest('.designer-btn-del-thumb');
+        if (delBtn) {
+          const idx = Number(delBtn.getAttribute('data-photo-idx'));
+          removePhotoAt(idx);
+        }
+      });
+    }
+
+    if (dom.btnClearPhotos) {
+      dom.btnClearPhotos.addEventListener('click', () => {
+        state.photos = [];
+        if (dom.photoInput) dom.photoInput.value = '';
+        renderPhotoThumbnails();
+        updateCakeVisuals();
+        hideAlert();
+      });
+    }
+
+    // 15.9. Nhập lời chúc (Bước 7)
     if (dom.messageInput) {
       dom.messageInput.addEventListener('input', (e) => {
         state.message = e.target.value;
@@ -830,12 +954,14 @@
     }
   }
 
-  // ----------------- 15. Khởi Chạy Khi DOM Sẵn Sàng -----------------
+  // ----------------- 16. Khởi Chạy Khi DOM Sẵn Sàng -----------------
   function init() {
     renderAllOptionCards();
+    renderPhotoThumbnails();
     updateCakeVisuals();
     goToStep(1);
     bindEvents();
+    initIntroModal();
   }
 
   if (document.readyState === 'loading') {

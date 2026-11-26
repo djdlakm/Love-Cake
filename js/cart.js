@@ -86,6 +86,7 @@ document.addEventListener("DOMContentLoaded", () => {
           ${item.customDetails.filling ? `Nhân: ${item.customDetails.filling}` : ''}
           ${item.customDetails.frosting ? `<br>Kem: ${item.customDetails.frosting}` : ''}
           ${item.customDetails.toppingsText && item.customDetails.toppingsText !== 'Không lấy topping' ? `<br>Topping: <strong>${item.customDetails.toppingsText}</strong>` : ''}
+          ${item.customDetails.photosText ? `<br>Cắm ảnh mặt bánh: <strong>${item.customDetails.photosText}</strong>` : ''}
           ${item.customDetails.message && item.customDetails.message !== 'Không có' ? `<br>Lời chúc: "<em>${item.customDetails.message}</em>"` : ''}
           ${item.customDetails.note && item.customDetails.note !== 'Không có' ? `<br>Ghi chú: ${item.customDetails.note}` : ''}
         </div>
@@ -102,7 +103,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         <div class="product-cell">
           <div class="product-thumb">
-            <img src="${item.image || 'assets/img/cart-cake.png'}" alt="${item.name}" />
+            <img src="${item.image || (item.customDetails ? 'assets/img/custom-cake-default.jpg' : 'assets/img/cart-cake.png')}" alt="${item.name}" />
           </div>
 
           <div class="product-info">

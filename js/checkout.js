@@ -286,6 +286,7 @@ function renderCart(){
             ${item.customDetails.sponge ? `Cốt ${escapeHTML(item.customDetails.sponge)} • ` : ''}
             ${item.customDetails.filling ? `Nhân ${escapeHTML(item.customDetails.filling)}` : ''}
             ${item.customDetails.toppingsText && item.customDetails.toppingsText !== 'Không lấy topping' ? `<br>Topping: ${escapeHTML(item.customDetails.toppingsText)}` : ''}
+            ${item.customDetails.photosText ? `<br>Cắm ảnh mặt bánh: ${escapeHTML(item.customDetails.photosText)}` : ''}
             ${item.customDetails.message && item.customDetails.message !== 'Không có' ? `<br>Lời chúc: "${escapeHTML(item.customDetails.message)}"` : ''}
           </small>
         ` : '<small>Size tiêu chuẩn · Vị bánh</small>'}
@@ -311,6 +312,7 @@ function renderCart(){
       <div>
         <strong>${escapeHTML(item.name)}</strong>
         ${item.customDetails?.toppingsText && item.customDetails.toppingsText !== 'Không lấy topping' ? `<small style="display:block; color:#9ca3af; font-size:11px;">Topping: ${escapeHTML(item.customDetails.toppingsText)}</small>` : ''}
+        ${item.customDetails?.photosText ? `<small style="display:block; color:#9ca3af; font-size:11px;">Cắm ảnh mặt bánh: ${escapeHTML(item.customDetails.photosText)}</small>` : ''}
         <small>${item.quantity} × ${money(item.price)}</small>
       </div>
       <b>${money(item.price*item.quantity)}</b>
