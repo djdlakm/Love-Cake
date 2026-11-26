@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
 
   /* ==========================================
      CÁC PHẦN TỬ HTML
@@ -9,6 +9,97 @@ document.addEventListener("DOMContentLoaded", () => {
   const priceMaxLabel = document.getElementById("priceMaxLabel");
 
   const productGrid = document.getElementById("productGrid");
+
+  function createProductCard(product) {
+    const card = document.createElement("article");
+    card.className = "shop-card";
+    card.dataset.id = product.id;
+    card.dataset.name = product.name;
+    card.dataset.category = product.category;
+    card.dataset.price = product.price;
+    card.dataset.occasion = product.occasion || "Sinh nhật,Lễ";
+    card.dataset.date = product.date || "";
+    card.dataset.sales = product.sales || "0";
+
+    const mediaLink = document.createElement("a");
+    mediaLink.href = `product-detail.html?id=${encodeURIComponent(product.id)}`;
+    mediaLink.className = "shop-media";
+
+    const image = document.createElement("img");
+    image.src = product.image;
+    image.alt = product.name;
+    image.loading = "lazy";
+    mediaLink.append(image);
+
+    const overlay = document.createElement("span");
+    overlay.className = "shop-overlay";
+    overlay.textContent = "Xem chi tiết";
+    mediaLink.append(overlay);
+
+    const body = document.createElement("div");
+    body.className = "shop-body";
+
+    const category = document.createElement("p");
+    category.className = "shop-category";
+    category.textContent = product.category;
+
+    const name = document.createElement("h3");
+    name.className = "shop-name";
+    const nameLink = document.createElement("a");
+    nameLink.href = mediaLink.href;
+    nameLink.textContent = product.name;
+    name.append(nameLink);
+
+    const rating = document.createElement("div");
+    rating.className = "shop-rating";
+    const stars = document.createElement("span");
+    stars.className = "stars";
+    stars.setAttribute("aria-label", "5 sao");
+    stars.textContent = "★★★★★";
+    const ratingNumber = document.createElement("span");
+    ratingNumber.className = "rating-num";
+    ratingNumber.textContent = "5.0";
+    rating.append(stars, ratingNumber);
+
+    const footer = document.createElement("div");
+    footer.className = "shop-footer";
+    const price = document.createElement("span");
+    price.className = "shop-price";
+    price.textContent = Number(product.price).toLocaleString("vi-VN") + "đ";
+
+    const addButton = document.createElement("button");
+    addButton.type = "button";
+    addButton.className = "btn-add-sm";
+    addButton.dataset.id = product.id;
+    addButton.dataset.name = product.name;
+    addButton.dataset.price = product.price;
+    addButton.textContent = "+ Thêm";
+
+    footer.append(price, addButton);
+    body.append(category, name, rating, footer);
+    card.append(mediaLink, body);
+    return card;
+  }
+
+  try {
+    const response = await fetch("js/products-data.json");
+    if (!response.ok) {
+      throw new Error(`Không tải được dữ liệu sản phẩm: HTTP ${response.status}`);
+    }
+
+    const productData = await response.json();
+    if (!Array.isArray(productData)) {
+      throw new Error("Dữ liệu sản phẩm phải là một danh sách.");
+    }
+
+    const firstStaticProduct = productGrid.querySelector(".shop-card");
+    productData.forEach(product => {
+      productGrid.insertBefore(createProductCard(product), firstStaticProduct);
+    });
+  } catch (error) {
+    console.error("Không thể tải sản phẩm từ products-data.json.", error);
+  }
+
   const products = Array.from(productGrid.querySelectorAll(".shop-card"));
 
   const productCount = document.getElementById("productCount");
@@ -37,6 +128,13 @@ document.addEventListener("DOMContentLoaded", () => {
     return Number(price).toLocaleString("vi-VN") + "đ";
   }
 
+  function compareProductsByDefault(a, b) {
+    const aIsFreshFruit = a.dataset.category === "Bánh hoa quả tươi";
+    const bIsFreshFruit = b.dataset.category === "Bánh hoa quả tươi";
+    if (aIsFreshFruit !== bIsFreshFruit) return aIsFreshFruit ? -1 : 1;
+    return a.dataset.id.localeCompare(b.dataset.id, undefined, { numeric: true });
+  }
+
 
   /* ==========================================
      CẬP NHẬT THANH GIÁ
@@ -63,11 +161,21 @@ document.addEventListener("DOMContentLoaded", () => {
       return true;
     }
 
-    const occasions = (product.dataset.occasion || "")
-      .split(",")
-      .map(item => item.trim());
+    const category = product.dataset.category || "";
 
-    return occasions.includes(selectedOccasion);
+    if (selectedOccasion === "Sinh nhật") {
+      return category !== "Bánh lễ";
+    }
+
+    if (selectedOccasion === "Cưới") {
+      return ["Bánh lễ", "Bánh hoa quả tươi", "Cheese Cake"].includes(category);
+    }
+
+    if (selectedOccasion === "Lễ") {
+      return ["Bánh lễ", "Cheese Cake"].includes(category);
+    }
+
+    return false;
   }
 
 
@@ -209,22 +317,8 @@ document.addEventListener("DOMContentLoaded", () => {
         );
         break;
 
-      case "newest":
-        sortedProducts.sort(
-          (a, b) => new Date(b.dataset.date) - new Date(a.dataset.date)
-        );
-        break;
-
-      case "bestseller":
-        sortedProducts.sort(
-          (a, b) => Number(b.dataset.sales) - Number(a.dataset.sales)
-        );
-        break;
-
       default:
-        sortedProducts.sort(
-          (a, b) => Number(a.dataset.id) - Number(b.dataset.id)
-        );
+        sortedProducts.sort(compareProductsByDefault);
         break;
     }
 
@@ -275,7 +369,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /* Đưa sản phẩm về thứ tự ban đầu */
     products
-      .sort((a, b) => Number(a.dataset.id) - Number(b.dataset.id))
+      .sort(compareProductsByDefault)
       .forEach(product => {
         productGrid.appendChild(product);
       });

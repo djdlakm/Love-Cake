@@ -1,0 +1,1358 @@
+[
+  {
+    "id": "HQT-001",
+    "name": "Bánh Xoài Chanh Leo Tươi",
+    "category": "Bánh hoa quả tươi",
+    "price": 342000,
+    "originalPrice": 380000,
+    "images": [
+      "assets/img/Bánh hoa quả tươi/Bánh hoa quả tươi 1.png",
+      "assets/img/Bánh hoa quả tươi/Bánh hoa quả tươi 1 (2).png",
+      "assets/img/Bánh hoa quả tươi/Bánh hoa quả tươi 1 (3).png",
+      "assets/img/Bánh hoa quả tươi/Bánh hoa quả tươi 1 (4).png"
+    ],
+    "description": "Sự kết hợp không thể hợp hơn của trái xoài ngọt và mọng nước cùng hương vị chua dịu của chanh leo. Chiếc bánh được cân bằng lại với cốt bông lan va-ni mềm ẩm đặc trưng và kem whipping va-ni ít ngọt, mềm tan trong miệng. Những miếng thạch dừa mát lạnh được điểm xuyết trên mặt bánh khiến Exotic Voyage Gateau trở nên thú vị và lấp lánh dưới ánh nắng đầy dịu dàng.",
+    "ingredients": [
+      "Bột mì số 11",
+      "Trứng gà ta",
+      "Kem whipping vani",
+      "Xoài tươi mọng nước",
+      "Chanh leo tươi",
+      "Thạch dừa mát lạnh",
+      "Bơ Normandie",
+      "Vani Tahiti"
+    ],
+    "usage": [
+      "Giữ bánh trong ngăn mát tủ lạnh đến khi dùng, tránh để lâu ở nhiệt độ phòng.",
+      "Lấy bánh ra trước khi thưởng thức khoảng 10–15 phút để kem mềm và ngon hơn.",
+      "Dùng dao sạch để cắt bánh; bảo quản lạnh phần còn lại và dùng sớm."
+    ],
+    "image": "assets/img/Bánh hoa quả tươi/Bánh hoa quả tươi 1.png"
+  },
+  {
+    "id": "HQT-002",
+    "name": "Bánh Trà Đào Sữa Chua",
+    "category": "Bánh hoa quả tươi",
+    "price": 351000,
+    "originalPrice": 390000,
+    "images": [
+      "assets/img/Bánh hoa quả tươi/Bánh hoa quả tươi 2.png",
+      "assets/img/Bánh hoa quả tươi/Bánh hoa quả tươi 2 (2).png",
+      "assets/img/Bánh hoa quả tươi/Bánh hoa quả tươi 2 (3).png",
+      "assets/img/Bánh hoa quả tươi/Bánh hoa quả tươi 2 (4).png",
+      "assets/img/Bánh hoa quả tươi/Bánh hoa quả tươi 2 (5).png"
+    ],
+    "description": "Cốt bánh bông lan mềm ẩm kết hợp cùng kem whipping ướp hương hồng trà thơm ngậy. Mứt đào hồng mọng nước. Pudding sữa chua núng nính, mềm mịn.",
+    "ingredients": [
+      "Bột mì số 11",
+      "Trứng gà ta",
+      "Kem whipping hồng trà",
+      "Mứt đào hồng mọng nước",
+      "Pudding sữa chua tươi",
+      "Bơ Normandie",
+      "Vani Tahiti"
+    ],
+    "usage": [
+      "Giữ bánh trong ngăn mát tủ lạnh đến khi dùng, tránh để lâu ở nhiệt độ phòng.",
+      "Lấy bánh ra trước khi thưởng thức khoảng 10–15 phút để kem mềm và ngon hơn.",
+      "Dùng dao sạch để cắt bánh; bảo quản lạnh phần còn lại và dùng sớm."
+    ],
+    "image": "assets/img/Bánh hoa quả tươi/Bánh hoa quả tươi 2.png"
+  },
+  {
+    "id": "HQT-003",
+    "name": "Bánh Cherry Socola",
+    "category": "Bánh hoa quả tươi",
+    "price": 378000,
+    "originalPrice": 420000,
+    "images": [
+      "assets/img/Bánh hoa quả tươi/Bánh hoa quả tươi 3.png",
+      "assets/img/Bánh hoa quả tươi/Bánh hoa quả tươi 3 (2).png",
+      "assets/img/Bánh hoa quả tươi/Bánh hoa quả tươi 3 (3).png",
+      "assets/img/Bánh hoa quả tươi/Bánh hoa quả tươi 3 (4).png",
+      "assets/img/Bánh hoa quả tươi/Bánh hoa quả tươi 3 (5).png"
+    ],
+    "description": "Cốt bánh sô cô la mềm ẩm, kết hợp cùng xốt sô cô la đắng nhẹ. Mứt cherry nhà làm chua ngọt, bếp không xay nhuyễn mà giữ nguyên thịt quả để bạn vẫn cảm nhận được sự mọng nước của trái cherry đúng vụ. Kem whipping vani ít ngọt, tan trong miệng.",
+    "ingredients": [
+      "Bột mì số 11",
+      "Trứng gà ta",
+      "Socola đắng nguyên chất",
+      "Mứt cherry tươi nhà làm",
+      "Kem whipping vani",
+      "Bột cacao",
+      "Bơ Normandie"
+    ],
+    "usage": [
+      "Giữ bánh trong ngăn mát tủ lạnh đến khi dùng, tránh để lâu ở nhiệt độ phòng.",
+      "Lấy bánh ra trước khi thưởng thức khoảng 10–15 phút để kem mềm và ngon hơn.",
+      "Dùng dao sạch để cắt bánh; bảo quản lạnh phần còn lại và dùng sớm."
+    ],
+    "image": "assets/img/Bánh hoa quả tươi/Bánh hoa quả tươi 3.png"
+  },
+  {
+    "id": "BT-001",
+    "name": "Bánh Bento Hộp Quà Nơ Kem Trắng",
+    "category": "Bánh Bento",
+    "price": 108000,
+    "originalPrice": 120000,
+    "image": "assets/img/bento/bento-01.jpg",
+    "description": "Món quà sinh nhật ngọt ngào gửi trao tâm ý với lớp kem màu hồng pastel dâu tây mịn màng. Bánh được thắt nơ kem nổi 3D màu trắng muốt đầy tinh tế, kết hợp cùng những hạt đường ngọc trai lấp lánh rực rỡ. Cốt bánh bông lan vani mềm ẩm đơm lớp kem bơ Normandie béo ngậy, tạo nên trải nghiệm vị giác đầy cuốn hút ngay từ miếng đầu tiên.",
+    "ingredients": [
+      "Bột mì số 11",
+      "Trứng gà ta",
+      "Kem President",
+      "Trái cây tươi (theo mùa)",
+      "Bơ Normandie",
+      "Vani Tahiti"
+    ],
+    "usage": [
+      "Giữ bánh trong ngăn mát tủ lạnh đến khi dùng, tránh để lâu ở nhiệt độ phòng.",
+      "Lấy bánh ra trước khi thưởng thức khoảng 10–15 phút để kem mềm và ngon hơn.",
+      "Dùng dao sạch để cắt bánh; bảo quản lạnh phần còn lại và dùng sớm."
+    ],
+    "images": [
+      "assets/img/bento/bento-01.jpg"
+    ]
+  },
+  {
+    "id": "BT-002",
+    "name": "Bánh Bento Dâu Tây Biểu Cảm Ngộ Nghĩnh",
+    "category": "Bánh Bento",
+    "price": 112500,
+    "originalPrice": 125000,
+    "image": "assets/img/bento/bento-02.jpg",
+    "description": "Chiếc bánh dành riêng cho những tín đồ mê dâu tây với những quả dâu Đà Lạt mọng nước được vẽ biểu cảm vui nhộn đầy cá tính. Sốt dâu tây nhà làm chua ngọt quyện cùng lớp kem tươi President thanh nhẹ và cốt bánh vani xốp mềm, mang lại dư vị tươi mát, sảng khoái và tràn đầy năng lượng cho tiệc sinh nhật.",
+    "ingredients": [
+      "Bột mì số 11",
+      "Trứng gà ta",
+      "Kem President",
+      "Dâu tây Đà Lạt tươi",
+      "Xốt dâu",
+      "Bơ Normandie",
+      "Vani Tahiti"
+    ],
+    "usage": [
+      "Giữ bánh trong ngăn mát tủ lạnh đến khi dùng, tránh để lâu ở nhiệt độ phòng.",
+      "Lấy bánh ra trước khi thưởng thức khoảng 10–15 phút để kem mềm và ngon hơn.",
+      "Dùng dao sạch để cắt bánh; bảo quản lạnh phần còn lại và dùng sớm."
+    ],
+    "images": [
+      "assets/img/bento/bento-02.jpg"
+    ]
+  },
+  {
+    "id": "BT-003",
+    "name": "Bánh Bento Đôi Thỏ Mắt Tròn & Bánh Sinh Nhật Mini",
+    "category": "Bánh Bento",
+    "price": 108000,
+    "originalPrice": 120000,
+    "image": "assets/img/bento/bento-03.jpg",
+    "description": "Tạo hình hai chú thỏ kem 3D tai hồng siêu đáng yêu đang ngồi bên chiếc bánh sinh nhật mini tí hon. Sự kết hợp giữa cốt bánh bông lan mềm tan và lớp kem whipping vani ngọt dịu, thanh mát, điểm xuyết họa tiết trái tim pastel lãng mạn khiến chiếc bánh bento trở nên vô cùng ngọt ngào và thơ mộng.",
+    "ingredients": [
+      "Bột mì số 11",
+      "Trứng gà ta",
+      "Kem President",
+      "Trái cây tươi (theo mùa)",
+      "Bơ Normandie",
+      "Vani Tahiti"
+    ],
+    "usage": [
+      "Giữ bánh trong ngăn mát tủ lạnh đến khi dùng, tránh để lâu ở nhiệt độ phòng.",
+      "Lấy bánh ra trước khi thưởng thức khoảng 10–15 phút để kem mềm và ngon hơn.",
+      "Dùng dao sạch để cắt bánh; bảo quản lạnh phần còn lại và dùng sớm."
+    ],
+    "images": [
+      "assets/img/bento/bento-03.jpg"
+    ]
+  },
+  {
+    "id": "BT-004",
+    "name": "Bánh Bento Nét Vẽ Khủng Long Tinh Nghịch",
+    "category": "Bánh Bento",
+    "price": 99000,
+    "originalPrice": 110000,
+    "image": "assets/img/bento/bento-04.jpg",
+    "description": "Phong cách tối giản K-style đầy ấn tượng với nét vẽ chú khủng long rồng con nét đen tinh nghịch đang vui vẻ nâng hai chiếc bánh sinh nhật. Cốt bánh bông lan vani mềm ẩm kết hợp kem bơ béo nhẹ, ngọt vừa phải, thích hợp làm món quà bất ngờ đáng yêu dành tặng bạn bè hay những người thân yêu.",
+    "ingredients": [
+      "Bột mì số 11",
+      "Trứng gà ta",
+      "Kem President",
+      "Trái cây tươi (theo mùa)",
+      "Bơ Normandie",
+      "Vani Tahiti"
+    ],
+    "usage": [
+      "Giữ bánh trong ngăn mát tủ lạnh đến khi dùng, tránh để lâu ở nhiệt độ phòng.",
+      "Lấy bánh ra trước khi thưởng thức khoảng 10–15 phút để kem mềm và ngon hơn.",
+      "Dùng dao sạch để cắt bánh; bảo quản lạnh phần còn lại và dùng sớm."
+    ],
+    "images": [
+      "assets/img/bento/bento-04.jpg"
+    ]
+  },
+  {
+    "id": "BT-005",
+    "name": "Bánh Bento Hoạt Hình Viền Kem Sò Sprinkle",
+    "category": "Bánh Bento",
+    "price": 103500,
+    "originalPrice": 115000,
+    "image": "assets/img/bento/bento-05.jpg",
+    "description": "Viền bánh được bắt bông kem sò uốn lượn tỉ mỉ đính hạt cốm đường rực rỡ sắc màu, ôm trọn nét vẽ nhân vật hoạt hình xinh xắn đội mũ tiệc sinh nhật. Hương vị kem tươi thơm ngậy hòa quyện hoàn hảo cùng cốt bánh mềm nhẹ tan ngậy trong miệng, mang đến trọn vẹn niềm vui cho buổi tiệc ngọt.",
+    "ingredients": [
+      "Bột mì số 11",
+      "Trứng gà ta",
+      "Kem President",
+      "Trái cây tươi (theo mùa)",
+      "Bơ Normandie",
+      "Vani Tahiti"
+    ],
+    "usage": [
+      "Giữ bánh trong ngăn mát tủ lạnh đến khi dùng, tránh để lâu ở nhiệt độ phòng.",
+      "Lấy bánh ra trước khi thưởng thức khoảng 10–15 phút để kem mềm và ngon hơn.",
+      "Dùng dao sạch để cắt bánh; bảo quản lạnh phần còn lại và dùng sớm."
+    ],
+    "images": [
+      "assets/img/bento/bento-05.jpg"
+    ]
+  },
+  {
+    "id": "BT-006",
+    "name": "Bánh Bento Mousse Xoài Tươi & Việt Quất",
+    "category": "Bánh Bento",
+    "price": 112500,
+    "originalPrice": 125000,
+    "image": "assets/img/bento/bento-06.jpg",
+    "description": "Dòng bánh Mousse mát lạnh thanh nhẹ với lớp mứt xoài vàng ươm mọng nước phủ tráng gương ở trung tâm. Mặt bánh đơm trái xoài chín cắt vuông cùng quả việt quất tươi chua thanh tự nhiên, cân bằng hoàn hảo với độ béo ngậy của kem tươi mousse vani dịu mát.",
+    "ingredients": [
+      "Bột mì số 11",
+      "Trứng gà ta",
+      "Kem President",
+      "Xoài chín tươi",
+      "Mứt xoài",
+      "Việt quất tươi",
+      "Bơ Normandie",
+      "Vani Tahiti"
+    ],
+    "usage": [
+      "Giữ bánh trong ngăn mát tủ lạnh đến khi dùng, tránh để lâu ở nhiệt độ phòng.",
+      "Lấy bánh ra trước khi thưởng thức khoảng 10–15 phút để kem mềm và ngon hơn.",
+      "Dùng dao sạch để cắt bánh; bảo quản lạnh phần còn lại và dùng sớm."
+    ],
+    "images": [
+      "assets/img/bento/bento-06.jpg"
+    ]
+  },
+  {
+    "id": "BT-007",
+    "name": "Bánh Bento Vịt Kem 3D Tắm Hồ Mứt Xoài",
+    "category": "Bánh Bento",
+    "price": 108000,
+    "originalPrice": 120000,
+    "image": "assets/img/bento/bento-07.jpg",
+    "description": "Thiết kế sáng tạo với tạo hình 3D chú vịt kem trắng đang thư thái bơi giữa hồ gel mứt xoài vàng tươi óng ánh. Cốt bánh xốp mịn kết hợp xốt quả nhiệt đới chua dịu và kem phô mai béo nhẹ, vừa lạ mắt vừa mang tới trải nghiệm vị giác vô cùng sảng khoái.",
+    "ingredients": [
+      "Bột mì số 11",
+      "Trứng gà ta",
+      "Kem President",
+      "Xoài chín tươi",
+      "Gel mứt xoài",
+      "Bơ Normandie",
+      "Vani Tahiti"
+    ],
+    "usage": [
+      "Giữ bánh trong ngăn mát tủ lạnh đến khi dùng, tránh để lâu ở nhiệt độ phòng.",
+      "Lấy bánh ra trước khi thưởng thức khoảng 10–15 phút để kem mềm và ngon hơn.",
+      "Dùng dao sạch để cắt bánh; bảo quản lạnh phần còn lại và dùng sớm."
+    ],
+    "images": [
+      "assets/img/bento/bento-07.jpg"
+    ]
+  },
+  {
+    "id": "BT-008",
+    "name": "Bánh Bento Mặt Vịt Tím Pastels",
+    "category": "Bánh Bento",
+    "price": 99000,
+    "originalPrice": 110000,
+    "image": "assets/img/bento/bento-08.jpg",
+    "description": "Tông màu tím pastel hiện đại nổi bật với trọn vẹn khuôn mặt chú vịt ngơ ngác dễ thương, chỏm tóc nâu và chiếc mỏ cam phúng phính. Bánh giữ hương vị bông lan vani truyền thống kết hợp kem tươi ít ngọt mềm mịn, là sự lựa chọn hoàn hảo cho những ai yêu thích sự phá cách ngộ nghĩnh.",
+    "ingredients": [
+      "Bột mì số 11",
+      "Trứng gà ta",
+      "Kem President",
+      "Trái cây tươi (theo mùa)",
+      "Bơ Normandie",
+      "Vani Tahiti"
+    ],
+    "usage": [
+      "Giữ bánh trong ngăn mát tủ lạnh đến khi dùng, tránh để lâu ở nhiệt độ phòng.",
+      "Lấy bánh ra trước khi thưởng thức khoảng 10–15 phút để kem mềm và ngon hơn.",
+      "Dùng dao sạch để cắt bánh; bảo quản lạnh phần còn lại và dùng sớm."
+    ],
+    "images": [
+      "assets/img/bento/bento-08.jpg"
+    ]
+  },
+  {
+    "id": "BT-009",
+    "name": "Bánh Bento Vintage Ruy Băng Hồng & Hạt Ngọc",
+    "category": "Bánh Bento",
+    "price": 112500,
+    "originalPrice": 125000,
+    "image": "assets/img/bento/bento-09.jpg",
+    "description": "Vẻ đẹp kiêu kỳ phong cách tiểu thư Vintage Pháp với nơ ruy băng lụa hồng thắt tinh tế quanh thân bánh, kết hợp dòng chữ uốn lượn và hạt đường ngọc trai trắng lấp lánh. Cốt bánh nhung mềm mịn tan chậm hòa cùng lớp kem President thơm ngậy quyến rũ.",
+    "ingredients": [
+      "Bột mì số 11",
+      "Trứng gà ta",
+      "Kem President",
+      "Trái cây tươi (theo mùa)",
+      "Bơ Normandie",
+      "Vani Tahiti"
+    ],
+    "usage": [
+      "Giữ bánh trong ngăn mát tủ lạnh đến khi dùng, tránh để lâu ở nhiệt độ phòng.",
+      "Lấy bánh ra trước khi thưởng thức khoảng 10–15 phút để kem mềm và ngon hơn.",
+      "Dùng dao sạch để cắt bánh; bảo quản lạnh phần còn lại và dùng sớm."
+    ],
+    "images": [
+      "assets/img/bento/bento-09.jpg"
+    ]
+  },
+  {
+    "id": "BT-010",
+    "name": "Bánh Bento Dáng Hoa Kem Tím & Việt Quất",
+    "category": "Bánh Bento",
+    "price": 108000,
+    "originalPrice": 120000,
+    "image": "assets/img/bento/bento-10.jpg",
+    "description": "Lớp kem trắng bắt viền uốn lượn dáng cánh hoa mềm mại, nâng đỡ những bông hoa kem tím pastel thanh lịch và trái việt quất tươi mọng nước. Cốt bánh vani ngọt dịu quyện cùng vị chua thanh dịu mát của việt quất, mang lại cảm giác trang nhã và cuốn hút cho bàn tiệc.",
+    "ingredients": [
+      "Bột mì số 11",
+      "Trứng gà ta",
+      "Kem President",
+      "Việt quất tươi",
+      "Mứt việt quất",
+      "Bơ Normandie",
+      "Vani Tahiti"
+    ],
+    "usage": [
+      "Giữ bánh trong ngăn mát tủ lạnh đến khi dùng, tránh để lâu ở nhiệt độ phòng.",
+      "Lấy bánh ra trước khi thưởng thức khoảng 10–15 phút để kem mềm và ngon hơn.",
+      "Dùng dao sạch để cắt bánh; bảo quản lạnh phần còn lại và dùng sớm."
+    ],
+    "images": [
+      "assets/img/bento/bento-10.jpg"
+    ]
+  },
+  {
+    "id": "MC-001",
+    "name": "Bánh Cuộn Happy Puppy",
+    "category": "Mini Cake",
+    "price": 76500,
+    "originalPrice": 85000,
+    "images": [
+      "assets/img/Minicake/Mini Cake 1.png",
+      "assets/img/Minicake/Mini Cake 1 (2).png"
+    ],
+    "description": "Bánh cuộn mềm ẩm kết hợp cùng kem whipping sữa tươi ít ngọt và hoa quả tươi theo mùa vừa tốt cho sức khỏe, vừa xinh xắn làm các bé thích mê bởi tạo hình bé cún dễ thương!",
+    "ingredients": [
+      "Bột mì số 11",
+      "Trứng gà ta",
+      "Kem whipping sữa tươi",
+      "Hoa quả tươi theo mùa",
+      "Bơ Normandie",
+      "Vani Tahiti"
+    ],
+    "usage": [
+      "Giữ bánh trong ngăn mát tủ lạnh đến khi dùng.",
+      "Nên thưởng thức bánh khi còn mát để cảm nhận trọn vẹn hương vị.",
+      "Bảo quản lạnh phần bánh còn lại và sử dụng sớm."
+    ],
+    "image": "assets/img/Minicake/Mini Cake 1.png"
+  },
+  {
+    "id": "MC-002",
+    "name": "Croissant",
+    "category": "Mini Cake",
+    "price": 40500,
+    "originalPrice": 45000,
+    "images": [
+      "assets/img/Minicake/Mini Cake 2.png"
+    ],
+    "description": "Vỏ ngoài giòn rụm, ngàn lớp bánh thơm bơ, từng lớp tổ ong nở đều, đẹp xinh - bánh sừng bò - nàng thơ nước Pháp thực sự là món bánh chinh phục mọi tín đồ yêu bánh. Ngoài croissant bơ nguyên bản, phần nhân kem thơm ngậy, ngọt vừa nên không hề ngán - bạn có thể dùng bánh vào bất kỳ buổi nào trong ngày.",
+    "ingredients": [
+      "Bột mì chuyên dụng",
+      "Bơ Normandie cao cấp",
+      "Sữa tươi nguyên chất",
+      "Trứng gà ta",
+      "Men nở thực phẩm",
+      "Nhân kem bơ custard"
+    ],
+    "usage": [
+      "Bảo quản bánh trong hộp kín ở nơi khô ráo, thoáng mát.",
+      "Có thể làm nóng bánh bằng lò nướng trước khi thưởng thức để lớp vỏ giòn thơm hơn.",
+      "Nên sử dụng bánh trong ngày để đảm bảo chất lượng tốt nhất."
+    ],
+    "image": "assets/img/Minicake/Mini Cake 2.png"
+  },
+  {
+    "id": "MC-003",
+    "name": "Pain au Chocolat",
+    "category": "Mini Cake",
+    "price": 45000,
+    "originalPrice": 50000,
+    "images": [
+      "assets/img/Minicake/Mini Cake 3.png"
+    ],
+    "description": "Bánh ngàn lớp cuộn sô cô la đen hảo hạng và thơm bơ - cực hợp với latte hay sô-cô-la nóng.",
+    "ingredients": [
+      "Bột mì chuyên dụng",
+      "Bơ Normandie cao cấp",
+      "Thanh socola đen hảo hạng",
+      "Trứng gà ta",
+      "Men nở thực phẩm"
+    ],
+    "usage": [
+      "Bảo quản bánh trong hộp kín ở nơi khô ráo, thoáng mát.",
+      "Có thể làm nóng bánh bằng lò nướng trước khi thưởng thức để lớp vỏ giòn thơm hơn.",
+      "Nên sử dụng bánh trong ngày để đảm bảo chất lượng tốt nhất."
+    ],
+    "image": "assets/img/Minicake/Mini Cake 3.png"
+  },
+  {
+    "id": "MC-004",
+    "name": "Raisin Roll",
+    "category": "Mini Cake",
+    "price": 43200,
+    "originalPrice": 48000,
+    "images": [
+      "assets/img/Minicake/Mini Cake 4.png"
+    ],
+    "description": "Bánh ngàn lớp cuộn nho khô chua chua, ngọt ngọt - thưởng thức bánh cùng một tách trà bá tước thơm lừng sẽ khiến trải nghiệm vị giác của bạn được trọn vẹn hơn.",
+    "ingredients": [
+      "Bột mì chuyên dụng",
+      "Bơ Normandie cao cấp",
+      "Nho khô Chile/Mỹ",
+      "Trứng gà ta",
+      "Men nở & Kem custard"
+    ],
+    "usage": [
+      "Bảo quản bánh trong hộp kín ở nơi khô ráo, thoáng mát.",
+      "Có thể làm nóng bánh bằng lò nướng trước khi thưởng thức để lớp vỏ giòn thơm hơn.",
+      "Nên sử dụng bánh trong ngày để đảm bảo chất lượng tốt nhất."
+    ],
+    "image": "assets/img/Minicake/Mini Cake 4.png"
+  },
+  {
+    "id": "MC-005",
+    "name": "Butter Ttoek",
+    "category": "Mini Cake",
+    "price": 49500,
+    "originalPrice": 55000,
+    "images": [
+      "assets/img/Minicake/Mini Cake 5.png"
+    ],
+    "description": "Bánh giòn nhẹ bên ngoài, dẻo mềm bên trong, thơm bơ và ăn kèm xốt phô mai béo mặn siêu thơm.",
+    "ingredients": [
+      "Bột gạo dẻo & Bột mì",
+      "Bơ Normandie",
+      "Phô mai Cheddar/Mozzarella",
+      "Xốt phô mai béo mặn",
+      "Gia vị nêm"
+    ],
+    "usage": [
+      "Bảo quản bánh trong hộp kín ở nơi khô ráo, thoáng mát.",
+      "Có thể làm nóng bánh trước khi thưởng thức để bánh thơm ngon hơn.",
+      "Nên sử dụng bánh trong ngày để đảm bảo chất lượng tốt nhất."
+    ],
+    "image": "assets/img/Minicake/Mini Cake 5.png"
+  },
+  {
+    "id": "MC-006",
+    "name": "Su Vỏ Giòn Caramel",
+    "category": "Mini Cake",
+    "price": 49500,
+    "originalPrice": 55000,
+    "images": [
+      "assets/img/Minicake/Mini Cake 6.png"
+    ],
+    "description": "Lớp vỏ choux giòn tan được phủ một lớp caramel thơm phức, nướng chuẩn nhiệt độ để đạt độ giòn. Cắn một miếng là nhân kem custard mát lạnh tràn ra, kết hợp hoàn hảo với trái cây tươi mát giúp cân bằng vị giác, ăn một chiếc là muốn ăn thêm chiếc thứ hai!",
+    "ingredients": [
+      "Bột mì",
+      "Trứng gà ta",
+      "Bơ Normandie",
+      "Caramel thơm phức",
+      "Nhân kem Custard mát lạnh",
+      "Trái cây tươi trang trí"
+    ],
+    "usage": [
+      "Giữ bánh trong ngăn mát tủ lạnh đến khi dùng.",
+      "Thưởng thức bánh khi còn mát để cảm nhận phần nhân kem custard thơm ngon.",
+      "Bảo quản lạnh phần bánh còn lại và sử dụng sớm."
+    ],
+    "image": "assets/img/Minicake/Mini Cake 6.png"
+  },
+  {
+    "id": "CC-001",
+    "name": "Lotus Biscoff",
+    "category": "Cheese Cake",
+    "price": 67500,
+    "originalPrice": 75000,
+    "images": [
+      "assets/img/Cheese cake/Cheese Cake 1.png"
+    ],
+    "description": "Cheesecake phô mai béo mịn kết hợp sốt bơ bánh quy Lotus Biscoff thơm nồng mùi quế caramel, phủ thêm vụn bánh quy giòn rụm trên mặt.",
+    "ingredients": [
+      "Kem phô mai Cream Cheese",
+      "Sốt bơ bánh quy Lotus Biscoff",
+      "Vụn bánh quy Biscoff",
+      "Bơ Normandie",
+      "Kem tươi whipping"
+    ],
+    "usage": [
+      "Giữ bánh trong ngăn mát tủ lạnh đến khi dùng.",
+      "Lấy bánh ra trước khi thưởng thức khoảng 5–10 phút để bánh đạt độ mềm mịn.",
+      "Bảo quản lạnh phần bánh còn lại và sử dụng sớm."
+    ],
+    "image": "assets/img/Cheese cake/Cheese Cake 1.png"
+  },
+  {
+    "id": "CC-002",
+    "name": "Strawberry Jam",
+    "category": "Cheese Cake",
+    "price": 64800,
+    "originalPrice": 72000,
+    "images": [
+      "assets/img/Cheese cake/Cheese Cake 2.png"
+    ],
+    "description": "Lớp bánh cheesecake mềm mịn, béo nhẹ hòa quyện cùng mứt dâu tây nhà làm chua ngọt dịu mát, mang lại cảm giác tươi mới và không hề ngấy.",
+    "ingredients": [
+      "Kem phô mai Cream Cheese",
+      "Mứt dâu tây tươi nhà làm",
+      "Dâu tây Đà Lạt",
+      "Đế bánh quy bơ",
+      "Kem tươi whipping"
+    ],
+    "usage": [
+      "Giữ bánh trong ngăn mát tủ lạnh đến khi dùng.",
+      "Lấy bánh ra trước khi thưởng thức khoảng 5–10 phút để bánh đạt độ mềm mịn.",
+      "Bảo quản lạnh phần bánh còn lại và sử dụng sớm."
+    ],
+    "image": "assets/img/Cheese cake/Cheese Cake 2.png"
+  },
+  {
+    "id": "CC-003",
+    "name": "Blueberry Jam",
+    "category": "Cheese Cake",
+    "price": 67500,
+    "originalPrice": 75000,
+    "images": [
+      "assets/img/Cheese cake/Cheese Cake 3.png"
+    ],
+    "description": "Cheesecake phô mai mát lạnh phủ lớp mứt việt quất chua thanh, đậm hương trái cây tự nhiên, cân bằng hoàn hảo với độ béo ngậy của phần kem phô mai.",
+    "ingredients": [
+      "Kem phô mai Cream Cheese",
+      "Mứt việt quất tự nhiên",
+      "Việt quất tươi mọng",
+      "Đế bánh quy bơ",
+      "Kem tươi whipping"
+    ],
+    "usage": [
+      "Giữ bánh trong ngăn mát tủ lạnh đến khi dùng.",
+      "Lấy bánh ra trước khi thưởng thức khoảng 5–10 phút để bánh đạt độ mềm mịn.",
+      "Bảo quản lạnh phần bánh còn lại và sử dụng sớm."
+    ],
+    "image": "assets/img/Cheese cake/Cheese Cake 3.png"
+  },
+  {
+    "id": "CC-004",
+    "name": "Cookie and Cream",
+    "category": "Cheese Cake",
+    "price": 64800,
+    "originalPrice": 72000,
+    "images": [
+      "assets/img/Cheese cake/Cheese Cake 4.png"
+    ],
+    "description": "Sự kết hợp kinh điển giữa cheesecake kem vani béo mượt và vụn bánh quy socola Oreo giòn thơm, ngọt vừa phải, cực kỳ cuốn hút.",
+    "ingredients": [
+      "Kem phô mai Cream Cheese",
+      "Bánh quy socola Oreo",
+      "Kem tươi vani",
+      "Bơ Normandie",
+      "Sữa tươi"
+    ],
+    "usage": [
+      "Giữ bánh trong ngăn mát tủ lạnh đến khi dùng.",
+      "Lấy bánh ra trước khi thưởng thức khoảng 5–10 phút để bánh đạt độ mềm mịn.",
+      "Bảo quản lạnh phần bánh còn lại và sử dụng sớm."
+    ],
+    "image": "assets/img/Cheese cake/Cheese Cake 4.png"
+  },
+  {
+    "id": "TH-001",
+    "name": "Bánh Kem Tạo Hình Shin Cậu Bé Bút Chì 3D",
+    "category": "Bánh Kem",
+    "price": 432000,
+    "originalPrice": 480000,
+    "images": [
+      "assets/img/Bánh kem/Bánh kem tạo hình 1.png"
+    ],
+    "description": "Bánh kem tạo hình 3D nhân vật Shin Cậu Bé Bút Chì với cặp lông mày rậm, mắt tròn và mũ xanh đính bông vàng đỏ siêu ngộ nghịch, đi kèm một chiếc bánh mini phủ sốt cam cắm nến nổi bật trên đế bánh.",
+    "ingredients": [
+      "Bột mì số 11",
+      "Trứng gà ta",
+      "Kem President",
+      "Sốt cam tươi",
+      "Bơ Normandie",
+      "Vani Tahiti"
+    ],
+    "usage": [
+      "Giữ bánh trong ngăn mát tủ lạnh đến khi dùng, tránh để lâu ở nhiệt độ phòng.",
+      "Lấy bánh ra trước khi thưởng thức khoảng 10–15 phút để kem mềm và ngon hơn.",
+      "Dùng dao sạch để cắt bánh; bảo quản lạnh phần còn lại và dùng sớm."
+    ],
+    "image": "assets/img/Bánh kem/Bánh kem tạo hình 1.png"
+  },
+  {
+    "id": "TH-002",
+    "name": "Bánh Sinh Nhật Bé Nhím Phủ Kem Hồng",
+    "category": "Bánh Kem",
+    "price": 414000,
+    "originalPrice": 460000,
+    "images": [
+      "assets/img/Bánh kem/Bánh kem tạo hình 2.png"
+    ],
+    "description": "Bánh kem tạo hình chú nhím 3D bầu bĩnh dễ thương nằm trên lớp kem phủ hồng pastel ngọt ngào, điểm xuyết nơ ruy băng hồng cùng họa tiết nơ và trái tim nhỏ vẽ tay tinh tế.",
+    "ingredients": [
+      "Bột mì số 11",
+      "Trứng gà ta",
+      "Kem President",
+      "Bơ Normandie",
+      "Vani Tahiti",
+      "Màu thực phẩm an toàn"
+    ],
+    "usage": [
+      "Giữ bánh trong ngăn mát tủ lạnh đến khi dùng, tránh để lâu ở nhiệt độ phòng.",
+      "Lấy bánh ra trước khi thưởng thức khoảng 10–15 phút để kem mềm và ngon hơn.",
+      "Dùng dao sạch để cắt bánh; bảo quản lạnh phần còn lại và dùng sớm."
+    ],
+    "image": "assets/img/Bánh kem/Bánh kem tạo hình 2.png"
+  },
+  {
+    "id": "TH-003",
+    "name": "Bánh Sinh Nhật Hello Kitty Nơ Hồng Má Hồng",
+    "category": "Bánh Kem",
+    "price": 405000,
+    "originalPrice": 450000,
+    "images": [
+      "assets/img/Bánh kem/Bánh kem tạo hình 3.png"
+    ],
+    "description": "Bánh kem 3D tạo hình mèo Hello Kitty dáng tròn trắng mịn với đôi má ửng hồng đáng yêu, chiếc nơ hồng pastel nổi bật cài bên tai cùng mũ đầu bếp trắng nhỏ xinh trên đỉnh.",
+    "ingredients": [
+      "Bột mì số 11",
+      "Trứng gà ta",
+      "Kem President",
+      "Bơ Normandie",
+      "Vani Tahiti"
+    ],
+    "usage": [
+      "Giữ bánh trong ngăn mát tủ lạnh đến khi dùng, tránh để lâu ở nhiệt độ phòng.",
+      "Lấy bánh ra trước khi thưởng thức khoảng 10–15 phút để kem mềm và ngon hơn.",
+      "Dùng dao sạch để cắt bánh; bảo quản lạnh phần còn lại và dùng sớm."
+    ],
+    "image": "assets/img/Bánh kem/Bánh kem tạo hình 3.png"
+  },
+  {
+    "id": "TH-004",
+    "name": "Bánh Sinh Nhật Bé Heo Nơ Vàng Đội Mũ Tiệc",
+    "category": "Bánh Kem",
+    "price": 414000,
+    "originalPrice": 460000,
+    "images": [
+      "assets/img/Bánh kem/Bánh kem tạo hình 4.png"
+    ],
+    "description": "Bánh kem tạo hình bé heo hồng 3D má phúng phính, buộc dây nơ vàng dưới cằm và đội mũ chóp sinh nhật tinh nghịch, phủ lớp kem trắng mịn cùng topping dâu tây đỏ tươi trên đỉnh.",
+    "ingredients": [
+      "Bột mì số 11",
+      "Trứng gà ta",
+      "Kem President",
+      "Dâu tây Đà Lạt tươi",
+      "Bơ Normandie",
+      "Vani Tahiti"
+    ],
+    "usage": [
+      "Giữ bánh trong ngăn mát tủ lạnh đến khi dùng, tránh để lâu ở nhiệt độ phòng.",
+      "Lấy bánh ra trước khi thưởng thức khoảng 10–15 phút để kem mềm và ngon hơn.",
+      "Dùng dao sạch để cắt bánh; bảo quản lạnh phần còn lại và dùng sớm."
+    ],
+    "image": "assets/img/Bánh kem/Bánh kem tạo hình 4.png"
+  },
+  {
+    "id": "BL-001",
+    "name": "Red Velvet Tiệc",
+    "category": "Bánh lễ",
+    "price": 468000,
+    "originalPrice": 520000,
+    "images": [
+      "assets/img/Bánh lễ/Bánh lễ 1.png"
+    ],
+    "description": "Set bánh tiệc Red Velvet cốt bánh đỏ nhung mềm ẩm thoảng hương cacao nhẹ, kết hợp kem phô mai cream cheese béo mịn, chia miếng gọn gàng tiện lợi cho tiệc nhóm và sự kiện.",
+    "ingredients": [
+      "Bột mì số 11",
+      "Trứng gà ta",
+      "Kem phô mai Cream Cheese",
+      "Bột cacao nguyên chất",
+      "Bơ Normandie",
+      "Chiết xuất củ dền/màu tự nhiên"
+    ],
+    "usage": [
+      "Giữ bánh trong ngăn mát tủ lạnh đến khi dùng.",
+      "Lấy bánh ra trước khi thưởng thức khoảng 10–15 phút để bánh mềm và ngon hơn.",
+      "Bảo quản lạnh phần bánh còn lại và sử dụng sớm."
+    ],
+    "image": "assets/img/Bánh lễ/Bánh lễ 1.png"
+  },
+  {
+    "id": "BL-002",
+    "name": "Set Mousse Chanh Leo Tiệc",
+    "category": "Bánh lễ",
+    "price": 468000,
+    "originalPrice": 520000,
+    "images": [
+      "assets/img/Bánh lễ/Bánh lễ 2.png"
+    ],
+    "description": "Set bánh mousse chanh leo chua ngọt thanh mát, kết cấu mềm tan mát lạnh trên nền bông lan mềm mịn, được đóng hộp chia phần sang trọng cho các buổi tiệc ngọt.",
+    "ingredients": [
+      "Bột mì số 11",
+      "Trứng gà ta",
+      "Chanh leo tươi nguyên chất",
+      "Kem tươi whipping",
+      "Gelatin thực phẩm",
+      "Bơ Normandie"
+    ],
+    "usage": [
+      "Giữ bánh trong ngăn mát tủ lạnh đến khi dùng.",
+      "Thưởng thức bánh khi còn mát để cảm nhận kết cấu mousse mềm tan.",
+      "Bảo quản lạnh phần bánh còn lại và sử dụng sớm."
+    ],
+    "image": "assets/img/Bánh lễ/Bánh lễ 2.png"
+  },
+  {
+    "id": "BL-003",
+    "name": "Set Bánh Socola Tiệc Nhóm",
+    "category": "Bánh lễ",
+    "price": 495000,
+    "originalPrice": 550000,
+    "images": [
+      "assets/img/Bánh lễ/Bánh lễ 3.png"
+    ],
+    "description": "Hộp tiệc gồm 25 miếng bánh socola cắt vuông tiện lợi, bắt chóp kem socola rưới sốt đậm đà và điểm lá vàng sang trọng, thắt nơ vàng đồng kèm thẻ cắm sinh nhật.",
+    "ingredients": [
+      "Bột mì số 11",
+      "Trứng gà ta",
+      "Socola đen hảo hạng",
+      "Kem tươi socola",
+      "Bột cacao",
+      "Lá vàng thực phẩm 24k"
+    ],
+    "usage": [
+      "Giữ bánh trong ngăn mát tủ lạnh đến khi dùng.",
+      "Lấy bánh ra trước khi thưởng thức khoảng 10–15 phút để bánh mềm và ngon hơn.",
+      "Bảo quản lạnh phần bánh còn lại và sử dụng sớm."
+    ],
+    "image": "assets/img/Bánh lễ/Bánh lễ 3.png"
+  },
+  {
+    "id": "BL-004",
+    "name": "Set Tart Hoa Quả Tươi",
+    "category": "Bánh lễ",
+    "price": 441000,
+    "originalPrice": 490000,
+    "images": [
+      "assets/img/Bánh lễ/Bánh lễ 4.png"
+    ],
+    "description": "Hộp bánh tart mini vỏ nướng giòn thơm bơ, nhân kem tươi béo nhẹ cùng topping dâu tây, xoài vàng, nho xanh cắt hạt lựu tươi mát và điểm lá vàng tinh tế, phù hợp cho tiệc trà và teabreak.",
+    "ingredients": [
+      "Bột mì số 11",
+      "Trứng gà ta",
+      "Bơ Normandie",
+      "Kem tươi whipping",
+      "Dâu tây",
+      "Xoài vàng",
+      "Nho xanh",
+      "Lá vàng thực phẩm"
+    ],
+    "usage": [
+      "Giữ bánh trong ngăn mát tủ lạnh đến khi dùng.",
+      "Thưởng thức bánh khi còn mát để giữ độ tươi ngon của trái cây và kem.",
+      "Bảo quản lạnh phần bánh còn lại và sử dụng sớm."
+    ],
+    "image": "assets/img/Bánh lễ/Bánh lễ 4.png"
+  },
+  {
+    "id": "CC-005",
+    "name": "Little Love (Mousse Dâu Nhân Matcha Trái Tim)",
+    "category": "Cheese Cake",
+    "price": 351000,
+    "originalPrice": 390000,
+    "images": [
+      "assets/img/Cheese cake/3.png",
+      "assets/img/Cheese cake/4.png"
+    ],
+    "description": "Sự kết hợp lãng mạn giữa lớp kem mousse dâu tây chua ngọt mát lành phác thảo dáng trái tim đỏ velvet quyến rũ, ôm trọn lớp nhân matcha trà xanh thơm dịu mát rượi và điểm xuyết lá vàng thực phẩm sang trọng.",
+    "ingredients": [
+      "Bột mì số 11",
+      "Trứng gà ta",
+      "Kem phô mai Cream Cheese",
+      "Sốt dâu tây tự nhiên",
+      "Bột trà xanh Matcha Nhật Bản",
+      "Lá vàng thực phẩm",
+      "Bơ Normandie",
+      "Vani Tahiti"
+    ],
+    "usage": [
+      "Giữ bánh trong ngăn mát tủ lạnh đến khi dùng.",
+      "Lấy bánh ra trước khi thưởng thức 10–15 phút để mousse đạt độ mềm mịn hoàn hảo."
+    ],
+    "image": "assets/img/Cheese cake/3.png"
+  },
+  {
+    "id": "CC-006",
+    "name": "Little Hug (Mousse Phô Mai Nhân Xoài Nhiệt Đới)",
+    "category": "Cheese Cake",
+    "price": 342000,
+    "originalPrice": 380000,
+    "images": [
+      "assets/img/Cheese cake/5.png",
+      "assets/img/Cheese cake/6.png"
+    ],
+    "description": "Thiết kế độc đáo với tạo hình đan len 3D màu hồng pastel xinh xắn. Bánh là sự hòa quyện béo mịn giữa kem mousse phô mai cream cheese ngậy thơm cùng nhân mứt xoài nhiệt đới tươi mát và lớp cốt bánh matcha trà xanh mềm ẩm.",
+    "ingredients": [
+      "Bột mì số 11",
+      "Trứng gà ta",
+      "Kem phô mai Cream Cheese",
+      "Mứt xoài nhiệt đới mọng nước",
+      "Bột trà xanh Matcha",
+      "Bơ Normandie",
+      "Vani Tahiti"
+    ],
+    "usage": [
+      "Bảo quản lạnh trong ngăn mát tủ lạnh.",
+      "Dùng trực tiếp khi còn mát lạnh."
+    ],
+    "image": "assets/img/Cheese cake/5.png"
+  },
+  {
+    "id": "CC-007",
+    "name": "Little Crush (Mousse Socola Vani Nhân Mix Berry)",
+    "category": "Cheese Cake",
+    "price": 351000,
+    "originalPrice": 390000,
+    "images": [
+      "assets/img/Cheese cake/7.png",
+      "assets/img/Cheese cake/8.png"
+    ],
+    "description": "Chiếc bánh bóng tráng gương lấp lóa đính đôi trái tim socola ngọt ngào. Lớp mousse vani ngọt dịu quyện hòa cùng nhân mix berry (phúc bồn tử và việt quất) chua thanh mát rượi trên nền cốt bông lan vani mềm mịn.",
+    "ingredients": [
+      "Bột mì số 11",
+      "Trứng gà ta",
+      "Kem mousse vani",
+      "Nhân trái cây hỗn hợp Mix Berry (Phúc bồn tử, Việt quất)",
+      "Socola trắng và đen trang trí",
+      "Bơ Normandie"
+    ],
+    "usage": [
+      "Giữ bánh trong ngăn mát tủ lạnh.",
+      "Thưởng thức ngon nhất sau khi lấy ra khoảng 10 phút."
+    ],
+    "image": "assets/img/Cheese cake/7.png"
+  },
+  {
+    "id": "CC-008",
+    "name": "Little Rose (Mousse Socola Hạnh Nhân)",
+    "category": "Cheese Cake",
+    "price": 378000,
+    "originalPrice": 420000,
+    "images": [
+      "assets/img/Cheese cake/9.png",
+      "assets/img/Cheese cake/10.png"
+    ],
+    "description": "Đỉnh cao nghệ thuật với đóa hoa hồng socola đỏ rực rỡ ngự trên lớp mousse hồng nhung mịn màng. Hương vị socola đắng nhẹ nguyên chất đậm đà quyện cùng nhân bơ hạnh nhân thơm bùi béo ngậy.",
+    "ingredients": [
+      "Bột mì số 11",
+      "Trứng gà ta",
+      "Socola đen nguyên chất",
+      "Bơ hạnh nhân thơm bùi",
+      "Kem tươi whipping",
+      "Bơ Normandie",
+      "Vani Tahiti"
+    ],
+    "usage": [
+      "Bảo quản lạnh ngăn mát.",
+      "Dùng dao sạch cắt bánh khi kem còn độ mát mịn."
+    ],
+    "image": "assets/img/Cheese cake/9.png"
+  },
+  {
+    "id": "HQT-004",
+    "name": "Basque Burnt Cheesecake Dâu Tây Tươi",
+    "category": "Bánh hoa quả tươi",
+    "price": 405000,
+    "originalPrice": 450000,
+    "images": [
+      "assets/img/Bánh hoa quả tươi/21.png",
+      "assets/img/Bánh hoa quả tươi/22.png",
+      "assets/img/Bánh hoa quả tươi/23.png"
+    ],
+    "description": "Dòng bánh phô mai nướng cháy chuẩn vị Tây Ban Nha với bề mặt xém vàng thơm lừng. Bánh béo ngậy mềm tan trong miệng, phủ đầy dâu tây Đà Lạt tươi mọng nước, kem bơ tươi và nhánh hương thảo mộc mạc.",
+    "ingredients": [
+      "Kem phô mai Cream Cheese",
+      "Dâu Tây Đà Lạt tươi",
+      "Kem tươi whipping",
+      "Trứng gà ta",
+      "Đường caramel nướng",
+      "Lá hương thảo (Thyme/Rosemary)"
+    ],
+    "usage": [
+      "Giữ lạnh bảo quản trong ngăn mát tủ lạnh đến khi dùng."
+    ],
+    "image": "assets/img/Bánh hoa quả tươi/21.png"
+  },
+  {
+    "id": "HQT-005",
+    "name": "Bánh Kem Vàng Xoài Việt Quất Thắt Nơ Lụa",
+    "category": "Bánh hoa quả tươi",
+    "price": 324000,
+    "originalPrice": 360000,
+    "images": [
+      "assets/img/Bánh hoa quả tươi/41.png"
+    ],
+    "description": "Sắc vàng pastel ấm áp bắt kem bơ viền sóng, đơm xoài tươi chín mọng, việt quất và hoa cúc họa mi xinh xắn, thắt dây nơ ruy băng trắng tinh khôi lãng mạn.",
+    "ingredients": [
+      "Bột mì số 11",
+      "Trứng gà ta",
+      "Kem President",
+      "Xoài chín tươi",
+      "Việt quất mọng",
+      "Bơ Normandie",
+      "Vani Tahiti"
+    ],
+    "usage": [
+      "Giữ bánh trong ngăn mát tủ lạnh.",
+      "Lấy bánh ra trước khi ăn 10–15 phút."
+    ],
+    "image": "assets/img/Bánh hoa quả tươi/41.png"
+  },
+  {
+    "id": "HQT-006",
+    "name": "Bánh Kem Xanh Băng Tuyết Vòng Việt Quất",
+    "category": "Bánh hoa quả tươi",
+    "price": 315000,
+    "originalPrice": 350000,
+    "images": [
+      "assets/img/Bánh hoa quả tươi/42.png"
+    ],
+    "description": "Tone màu xanh pastel vân mây băng tuyết hiện đại, kết vương miện việt quất tươi mọng nguyên trái ngọt mát trên mặt bánh.",
+    "ingredients": [
+      "Bột mì số 11",
+      "Trứng gà ta",
+      "Kem President",
+      "Việt quất tươi nguyên trái",
+      "Bơ Normandie",
+      "Vani Tahiti"
+    ],
+    "usage": [
+      "Bảo quản lạnh ngăn mát tủ lạnh."
+    ],
+    "image": "assets/img/Bánh hoa quả tươi/42.png"
+  },
+  {
+    "id": "HQT-007",
+    "name": "Bánh Kem Greenery Dâu Tây & Trứng Muối Sốt Chanh Leo",
+    "category": "Bánh hoa quả tươi",
+    "price": 333000,
+    "originalPrice": 370000,
+    "images": [
+      "assets/img/Bánh hoa quả tươi/43.png"
+    ],
+    "description": "Tone xanh lá rustic tươi mát điểm xuyết dâu tây tươi mọng, vụn trứng muối bùi béo kết hợp sốt chanh leo chua dịu ngậy thơm.",
+    "ingredients": [
+      "Bột mì số 11",
+      "Trứng gà ta",
+      "Kem President",
+      "Dâu tây Đà Lạt tươi",
+      "Sốt chanh leo",
+      "Vụn trứng muối",
+      "Bơ Normandie"
+    ],
+    "usage": [
+      "Giữ bánh trong ngăn mát tủ lạnh đến khi dùng."
+    ],
+    "image": "assets/img/Bánh hoa quả tươi/43.png"
+  },
+  {
+    "id": "HQT-008",
+    "name": "Bánh Kem Sốt Chanh Leo & Xoài Tươi Viền Trong",
+    "category": "Bánh hoa quả tươi",
+    "price": 324000,
+    "originalPrice": 360000,
+    "images": [
+      "assets/img/Bánh hoa quả tươi/44.png"
+    ],
+    "description": "Dạng bánh viền mica trong suốt khoe trọn lớp sốt chanh leo vàng ươm mọng nước và các khối xoài tươi chín cắt vuông bắt mắt.",
+    "ingredients": [
+      "Bột mì số 11",
+      "Trứng gà ta",
+      "Kem President",
+      "Xoài chín tươi",
+      "Sốt chanh leo tươi",
+      "Bơ Normandie",
+      "Vani Tahiti"
+    ],
+    "usage": [
+      "Bảo quản tủ lạnh ngăn mát.",
+      "Rút lớp viền màng mica trước khi thưởng thức."
+    ],
+    "image": "assets/img/Bánh hoa quả tươi/44.png"
+  },
+  {
+    "id": "HQT-009",
+    "name": "Bánh Chiffon Drip Cam Tươi & Hoa Nhỏ",
+    "category": "Bánh hoa quả tươi",
+    "price": 306000,
+    "originalPrice": 340000,
+    "images": [
+      "assets/img/Bánh hoa quả tươi/45.png"
+    ],
+    "description": "Cốt bánh chiffon xốp nhẹ mềm tan như mây, trang trí lớp mứt cam chanh drip uốn lượn, lát cam vàng tươi mát và hoa tươi nhã nhặn.",
+    "ingredients": [
+      "Bột mì số 11",
+      "Trứng gà ta",
+      "Kem President",
+      "Lát cam vàng tươi",
+      "Sốt mứt cam chanh",
+      "Bơ Normandie"
+    ],
+    "usage": [
+      "Giữ bánh lạnh trong ngăn mát tủ lạnh."
+    ],
+    "image": "assets/img/Bánh hoa quả tươi/45.png"
+  },
+  {
+    "id": "HQT-010",
+    "name": "Bánh Kem Chiffon Xoài Tươi Viền Sò Nhún",
+    "category": "Bánh hoa quả tươi",
+    "price": 315000,
+    "originalPrice": 350000,
+    "images": [
+      "assets/img/Bánh hoa quả tươi/46.png"
+    ],
+    "description": "Viền kem vỏ sò nhún mềm mại bao quanh lòng bánh đơm đầy xoài chín tươi vàng ươm, ngọt lịm mọng nước.",
+    "ingredients": [
+      "Bột mì số 11",
+      "Trứng gà ta",
+      "Kem President",
+      "Xoài tươi chín mọng",
+      "Bơ Normandie",
+      "Vani Tahiti"
+    ],
+    "usage": [
+      "Giữ lạnh ngăn mát tủ lạnh."
+    ],
+    "image": "assets/img/Bánh hoa quả tươi/46.png"
+  },
+  {
+    "id": "HQT-011",
+    "name": "Bánh Kem Vani Dâu Tây & Xoài Cắt Vuông",
+    "category": "Bánh hoa quả tươi",
+    "price": 324000,
+    "originalPrice": 360000,
+    "images": [
+      "assets/img/Bánh hoa quả tươi/47.png"
+    ],
+    "description": "Lớp kem vani béo nhẹ sắp xếp đơm xen kẽ dâu tây đỏ tươi mọng nước, xoài vàng cắt vuông và các hạt đường ngọc trai trắng lấp lánh.",
+    "ingredients": [
+      "Bột mì số 11",
+      "Trứng gà ta",
+      "Kem President",
+      "Dâu tây tươi",
+      "Xoài chín vuông",
+      "Bơ Normandie",
+      "Hạt đường ngọc trai"
+    ],
+    "usage": [
+      "Bảo quản ngăn mát tủ lạnh."
+    ],
+    "image": "assets/img/Bánh hoa quả tươi/47.png"
+  },
+  {
+    "id": "HQT-012",
+    "name": "Bánh Kem Vintage Ruffles Dâu Tây & Nơ Đỏ",
+    "category": "Bánh hoa quả tươi",
+    "price": 351000,
+    "originalPrice": 390000,
+    "images": [
+      "assets/img/Bánh hoa quả tươi/48.png"
+    ],
+    "description": "Phong cách tiểu thư Vintage cổ điển với các dải ruffles kem xếp tầng uốn lượn, thắt nơ ruy băng đỏ quyến rũ và phủ đầy dâu tây tươi mọng rực rỡ.",
+    "ingredients": [
+      "Bột mì số 11",
+      "Trứng gà ta",
+      "Kem President",
+      "Dâu Tây Đà Lạt tươi",
+      "Bơ Normandie",
+      "Vani Tahiti"
+    ],
+    "usage": [
+      "Giữ bánh trong ngăn mát tủ lạnh."
+    ],
+    "image": "assets/img/Bánh hoa quả tươi/48.png"
+  },
+  {
+    "id": "HQT-013",
+    "name": "Bánh Kem Nơ Trắng Trái Cây Thập Cẩm",
+    "category": "Bánh hoa quả tươi",
+    "price": 342000,
+    "originalPrice": 380000,
+    "images": [
+      "assets/img/Bánh hoa quả tươi/49.png"
+    ],
+    "description": "Nơ ruy băng trắng thắt nhẹ nhàng kết hợp thảm hoa quả tươi phong phú gồm dâu tây, việt quất, xoài chín và cam vàng quyến rũ.",
+    "ingredients": [
+      "Bột mì số 11",
+      "Trứng gà ta",
+      "Kem President",
+      "Dâu tây",
+      "Việt quất",
+      "Xoài tươi",
+      "Cam tươi",
+      "Bơ Normandie"
+    ],
+    "usage": [
+      "Bảo quản lạnh tủ lạnh."
+    ],
+    "image": "assets/img/Bánh hoa quả tươi/49.png"
+  },
+  {
+    "id": "TH-005",
+    "name": "Bánh Kem Tạo Hình Hello Kitty & Trái Tim Đỏ",
+    "category": "Bánh Kem",
+    "price": 405000,
+    "originalPrice": 450000,
+    "images": [
+      "assets/img/Bánh kem/50.png"
+    ],
+    "description": "Tạo hình 3D nhân vật Hello Kitty đáng yêu ngự trên mặt bánh kem hồng pastel điểm xuyết các trái tim đỏ ngọt ngào.",
+    "ingredients": [
+      "Bột mì số 11",
+      "Trứng gà ta",
+      "Kem President",
+      "Bơ Normandie",
+      "Vani Tahiti",
+      "Màu thực phẩm an toàn"
+    ],
+    "usage": [
+      "Giữ bánh trong ngăn mát tủ lạnh."
+    ],
+    "image": "assets/img/Bánh kem/50.png"
+  },
+  {
+    "id": "TH-006",
+    "name": "Bánh Kem Nét Vẽ Duck Meme Hài Hước",
+    "category": "Bánh Kem",
+    "price": 108000,
+    "originalPrice": 120000,
+    "images": [
+      "assets/img/Bánh kem/51.png"
+    ],
+    "description": "Bánh bento nhỏ xinh vẽ biểu cảm chú vịt meme ngộ nghĩnh hài hước, nét vẽ phá cách trẻ trung độc đáo.",
+    "ingredients": [
+      "Bột mì số 11",
+      "Trứng gà ta",
+      "Kem President",
+      "Bơ Normandie",
+      "Vani Tahiti"
+    ],
+    "usage": [
+      "Giữ bánh lạnh trong ngăn mát tủ lạnh."
+    ],
+    "image": "assets/img/Bánh kem/51.png"
+  },
+  {
+    "id": "TH-007",
+    "name": "Bánh Kem Nét Vẽ Đôi Bạn Hoạt Hình Pastels",
+    "category": "Bánh Kem",
+    "price": 108000,
+    "originalPrice": 120000,
+    "images": [
+      "assets/img/Bánh kem/52.png"
+    ],
+    "description": "Bánh bento tone hồng tím pastel vẽ phác thảo đôi bạn hoạt hình dễ thương mừng tiệc sinh nhật thân mật.",
+    "ingredients": [
+      "Bột mì số 11",
+      "Trứng gà ta",
+      "Kem President",
+      "Bơ Normandie",
+      "Vani Tahiti"
+    ],
+    "usage": [
+      "Giữ lạnh ngăn mát tủ lạnh."
+    ],
+    "image": "assets/img/Bánh kem/52.png"
+  },
+  {
+    "id": "TH-008",
+    "name": "Bánh Kem Chủ Đề Du Lịch BIZ Travel",
+    "category": "Bánh Kem",
+    "price": 112500,
+    "originalPrice": 125000,
+    "images": [
+      "assets/img/Bánh kem/53.png"
+    ],
+    "description": "Thiết kế chủ đề du lịch mộng mơ vẽ hình máy bay vi vu và quả địa cầu xanh mint xinh xắn dành riêng cho những tâm hồn mê xê dịch.",
+    "ingredients": [
+      "Bột mì số 11",
+      "Trứng gà ta",
+      "Kem President",
+      "Bơ Normandie",
+      "Vani Tahiti"
+    ],
+    "usage": [
+      "Bảo quản ngăn mát tủ lạnh."
+    ],
+    "image": "assets/img/Bánh kem/53.png"
+  },
+  {
+    "id": "TH-009",
+    "name": "Bánh Kem Ngôi Sao Sắc Màu Pastels",
+    "category": "Bánh Kem",
+    "price": 103500,
+    "originalPrice": 115000,
+    "images": [
+      "assets/img/Bánh kem/54.png"
+    ],
+    "description": "Mặt bánh trắng mịn vẽ các ngôi sao đa sắc màu pastel xinh xắn nhẹ nhàng, thích hợp làm món quà kỉ niệm đáng yêu.",
+    "ingredients": [
+      "Bột mì số 11",
+      "Trứng gà ta",
+      "Kem President",
+      "Bơ Normandie",
+      "Vani Tahiti"
+    ],
+    "usage": [
+      "Giữ lạnh ngăn mát tủ lạnh."
+    ],
+    "image": "assets/img/Bánh kem/54.png"
+  },
+  {
+    "id": "TH-010",
+    "name": "Bánh Kem Cốc Bia Nhậu Vui Nhộn",
+    "category": "Bánh Kem",
+    "price": 112500,
+    "originalPrice": 125000,
+    "images": [
+      "assets/img/Bánh kem/55.png"
+    ],
+    "description": "Tạo hình ly bia sủi bọt kem béo cùng biểu cảm 'Zô 100%' hài hước độc lạ dành tặng các chiến hữu trong buổi tiệc.",
+    "ingredients": [
+      "Bột mì số 11",
+      "Trứng gà ta",
+      "Kem President",
+      "Bơ Normandie",
+      "Vani Tahiti"
+    ],
+    "usage": [
+      "Bảo quản lạnh ngăn mát tủ lạnh."
+    ],
+    "image": "assets/img/Bánh kem/55.png"
+  },
+  {
+    "id": "TH-011",
+    "name": "Bánh Kem Nấm Nho & Hoa Nơ Tím Vintage",
+    "category": "Bánh Kem",
+    "price": 342000,
+    "originalPrice": 380000,
+    "images": [
+      "assets/img/Bánh kem/56.png"
+    ],
+    "description": "Sự kết hợp giữa tone tím mộng mơ vintage, thắt nơ ruy băng hoa tím, đơm quả nho tươi mọng và các tạo hình nấm kem xinh xắn.",
+    "ingredients": [
+      "Bột mì số 11",
+      "Trứng gà ta",
+      "Kem President",
+      "Nho tươi mọng",
+      "Bơ Normandie",
+      "Vani Tahiti"
+    ],
+    "usage": [
+      "Giữ bánh trong ngăn mát tủ lạnh."
+    ],
+    "image": "assets/img/Bánh kem/56.png"
+  },
+  {
+    "id": "TH-012",
+    "name": "Bánh Kem Trái Tim Vintage Tím Pastel & Mint",
+    "category": "Bánh Kem",
+    "price": 333000,
+    "originalPrice": 370000,
+    "images": [
+      "assets/img/Bánh kem/57.png"
+    ],
+    "description": "Bánh dáng trái tim phủ kem tím pastel kết hợp viền kem nhún màu xanh mint thanh lịch, đính hạt đường ngọc trai quyến rũ.",
+    "ingredients": [
+      "Bột mì số 11",
+      "Trứng gà ta",
+      "Kem President",
+      "Bơ Normandie",
+      "Vani Tahiti"
+    ],
+    "usage": [
+      "Bảo quản lạnh ngăn mát tủ lạnh."
+    ],
+    "image": "assets/img/Bánh kem/57.png"
+  },
+  {
+    "id": "TH-013",
+    "name": "Bánh Kem Trái Tim Vintage Hồng & Nơ Đen",
+    "category": "Bánh Kem",
+    "price": 351000,
+    "originalPrice": 390000,
+    "images": [
+      "assets/img/Bánh kem/58.png"
+    ],
+    "description": "Dáng trái tim hồng pastel kiều diễm điểm xuyết các thắt nơ ruy băng đen tương phản hiện đại, phong cách Coquette kiêu kỳ.",
+    "ingredients": [
+      "Bột mì số 11",
+      "Trứng gà ta",
+      "Kem President",
+      "Bơ Normandie",
+      "Vani Tahiti"
+    ],
+    "usage": [
+      "Giữ bánh trong ngăn mát tủ lạnh."
+    ],
+    "image": "assets/img/Bánh kem/58.png"
+  },
+  {
+    "id": "TH-014",
+    "name": "Bánh Kem Ngôi Sao Bạc & Dải Kem Xanh Pastels",
+    "category": "Bánh Kem",
+    "price": 324000,
+    "originalPrice": 360000,
+    "images": [
+      "assets/img/Bánh kem/59.png"
+    ],
+    "description": "Thiết kế hiện đại tone trắng mây kết hợp dải kem uốn lượn màu xanh pastel và đính các ngôi sao bạc lấp lóa rực rỡ.",
+    "ingredients": [
+      "Bột mì số 11",
+      "Trứng gà ta",
+      "Kem President",
+      "Bơ Normandie",
+      "Vani Tahiti"
+    ],
+    "usage": [
+      "Giữ bánh lạnh trong ngăn mát tủ lạnh."
+    ],
+    "image": "assets/img/Bánh kem/59.png"
+  }
+]
