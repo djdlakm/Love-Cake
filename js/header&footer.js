@@ -27,6 +27,8 @@ function initMobileMenu() {
   const menuToggle = document.querySelector('#menuToggle');
   const menuClose = document.querySelector('#menuClose');
   const navbar = document.querySelector('.navbar');
+  const productMenuToggle = document.querySelector('.nav-dropdown-toggle');
+  const productMenu = productMenuToggle?.closest('.nav-dropdown');
 
   // Mở menu khi bấm nút 3 gạch 🚪
   if (menuToggle && navbar) {
@@ -41,6 +43,14 @@ function initMobileMenu() {
       navbar.classList.remove('active');
     });
   }
+
+  if (productMenuToggle && productMenu) {
+    productMenuToggle.addEventListener('click', () => {
+      const isExpanded = productMenuToggle.getAttribute('aria-expanded') === 'true';
+      productMenuToggle.setAttribute('aria-expanded', String(!isExpanded));
+      productMenu.classList.toggle('is-expanded', !isExpanded);
+    });
+  }
 }
 
 // 4. Hàm tự động Highlight trang hiện tại 📍
@@ -50,7 +60,7 @@ function highlightCurrentPage() {
     return withoutIndex.replace(/\/+$/, '') || '/';
   };
   const currentPath = normalizePath(window.location.pathname);
-  const navLinks = document.querySelectorAll('.navbar a');
+  const navLinks = document.querySelectorAll('.navbar > ul > li > a');
 
   navLinks.forEach((link) => {
     const linkPath = normalizePath(
@@ -102,9 +112,29 @@ function loadComponents() {
           <ul>
             <li><a href="${BASE_URL}index.html">Trang chủ</a></li>
             <li><a href="${BASE_URL}about.html">Giới thiệu</a></li>
-            <li><a href="${BASE_URL}product.html">Sản phẩm</a></li>
+            <li class="nav-dropdown">
+              <a href="${BASE_URL}product.html">Sản phẩm</a>
+              <button
+                class="nav-dropdown-toggle"
+                type="button"
+                aria-label="Mở danh mục sản phẩm"
+                aria-expanded="false"
+                aria-controls="productCategoryMenu"
+              >
+                <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+              </button>
+              <ul class="nav-dropdown-menu" id="productCategoryMenu" aria-label="Danh mục sản phẩm">
+                <li><a href="${BASE_URL}product.html?cat=banh-hoa-qua-tuoi">Bánh hoa quả tươi</a></li>
+                <li><a href="${BASE_URL}product.html?cat=banh-kem">Bánh Kem</a></li>
+                <li><a href="${BASE_URL}product.html?cat=banh-bento">Bánh Bento</a></li>
+                <li><a href="${BASE_URL}product.html?cat=cheese-cake">Cheese Cake</a></li>
+                <li><a href="${BASE_URL}product.html?cat=mini-cake">Mini Cake</a></li>
+                <li><a href="${BASE_URL}product.html?cat=banh-le">Bánh lễ</a></li>
+              </ul>
+            </li>
             <li><a href="${BASE_URL}builder.html">Tự thiết kế bánh</a></li>
             <li><a href="${BASE_URL}contact.html">Liên hệ</a></li>
+            <li class="mobile-account-link"><a href="${BASE_URL}auth.html">Đăng nhập / Đăng ký</a></li>
           </ul>
         </nav>
 
