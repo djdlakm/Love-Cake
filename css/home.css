@@ -1147,23 +1147,60 @@
   }
 }
 
-/* Thẻ Bánh Kem dùng ảnh nền */
+/* Thẻ danh mục dùng ảnh nền */
 .category-card--photo {
   position: relative;
   justify-content: center;
-  min-height: 200px;
   overflow: hidden;
   border-color: transparent;
-  background:
-    linear-gradient(
-      to top,
-      rgb(0 0 0 / 75%) 0%,
-      rgb(0 0 0 / 40%) 45%,
-      rgb(0 0 0 / 10%) 100%
-    ),
-    var(--card-img) center / cover no-repeat;
+  background: none;
+  isolation: isolate;
 }
 
+/* Lớp ảnh (sẽ phóng to khi hover) */
+.category-card--photo::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background-image: var(--card-img);
+  background-size: cover;
+  background-position: var(--card-pos, center);
+  background-repeat: no-repeat;
+  transition: transform 0.5s ease;
+}
+
+/* Lớp phủ tối cố định để chữ nổi lên */
+.category-card--photo::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: rgb(0 0 0 / 40%);
+}
+
+/* Giữ chữ nằm trên cùng */
+.category-card--photo > * {
+  position: relative;
+}
+
+/* Hover: chỉ phóng ảnh nhẹ, không đổi độ tối, không nhấc thẻ */
+.category-card--photo:hover {
+  background: none;
+  border-color: transparent;
+  box-shadow: none;
+  transform: none;
+}
+
+.category-card--photo:hover::after {
+  transform: scale(1.08);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .category-card--photo::after {
+    transition: none;
+  }
+}
 .category-card--photo .category-name {
   color: #fff;
   font-size: 20px;
@@ -1185,16 +1222,6 @@
 }
 
 /* Giữ nguyên ảnh và chữ trắng khi hover (không bị ghi đè bởi hover chung) */
-.category-card--photo:hover {
-  background:
-    linear-gradient(
-      to top,
-      rgb(0 0 0 / 80%) 0%,
-      rgb(0 0 0 / 45%) 45%,
-      rgb(0 0 0 / 15%) 100%
-    ),
-    var(--card-img) center / cover no-repeat;
-}
 
 .category-card--photo:hover .category-name {
   color: #fff;
@@ -1207,4 +1234,118 @@
   margin-bottom: 12px;
   /* Mẹo nhỏ: Nếu lỡ dùng ảnh nền trắng trên nền vàng nhạt, thêm dòng dưới để hòa trộn nền trắng: */
   mix-blend-mode: multiply; 
+}
+
+/* ==========================================
+   SLIDER DANH MỤC (tự chạy + thanh kéo)
+   ========================================== */
+.category-slider {
+  --per-view: 2.5;
+  --cat-gap: 16px;
+  width: 100%;
+  max-width: 100%;
+  contain: inline-size; /* không cho nội dung làm phình khung */
+}
+
+.category-track {
+  display: flex;
+  gap: var(--cat-gap);
+  width: 100%;
+  padding: 8px 2px 18px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior-x: contain;
+
+  /* Firefox */
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-brand-soft);
+}
+
+.category-slider .category-card {
+  flex: 0 0 calc(
+    (100% - (var(--per-view) - 1) * var(--cat-gap)) / var(--per-view)
+  );
+  min-height: 240px;
+}
+
+/* Thanh kéo tùy chỉnh (Chrome, Edge, Safari) */
+.category-track::-webkit-scrollbar {
+  height: 10px;
+}
+
+.category-track::-webkit-scrollbar-track {
+  border-radius: 999px;
+  background: var(--color-brand-soft);
+}
+
+.category-track::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background: var(--color-brand);
+  border: 2px solid var(--color-brand-soft);
+}
+
+.category-track::-webkit-scrollbar-thumb:hover {
+  background: var(--color-brand-hover);
+}
+
+@media screen and (max-width: 1024px) {
+  .category-slider { --per-view: 2.2; }
+}
+
+@media screen and (max-width: 767px) {
+  .category-slider {
+    --per-view: 1.2;
+    --cat-gap: 12px;
+  }
+}
+
+/* ==========================================
+   SLIDER BÁNH BÁN CHẠY (tự chạy + thanh cuộn ngắn)
+   ========================================== */
+.product-slider {
+  --per-view: 3;
+  --prod-gap: 22px;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  contain: inline-size;
+}
+
+.product-track {
+  display: flex;
+  gap: var(--prod-gap);
+  width: 100%;
+  padding: 8px 0 20px; /* chừa chỗ cho hiệu ứng nhấc thẻ và đổ bóng */
+  overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+}
+
+.product-track::-webkit-scrollbar {
+  display: none;
+}
+
+.product-slider .product-card {
+  flex: 0 0 calc(
+    (100% - (var(--per-view) - 1) * var(--prod-gap)) / var(--per-view)
+  );
+}
+
+.product-slider .cat-scrollbar {
+  margin-top: 0;
+}
+
+@media screen and (max-width: 1024px) {
+  .product-slider {
+    --per-view: 2;
+    --prod-gap: 20px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .product-slider {
+    --per-view: 1.15;
+    --prod-gap: 12px;
+  }
 }

@@ -49,7 +49,7 @@
 </section>
 
       <!-- ==================== 2. DANH MỤC ==================== -->
-      <section class="categories" aria-labelledby="categories-title">
+       <section class="categories" aria-labelledby="categories-title">
         <div class="section-container">
           <div class="section-head section-head-center">
             <p class="section-label">Danh mục</p>
@@ -57,38 +57,46 @@
               Khám Phá Thế Giới Bánh
             </h2>
           </div>
+      <div class="category-slider" id="categorySlider">
+  <div class="category-track">
+    <a href="product.html?cat=banh-hoa-qua-tuoi" class="category-card category-card--photo"
+       style="--card-img: url('../assets/img/Bánh hoa quả tươi/Bánh hoa quả tươi 1.png'); --card-pos: center 30%;">
+      <h3 class="category-name">Bánh Hoa Quả Tươi</h3>
+      <p class="category-desc">Sinh nhật, cưới hỏi, kỷ niệm</p>
+    </a>
 
-          <div class="category-grid">
-            <a href="product.html?cat=banh-kem" 
-               class="category-card category-card--photo"
-               style="--card-img: url('../assets/iu.png');">
-              <h3 class="category-name">Bánh Kem</h3>
-              <p class="category-desc">Sinh nhật, cưới hỏi, kỷ niệm</p>
-            </a>
+    <a href="product.html?cat=banh-kem" class="category-card category-card--photo"
+       style="--card-img: url('../assets/img/Bánh kem/57.png');--card-pos: center 30%;">
+      <h3 class="category-name">Bánh Kem</h3>
+      <p class="category-desc">Sinh nhật, cưới hỏi, kỷ niệm</p>
+    </a>
+     <a href="product.html?cat=banh-bento" class="category-card category-card--photo"
+       style="--card-img: url('../assets/img/bento/bento-09.jpg');--card-pos: center 30%;">
+      <h3 class="category-name">Bánh Bento</h3>
+      <p class="category-desc">Gọn gàng, tiện lợi</p>
+    </a>
 
-            <a href="product.html?cat=banh-lanh" 
-               class="category-card category-card--photo"
-               style="--card-img: url('../assets/bl.jpg');">
-              <h3 class="category-name">Bánh Lạnh</h3>
-              <p class="category-desc">Cheesecake, mousse tươi mát</p>
-            </a>
+    <a href="product.html?cat=cheese-cake" class="category-card category-card--photo"
+       style="--card-img: url('../assets/img/Cheese cake/Cheese Cake 2.png');--card-pos: center 30%;">
+      <h3 class="category-name">Bánh Cheese Cake</h3>
+      <p class="category-desc">Tươi mát, béo ngậy</p>
+    </a>
 
-            <a href="product.html?cat=banh-mi" 
-               class="category-card category-card--photo"
-               style="--card-img: url('../assets/banh_my.jpg');">
-              <h3 class="category-name">Bánh Mì</h3>
-              <p class="category-desc">Croissant, brioche thơm bơ</p>
-            </a>
+    <a href="product.html?cat=mini-cake" class="category-card category-card--photo"
+       style="--card-img: url('../assets/img/Minicake/Mini Cake 1.png');  --card-pos: center 30%;">
+      <h3 class="category-name">Bánh Mini</h3>
+      <p class="category-desc">Đẹp mắt, dễ thương</p>
+    </a>
 
-            <a href="product.html?cat=cupcake" 
-               class="category-card category-card--photo"
-               style="--card-img: url('../assets/cupcake.jpg');">
-              <h3 class="category-name">Cupcake</h3>
-              <p class="category-desc">Nhỏ xinh, đủ màu sắc</p>
-            </a>
-          </div>
-        </div>
-      </section>
+    <a href="product.html?cat=banh-le" class="category-card category-card--photo"
+       style="--card-img: url('../assets/img/Bánh lễ/Bánh lễ 2.png'); --card-pos: center 30%;">
+      <h3 class="category-name">Bánh Lễ</h3>
+      <p class="category-desc">Dành cho các dịp đặc biệt</p>
+    </a>
+<div class="cat-scrollbar" aria-hidden="true">
+    <div class="cat-thumb"></div>
+  </div>
+</div>
 
       <!-- ==================== 3. BÁNH BÁN CHẠY ==================== -->
       <section class="featured" aria-labelledby="featured-title">
@@ -97,109 +105,19 @@
             <div>
               <p class="section-label">Nổi bật</p>
               <h2 id="featured-title" class="section-title">
-                Bánh Bán Chạy Nhất
+                Gợi Ý Bánh Cho Bạn
               </h2>
             </div>
             <a href="product.html" class="section-link">Xem tất cả →</a>
           </div>
+     <div class="product-slider" id="productSlider">
+  <div class="product-track" id="productTrack"></div>
 
-          <div class="product-grid">
-            <!-- Sản phẩm 1 -->
-            <article class="product-card">
-              <a href="product-detail.html?id=1" class="product-media">
-                <img
-                  src="assets/banhkem4.png"
-                  alt="Bánh Kem Dâu Tây"
-                  loading="lazy"
-                />
-              </a>
-              <div class="product-body">
-                <p class="product-category">Bánh Kem</p>
-                <h3 class="product-name">
-                  <a href="product-detail.html?id=1">Bánh Kem Dâu Tây</a>
-                </h3>
-                <div class="product-rating">
-                  <span class="stars" aria-label="5 sao">★★★★★</span>
-                  <span class="rating-count">(128)</span>
-                </div>
-                <div class="product-footer">
-                  <span class="product-price">350.000đ</span>
-                  <button
-                    type="button"
-                    class="btn-add-cart"
-                    data-id="1"
-                    data-name="Bánh Kem Dâu Tây"
-                    data-price="350000"
-                  >
-                    <i class="fa-solid fa-plus"></i> Thêm vào giỏ
-                  </button>
-                </div>
-              </div>
-            </article>
-
-            <!-- Sản phẩm 2 -->
-            <article class="product-card">
-              <a href="product-detail.html?id=2" class="product-media">
-                <img
-                  src="assets/bk2.png"
-                  alt="Fondant Hoa Hồng"
-                  loading="lazy"
-                />
-              </a>
-              <div class="product-body">
-                <p class="product-category">Bánh Kem</p>
-                <h3 class="product-name">
-                  <a href="product-detail.html?id=2">Fondant Hoa Hồng</a>
-                </h3>
-                <div class="product-rating">
-                  <span class="stars" aria-label="5 sao">★★★★★</span>
-                  <span class="rating-count">(96)</span>
-                </div>
-                <div class="product-footer">
-                  <span class="product-price">480.000đ</span>
-                  <button
-                    type="button"
-                    class="btn-add-cart"
-                    data-id="2"
-                    data-name="Fondant Hoa Hồng"
-                    data-price="480000"
-                  >
-                    <i class="fa-solid fa-plus"></i> Thêm vào giỏ
-                  </button>
-                </div>
-              </div>
-            </article>
-
-            <!-- Sản phẩm 3 -->
-            <article class="product-card">
-              <a href="product-detail.html?id=3" class="product-media">
-                <img
-                  src="assets/bk4.png"
-                  alt="Bánh Kem Vani Trắng"
-                  loading="lazy"
-                />
-              </a>
-              <div class="product-body">
-                <p class="product-category">Bánh Kem</p>
-                <h3 class="product-name">
-                  <a href="product-detail.html?id=3">Bánh Kem Vani Trắng</a>
-                </h3>
-                <div class="product-rating">
-                  <span class="stars" aria-label="5 sao">★★★★★</span>
-                  <span class="rating-count">(74)</span>
-                </div>
-                <div class="product-footer">
-                  <span class="product-price">290.000đ</span>
-                  <button
-                    type="button"
-                    class="btn-add-cart"
-                    data-id="3"
-                    data-name="Bánh Kem Vani Trắng"
-                    data-price="290000"
-                  >
-                    <i class="fa-solid fa-plus"></i> Thêm vào giỏ
-                  </button>
-                </div>
+  <div class="cat-scrollbar" aria-hidden="true">
+    <div class="cat-thumb"></div>
+  </div>
+</div>
+      
               </div>
             </article>
           </div>
@@ -252,113 +170,6 @@
               </p>
             </d>
           </a>
-        </div>
-      </section>
-
-      <!-- ==================== 5. KHÁCH HÀNG NÓI GÌ ==================== -->
-      <section class="testimonials" aria-labelledby="testimonials-title">
-        <div class="section-container">
-          <div class="section-head section-head-center">
-            <p class="
-             section-label-light">Khách hàng nói gì</p>
-            <h2
-              id="testimonials-title"
-              class="section-title section-title-light"
-            >
-              Yêu Thương Từ Khách Hàng
-            </h2>
-          </div>
-
-          <div class="testimonial-slider">
-            <div class="testimonial-card">
-              <span class="testimonial-quote" aria-hidden="true">"</span>
-
-              <!-- Slide 1 -->
-              <div class="testimonial-slide active">
-                <p class="testimonial-text">
-                  Bánh ngon tuyệt vời, đúng như hình ảnh. Mình đặt bánh sinh
-                  nhật cho con gái và bé rất thích!
-                </p>
-                <div class="testimonial-author">
-                  <span class="testimonial-avatar">L</span>
-                  <div class="testimonial-info">
-                    <strong>Linh Nguyễn</strong>
-                    <span class="stars" aria-label="5 sao">★★★★★</span>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Slide 2 (nội dung mẫu - bạn thay bằng nội dung trong Figma) -->
-              <div class="testimonial-slide">
-                <p class="testimonial-text">
-                  Bánh mềm, kem béo vừa phải, không quá ngọt. Giao hàng đúng giờ
-                  và bánh vẫn nguyên vẹn.
-                </p>
-                <div class="testimonial-author">
-                  <span class="testimonial-avatar">M</span>
-                  <div class="testimonial-info">
-                    <strong>Minh Anh</strong>
-                    <span class="stars" aria-label="5 sao">★★★★★</span>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Slide 3 (nội dung mẫu) -->
-              <div class="testimonial-slide">
-                <p class="testimonial-text">
-                  Mình thiết kế bánh theo ý riêng và tiệm làm rất đẹp. Chắc chắn
-                  sẽ ủng hộ dài dài!
-                </p>
-                <div class="testimonial-author">
-                  <span class="testimonial-avatar">H</span>
-                  <div class="testimonial-info">
-                    <strong>Hoàng Trang</strong>
-                    <span class="stars" aria-label="5 sao">★★★★★</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div
-              class="testimonial-dots"
-              role="tablist"
-              aria-label="Chọn đánh giá"
-            >
-              <button
-                type="button"
-                class="dot active"
-                aria-label="Đánh giá 1"
-              ></button>
-              <button
-                type="button"
-                class="dot"
-                aria-label="Đánh giá 2"
-              ></button>
-              <button
-                type="button"
-                class="dot"
-                aria-label="Đánh giá 3"
-              ></button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ==================== 6. CTA THIẾT KẾ BÁNH ==================== -->
-      <section class="cta" aria-labelledby="cta-title">
-        <div class="section-container">
-          <div class="cta-box">
-            <div class="cta-content">
-              <h2 id="cta-title" class="cta-title">Thiết Kế Bánh Theo Ý Bạn</h2>
-              <p class="cta-desc">
-                Sử dụng công cụ thiết kế của chúng tôi để tạo chiếc bánh trong
-                mơ!
-              </p>
-            </div>
-            <a href="builder.html" class="btn btn-primary btn-lg"
-              >Bắt Đầu Thiết Kế</a
-            >
-          </div>
         </div>
       </section>
     </main>

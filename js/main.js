@@ -82,8 +82,10 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  initializeHeroSlider();
+    initializeHeroSlider();
+  initAutoSlider('categorySlider', '.category-track');
   initializePromoPopup();
+
 });
 
 function initializeHeroSlider() {
@@ -204,6 +206,185 @@ function updateCartBadge() {
     cartBadge.textContent = totalQuantity;
   }
 }
+/* ==========================================
+   SLIDER TỰ CHẠY + THANH CUỘN NGẮN (dùng chung)
+   ========================================== */
+function initAutoSlider(sliderId, trackSelector) {
+  const slider = document.getElementById(sliderId);
+  if (!slider) return;
 
-// Chạy hàm này ngay khi trang web tải xong 🚀
+  const track = slider.querySelector(trackSelector);
+  const bar = slider.querySelector('.cat-scrollbar');
+  const thumb = slider.querySelector('.cat-thumb');
+  if (!track || !bar || !thumb) return;
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const SPEED = 0.6; // px mỗi khung hình, tăng lên để chạy nhanh hơn
+
+  let pos = track.scrollLeft;
+  let dir = 1;
+  let paused = false;
+  let resumeTimer = null;
+  let dragging = false;
+
+  /* ----- Thanh cuộn tự tạo ----- */
+  function updateThumb() {
+    const max = track.scrollWidth - track.clientWidth;
+    bar.hidden = max <= 0;
+    if (max <= 0) return;
+
+    const barW = bar.clientWidth;
+    const thumbW = Math.max(36, (track.clientWidth / track.scrollWidth) * barW);
+    thumb.style.width = thumbW + 'px';
+    thumb.style.left = (track.scrollLeft / max) * (barW - thumbW) + 'px';
+  }
+
+  function scrollFromBar(clientX) {
+    const rect = bar.getBoundingClientRect();
+    const thumbW = thumb.offsetWidth;
+    const ratio = (clientX - rect.left - thumbW / 2) / (rect.width - thumbW);
+    const max = track.scrollWidth - track.clientWidth;
+    track.scrollLeft = Math.min(1, Math.max(0, ratio)) * max;
+    pos = track.scrollLeft;
+  }
+
+  bar.addEventListener('pointerdown', (e) => {
+    dragging = true;
+    pause();
+    bar.setPointerCapture(e.pointerId);
+    scrollFromBar(e.clientX);
+  });
+
+  bar.addEventListener('pointermove', (e) => {
+    if (dragging) scrollFromBar(e.clientX);
+  });
+
+  bar.addEventListener('pointerup', () => {
+    dragging = false;
+    resume(1500);
+  });
+
+  track.addEventListener('scroll', updateThumb);
+  window.addEventListener('resize', updateThumb);
+
+  /* ----- Tự chạy ----- */
+  function tick() {
+    if (!paused) {
+      const max = track.scrollWidth - track.clientWidth;
+      if (max > 0) {
+        pos += SPEED * dir;
+        if (pos >= max) { pos = max; dir = -1; }
+        else if (pos <= 0) { pos = 0; dir = 1; }
+        track.scrollLeft = pos;
+      }
+    }
+    requestAnimationFrame(tick);
+  }
+
+  function pause() {
+    paused = true;
+    clearTimeout(resumeTimer);
+  }
+
+  function resume(delay) {
+    clearTimeout(resumeTimer);
+    resumeTimer = setTimeout(() => {
+      pos = track.scrollLeft;
+      paused = false;
+    }, delay);
+  }
+
+  slider.addEventListener('mouseenter', pause);
+  slider.addEventListener('mouseleave', () => { if (!dragging) resume(300); });
+  slider.addEventListener('touchstart', pause, { passive: true });
+  slider.addEventListener('touchend', () => resume(2000));
+  slider.addEventListener('focusin', pause);
+  slider.addEventListener('focusout', () => resume(300));
+
+  updateThumb();
+  if (!reduceMotion) requestAnimationFrame(tick);
+}
+
+/* ==========================================
+   SẢN PHẨM TỪ FILE JSON
+   ========================================== */
+const PRODUCTS_URL = 'js\\products-data.json';
+
+const escapeHTML = (value) =>
+  String(value ?? '').replace(/[&<>"']/g, (c) => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
+  }[c]));
+
+const formatVND = (n) => Number(n || 0).toLocaleString('vi-VN') + 'đ';
+
+/* Chuẩn hóa tên trường: sửa ở đây nếu JSON của bạn dùng tên khác */
+function normalizeProduct(p) {
+  return {
+    id: p.id,
+    name: p.name ?? p.title ?? '',
+    price: p.price ?? 0,
+    category: p.category ?? '',
+    image: p.image ?? p.img ?? p.thumbnail ?? '',
+    rating: Number(p.rating ?? 5),
+    count: p.reviews ?? p.sales ?? p.reviewCount ?? null,
+  };
+}
+
+function renderProductCard(raw) {
+  const p = normalizeProduct(raw);
+  const stars = '★'.repeat(Math.round(p.rating)) + '☆'.repeat(5 - Math.round(p.rating));
+  const link = `product-detail.html?id=${encodeURIComponent(p.id)}`;
+
+  return `
+    <article class="product-card">
+      <a href="${link}" class="product-media">
+        <img src="${escapeHTML(p.image)}" alt="${escapeHTML(p.name)}" loading="lazy" />
+      </a>
+      <div class="product-body">
+        <p class="product-category">${escapeHTML(p.category)}</p>
+        <h3 class="product-name">
+          <a href="${link}">${escapeHTML(p.name)}</a>
+        </h3>
+        <div class="product-rating">
+          <span class="stars" aria-label="${p.rating} sao">${stars}</span>
+          ${p.count !== null ? `<span class="rating-count">(${escapeHTML(p.count)})</span>` : ''}
+        </div>
+        <div class="product-footer">
+          <span class="product-price">${formatVND(p.price)}</span>
+          <button type="button" class="btn-add-cart"
+            data-id="${escapeHTML(p.id)}"
+            data-name="${escapeHTML(p.name)}"
+            data-price="${escapeHTML(p.price)}">
+            <i class="fa-solid fa-plus"></i> Thêm vào giỏ
+          </button>
+        </div>
+      </div>
+    </article>`;
+}
+
+async function loadHomeProducts() {
+  const track = document.getElementById('productTrack');
+  if (!track) return;
+
+  try {
+    const res = await fetch(PRODUCTS_URL);
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+
+    const data = await res.json();
+    // Chấp nhận cả dạng [ ... ] lẫn { "products": [ ... ] }
+    const list = Array.isArray(data) ? data : (data.products || data.items || []);
+
+    track.innerHTML = list.map(renderProductCard).join('');
+  } catch (err) {
+    console.error('Không tải được sản phẩm:', err);
+    track.innerHTML = '<p>Không tải được sản phẩm. Vui lòng thử lại sau.</p>';
+  }
+}
+
+// Chạy hàm này ngay khi trang web tải xong 
 document.addEventListener('DOMContentLoaded', updateCartBadge);
+// Tải sản phẩm từ JSON rồi mới khởi tạo slider (chạy độc lập, không phụ thuộc khối ở trên)
+document.addEventListener('DOMContentLoaded', async () => {
+  await loadHomeProducts();
+  initAutoSlider('productSlider', '.product-track');
+});
