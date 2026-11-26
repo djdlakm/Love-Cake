@@ -27,6 +27,8 @@ function initMobileMenu() {
   const menuToggle = document.querySelector('#menuToggle');
   const menuClose = document.querySelector('#menuClose');
   const navbar = document.querySelector('.navbar');
+  const productMenuToggle = document.querySelector('.nav-dropdown-toggle');
+  const productMenu = productMenuToggle?.closest('.nav-dropdown');
 
   // Mở menu khi bấm nút 3 gạch 🚪
   if (menuToggle && navbar) {
@@ -41,6 +43,14 @@ function initMobileMenu() {
       navbar.classList.remove('active');
     });
   }
+
+  if (productMenuToggle && productMenu) {
+    productMenuToggle.addEventListener('click', () => {
+      const isExpanded = productMenuToggle.getAttribute('aria-expanded') === 'true';
+      productMenuToggle.setAttribute('aria-expanded', String(!isExpanded));
+      productMenu.classList.toggle('is-expanded', !isExpanded);
+    });
+  }
 }
 
 // 4. Hàm tự động Highlight trang hiện tại 📍
@@ -50,7 +60,7 @@ function highlightCurrentPage() {
     return withoutIndex.replace(/\/+$/, '') || '/';
   };
   const currentPath = normalizePath(window.location.pathname);
-  const navLinks = document.querySelectorAll('.navbar a');
+  const navLinks = document.querySelectorAll('.navbar > ul > li > a');
 
   navLinks.forEach((link) => {
     const linkPath = normalizePath(
@@ -88,7 +98,7 @@ function loadComponents() {
         </button>
 
         <!-- Logo (Giữa) 🖼️ -->
-        <a href="${BASE_URL}" class="logo-wrapper">
+        <a href="${BASE_URL}index.html" class="logo-wrapper">
           <img class="logo" src="${BASE_URL}assets/img/logo.png" alt="logo" />
         </a>
 
@@ -100,19 +110,39 @@ function loadComponents() {
             <button class="menu-close" id="menuClose" aria-label="Close Menu">&times;</button>
           </div>
           <ul>
-            <li><a href="${BASE_URL}">Trang chủ</a></li>
+            <li><a href="${BASE_URL}index.html">Trang chủ</a></li>
             <li><a href="${BASE_URL}about.html">Giới thiệu</a></li>
-            <li><a href="${BASE_URL}product.html">Sản phẩm</a></li>
+            <li class="nav-dropdown">
+              <a href="${BASE_URL}product.html">Sản phẩm</a>
+              <button
+                class="nav-dropdown-toggle"
+                type="button"
+                aria-label="Mở danh mục sản phẩm"
+                aria-expanded="false"
+                aria-controls="productCategoryMenu"
+              >
+                <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+              </button>
+              <ul class="nav-dropdown-menu" id="productCategoryMenu" aria-label="Danh mục sản phẩm">
+                <li><a href="${BASE_URL}product.html?cat=banh-hoa-qua-tuoi">Bánh hoa quả tươi</a></li>
+                <li><a href="${BASE_URL}product.html?cat=banh-kem">Bánh Kem</a></li>
+                <li><a href="${BASE_URL}product.html?cat=banh-bento">Bánh Bento</a></li>
+                <li><a href="${BASE_URL}product.html?cat=cheese-cake">Cheese Cake</a></li>
+                <li><a href="${BASE_URL}product.html?cat=mini-cake">Mini Cake</a></li>
+                <li><a href="${BASE_URL}product.html?cat=banh-le">Bánh lễ</a></li>
+              </ul>
+            </li>
             <li><a href="${BASE_URL}builder.html">Tự thiết kế bánh</a></li>
             <li><a href="${BASE_URL}contact.html">Liên hệ</a></li>
+            <li class="mobile-account-link"><a href="${BASE_URL}auth.html">Đăng nhập / Đăng ký</a></li>
           </ul>
         </nav>
 
         <!-- Tài khoản và giỏ hàng (Phải) -->
         <div class="header-actions">
-            <a href="${BASE_URL}login.html" class="account-link">
+            <a href="${BASE_URL}auth.html" class="account-link">
               <i class="fas fa-user" aria-hidden="true"></i>
-              <span>Đăng nhập / Đăng ký</span>
+              <span id="account-label">Đăng nhập / Đăng ký</span>
             </a>
             <a href="${BASE_URL}cart.html" class="cart-icon">
               <i class="fas fa-shopping-cart" aria-hidden="true"></i>
@@ -131,7 +161,7 @@ function loadComponents() {
 
       <div class="container footer-content">
         <div class="col1 footer-brand">
-          <a href="${BASE_URL}" class="logo-wrapper brand">
+          <a href="${BASE_URL}index.html" class="logo-wrapper brand">
             <img src="${BASE_URL}assets/img/logo.png" alt="Love Cake" class="logo" />
           </a>
           <p class="footer-about">
@@ -143,7 +173,7 @@ function loadComponents() {
         <div class="col2 footer-links">
           <h3>Liên kết nhanh</h3>
           <ul>
-            <li><a href="${BASE_URL}">Trang chủ</a></li>
+            <li><a href="${BASE_URL}index.html">Trang chủ</a></li>
             <li><a href="${BASE_URL}about.html">Giới thiệu</a></li>
             <li><a href="${BASE_URL}product.html">Sản phẩm</a></li>
             <li><a href="${BASE_URL}builder.html">Tự thiết kế bánh</a></li>
@@ -154,8 +184,8 @@ function loadComponents() {
         <div class="col3 footer-contact">
           <h3>Liên hệ</h3>
           <ul>
-            <li><span class="contact-icon">📍</span><span>123 Cầu Giấy, Hà Nội</span></li>
-            <li><span class="contact-icon">📞</span><span>0901 234 567</span></li>
+            <li><span class="contact-icon">📍</span><span>12 Chùa Bộc, Kim Liên, Hà Nội</span></li>
+            <li><span class="contact-icon">📞</span><span>0987 654 321</span></li>
             <li><span class="contact-icon">✉️</span><a href="mailto:info@lovecake.vn" class="contact-mail">info@lovecake.vn</a></li>
           </ul>
           <div class="footer-social">
@@ -185,6 +215,27 @@ function loadComponents() {
 
   if (headerElement) headerElement.innerHTML = headerHTML;
   if (footerElement) footerElement.innerHTML = footerHTML;
+
+  const accountLabel = document.getElementById('account-label');
+  const accountLink = accountLabel?.closest('.account-link');
+  let currentUser = null;
+  try {
+    currentUser = JSON.parse(localStorage.getItem('LOVE_CAKE_CURRENT_USER') || 'null');
+  } catch (error) {
+    console.error('Không thể đọc phiên đăng nhập trên header:', error);
+  }
+
+  if (currentUser && typeof currentUser.name === 'string' && accountLabel && accountLink) {
+    accountLabel.textContent = currentUser.name;
+    accountLink.classList.add('is-authenticated');
+    accountLink.href =
+      currentUser.role === 'admin'
+        ? `${BASE_URL}admin.html`
+        : `${BASE_URL}account.html`;
+    accountLink.setAttribute('aria-label', `Tài khoản ${currentUser.name}`);
+  } else if (accountLink) {
+    accountLink.href = `${BASE_URL}auth.html`;
+  }
 
   // Kích hoạt tính năng
   updateCartBadge();

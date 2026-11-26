@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Bảng điều khiển quản trị Love Cake.">
+    <title>Quản trị | Love Cake</title>
+    <script src="https://kit.fontawesome.com/30260f1add.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/admin.css">
+    <link rel="stylesheet" href="css/account.css">
+  </head>
+  <body class="admin-document">
+    <div id="header-placeholder"></div>
+    <main class="admin-page">
+      <header class="admin-page__heading">
+        <div><p class="admin-page__eyebrow">Love Cake · Quản trị</p><h1>Tổng quan cửa hàng</h1><p>Theo dõi hoạt động kinh doanh và cập nhật trạng thái đơn hàng.</p></div>
+        <a class="admin-page__store-link" href="index.html">← Về cửa hàng</a>
+      </header>
+      <section class="admin-stats" aria-label="Thống kê cửa hàng">
+        <article class="admin-stat-card"><span class="admin-stat-card__icon">₫</span><div><p>Tổng doanh thu</p><strong id="admin-revenue">0đ</strong><small>Đơn hàng hoàn thành</small></div></article>
+        <article class="admin-stat-card"><span class="admin-stat-card__icon">▤</span><div><p>Tổng đơn hàng</p><strong id="admin-order-count">0</strong><small>Toàn bộ đơn hàng</small></div></article>
+        <article class="admin-stat-card"><span class="admin-stat-card__icon admin-stat-card__icon--customers" aria-hidden="true"><svg viewBox="0 0 64 64" fill="none" focusable="false"><path d="M23 10a8 8 0 1 0-7 13M5 45c1-9 6-15 14-17M41 10a8 8 0 1 1 7 13M59 45c-1-9-6-15-14-17" stroke="#f46b4f" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="32" cy="20" r="9" stroke="#355d8c" stroke-width="3.5"/><path d="M16 53c1-11 7-18 16-18s15 7 16 18" stroke="#355d8c" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><p>Khách hàng</p><strong id="admin-customer-count">0</strong><small>Tài khoản đã đăng ký</small></div></article>
+        <article class="admin-stat-card"><span class="admin-stat-card__icon admin-stat-card__icon--products" aria-hidden="true"><svg viewBox="0 0 64 64" fill="none" focusable="false"><path d="M12 27h40v25H12zM12 34h4c0 4 6 4 6 0s6-4 6 0 6 4 6 0 6-4 6 0 6 4 6 0 6-4 6 0h4M12 44h40M22 27V16m10 11V13m10 14V16" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 11c-2-2 0-5 0-5s3 3 0 5zm10-3c-2-2 0-5 0-5s3 3 0 5zm10 3c-2-2 0-5 0-5s3 3 0 5z" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><p>Mẫu bánh đang bán</p><strong id="admin-product-count">0</strong><small>Danh mục sản phẩm</small></div></article>
+      </section>
+      <section class="admin-dashboard-grid">
+        <article class="admin-card admin-chart-card">
+          <div class="admin-card__heading"><div><p class="admin-page__eyebrow">Doanh thu</p><h2>Doanh thu theo tháng</h2></div><span class="admin-chart-legend"><i></i>Đơn hoàn thành</span></div>
+          <div class="admin-chart" id="admin-revenue-chart" aria-label="Biểu đồ doanh thu 6 tháng gần nhất"></div>
+        </article>
+        <article class="admin-card admin-summary-card">
+          <p class="admin-page__eyebrow">Đơn hàng</p><h2>Tình trạng xử lý</h2>
+          <div class="admin-status-summary">
+            <p><span class="admin-status-dot is-processing"></span>Đang xử lý<strong id="admin-processing-count">0</strong></p>
+            <p><span class="admin-status-dot is-shipping"></span>Đang giao<strong id="admin-shipping-count">0</strong></p>
+            <p><span class="admin-status-dot is-completed"></span>Hoàn thành<strong id="admin-completed-count">0</strong></p>
+          </div>
+        </article>
+      </section>
+      <section class="admin-card admin-orders-card">
+        <div class="admin-card__heading"><div><p class="admin-page__eyebrow">Quản lý bán hàng</p><h2>Đơn hàng gần đây</h2></div><button class="admin-refresh-button" type="button" id="admin-refresh">Làm mới</button></div>
+        <div class="admin-table-wrap">
+          <table class="admin-orders-table">
+            <thead><tr><th>Mã đơn</th><th>Khách hàng</th><th>Sản phẩm</th><th>Ngày đặt</th><th>Tổng tiền</th><th>Chi tiết</th><th>Trạng thái</th></tr></thead>
+            <tbody id="admin-orders-body"></tbody>
+          </table>
+        </div>
+        <p class="admin-empty" id="admin-orders-empty" hidden>Chưa có đơn hàng. Đơn hàng khách đặt sẽ xuất hiện tại đây.</p>
+      </section>
+      <dialog class="account-order-dialog" id="admin-order-dialog" aria-labelledby="admin-order-dialog-title">
+        <button class="account-order-dialog__close" id="admin-order-dialog-close" type="button" aria-label="Đóng chi tiết đơn hàng">&times;</button>
+        <div id="admin-order-dialog-content"></div>
+      </dialog>
+    </main>
+    <div id="footer-placeholder"></div>
+    <script src="js/header&footer.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/admin.js"></script>
+  </body>
+</html>

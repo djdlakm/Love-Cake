@@ -10,8 +10,22 @@ const recommendationsSection = document.querySelector('.recommendations-section'
 const recommendationControls = document.querySelectorAll('[data-recommendations-step]');
 const currentPriceEl = document.querySelector('.current-price');
 const oldPriceEl = document.querySelector('.old-price');
+const mainProductImage = document.getElementById('mainProductImage');
+const galleryThumbnails = document.getElementById('galleryThumbnails');
+const galleryPrevious = document.getElementById('galleryPrevious');
+const galleryNext = document.getElementById('galleryNext');
 
 let selectedPrice = 100000;
+let galleryImages = [];
+let currentGalleryIndex = 0;
+let galleryAutoplayTimer;
+let selectedProduct = {
+  id: 'BLC-2026',
+  name: 'Bánh Kem Bento Dâu Tây Tươi (Hộp Bento Sinh Nhật)',
+  price: selectedPrice,
+  category: 'Bánh Bento',
+  image: 'assets/banhdautay2.jpg',
+};
 
 function formatCurrency(amount) {
   return `${amount.toLocaleString('vi-VN')}đ`;
@@ -20,6 +34,158 @@ function formatCurrency(amount) {
 function updateCurrentPrice() {
   currentPriceEl.textContent = formatCurrency(selectedPrice);
 }
+
+function showGalleryImage(index) {
+  if (galleryImages.length === 0) return;
+
+  currentGalleryIndex = (index + galleryImages.length) % galleryImages.length;
+  mainProductImage.src = galleryImages[currentGalleryIndex];
+  mainProductImage.alt = selectedProduct.name;
+
+  galleryThumbnails.querySelectorAll('.gallery-thumbnail').forEach((button, buttonIndex) => {
+    const isActive = buttonIndex === currentGalleryIndex;
+    button.classList.toggle('active', isActive);
+    button.setAttribute('aria-pressed', String(isActive));
+  });
+}
+
+function updateGalleryAutoplay() {
+  window.clearInterval(galleryAutoplayTimer);
+  if (galleryImages.length < 2 || document.hidden) return;
+
+  galleryAutoplayTimer = window.setInterval(() => {
+    showGalleryImage(currentGalleryIndex + 1);
+  }, 3000);
+}
+
+function renderProductGallery(product) {
+  galleryImages = product.images.length > 0 ? product.images : [product.image];
+  currentGalleryIndex = 0;
+  galleryThumbnails.replaceChildren(...galleryImages.map((src, index) => {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'gallery-thumbnail';
+    button.dataset.galleryIndex = index;
+    button.setAttribute('aria-label', `Xem ảnh ${index + 1} của ${product.name}`);
+    button.setAttribute('aria-pressed', String(index === 0));
+
+    const image = document.createElement('img');
+    image.src = src;
+    image.alt = '';
+    image.loading = 'lazy';
+    button.append(image);
+    return button;
+  }));
+  galleryThumbnails.hidden = galleryImages.length < 2;
+  galleryPrevious.hidden = galleryImages.length < 2;
+  galleryNext.hidden = galleryImages.length < 2;
+  showGalleryImage(0);
+  updateGalleryAutoplay();
+}
+
+function displayProduct(product) {
+  const images = Array.isArray(product.images) ? product.images.filter(Boolean) : [];
+  const productImage = images[0] || product.image || 'assets/img/cart-cake.png';
+  selectedProduct = { ...product, image: productImage, images: images.length ? images : [productImage] };
+  selectedPrice = Number(product.price);
+
+  document.querySelector('.product-title').textContent = product.name;
+  renderProductGallery(selectedProduct);
+  document.querySelector('.product-description').textContent = product.description;
+  document.title = `${product.name} | Love Cake`;
+  updateCurrentPrice();
+
+  if (product.originalPrice) {
+    oldPriceEl.textContent = formatCurrency(Number(product.originalPrice));
+    const discount = Math.round((1 - product.price / product.originalPrice) * 100);
+    document.querySelector('.save-tag').textContent = `Tiết kiệm -${discount}%`;
+  } else {
+    oldPriceEl.hidden = true;
+    document.querySelector('.save-tag').hidden = true;
+  }
+
+  const ingredients = document.querySelector('.ingredient-grid');
+  ingredients.replaceChildren(...product.ingredients.map((ingredient) => {
+    const item = document.createElement('li');
+    item.className = 'ingredient-item';
+    const text = document.createElement('strong');
+    text.textContent = ingredient;
+    item.append(text);
+    return item;
+  }));
+
+  const usage = document.querySelector('.usage-list');
+  usage.replaceChildren(...product.usage.map((instruction) => {
+    const item = document.createElement('li');
+    item.textContent = instruction;
+    return item;
+  }));
+}
+
+const requestedProductId = new URLSearchParams(window.location.search).get('id');
+const productDataPromise = fetch('js/products-data.json')
+  .then((response) => {
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    return response.json();
+  })
+  .then((products) => {
+    if (!Array.isArray(products)) throw new Error('Dữ liệu sản phẩm không hợp lệ.');
+    return products;
+  })
+  .catch((error) => {
+    console.error('Không thể tải dữ liệu sản phẩm.', error);
+    return [];
+  });
+
+function renderRecommendations(products) {
+  const cards = products
+    .filter((product) => product.id !== requestedProductId)
+    .map((product) => {
+      const card = document.createElement('article');
+      card.className = 'recommendation-card';
+
+      const image = document.createElement('img');
+      image.src = product.image || product.images[0] || 'assets/img/cart-cake.png';
+      image.alt = product.name;
+      image.loading = 'lazy';
+
+      const copy = document.createElement('div');
+      copy.className = 'recommendation-copy';
+      const label = document.createElement('span');
+      label.className = 'recommendation-label';
+      label.textContent = product.category;
+      const name = document.createElement('h3');
+      name.textContent = product.name;
+      copy.append(label, name);
+      card.append(image, copy);
+      return card;
+    });
+
+  recommendationsTrack.replaceChildren(...cards);
+  updateRecommendationControls();
+}
+productDataPromise.then((products) => {
+  const product = products.find((item) => item.id === requestedProductId);
+  if (product) displayProduct(product);
+  renderRecommendations(products);
+});
+
+galleryPrevious.addEventListener('click', () => {
+  showGalleryImage(currentGalleryIndex - 1);
+  updateGalleryAutoplay();
+});
+galleryNext.addEventListener('click', () => {
+  showGalleryImage(currentGalleryIndex + 1);
+  updateGalleryAutoplay();
+});
+galleryThumbnails.addEventListener('click', (event) => {
+  const thumbnail = event.target.closest('.gallery-thumbnail');
+  if (!thumbnail) return;
+  showGalleryImage(Number(thumbnail.dataset.galleryIndex));
+  updateGalleryAutoplay();
+});
+
+document.addEventListener('visibilitychange', updateGalleryAutoplay);
 
 sizeOptions.forEach((button) => {
   button.addEventListener('click', () => {
@@ -61,11 +227,12 @@ function animateCartFly(sourceButton) {
   const startY = source.top + source.height / 2;
   const endX = target.left + target.width / 2;
   const endY = target.top + target.height / 2;
-  const flyer = document.createElement('span');
+  const flyer = document.createElement('img');
 
   flyer.className = 'cart-fly-icon';
-  flyer.innerHTML = '<i class="fa-solid fa-cake-candles" aria-hidden="true"></i>';
   flyer.setAttribute('aria-hidden', 'true');
+  flyer.src = selectedProduct.image;
+  flyer.alt = '';
   flyer.style.left = `${startX - 20}px`;
   flyer.style.top = `${startY - 20}px`;
   document.body.append(flyer);
@@ -89,24 +256,34 @@ function animateCartFly(sourceButton) {
   cartIcon.addEventListener('animationend', () => cartIcon.classList.remove('cart-bounce'), { once: true });
 }
 
-document.querySelector('.btn-secondary')?.addEventListener('click', (event) => {
-  const productId = 'BLC-2026';
+document.querySelector('.btn-secondary')?.addEventListener('click', async (event) => {
+  if (requestedProductId && requestedProductId.startsWith('BT-')) {
+    const products = await productDataPromise;
+    const product = products.find((item) => item.id === requestedProductId);
+    if (!product) return;
+    displayProduct(product);
+  }
+
   const quantity = Math.max(1, Number(qtyInput.value) || 1);
   const accessories = [];
   const accessoryKey = '';
   const cart = JSON.parse(localStorage.getItem('cart') || '[]');
-  const existingItem = cart.find((item) => item.id === productId && (item.accessoryKey || '') === accessoryKey);
+  const existingItem = cart.find((item) => item.id === selectedProduct.id && (item.accessoryKey || '') === accessoryKey);
 
   if (existingItem) {
     existingItem.quantity = (Number(existingItem.quantity) || 0) + quantity;
+    existingItem.image = selectedProduct.image;
+    existingItem.name = selectedProduct.name;
+    existingItem.category = selectedProduct.category;
   } else {
     cart.push({
-      id: productId,
-      name: 'Bánh Kem Bento Dâu Tây Tươi (Hộp Bento Sinh Nhật)',
+      id: selectedProduct.id,
+      name: selectedProduct.name,
       price: selectedPrice,
+      category: selectedProduct.category,
       accessories,
       accessoryKey,
-      image: 'assets/banhdautay2.jpg',
+      image: selectedProduct.image,
       quantity,
     });
   }

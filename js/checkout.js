@@ -1,3 +1,4 @@
+
 const OFFER_CATALOG = {
   LOVECAKE11: {
     code:"LOVECAKE11",
@@ -110,14 +111,8 @@ const OFFER_CATALOG = {
   }
 };
 
-
-
-
 let cart = loadCart();
 let voucher = {code:"",active:false};
-
-
-
 
 function loadCart(){
   try{
@@ -131,7 +126,14 @@ function loadCart(){
       price:Number(item.price??item.salePrice??item.unitPrice),
       quantity:Number(item.quantity??item.qty??1),
       image:String(item.image||item.img||item.thumbnail||""),
-      category:String(item.category||item.type||"")
+      category:String(item.category||item.type||""),
+      size:String(item.size||item.customDetails?.size||""),
+      customDetails:item.customDetails&&typeof item.customDetails==="object"
+        ?item.customDetails
+        :null,
+      accessories:Array.isArray(item.accessories)
+        ?item.accessories.map(accessory=>String(accessory))
+        :[]
     })).filter(item=>item.name&&Number.isFinite(item.price)&&item.price>0&&
       Number.isInteger(item.quantity)&&item.quantity>0);
   }catch(error){
@@ -140,17 +142,12 @@ function loadCart(){
   }
 }
 
-
-
-
 const $=id=>document.getElementById(id);
 const money=n=>new Intl.NumberFormat("vi-VN").format(Math.max(0,Math.round(n)))+"đ";
 
-
 const markFieldComplete=field=>field.classList.toggle("has-value",Boolean(field.value.trim()));
 
-
-["city","district","ward"].forEach(id=>{
+["city","ward"].forEach(id=>{
   const select=$(id);
   markFieldComplete(select);
   select.addEventListener("change",()=>markFieldComplete(select));
@@ -160,15 +157,40 @@ const addressField=$("address");
 markFieldComplete(addressField);
 addressField.addEventListener("input",()=>markFieldComplete(addressField));
 
-
 ["fullName","phone","receiveDate","receiveHour","note"].forEach(id=>{
   const field=$(id);
   markFieldComplete(field);
   field.addEventListener("input",()=>markFieldComplete(field));
 });
 
+function prefillCheckoutFromAccount(){
+  let currentUser=null;
+  try{
+    currentUser=JSON.parse(localStorage.getItem("LOVE_CAKE_CURRENT_USER")||"null");
+  }catch(error){
+    console.error("Không thể đọc hồ sơ để điền thông tin thanh toán.",error);
+    return;
+  }
+  if(!currentUser||currentUser.role==="admin")return;
 
+  const values={
+    fullName:currentUser.name||currentUser.fullName,
+    phone:currentUser.phone,
+    city:"Hà Nội",
+    ward:currentUser.ward,
+    address:currentUser.address
+  };
+  Object.entries(values).forEach(([id,value])=>{
+    if(value===null||value===undefined)return;
+    const field=$(id);
+    field.value=String(value);
+    const eventName=field.tagName==="SELECT"?"change":"input";
+    field.dispatchEvent(new Event(eventName,{bubbles:true}));
+  });
+  updateTransferContent();
+}
 
+prefillCheckoutFromAccount();
 
 function setMobileMenuOpen(isOpen){
   const navbar=document.querySelector(".navbar");
@@ -177,9 +199,6 @@ function setMobileMenuOpen(isOpen){
   navbar.classList.toggle("active",isOpen);
   toggle.setAttribute("aria-expanded",String(isOpen));
 }
-
-
-
 
 function saveCart({manuallyCleared=false,orderCompleted=false}={}){
   try{
@@ -193,9 +212,6 @@ function saveCart({manuallyCleared=false,orderCompleted=false}={}){
   }
 }
 
-
-
-
 function initializeHeaderControls(){
   $("menuToggle").addEventListener("click",()=>setMobileMenuOpen(true));
   $("menuClose").addEventListener("click",()=>setMobileMenuOpen(false));
@@ -204,17 +220,11 @@ function initializeHeaderControls(){
   });
 }
 
-
-
-
 if(document.readyState==="loading"){
   document.addEventListener("DOMContentLoaded",initializeHeaderControls,{once:true});
 }else{
   initializeHeaderControls();
 }
-
-
-
 
 $("fullName").addEventListener("input",updateTransferContent);
 $("phone").addEventListener("input",updateTransferContent);
@@ -226,15 +236,9 @@ document.addEventListener("keydown",event=>{
   if(event.key==="Escape")hideVoucherModal();
 });
 
-
-
-
 function escapeHTML(s){
   return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
 }
-
-
-
 
 function updateTransferContent(){
   const name=$("fullName").value.trim();
@@ -244,36 +248,23 @@ function updateTransferContent(){
     :"Họ và tên người đặt + SĐT";
 }
 
-
-
-
 function syncReceiveTime(){
   const date=$("receiveDate").value;
   const time=$("receiveHour").value;
   $("receiveTime").value=date&&time?`${date}T${time}`:"";
 }
 
-
-
-
 function updateCartBadge(){
   const badge=document.querySelector(".cart-badge");
   if(badge)badge.textContent=String(cart.reduce((total,item)=>total+item.quantity,0));
 }
 
-
 $("scrollToTopBtn").addEventListener("click",()=>{
   window.scrollTo({top:0,behavior:"smooth"});
 });
 
-
-
-
 function renderCart(){
   updateCartBadge();
-
-
-
 
   $("cartList").innerHTML=cart.length?cart.map((item,i)=>`
     <div class="cart-product">
@@ -303,9 +294,6 @@ function renderCart(){
     </div>
   `).join(""):'<p class="empty-cart">Giỏ hàng đang trống. Bạn hãy quay lại giỏ hàng để chọn bánh nhé ♡</p>';
 
-
-
-
   $("summaryItems").innerHTML=cart.map(item=>`
     <div class="summary-item">
       <div class="summary-img">${item.image?`<img src="${escapeHTML(item.image)}" alt="">`:"🍰"}</div>
@@ -319,14 +307,8 @@ function renderCart(){
     </div>
   `).join("");
 
-
-
-
   updateTotals();
 }
-
-
-
 
 $("cartList").addEventListener("click",e=>{
   const btn=e.target.closest("button[data-action]");
@@ -338,9 +320,6 @@ $("cartList").addEventListener("click",e=>{
   saveCart({manuallyCleared:!cart.length});
   renderCart();
 });
-
-
-
 
 function receiveType(){
   return document.querySelector('input[name="receiveType"]:checked')?.value||"delivery";
@@ -411,9 +390,6 @@ function updateTotals(){
   renderSelectedVoucher();
 }
 
-
-
-
 function renderSelectedVoucher(){
   const offer=OFFER_CATALOG[voucher.code];
   const selectedText=$("voucherSelectionText");
@@ -430,9 +406,6 @@ function renderSelectedVoucher(){
   $("removeVoucher").classList.toggle("hidden",!voucher.active);
   card.classList.toggle("is-empty",!voucher.active);
 }
-
-
-
 
 function renderVoucherOptions(){
   $("voucherOptions").innerHTML=Object.values(OFFER_CATALOG).map(offer=>{
@@ -457,18 +430,12 @@ function renderVoucherOptions(){
   }).join("");
 }
 
-
-
-
 function hideVoucherModal(){
   const modal=$("voucherModal");
   if(!modal)return;
   modal.classList.remove("show");
   modal.setAttribute("aria-hidden","true");
 }
-
-
-
 
 function showVoucherModal(){
   renderVoucherOptions();
@@ -478,9 +445,6 @@ function showVoucherModal(){
   $("closeVoucherModal").focus();
 }
 
-
-
-
 function applyVoucher(code){
   const offer=OFFER_CATALOG[code];
   if(!offer||!isOfferEligible(offer))return;
@@ -488,9 +452,6 @@ function applyVoucher(code){
   hideVoucherModal();
   updateTotals();
 }
-
-
-
 
 $("voucherSelect").addEventListener("click",showVoucherModal);
 $("closeVoucherModal").addEventListener("click",hideVoucherModal);
@@ -502,9 +463,6 @@ $("voucherOptions").addEventListener("click",event=>{
   if(button&&!button.disabled)applyVoucher(button.dataset.voucherCode);
 });
 
-
-
-
 function showCheckoutNotice(message){
   $("noticeMessage").textContent=message;
   $("checkoutNotice").classList.add("show");
@@ -512,25 +470,16 @@ function showCheckoutNotice(message){
   $("confirmNotice").focus();
 }
 
-
-
-
 function hideCheckoutNotice(){
   $("checkoutNotice").classList.remove("show");
   $("checkoutNotice").setAttribute("aria-hidden","true");
 }
-
-
-
 
 $("confirmNotice").addEventListener("click",hideCheckoutNotice);
 $("closeNotice").addEventListener("click",hideCheckoutNotice);
 $("checkoutNotice").addEventListener("click",event=>{
   if(event.target===$("checkoutNotice"))hideCheckoutNotice();
 });
-
-
-
 
 document.querySelectorAll('input[name="receiveType"]').forEach(r=>{
   r.addEventListener("change",()=>{
@@ -542,9 +491,6 @@ document.querySelectorAll('input[name="receiveType"]').forEach(r=>{
   });
 });
 
-
-
-
 document.querySelectorAll('input[name="payment"]').forEach(r=>{
   r.addEventListener("change",()=>{
     document.querySelectorAll(".payment-option").forEach(x=>x.classList.remove("selected"));
@@ -552,9 +498,6 @@ document.querySelectorAll('input[name="payment"]').forEach(r=>{
     $("onlineBox").classList.toggle("hidden",r.value!=="online");
   });
 });
-
-
-
 
 $("store").addEventListener("change",e=>{
   markFieldComplete(e.target);
@@ -571,17 +514,11 @@ $("store").addEventListener("change",e=>{
   $("mapBox").classList.remove("hidden");
 });
 
-
-
-
 $("removeVoucher").addEventListener("click",()=>{
   voucher.active=false;
   voucher.code="";
   updateTotals();
 });
-
-
-
 
 function validForm(){
   syncReceiveTime();
@@ -594,7 +531,7 @@ function validForm(){
     return false;
   }
   if(receiveType()==="delivery"){
-    if(!$("city").value||!$("district").value||!$("ward").value||!$("address").value.trim()){
+    if(!$("city").value||!$("ward").value||!$("address").value.trim()){
       showCheckoutNotice("Vui lòng điền đầy đủ địa chỉ giao bánh để chúng mình giao bánh đến đúng nơi nhé ♡");
       return false;
     }
@@ -605,52 +542,78 @@ function validForm(){
   return true;
 }
 
-
-
-
 $("placeOrder").addEventListener("click",()=>{
   if(!validForm())return;
-  fillInvoice();
+  const invoice=fillInvoice();
+  try{
+    const savedOrders=localStorage.getItem("LOVE_CAKE_ORDERS");
+    const orders=savedOrders?JSON.parse(savedOrders):[];
+    if(!Array.isArray(orders))throw new Error("Dữ liệu đơn hàng không hợp lệ.");
+    let currentUser=null;
+    try{
+      currentUser=JSON.parse(localStorage.getItem("LOVE_CAKE_CURRENT_USER")||"null");
+    }catch(error){
+      console.error("Không thể đọc phiên khách hàng khi đặt đơn.",error);
+    }
+    orders.push({
+      id:invoice.code,
+      userId:currentUser?.id||"",
+      email:currentUser?.email||"",
+      customerName:$("fullName").value.trim(),
+      phone:$("phone").value.trim(),
+      address:$("billAddress").textContent,
+      createdAt:invoice.createdAt,
+      receiveTime:invoice.receiveTime,
+      receiveType:invoice.receiveType,
+      paymentMethod:invoice.paymentMethod,
+      paymentStatus:invoice.paymentStatus,
+      note:invoice.note,
+      items:cart.map(item=>({
+        name:item.name,
+        size:item.size||"",
+        quantity:item.quantity,
+        price:item.price,
+        category:item.category||"",
+        customDetails:item.customDetails,
+        accessories:item.accessories
+      })),
+      subtotal:invoice.subtotal,
+      shipping:invoice.shipping,
+      discount:invoice.discount,
+      total:invoice.total,
+      status:"Đang xử lý"
+    });
+    localStorage.setItem("LOVE_CAKE_ORDERS",JSON.stringify(orders));
+  }catch(error){
+    console.error("Không thể lưu đơn hàng.",error);
+    showCheckoutNotice("Không thể lưu đơn hàng vào trình duyệt. Đơn hàng chưa được xác nhận, vui lòng thử lại nhé ♡");
+    return;
+  }
   $("invoiceModal").classList.add("show");
   cart=[];
   saveCart({orderCompleted:true});
   renderCart();
 });
 
-
-
-
 function fillInvoice(){
   const now=new Date();
   const code="LC"+now.getFullYear()+String(now.getMonth()+1).padStart(2,"0")+String(now.getDate()).padStart(2,"0")+Math.floor(100+Math.random()*900);
-
-
-
 
   $("invoiceCode").textContent=code;
   $("invoiceDate").textContent=now.toLocaleDateString("vi-VN");
   $("billName").textContent=$("fullName").value.trim();
   $("billPhone").textContent=$("phone").value.trim();
 
-
-
-
   const d=new Date($("receiveTime").value);
   $("billReceive").textContent=isNaN(d)?$("receiveTime").value:d.toLocaleString("vi-VN");
 
-
-
-
   let address="";
   if(receiveType()==="delivery"){
-    address=[$("address").value,$("ward").value,$("district").value,$("city").value].filter(Boolean).join(", ");
+    address=[$("address").value,$("ward").value,$("city").value].filter(Boolean).join(", ");
   }else{
     address=$("store").options[$("store").selectedIndex].text;
   }
   $("billAddress").textContent=address;
-
-
-
 
   $("billItems").innerHTML=cart.map(x=>`
     <div class="bill-row">
@@ -660,36 +623,39 @@ function fillInvoice(){
     </div>
   `).join("");
 
-
-
-
   const pay=document.querySelector('input[name="payment"]:checked')?.value;
   const totals=calculateTotals();
   const paidByBank=pay==="online";
+  const paymentMethod=paidByBank
+    ?"Chuyển khoản ngân hàng / Ví điện tử"
+    :"Tiền mặt khi nhận bánh (COD)";
+  const paymentStatus=paidByBank
+    ?"Chờ xác nhận thanh toán"
+    :"Chưa thanh toán";
   $("billSubtotal").textContent=money(totals.subtotal);
   $("billShipping").textContent=money(totals.shipping);
   $("billDiscount").textContent=totals.discount>0?"-"+money(totals.discount):money(0);
   $("billDueLabel").textContent="Tổng cộng";
   $("billTotal").textContent=money(totals.total);
-  $("billPayment").textContent=paidByBank
-    ?"Chuyển khoản ngân hàng / Ví điện tử"
-    :"Tiền mặt khi nhận bánh (COD)";
-  $("billPaymentStatus").textContent=paidByBank
-    ?"Chờ xác nhận thanh toán"
-    :"Chưa thanh toán";
+  $("billPayment").textContent=paymentMethod;
+  $("billPaymentStatus").textContent=paymentStatus;
+  return {
+    code,
+    createdAt:now.toISOString(),
+    receiveTime:$("billReceive").textContent,
+    receiveType:receiveType(),
+    paymentMethod,
+    paymentStatus,
+    note:$("note").value.trim(),
+    subtotal:totals.subtotal,
+    shipping:totals.shipping,
+    discount:totals.discount,
+    total:totals.total
+  };
 }
-
-
-
 
 $("closeInvoice").addEventListener("click",()=>$("invoiceModal").classList.remove("show"));
 $("printBill").addEventListener("click",()=>window.print());
 $("continueShopping").addEventListener("click",()=>window.location.href="product.html");
 
-
-
-
 renderCart();
-
-
-
