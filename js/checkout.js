@@ -181,6 +181,7 @@ function updatePhoneValidation(showEmptyMessage){
 
 updatePhoneValidation(false);
 phoneField.addEventListener("input",()=>updatePhoneValidation(true));
+updateReceiveTimeConstraints();
 
 function prefillCheckoutFromAccount(){
   let currentUser=null;
@@ -249,6 +250,8 @@ $("fullName").addEventListener("input",updateTransferContent);
 $("phone").addEventListener("input",updateTransferContent);
 $("receiveDate").addEventListener("input",syncReceiveTime);
 $("receiveHour").addEventListener("input",syncReceiveTime);
+$("receiveDate").addEventListener("change",syncReceiveTime);
+$("receiveHour").addEventListener("change",syncReceiveTime);
 document.addEventListener("keydown",event=>{
   if(event.key==="Escape")setMobileMenuOpen(false);
   if(event.key==="Escape")hideCheckoutNotice();
@@ -271,6 +274,58 @@ function syncReceiveTime(){
   const date=$("receiveDate").value;
   const time=$("receiveHour").value;
   $("receiveTime").value=date&&time?`${date}T${time}`:"";
+  updateReceiveTimeConstraints();
+
+  const error=$("receiveTimeError");
+  if(!date||!time){
+    error.textContent="";
+    $("receiveDate").setAttribute("aria-invalid","false");
+    $("receiveHour").setAttribute("aria-invalid","false");
+  }else if(!isReceiveTimeValid()){
+    error.textContent="Thời gian nhận bánh phải cách thời điểm đặt ít nhất 2 tiếng.";
+    $("receiveDate").setAttribute("aria-invalid","true");
+    $("receiveHour").setAttribute("aria-invalid","true");
+  }else{
+    error.textContent="";
+    $("receiveDate").setAttribute("aria-invalid","false");
+    $("receiveHour").setAttribute("aria-invalid","false");
+  }
+}
+
+function formatLocalDate(date){
+  const year=date.getFullYear();
+  const month=String(date.getMonth()+1).padStart(2,"0");
+  const day=String(date.getDate()).padStart(2,"0");
+  return `${year}-${month}-${day}`;
+}
+
+function formatLocalTime(date){
+  return `${String(date.getHours()).padStart(2,"0")}:${String(date.getMinutes()).padStart(2,"0")}`;
+}
+
+function updateReceiveTimeConstraints(){
+  const now=new Date();
+  const today=formatLocalDate(now);
+  const receiveDate=$("receiveDate");
+  receiveDate.min=today;
+
+  if(receiveDate.value===today){
+    const earliest=new Date(now.getTime()+2*60*60*1000);
+    if(earliest.getSeconds()>0||earliest.getMilliseconds()>0){
+      earliest.setSeconds(0,0);
+      earliest.setMinutes(earliest.getMinutes()+1);
+    }
+    $("receiveHour").min=formatLocalTime(earliest);
+  }else{
+    $("receiveHour").min="";
+  }
+}
+
+function isReceiveTimeValid(){
+  if(!$("receiveTime").value)return false;
+  const receiveTime=new Date($("receiveTime").value);
+  if(Number.isNaN(receiveTime.getTime()))return false;
+  return receiveTime.getTime()-Date.now()>=2*60*60*1000;
 }
 
 function updateCartBadge(){
@@ -541,6 +596,15 @@ function validForm(){
     showCheckoutNotice("Vui lòng điền đầy đủ họ tên, số điện thoại và thời gian nhận bánh nhé ♡");
     return false;
   }
+  if(!isReceiveTimeValid()){
+    $("receiveTimeError").textContent="Thời gian nhận bánh phải cách thời điểm đặt ít nhất 2 tiếng.";
+    $("receiveDate").setAttribute("aria-invalid","true");
+    $("receiveHour").setAttribute("aria-invalid","true");
+    showCheckoutNotice("Thời gian nhận bánh phải cách thời điểm đặt ít nhất 2 tiếng.");
+    return false;
+  }
+  $("receiveDate").setAttribute("aria-invalid","false");
+  $("receiveHour").setAttribute("aria-invalid","false");
   if(!updatePhoneValidation(true)){
     showCheckoutNotice("Số điện thoại phải gồm đúng 10 chữ số nhé ♡");
     return false;

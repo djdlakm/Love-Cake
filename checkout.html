@@ -62,12 +62,13 @@
             </label>
             <div class="receive-datetime">
               <label class="required-field">Ngày nhận bánh<em>*</em>
-                <input id="receiveDate" type="date" lang="vi">
+                <input id="receiveDate" type="date" lang="vi" required>
               </label>
               <label class="required-field">Giờ nhận bánh<em>*</em>
-                <input id="receiveHour" type="time" lang="vi">
+                <input id="receiveHour" type="time" lang="vi" required>
               </label>
             </div>
+            <span id="receiveTimeError" class="field-error-message receive-time-error" aria-live="polite"></span>
             <input id="receiveTime" type="hidden">
             <label class="full">Ghi chú đơn hàng
               <textarea id="note" placeholder="Ví dụ: Viết chữ Happy Birthday lên bánh, giao trước 18h..."></textarea>

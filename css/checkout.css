@@ -87,6 +87,7 @@ html{scroll-behavior:smooth}
 .checkout-page input.field-invalid:focus{box-shadow:0 0 0 3px rgb(180 35 24 / 20%)}
 .field-error-message{display:block;margin-top:5px;color:#b42318;font-size:12px;font-weight:500}
 .field-error-message:empty{display:none}
+.receive-time-error{grid-column:1/-1;margin-top:-8px}
 .checkout-page input:-webkit-autofill,
 .checkout-page input:-webkit-autofill:hover,
 .checkout-page input:autofill{
