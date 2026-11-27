@@ -172,7 +172,6 @@
 
   // ----------------- 2. Trạng Thái Hiện Tại Của Trình Thiết Kế -----------------
   const MAX_PHOTOS = 8;
-  const INTRO_SESSION_KEY = 'loveCakeBuilderIntroShown';
 
   const state = {
     step: 1,
@@ -796,20 +795,8 @@
   function initIntroModal() {
     if (!dom.introModal) return;
 
-    // Chỉ tự động hiện 1 lần đầu tiên trong phiên truy cập (A2)
-    let alreadyShown = false;
-    try {
-      alreadyShown = sessionStorage.getItem(INTRO_SESSION_KEY) === '1';
-      if (!alreadyShown) {
-        sessionStorage.setItem(INTRO_SESSION_KEY, '1');
-      }
-    } catch (e) {
-      alreadyShown = false;
-    }
-
-    if (!alreadyShown) {
-      openIntroModal();
-    }
+    // Tự động hiển thị pop-up mỗi lần người dùng truy cập trang tự thiết kế
+    openIntroModal();
 
     if (dom.introCloseBtn) dom.introCloseBtn.addEventListener('click', closeIntroModal);
     if (dom.introBackdrop) dom.introBackdrop.addEventListener('click', closeIntroModal);
