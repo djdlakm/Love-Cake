@@ -9,7 +9,6 @@
   --line:var(--color-brand-border);
 }
 html{scroll-behavior:smooth}
-body{margin:0}
 .checkout-page{max-width:1260px;margin:auto;padding:28px 25px 70px}
 .checkout-page h2,.checkout-page strong,.checkout-page b{font-weight:700}
 .hero{display:flex;justify-content:space-between;align-items:center;margin:10px 0 22px}
@@ -228,31 +227,6 @@ body{margin:0}
 .thank-you img{flex:0 0 88px;width:88px;height:76px;object-fit:contain}
 .thank-you span{font-weight:600;white-space:nowrap}
 
-.footer{position:relative;padding-top:40px;border-top:2px solid var(--color-brand-border);background:var(--color-ink);font-family:"Montserrat",sans-serif}
-.footer .container.footer-content{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));align-items:start;gap:30px;width:min(1200px,calc(100% - 48px));max-width:1200px;margin:0 auto 48px;padding:0}
-.footer .col1,.footer .col2,.footer .col3,.footer .col4{min-width:0}
-.footer .footer-brand .logo-wrapper{display:flex;width:100%;justify-content:center}
-.footer .col1 .logo{display:block;width:160px;height:92px;margin:0 auto;object-fit:cover;object-position:center}
-.footer .footer-about{max-width:290px;margin:18px 0 22px;color:var(--color-text-subtle);font-size:14px;line-height:1.75}
-.footer .footer-social{display:flex;align-items:center;gap:30px}
-.footer .social-btn{display:grid;width:36px;height:36px;place-items:center;border-radius:10px;background:rgb(255 255 255 / 8%);color:var(--color-text-subtle);font-size:14px;transition:background-color .18s ease,color .18s ease}
-.footer .social-btn:hover{color:var(--color-brand-light)}
-.footer h3{height:auto;margin:0 0 20px;color:var(--color-text-on-brand);font-size:18px;font-weight:700;letter-spacing:.6px;text-transform:uppercase}
-.footer ul{margin:0;padding:0;list-style:none}
-.footer .footer-links li{display:block;margin-bottom:14px}
-.footer .footer-links a,.footer .contact-mail{color:var(--color-text-subtle);font-size:14px;transition:color .18s ease,padding-left .18s ease}
-.footer .footer-links a:hover{padding-left:6px;color:var(--color-brand)}
-.footer .footer-contact li,.footer .footer-hours li{display:flex;align-items:center;gap:12px;margin-bottom:18px;color:var(--color-text-subtle);font-size:14px;line-height:1.5}
-.footer .contact-icon{flex:0 0 20px;text-align:center}
-.footer .contact-mail,.footer .hours{color:var(--color-brand-light)}
-.footer .contact-mail:hover{text-decoration:underline}
-.footer .footer-hours li{justify-content:space-between}
-.footer .hours{font-weight:600;white-space:nowrap}
-.footer .bottom{display:flex;justify-content:center;padding:15px 0;border-top:1px solid var(--color-brand-border-overlay)}
-.footer .bottom p{margin:0;color:var(--color-text-subtle);font-size:14px}
-#scrollToTopBtn{position:absolute;top:20px;right:20px;width:45px;height:45px;border:0;border-radius:50%;background:var(--pink);color:var(--color-text-on-brand);display:flex;align-items:center;justify-content:center;font-size:18px;cursor:pointer;box-shadow:0 4px 10px var(--color-shadow-heavy);transition:all .3s ease}
-#scrollToTopBtn:hover{background:var(--pink2);transform:translateY(-5px);box-shadow:0 6px 15px var(--color-shadow-brand)}
-
 .checkout-notice{position:fixed;inset:0;z-index:1200;display:none;align-items:center;justify-content:center;padding:20px;background:rgb(43 25 32 / 48%);backdrop-filter:blur(6px)}
 .checkout-notice.show{display:flex}
 .notice-card{position:relative;width:min(440px,100%);padding:34px 32px 30px;border:1px solid #f3d4dc;border-radius:24px;background:linear-gradient(155deg,#fff 0%,#fffafb 62%,#fff0f4 100%);box-shadow:0 26px 80px rgb(7 18 36 / 26%);text-align:center;animation:noticeIn .25s ease-out}
@@ -300,25 +274,6 @@ body{margin:0}
 
 @media(max-width:950px){
   .layout{grid-template-columns:1fr}.summary{position:static}
-}
-@media(max-width:1024px){
-  .header .container{min-height:68px;padding:0 15px}
-  .menu-toggle{display:block;background:none;border:0;color:#2b3a4a;font-size:22px;cursor:pointer;padding:5px;width:40px;text-align:left}
-  .logo-wrapper{flex:1}
-  .header .logo{width:110px;height:63px}
-  .header .navbar{position:fixed;top:0;left:0;width:280px;height:100vh;background:var(--color-surface);z-index:9999;box-shadow:2px 0 12px var(--color-shadow-medium);transform:translateX(-100%);transition:transform .3s ease-in-out;padding:0;margin:0;display:flex;flex-direction:column}
-  .header .navbar.active{transform:translateX(0)}
-  .header .menu-header{display:flex;justify-content:space-between;align-items:center;background:var(--color-brand-light);color:#fff;padding:16px 20px;font-size:18px;font-weight:700}
-  .menu-close{background:none;border:0;color:#fff;font-size:26px;cursor:pointer;line-height:1}
-  .header .navbar ul{flex-direction:column;align-items:stretch;gap:0}
-  .header .navbar li{border-bottom:1px solid var(--color-border-subtle);width:100%}
-  .header .navbar a{display:block;padding:15px 20px;font-size:15px}
-  .header .navbar li.active a,.header .navbar a.active{background:var(--color-brand-soft);border-bottom:none;padding-bottom:15px}
-  .footer .container.footer-content{grid-template-columns:repeat(2,minmax(0,1fr));margin:0 auto 40px;gap:36px 30px}
-}
-@media(max-width:767px){
-  .footer .container.footer-content{grid-template-columns:1fr;margin:0 auto 32px;gap:32px}
-  #scrollToTopBtn{width:40px;height:40px;top:15px;right:15px;font-size:16px}
 }
 @media(max-width:700px){
   .checkout-page{padding:18px 12px 50px}.hero h1{font-size:40px}.hero-cake{width:110px;height:100px;margin-right:0}
@@ -555,8 +510,6 @@ body{margin:0}
 /* Responsive checkout overrides */
 .checkout-page,
 .checkout-page * ,
-.footer,
-.footer * ,
 .invoice,
 .invoice * {
   box-sizing:border-box;

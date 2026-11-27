@@ -255,7 +255,7 @@ document.addEventListener("keydown",event=>{
   if(event.key==="Escape")hideVoucherModal();
 });
 
-function escapeHTML(s){
+function escapeCheckoutHTML(s){
   return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
 }
 
@@ -283,17 +283,17 @@ function renderCart(){
 
   $("cartList").innerHTML=cart.length?cart.map((item,i)=>`
     <div class="cart-product">
-      <div class="product-image">${item.image?`<img src="${escapeHTML(item.image)}" alt="">`:"🍰"}</div>
+      <div class="product-image">${item.image?`<img src="${escapeCheckoutHTML(item.image)}" alt="">`:"🍰"}</div>
       <div class="product-info">
-        <strong>${escapeHTML(item.name)}</strong>
+        <strong>${escapeCheckoutHTML(item.name)}</strong>
         ${item.customDetails ? `
           <small style="display:block; line-height: 1.35; margin-top: 2px;">
-            ${item.customDetails.size ? `${escapeHTML(item.customDetails.size)} • ` : ''}
-            ${item.customDetails.sponge ? `Cốt ${escapeHTML(item.customDetails.sponge)} • ` : ''}
-            ${item.customDetails.filling ? `Nhân ${escapeHTML(item.customDetails.filling)}` : ''}
-            ${item.customDetails.toppingsText && item.customDetails.toppingsText !== 'Không lấy topping' ? `<br>Topping: ${escapeHTML(item.customDetails.toppingsText)}` : ''}
-            ${item.customDetails.photosText ? `<br>Cắm ảnh mặt bánh: ${escapeHTML(item.customDetails.photosText)}` : ''}
-            ${item.customDetails.message && item.customDetails.message !== 'Không có' ? `<br>Lời chúc: "${escapeHTML(item.customDetails.message)}"` : ''}
+            ${item.customDetails.size ? `${escapeCheckoutHTML(item.customDetails.size)} • ` : ''}
+            ${item.customDetails.sponge ? `Cốt ${escapeCheckoutHTML(item.customDetails.sponge)} • ` : ''}
+            ${item.customDetails.filling ? `Nhân ${escapeCheckoutHTML(item.customDetails.filling)}` : ''}
+            ${item.customDetails.toppingsText && item.customDetails.toppingsText !== 'Không lấy topping' ? `<br>Topping: ${escapeCheckoutHTML(item.customDetails.toppingsText)}` : ''}
+            ${item.customDetails.photosText ? `<br>Cắm ảnh mặt bánh: ${escapeCheckoutHTML(item.customDetails.photosText)}` : ''}
+            ${item.customDetails.message && item.customDetails.message !== 'Không có' ? `<br>Lời chúc: "${escapeCheckoutHTML(item.customDetails.message)}"` : ''}
           </small>
         ` : '<small>Size tiêu chuẩn · Vị bánh</small>'}
       </div>
@@ -303,7 +303,7 @@ function renderCart(){
         <span>${item.quantity}</span>
         <button type="button" data-action="plus" data-index="${i}">+</button>
       </div>
-      <button class="remove" type="button" data-action="remove" data-index="${i}" aria-label="Xóa ${escapeHTML(item.name)}" title="Xóa sản phẩm">
+      <button class="remove" type="button" data-action="remove" data-index="${i}" aria-label="Xóa ${escapeCheckoutHTML(item.name)}" title="Xóa sản phẩm">
         <i class="fa-solid fa-trash-can" aria-hidden="true"></i>
       </button>
     </div>
@@ -311,11 +311,11 @@ function renderCart(){
 
   $("summaryItems").innerHTML=cart.map(item=>`
     <div class="summary-item">
-      <div class="summary-img">${item.image?`<img src="${escapeHTML(item.image)}" alt="">`:"🍰"}</div>
+      <div class="summary-img">${item.image?`<img src="${escapeCheckoutHTML(item.image)}" alt="">`:"🍰"}</div>
       <div>
-        <strong>${escapeHTML(item.name)}</strong>
-        ${item.customDetails?.toppingsText && item.customDetails.toppingsText !== 'Không lấy topping' ? `<small style="display:block; color:#9ca3af; font-size:11px;">Topping: ${escapeHTML(item.customDetails.toppingsText)}</small>` : ''}
-        ${item.customDetails?.photosText ? `<small style="display:block; color:#9ca3af; font-size:11px;">Cắm ảnh mặt bánh: ${escapeHTML(item.customDetails.photosText)}</small>` : ''}
+        <strong>${escapeCheckoutHTML(item.name)}</strong>
+        ${item.customDetails?.toppingsText && item.customDetails.toppingsText !== 'Không lấy topping' ? `<small style="display:block; color:#9ca3af; font-size:11px;">Topping: ${escapeCheckoutHTML(item.customDetails.toppingsText)}</small>` : ''}
+        ${item.customDetails?.photosText ? `<small style="display:block; color:#9ca3af; font-size:11px;">Cắm ảnh mặt bánh: ${escapeCheckoutHTML(item.customDetails.photosText)}</small>` : ''}
         <small>${item.quantity} × ${money(item.price)}</small>
       </div>
       <b>${money(item.price*item.quantity)}</b>
@@ -431,13 +431,13 @@ function renderVoucherOptions(){
       <article class="voucher-option${selected?" is-selected":""}${eligible?"":" is-disabled"}">
         <div class="voucher-option-info">
           <div class="voucher-option-meta">
-            <span class="voucher-option-code">${escapeHTML(offer.code)}</span>
-            <span class="voucher-option-status">${escapeHTML(status)}</span>
+            <span class="voucher-option-code">${escapeCheckoutHTML(offer.code)}</span>
+            <span class="voucher-option-status">${escapeCheckoutHTML(status)}</span>
           </div>
-          <h3>${escapeHTML(offer.title)}</h3>
-          <p>${escapeHTML(offer.description)}</p>
+          <h3>${escapeCheckoutHTML(offer.title)}</h3>
+          <p>${escapeCheckoutHTML(offer.description)}</p>
         </div>
-        <button type="button" data-voucher-code="${escapeHTML(offer.code)}" ${eligible?"":"disabled"}>
+        <button type="button" data-voucher-code="${escapeCheckoutHTML(offer.code)}" ${eligible?"":"disabled"}>
           ${selected?"Đang chọn":eligible?"Áp dụng":"Chưa dùng được"}
         </button>
       </article>
@@ -636,7 +636,7 @@ function fillInvoice(){
 
   $("billItems").innerHTML=cart.map(x=>`
     <div class="bill-row">
-      <span>${escapeHTML(x.name)}</span>
+      <span>${escapeCheckoutHTML(x.name)}</span>
       <span>${x.quantity}</span>
       <span>${money(x.price*x.quantity)}</span>
     </div>
