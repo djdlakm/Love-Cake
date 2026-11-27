@@ -185,7 +185,7 @@ function loadComponents() {
           <h3>Liên hệ</h3>
           <ul>
             <li><span class="contact-icon">📍</span><span>12 Chùa Bộc, Kim Liên, Hà Nội</span></li>
-            <li><span class="contact-icon">📞</span><span>0987 654 321</span></li>
+            <li><span class="contact-icon">📞</span><span>0969 082 471</span></li>
             <li><span class="contact-icon">✉️</span><a href="mailto:info@lovecake.vn" class="contact-mail">info@lovecake.vn</a></li>
           </ul>
           <div class="footer-social">
