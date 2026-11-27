@@ -161,26 +161,11 @@ document.addEventListener('DOMContentLoaded', () => {
     return Array.from(unique.values()).filter((user) => user.role !== 'admin');
   };
 
-  const getProducts = () => {
-    const key = 'LOVE_CAKE_PRODUCTS';
-    const raw = localStorage.getItem(key);
-    if (raw) {
-      const products = JSON.parse(raw);
-      if (!Array.isArray(products)) throw new Error('Danh mục bánh trong trình duyệt không hợp lệ.');
-      return products;
-    }
-    const products = [
-      'Bánh Kem Dâu Tây',
-      'Fondant Hoa Hồng',
-      'Bánh Kem Vani Trắng',
-      'Cupcake Pastel Mix',
-      'Bánh Kem Nến Hồng',
-      'Cupcake Red Velvet',
-      'Cheesecake Việt Quất',
-      'Croissant Bơ Pháp',
-      'Bánh Kem 3 Tầng',
-    ].map((name, index) => ({ id: index + 1, name, active: true }));
-    localStorage.setItem(key, JSON.stringify(products));
+  const getProducts = async () => {
+    const response = await fetch('js/products-data.json');
+    if (!response.ok) throw new Error(`Không thể tải danh mục bánh (HTTP ${response.status}).`);
+    const products = await response.json();
+    if (!Array.isArray(products)) throw new Error('Danh mục bánh trong products-data.json không hợp lệ.');
     return products;
   };
 
@@ -217,10 +202,11 @@ document.addEventListener('DOMContentLoaded', () => {
       .join('');
   };
 
-  const render = () => {
+  const render = async () => {
     try {
       const orders = readArray(ORDERS_KEY);
       const users = getUsers();
+      const products = await getProducts();
       const revenue = orders.reduce(
         (sum, order) => sum + (order.status === 'Hoàn thành' ? Number(order.total) || 0 : 0),
         0,
@@ -228,7 +214,7 @@ document.addEventListener('DOMContentLoaded', () => {
       document.getElementById('admin-revenue').textContent = formatMoney(revenue);
       document.getElementById('admin-order-count').textContent = String(orders.length);
       document.getElementById('admin-customer-count').textContent = String(users.length);
-      const productCount = getProducts().filter(
+      const productCount = products.filter(
         (product) => product && product.active !== false,
       ).length;
       document.getElementById('admin-product-count').textContent = String(productCount);
@@ -294,7 +280,7 @@ document.addEventListener('DOMContentLoaded', () => {
     } catch (error) {
       console.error('Không thể tải dữ liệu quản trị:', error);
       document.getElementById('admin-orders-body').innerHTML =
-        '<tr><td colspan="7">Không thể đọc dữ liệu cửa hàng. Vui lòng kiểm tra localStorage và tải lại trang.</td></tr>';
+        '<tr><td colspan="7">Không thể đọc dữ liệu cửa hàng. Vui lòng kiểm tra dữ liệu sản phẩm/đơn hàng và tải lại trang.</td></tr>';
       document.getElementById('admin-orders-empty').hidden = true;
     }
   };
