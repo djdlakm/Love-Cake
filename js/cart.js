@@ -113,9 +113,9 @@ document.addEventListener("DOMContentLoaded", () => {
           </div>
         </div>
 
-        <div class="price-cell">${formatMoney(item.price)}</div>
+        <div class="price-cell" data-label="Đơn giá">${formatMoney(item.price)}</div>
 
-        <div class="qty-cell">
+        <div class="qty-cell" data-label="Số lượng">
           <div class="quantity-box">
             <button class="qty-btn minus" data-index="${index}" aria-label="Giảm số lượng">−</button>
             <span class="qty-value">${item.quantity || 1}</span>
@@ -123,7 +123,7 @@ document.addEventListener("DOMContentLoaded", () => {
           </div>
         </div>
 
-        <div class="total-cell">${formatMoney((Number(item.price) || 0) * (Number(item.quantity) || 1))}</div>
+        <div class="total-cell" data-label="Thành tiền">${formatMoney((Number(item.price) || 0) * (Number(item.quantity) || 1))}</div>
       `;
 
       if (footer) {
