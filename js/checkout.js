@@ -157,11 +157,30 @@ const addressField=$("address");
 markFieldComplete(addressField);
 addressField.addEventListener("input",()=>markFieldComplete(addressField));
 
-["fullName","phone","receiveDate","receiveHour","note"].forEach(id=>{
+["fullName","receiveDate","receiveHour","note"].forEach(id=>{
   const field=$(id);
   markFieldComplete(field);
   field.addEventListener("input",()=>markFieldComplete(field));
 });
+
+const phoneField=$("phone");
+const phoneError=$("phoneError");
+
+function updatePhoneValidation(showEmptyMessage){
+  const value=phoneField.value.trim();
+  const isValid=/^\d{10}$/.test(value);
+  const message=value
+    ?(isValid?"":"Số điện thoại phải gồm đúng 10 chữ số.")
+    :(showEmptyMessage?"Vui lòng nhập số điện thoại.":"");
+  phoneError.textContent=message;
+  phoneField.setAttribute("aria-invalid",String(Boolean(message)));
+  phoneField.classList.toggle("field-invalid",Boolean(message));
+  phoneField.classList.toggle("has-value",isValid);
+  return isValid;
+}
+
+updatePhoneValidation(false);
+phoneField.addEventListener("input",()=>updatePhoneValidation(true));
 
 function prefillCheckoutFromAccount(){
   let currentUser=null;
@@ -258,10 +277,6 @@ function updateCartBadge(){
   const badge=document.querySelector(".cart-badge");
   if(badge)badge.textContent=String(cart.reduce((total,item)=>total+item.quantity,0));
 }
-
-$("scrollToTopBtn").addEventListener("click",()=>{
-  window.scrollTo({top:0,behavior:"smooth"});
-});
 
 function renderCart(){
   updateCartBadge();
@@ -524,6 +539,10 @@ function validForm(){
   syncReceiveTime();
   if(!$("fullName").value.trim()||!$("phone").value.trim()||!$("receiveTime").value){
     showCheckoutNotice("Vui lòng điền đầy đủ họ tên, số điện thoại và thời gian nhận bánh nhé ♡");
+    return false;
+  }
+  if(!updatePhoneValidation(true)){
+    showCheckoutNotice("Số điện thoại phải gồm đúng 10 chữ số nhé ♡");
     return false;
   }
   if(!cart.length){
