@@ -175,14 +175,14 @@
 
   const state = {
     step: 1,
-    size: 'small', // Mặc định 15cm
-    sponge: 'vanilla', // Mặc định Vanilla Pháp
-    filling: 'blueberry', // Mặc định Việt Quất
-    frosting: 'whipping', // Mặc định Kem tươi
-    toppings: [], // Mảng ID các topping được chọn (tối đa 3)
-    photos: [], // Mảng chuỗi ảnh nén base64 (tối đa 8 ảnh, không bắt buộc)
-    message: 'Happy Birthday Love', // Mặc định lời chúc
-    totalPrice: 260000
+    size: null, // Chưa chọn kích thước mặc định (A1)
+    sponge: null, // Chưa chọn cốt bánh (A1)
+    filling: null, // Chưa chọn nhân kem (A1)
+    frosting: null, // Chưa chọn kem phủ -> bánh trắng mặc định (A1, A4)
+    toppings: [], // Không có topping mặc định
+    photos: [], // Không cắm ảnh mặc định
+    message: '', // Không điền trước lời chúc (A6, A7)
+    totalPrice: 0
   };
 
   // ----------------- 3. Khởi Tạo DOM Elements -----------------
@@ -516,44 +516,98 @@
     el.classList.add(className);
   }
 
-  // ----------------- 8. Tính Toán Tổng Giá Đơn Hàng -----------------
-  function calculateTotal() {
-    const szObj = CAKE_CONFIG.sizes[state.size] || CAKE_CONFIG.sizes.small;
-    const spObj = CAKE_CONFIG.sponges[state.sponge] || CAKE_CONFIG.sponges.vanilla;
-    const flObj = CAKE_CONFIG.fillings[state.filling] || CAKE_CONFIG.fillings.blueberry;
-    const frObj = CAKE_CONFIG.frostings[state.frosting] || CAKE_CONFIG.frostings.whipping;
+  // ----------------- 8. Tính Toán Tổng Giá & Kiểm Tra Bước Bắt Buộc -----------------
+  const REQUIRED_STEP_ERRORS = {
+    1: 'Vui lòng chọn kích thước bánh trước khi tiếp tục ✿',
+    2: 'Vui lòng chọn vị cốt bánh trước khi tiếp tục ✿',
+    3: 'Vui lòng chọn nhân kem trước khi tiếp tục ✿',
+    4: 'Vui lòng chọn loại kem phủ trước khi tiếp tục ✿'
+  };
 
-    const basePrice = szObj.price;
-    const spSurcharge = spObj.surcharge || 0;
-    const flSurcharge = flObj.surcharge || 0;
-    const frSurcharge = frObj.surcharge || 0;
+  function isStepValid(stepNum) {
+    if (stepNum === 1) return Boolean(state.size && CAKE_CONFIG.sizes[state.size]);
+    if (stepNum === 2) return Boolean(state.sponge && CAKE_CONFIG.sponges[state.sponge]);
+    if (stepNum === 3) return Boolean(state.filling && CAKE_CONFIG.fillings[state.filling]);
+    if (stepNum === 4) return Boolean(state.frosting && CAKE_CONFIG.frostings[state.frosting]);
+    return true;
+  }
+
+  function getHighestUnlockedStep() {
+    for (let s = 1; s <= 4; s++) {
+      if (!isStepValid(s)) return s;
+    }
+    return 7;
+  }
+
+  function calculateTotal() {
+    const szObj = state.size ? CAKE_CONFIG.sizes[state.size] : null;
+    const spObj = state.sponge ? CAKE_CONFIG.sponges[state.sponge] : null;
+    const flObj = state.filling ? CAKE_CONFIG.fillings[state.filling] : null;
+    const frObj = state.frosting ? CAKE_CONFIG.frostings[state.frosting] : null;
+
+    const basePrice = szObj ? szObj.price : 0;
+    const spSurcharge = spObj ? (spObj.surcharge || 0) : 0;
+    const flSurcharge = flObj ? (flObj.surcharge || 0) : 0;
+    const frSurcharge = frObj ? (frObj.surcharge || 0) : 0;
     const toppingSurcharge = calculateToppingSurcharge(state.toppings.length);
 
     state.totalPrice = basePrice + spSurcharge + flSurcharge + frSurcharge + toppingSurcharge;
     return state.totalPrice;
   }
 
+  function setSummaryValue(el, text, isEmpty) {
+    if (!el) return;
+    el.textContent = text;
+    el.classList.toggle('is-empty', Boolean(isEmpty));
+  }
+
+  function updateStepperStates() {
+    const highestUnlocked = getHighestUnlockedStep();
+    dom.stepperItems.forEach((item) => {
+      const stepIdx = Number(item.getAttribute('data-step'));
+      item.classList.toggle('active', stepIdx === state.step);
+      item.classList.toggle('completed', stepIdx < state.step && isStepValid(stepIdx));
+      item.classList.toggle('locked', stepIdx > highestUnlocked);
+    });
+
+    dom.stepperLines.forEach((line, idx) => {
+      line.classList.toggle('active', idx + 1 < state.step);
+    });
+  }
+
   // ----------------- 9. Cập Nhật Hiển Thị Chiếc Bánh (Real-Time SVG) -----------------
   function updateCakeVisuals(changedSection) {
-    const szObj = CAKE_CONFIG.sizes[state.size] || CAKE_CONFIG.sizes.small;
-    const spObj = CAKE_CONFIG.sponges[state.sponge] || CAKE_CONFIG.sponges.vanilla;
-    const flObj = CAKE_CONFIG.fillings[state.filling] || CAKE_CONFIG.fillings.blueberry;
-    const frObj = CAKE_CONFIG.frostings[state.frosting] || CAKE_CONFIG.frostings.whipping;
+    const szObj = state.size ? CAKE_CONFIG.sizes[state.size] : null;
+    const spObj = state.sponge ? CAKE_CONFIG.sponges[state.sponge] : null;
+    const flObj = state.filling ? CAKE_CONFIG.fillings[state.filling] : null;
+    const frObj = state.frosting ? CAKE_CONFIG.frostings[state.frosting] : null;
 
-    // 9.1. Kích thước bánh co giãn mượt trên đĩa trơn
+    // 9.1. Kích thước bánh (chưa chọn thì giữ cỡ cân đối chuẩn 0.86 theo A5)
     if (dom.cakeScalable) {
-      dom.cakeScalable.style.setProperty('--designer-scale', szObj.scale);
+      dom.cakeScalable.style.setProperty('--designer-scale', szObj ? szObj.scale : 0.86);
     }
 
-    // 9.2. Màu kem phủ toàn thân & mặt trên bánh
-    if (dom.cakeSide) dom.cakeSide.setAttribute('fill', frObj.color);
-    if (dom.cakeTop) dom.cakeTop.setAttribute('fill', frObj.color);
+    // 9.2. Màu kem phủ (chưa chọn thì bánh trắng trơn #ffffff theo A4)
+    const frostingColor = frObj ? frObj.color : '#ffffff';
+    if (dom.cakeSide) dom.cakeSide.setAttribute('fill', frostingColor);
+    if (dom.cakeTop) dom.cakeTop.setAttribute('fill', frostingColor);
 
-    // 9.3. Hai dải sọc trên thân bánh: Dải trên = Cốt bánh, Dải dưới = Nhân kem
-    if (dom.spongeBand) dom.spongeBand.setAttribute('fill', spObj.color);
-    if (dom.spongeTooltip) dom.spongeTooltip.textContent = `Cốt bánh: ${spObj.name}`;
-    if (dom.fillingBand) dom.fillingBand.setAttribute('fill', flObj.color);
-    if (dom.fillingTooltip) dom.fillingTooltip.textContent = `Nhân kem: ${flObj.name}`;
+    // 9.3. Hai dải sọc Cốt bánh & Nhân kem: ẩn hoàn toàn khi chưa chọn (theo A3)
+    if (dom.spongeBand) {
+      dom.spongeBand.classList.toggle('is-visible', Boolean(spObj));
+      dom.spongeBand.setAttribute('fill', spObj ? spObj.color : '#ffffff');
+    }
+    if (dom.spongeTooltip) {
+      dom.spongeTooltip.textContent = spObj ? `Cốt bánh: ${spObj.name}` : 'Cốt bánh: Chưa chọn';
+    }
+
+    if (dom.fillingBand) {
+      dom.fillingBand.classList.toggle('is-visible', Boolean(flObj));
+      dom.fillingBand.setAttribute('fill', flObj ? flObj.color : '#ffffff');
+    }
+    if (dom.fillingTooltip) {
+      dom.fillingTooltip.textContent = flObj ? `Nhân kem: ${flObj.name}` : 'Nhân kem: Chưa chọn';
+    }
 
     // 9.4. Cập nhật 6 lớp SVG Topping trên mặt bánh
     Object.keys(dom.toppingLayers).forEach((key) => {
@@ -563,10 +617,10 @@
       }
     });
 
-    // 9.5. Cập nhật lời chúc viết tay màu #D94A73 giữa thân trước bánh
+    // 9.5. Lời chúc viết tay: để trống hoàn toàn nếu chưa nhập (theo A6)
+    const trimmedMessage = (state.message || '').trim();
     if (dom.curvedTextPath) {
-      const txt = (state.message || '').trim();
-      dom.curvedTextPath.textContent = txt || 'Love Cake';
+      dom.curvedTextPath.textContent = trimmedMessage;
     }
 
     // 9.6. Hiệu ứng nảy bánh nhẹ khi thay đổi lựa chọn
@@ -574,32 +628,36 @@
       triggerPulse(dom.cakeAssembly, 'designer-bounce');
     }
 
-    // 9.7. Cập nhật Thẻ Tóm Tắt Đơn Hàng (Bước 7)
+    // 9.7. Cập nhật trạng thái khóa trên thanh Stepper
+    updateStepperStates();
+
+    // 9.8. Cập nhật Thẻ Tóm Tắt Đơn Hàng (Bước 7 theo A8)
     calculateTotal();
-    if (dom.sumSize) dom.sumSize.textContent = szObj.name;
-    if (dom.sumSponge) dom.sumSponge.textContent = spObj.name;
-    if (dom.sumFilling) dom.sumFilling.textContent = flObj.name;
-    if (dom.sumFrosting) dom.sumFrosting.textContent = frObj.name;
+    setSummaryValue(dom.sumSize, szObj ? szObj.name : 'Chưa chọn', !szObj);
+    setSummaryValue(dom.sumSponge, spObj ? spObj.name : 'Chưa chọn', !spObj);
+    setSummaryValue(dom.sumFilling, flObj ? flObj.name : 'Chưa chọn', !flObj);
+    setSummaryValue(dom.sumFrosting, frObj ? frObj.name : 'Chưa chọn', !frObj);
 
     if (dom.sumTopping) {
       if (state.toppings.length === 0) {
-        dom.sumTopping.textContent = 'Không lấy topping (0đ)';
+        setSummaryValue(dom.sumTopping, 'Không lấy topping (0đ)', false);
       } else {
         const toppingNames = state.toppings.map(id => CAKE_CONFIG.toppings[id]?.name || id).join(', ');
         const surcharge = calculateToppingSurcharge(state.toppings.length);
-        dom.sumTopping.textContent = surcharge > 0
+        const text = surcharge > 0
           ? `${toppingNames} (+${formatMoney(surcharge)})`
           : `${toppingNames} (Miễn phí)`;
+        setSummaryValue(dom.sumTopping, text, false);
       }
     }
 
-    if (dom.sumPhotos) {
-      dom.sumPhotos.textContent = state.photos.length > 0
-        ? `${state.photos.length} ảnh (Miễn phí)`
-        : 'Không cắm ảnh (0đ)';
-    }
+    setSummaryValue(
+      dom.sumPhotos,
+      state.photos.length > 0 ? `${state.photos.length} ảnh (Miễn phí)` : 'Không cắm ảnh (0đ)',
+      false
+    );
 
-    if (dom.sumMessage) dom.sumMessage.textContent = state.message || '(Không lời chúc)';
+    setSummaryValue(dom.sumMessage, trimmedMessage || '(Chưa có)', !trimmedMessage);
     if (dom.sumTotal) dom.sumTotal.textContent = formatMoney(state.totalPrice);
   }
 
@@ -609,15 +667,7 @@
     state.step = targetStep;
 
     // Cập nhật Stepper
-    dom.stepperItems.forEach((item) => {
-      const stepIdx = Number(item.getAttribute('data-step'));
-      item.classList.toggle('active', stepIdx === state.step);
-      item.classList.toggle('completed', stepIdx < state.step);
-    });
-
-    dom.stepperLines.forEach((line, idx) => {
-      line.classList.toggle('active', idx + 1 < state.step);
-    });
+    updateStepperStates();
 
     // Ẩn/Hiện bước tương ứng
     dom.wizardSteps.forEach((stepEl) => {
@@ -644,6 +694,11 @@
 
   function nextStep() {
     if (state.step < 7) {
+      // Kiểm tra bắt buộc ở Bước 1–4 trước khi chuyển bước (A2)
+      if (!isStepValid(state.step)) {
+        showAlert(REQUIRED_STEP_ERRORS[state.step]);
+        return;
+      }
       goToStep(state.step + 1);
     } else {
       // Ở bước cuối (Bước 7), bấm nút sẽ thêm vào giỏ hàng
@@ -678,6 +733,15 @@
 
   // ----------------- 12. Thêm Vào Giỏ Hàng & Chuyển Trang Giỏ Hàng -----------------
   function addToCart() {
+    // Đảm bảo đã chọn đủ Bước 1–4 trước khi thêm vào giỏ
+    for (let s = 1; s <= 4; s++) {
+      if (!isStepValid(s)) {
+        goToStep(s);
+        showAlert(REQUIRED_STEP_ERRORS[s]);
+        return;
+      }
+    }
+
     let cart = [];
     try {
       cart = JSON.parse(localStorage.getItem('cart')) || [];
@@ -686,10 +750,10 @@
       cart = [];
     }
 
-    const szObj = CAKE_CONFIG.sizes[state.size] || CAKE_CONFIG.sizes.small;
-    const spObj = CAKE_CONFIG.sponges[state.sponge] || CAKE_CONFIG.sponges.vanilla;
-    const flObj = CAKE_CONFIG.fillings[state.filling] || CAKE_CONFIG.fillings.blueberry;
-    const frObj = CAKE_CONFIG.frostings[state.frosting] || CAKE_CONFIG.frostings.whipping;
+    const szObj = CAKE_CONFIG.sizes[state.size];
+    const spObj = CAKE_CONFIG.sponges[state.sponge];
+    const flObj = CAKE_CONFIG.fillings[state.filling];
+    const frObj = CAKE_CONFIG.frostings[state.frosting];
 
     const toppingNames = state.toppings.map(id => CAKE_CONFIG.toppings[id]?.name || id);
     const toppingSurcharge = calculateToppingSurcharge(state.toppings.length);
@@ -717,7 +781,7 @@
         photosCount: photosCount,
         photosText: photosText,
         photos: state.photos.slice(),
-        message: state.message || 'Không có'
+        message: (state.message || '').trim() || 'Không có'
       }
     };
 
@@ -759,19 +823,19 @@
     }, 3500);
   }
 
-  // ----------------- 13. Làm Lại Từ Đầu (Reset theo A15) -----------------
+  // ----------------- 13. Làm Lại Từ Đầu (Reset về bánh trắng mặc định theo A10) -----------------
   function resetDesigner() {
     state.step = 1;
-    state.size = 'small';
-    state.sponge = 'vanilla';
-    state.filling = 'blueberry';
-    state.frosting = 'whipping';
+    state.size = null;
+    state.sponge = null;
+    state.filling = null;
+    state.frosting = null;
     state.toppings = [];
     state.photos = [];
-    state.message = 'Happy Birthday Love';
+    state.message = '';
 
     if (dom.photoInput) dom.photoInput.value = '';
-    if (dom.messageInput) dom.messageInput.value = state.message;
+    if (dom.messageInput) dom.messageInput.value = '';
 
     renderAllOptionCards();
     renderPhotoThumbnails();
@@ -815,11 +879,17 @@
     if (dom.btnNext) dom.btnNext.addEventListener('click', nextStep);
     if (dom.btnReset) dom.btnReset.addEventListener('click', resetDesigner);
 
-    // 15.2. Stepper click
+    // 15.2. Stepper click (Khóa nhảy cóc lên bước sau nếu chưa chọn đủ bước trước theo A9)
     dom.stepperItems.forEach((item) => {
       item.addEventListener('click', () => {
-        const s = Number(item.getAttribute('data-step'));
-        goToStep(s);
+        const targetStep = Number(item.getAttribute('data-step'));
+        const highestUnlocked = getHighestUnlockedStep();
+        if (targetStep > highestUnlocked) {
+          goToStep(highestUnlocked);
+          showAlert(REQUIRED_STEP_ERRORS[highestUnlocked]);
+          return;
+        }
+        goToStep(targetStep);
       });
     });
 
@@ -828,6 +898,7 @@
       dom.sizeOptions.addEventListener('change', (e) => {
         if (e.target.name === 'cake-size-choice') {
           state.size = e.target.value;
+          hideAlert();
           renderAllOptionCards();
           updateCakeVisuals('size');
         }
@@ -839,6 +910,7 @@
       dom.spongeOptions.addEventListener('change', (e) => {
         if (e.target.name === 'cake-sponge-choice') {
           state.sponge = e.target.value;
+          hideAlert();
           renderAllOptionCards();
           updateCakeVisuals('sponge');
         }
@@ -850,6 +922,7 @@
       dom.fillingOptions.addEventListener('change', (e) => {
         if (e.target.name === 'cake-filling-choice') {
           state.filling = e.target.value;
+          hideAlert();
           renderAllOptionCards();
           updateCakeVisuals('filling');
         }
@@ -861,6 +934,7 @@
       dom.frostingOptions.addEventListener('change', (e) => {
         if (e.target.name === 'cake-frosting-choice') {
           state.frosting = e.target.value;
+          hideAlert();
           renderAllOptionCards();
           updateCakeVisuals('frosting');
         }
@@ -930,12 +1004,12 @@
     if (dom.messageInput) {
       dom.messageInput.addEventListener('input', (e) => {
         state.message = e.target.value;
+        const txt = state.message.trim();
         if (dom.curvedTextPath) {
-          const txt = state.message.trim();
-          dom.curvedTextPath.textContent = txt || 'Love Cake';
+          dom.curvedTextPath.textContent = txt;
         }
         if (dom.sumMessage) {
-          dom.sumMessage.textContent = state.message || '(Không lời chúc)';
+          setSummaryValue(dom.sumMessage, txt || '(Chưa có)', !txt);
         }
       });
     }
@@ -943,6 +1017,7 @@
 
   // ----------------- 16. Khởi Chạy Khi DOM Sẵn Sàng -----------------
   function init() {
+    if (dom.messageInput) dom.messageInput.value = '';
     renderAllOptionCards();
     renderPhotoThumbnails();
     updateCakeVisuals();

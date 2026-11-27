@@ -200,7 +200,7 @@
               <h2 class="designer-step-title">Lời chúc &amp; Tóm tắt đơn hàng</h2>
             </div>
 
-            <!-- Ô nhập lời chúc trên bánh -->
+            <!-- Ô nhập lời chúc trên bánh (Trống hoàn toàn không điền trước theo A7) -->
             <div class="designer-field-group">
               <label class="designer-field-label" for="designerMessageInput">✿ Lời chúc:</label>
               <div class="designer-input-wrapper">
@@ -209,8 +209,7 @@
                   id="designerMessageInput"
                   class="designer-text-input"
                   maxlength="26"
-                  value="Happy Birthday Love"
-                  placeholder="Nhập lời chúc..."
+                  value=""
                 />
               </div>
     
@@ -225,19 +224,19 @@
               <div class="designer-summary-rows">
                 <div class="designer-summary-row">
                   <span>Kích thước bánh:</span>
-                  <strong id="designerSumSize">Size Nhỏ (15cm)</strong>
+                  <strong id="designerSumSize">Chưa chọn</strong>
                 </div>
                 <div class="designer-summary-row">
                   <span>Cốt bánh:</span>
-                  <strong id="designerSumSponge">Vanilla</strong>
+                  <strong id="designerSumSponge">Chưa chọn</strong>
                 </div>
                 <div class="designer-summary-row">
                   <span>Nhân kem:</span>
-                  <strong id="designerSumFilling">Việt quất</strong>
+                  <strong id="designerSumFilling">Chưa chọn</strong>
                 </div>
                 <div class="designer-summary-row">
                   <span>Kem phủ:</span>
-                  <strong id="designerSumFrosting">Kem tươi</strong>
+                  <strong id="designerSumFrosting">Chưa chọn</strong>
                 </div>
                 <div class="designer-summary-row" id="designerSumToppingRow">
                   <span>Topping trên bánh:</span>
@@ -249,12 +248,12 @@
                 </div>
                 <div class="designer-summary-row">
                   <span>Lời chúc trên bánh:</span>
-                  <strong id="designerSumMessage">Happy Birthday</strong>
+                  <strong id="designerSumMessage">(Chưa có)</strong>
                 </div>
                 <div class="designer-summary-divider"></div>
                 <div class="designer-summary-total-row">
                   <span>Tổng giá tạm tính:</span>
-                  <span class="designer-total-price" id="designerSumTotal">260.000đ</span>
+                  <span class="designer-total-price" id="designerSumTotal">0đ</span>
                 </div>
               </div>
             </div>
@@ -366,26 +365,28 @@
                   stroke-linejoin="round"
                 />
 
-                <!-- Dải sọc cong 1 (trên): Thể hiện màu Cốt bánh (dày rõ hơn theo A5) -->
+                <!-- Dải sọc cong 1 (trên): Thể hiện màu Cốt bánh (ẩn khi chưa chọn theo A3) -->
                 <path
                   id="designerSpongeBand"
+                  class="designer-flavor-band"
                   d="M 76 128 A 134 48 0 0 0 344 128 L 344 150 A 134 48 0 0 1 76 150 Z"
-                  fill="#fce7a2"
+                  fill="#ffffff"
                   stroke="#D94A73"
                   stroke-width="1.45"
                 >
-                  <title id="designerSpongeTooltip">Cốt bánh: Vanilla Pháp</title>
+                  <title id="designerSpongeTooltip">Cốt bánh: Chưa chọn</title>
                 </path>
 
-                <!-- Dải sọc cong 2 (dưới): Thể hiện màu Nhân kem (dày rõ hơn theo A5) -->
+                <!-- Dải sọc cong 2 (dưới): Thể hiện màu Nhân kem (ẩn khi chưa chọn theo A3) -->
                 <path
                   id="designerFillingBand"
+                  class="designer-flavor-band"
                   d="M 76 204 A 134 48 0 0 0 344 204 L 344 226 A 134 48 0 0 1 76 226 Z"
-                  fill="#4f46e5"
+                  fill="#ffffff"
                   stroke="#D94A73"
                   stroke-width="1.45"
                 >
-                  <title id="designerFillingTooltip">Nhân kem: Việt Quất</title>
+                  <title id="designerFillingTooltip">Nhân kem: Chưa chọn</title>
                 </path>
 
                 <!-- Lớp phủ bóng 3D cho thân trụ -->
@@ -404,16 +405,14 @@
                   pointer-events="none"
                 />
 
-                <!-- Chữ lời chúc viết tay mềm mại màu #D94A73 giữa 2 dải cốt & nhân (theo A9, A10) -->
+                <!-- Chữ lời chúc viết tay mềm mại màu #D94A73 giữa 2 dải cốt & nhân (trống khi chưa nhập theo A6) -->
                 <text class="designer-curved-svg-text" filter="url(#pipedTextGlow)">
                   <textPath
                     id="designerCurvedTextPath"
                     href="#designerTextCurvePath"
                     startOffset="50%"
                     text-anchor="middle"
-                  >
-                    Happy Birthday Love
-                  </textPath>
+                  ></textPath>
                 </text>
 
                 <!-- Mặt trên bánh (Elip phủ màu kem) -->
