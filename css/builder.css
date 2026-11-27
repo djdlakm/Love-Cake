@@ -148,6 +148,11 @@
   color: var(--primary);
 }
 
+.designer-step-item.locked {
+  opacity: 0.58;
+  cursor: not-allowed;
+}
+
 .designer-step-line {
   flex: 1;
   max-width: 32px;
@@ -865,6 +870,11 @@
   word-break: break-word;
 }
 
+.designer-summary-row strong.is-empty {
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
 .designer-summary-divider {
   height: 1px;
   background-color: #f1e4dc;
@@ -1000,6 +1010,16 @@
 .designer-cake-scalable path,
 .designer-cake-scalable ellipse {
   transition: fill 0.3s ease;
+}
+
+/* 2 dải sọc Cốt bánh & Nhân kem ẩn mặc định khi chưa chọn (bánh trắng trơn theo A3) */
+.designer-flavor-band {
+  opacity: 0;
+  transition: opacity 0.3s ease, fill 0.3s ease;
+}
+
+.designer-flavor-band.is-visible {
+  opacity: 1;
 }
 
 /* Chữ lời chúc viết tay mềm mại màu #D94A73 giữa 2 dải cốt & nhân (A9, A10) */

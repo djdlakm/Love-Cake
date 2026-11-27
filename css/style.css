@@ -681,9 +681,6 @@ ul {
     display: none;
   }
 
-  .header .account-menu__chevron {
-    display: none;
-  }
 }
 
 /* ==========================================
@@ -800,6 +797,10 @@ ul {
 }
 
 .header .account-dropdown[hidden] {
+  display: none;
+}
+
+.header .account-menu__chevron {
   display: none;
 }
 
