@@ -345,6 +345,12 @@ ul {
   justify-content: space-between;
 }
 
+.footer .footer-policy h3 {
+  display: block;
+  height: auto;
+  margin: 0 0 18px;
+}
+
 .footer .hours {
   color: var(--color-brand-light);
   font-weight: 600;

@@ -201,6 +201,12 @@ function loadComponents() {
             <li><span>Thứ 2 – Thứ 6</span><span class="hours">7:00 – 21:00</span></li>
             <li><span>Thứ 7 - Chủ Nhật</span><span class="hours">7:00 – 22:00</span></li>
           </ul>
+          <div class="footer-links footer-policy">
+            <h3>Chính sách &amp; Điều khoản</h3>
+            <ul>
+              <li><a href="${BASE_URL}policy.html">Xem chính sách</a></li>
+            </ul>
+          </div>
         </div>
       </div>
 
